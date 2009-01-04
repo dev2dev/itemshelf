@@ -1,0 +1,137 @@
+2009-01-04 : Takuya Murakami
+	* Subversion リポジトリを変更
+	* ライセンスを変更
+	
+2008-12-28 : Takuya Murakami
+	* ver 1.2 (r617)
+
+	* indent をすべてスペースに変更した
+	
+2008-12-27 : Takuya Murakami
+	* タイトル検索時に keyboard を隠すようにした
+	* タイトル検索入力フィールドを通常(capitalizeしない)に変更
+	
+2008-12-24 : Takuya Murakami
+	* タイトル検索に DVD が入っていなかったのを修正
+
+2008-12-19 : Takuya Murakami
+	* ver 1.1, AppStore 4回目 (r589) ⇒ 正式公開
+	* ISBN入力時にクラッシュしていたバグを修正
+
+2008-12-18 : Takuya Murakami
+	* ver 1.1, AppStore 3回目 (r571) ⇒キャンセル
+	* ツールバーボタンを変更。棚追加ボタンを追加、デザイン変更。
+	* イメージキャッシュ処理変更。キャッシュ数 70。WebView 遷移時にクリア。
+	* fetchImage 削除、getImage に統合。
+	* ItemView にはいったときに全イメージロードを開始するようにした。
+	* 単体テスト強化
+	
+2008-12-17 : Takuya Murakami
+	* SearchController のクラスを分割、SearchControllerAmazon を新設
+	  Amazon 以外への検索対応のため
+	
+2008-12-16 : Takuya Murakami
+	* バグ修正：アイテム並び変えのアイコンをタップするとクラッシュしていた。
+	* ScanViewController のうち、検索に関する部分を SearchController に分離
+	* ScanView の UI 変更。Amazon 検索時にいちいち戻らないようにした。
+	* また、Title/コード入力は modal dialog ではなく、push view でやるようにした。
+	* ShelfListView において、追加ボタンを削除。編集で追加できるようにした。
+	* アイテム取り込みボタンを、カメラアイコンから "+" アイコンに変更した
+	* 単体テスト追加作業中
+	* メモリ上にキャッシュする画像の上限を 50 個にした。100 以上になると、メモリ不足
+	  になって強制解放が入るようだ。50ならなんとか大丈夫ぽい。しかし、正しい解決策は、
+	  縮小画像で UIImage に格納することのような気がする。
+	
+2008-12-15 : Takuya Murakami
+	* ver 1.2 beta 1 (r490)
+	* 棚一覧画面にアイコンを追加
+	* SmartShelf 機能を追加
+
+2008-12-14 : Takuya Murakami
+	* Amazon API : Proxy CGI を使用するように変更
+	
+2008-12-12 : Takuya Murakami (r437)
+	* ver 1.1 で AppStore 提出
+	* Amazon から不正データ受信時の処理を追加
+	* Virtual Shelf 処理を追加（All 棚のみ）
+	* Amazon 検索処理を修正: SearchIndex/IndexName処理を訂正
+	* 検索の安定性を向上した: AmazonApi.m でデータ受信に
+	  NSMutableString ではなく NSMutableData を使用するように変更。
+	  前者だとデータがちゃんと入らないことがあった。
+	
+2008-12-11 : Takuya Murakami (r426)
+	* ver 1.1 でAppStore 提出 -> バグ発見のためキャンセル
+	  カテゴリが正しく入っていなかった。
+	
+2008-12-8 : Takuya Murakami
+	* ver 1.1 RC1 (rev 411)
+	* 数字パッドの並び順を上下逆にした
+	* バグ修正: Blended / Sort の同時使用はできず検索失敗となっていた。
+	* Amazon から返ってくるエラーメッセージを表示するようにした。
+	* URL 修正 (itemshelf.com)
+	* WebView に reload ボタンをつけた
+
+2008-12-5 : Takuya Murakami
+	* タイトル検索強化、分類指定を追加中
+	* ItemView 変更。タイトル検索時は、検索結果から必要なものだけ棚に
+	  移動できるようにした。
+	* 棚に４個アイテムを並べるモードを追加
+	
+2008-12-4 : Takuya Murakami
+	* ItemView : 複数アイテム表示機能を追加
+	* タイトル検索を追加
+	* 地域選択を ScanView に移動した
+	
+2008-12-3 : Takuya Murakami (r340)
+	* Version 1.0 RC2 : AppStore 提出版
+	* UI を大幅に変更。複数棚に対応、タブバー廃止。
+	* アイテム表示画面を変更、TableView にした。WebView を新たに追加。
+	* フィルタボタンに現在選択中のフィルタ名を表示するようにした。
+	* Barcode 読み取り処理を修正、１個目のバーコードのみを読むようにした。
+	* データベースに Shelf テーブルを追加。
+	* バグ修正など
+	* No Image を追加
+	* 「バーコード入力」の文言を修正
+	* 検索では、著者と出版社も検索するようにした
+	* アイテム数表示を追加
+	
+2008-12-1 : Takuya Muakami
+	* 検索バーを追加
+	* Item.image を削除し、imageCache を追加。
+	  画像のキャッシュ数の上限を制限するようにした。
+	* Shelf クラスを追加。history, wantList, haveList を管理する構造
+	  に変更。
+	* 棚移動用の UI を変更 (ActionSheet ではなく Table で選択)
+	* 履歴(History)を未分類(Unclassified)に名称変更
+	* ヘルプへのリンクを追加
+	
+2008-11-29 : Takuya Murakami
+	* zebra, itemshelf 本体(*.m) をライブラリに分割
+	* Ver 1.0, AppStore 提出 -> reject されたので ver1.0 RC1 ということにする。
+
+2008-11-28 : Takuya Murakami
+	* ASIN 重複チェックを追加
+	* About画面分離
+	* Mail の subject を訂正
+	* ItemView の背景色を変更 (なぜか Amazon で背景色がへんになるので)
+	* AppStore に登録
+	
+2008-11-27 : Takuya Murakami
+	* GenEditTypeViewController を GenSelectListViewController に変更
+	* StringArray を使用するように変更
+	* AmazonAssociate 処理を分離
+	* バグ修正 (データベースでぽかをやっていた)
+	* Amazon のモバイル向けページを表示するようにした(メールは別)
+	* その他もろもろ
+	
+2008-11-26 : Takuya Murakami
+	* ChangeLog 開始 (もっとはやくやれっての)
+	* NumPad を追加しました
+	  ASIN 入力用に、フルキーボードも出せるようにしてあります。
+	* カスタム URL サポートを追加 (itemshelf://ASIN/Country 形式)
+	* プロジェクト名称を ItemShelf に変更
+	* コード入力桁数チェックを追加
+	* ItemView のボタンを分割
+	* メール送信時のリンク生成処理を修正
+	* ベータ版配布開始
+	* Adhoc 配布のために、Entitlement.plist を追加

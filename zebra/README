@@ -1,0 +1,58 @@
+ZEBRA BARCODE READER
+====================
+
+Zebra is a library for scanning and decoding bar codes from various
+sources such as video streams, image files or raw intensity sensors.
+It supports EAN, UPC, Code 128, Code 39 and Interleaved 2 of
+5. Included with the library are basic applications for decoding
+captured bar code images and using a video device (eg, webcam) as a
+bar code scanner.  The flexible, layered architecture features a fast,
+streaming interface with a minimal memory footprint.
+
+Check the zebra library home page for the latest release, mailing
+lists, etc.
+    http://zebra.sourceforge.net/
+
+License information can be found in 'COPYING.LIB'.
+
+
+BUILDING
+========
+
+See 'INSTALL' for generic configuration and build instructions.
+
+The scanner/decoder library itself only requires a few standard
+library functions which should be avilable almost anywhere.
+
+The zebraimg program uses ImageMagick to read image files in many
+different formats, you can obtain it from
+    http://www.imagemagick.org/
+
+The zebracam program uses the video4linux API (v4l1 or v4l2) to access
+the video device.  This interface is part of the linux kernel.  More
+information is available at
+    http://linuxtv.org/v4lwiki/
+
+If required libraries are not available you may disable building for
+the corresponding program using configure (see configure --help).
+
+
+RUNNING
+=======
+
+'make install' will install the library and application programs.  Run
+'zebracam' to start the video scanner.  use 'zebraimg barcode.jpg' to
+decode a saved image file.  Check the manual to find specific options
+for each program.
+
+
+REPORTING BUGS
+==============
+
+Bugs can be reported on the sourceforge project page
+    http://www.sourceforge.net/projects/zebra/
+
+Please include the zebra version number and a detailed description of
+the problem.  You'll probably have better luck if you're also familiar
+with the concepts from:
+    http://www.catb.org/~esr/faqs/smart-questions.html

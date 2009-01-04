@@ -1,0 +1,15 @@
+http://code.google.com/p/google-toolbox-for-mac/wiki/iPhoneUnitTesting
+
+テスト対象
+        AmazonApi
+        Common
+        DataModel
+        Database
+        Item
+        ItemListModel
+        Shelf
+        StringArray
+        URLComponent
+
+ViewController をどうするか？
+今までクラッシュするバグは ViewController に集中していたので、、、

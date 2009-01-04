@@ -1,0 +1,87 @@
+"AppName" = "ItemShelf";
+"SupportURL" = "http://itemshelf.com/index.html";
+"HelpURL" = "http://itemshelf.com/help-1_1.html";
+
+"Cancel" = "Cancel";
+
+"Add shelf" = "Add shelf";
+"Shelves" = "Shelves";
+"Shelf name" = "Shelf name";
+"Item" = "Item";
+
+"Add new shelf" = "Add new shelf...";
+"Add normal shelf" = "Add normal shelf";
+"Add smart shelf" = "Add smart shelf";
+"Edit shelf" = "Edit shelf";
+
+"Scan" = "Scan";
+"History" = "History";
+"Unclassified" = "Unclassified";
+"Wishlist" = "Wishlist";
+"ItemShelf" = "ItemShelf";
+"Config" = "Config";
+
+"Camera scan" = "Camera Scan";
+"Scan barcode with iPhone's camera" = "Scan barcode with iPhone's camera (macro lens needed)";
+"Photo library scan" = "Photo library scan";
+"Scan barcode image from photo library" = "Scan barcode image from photo library";
+"Enter item code" = "Enter item code";
+"EnterCodeDescription" = "Enter item code manually (ISBN, ASIN, UPC, EAN, JAN)";
+"Enter title" = "Enter title";
+"EnterTitleDescription" = "Enter title to search items";
+
+"Title" = "Title";
+"Code" = "Code";
+"NumPadNoteText" = "Note: No need to input 'ISBN' nor '-' characters.\nTo enter ASIN, tap the text field to use full keyboard.";
+	
+"Illegal message was received" = "Illegal message was received";
+"Cannot find item information" = "Cannot find item information";
+"Cannot connect Amazon service" = "Cannot connect Amazon service";
+
+"Could not recognize barcode symbol" = "Could not recognize barcode symbol";
+"Code is too short" = "Code is too short";
+"Keyword is too short" = "Keyword is too short";
+"Error" = "Error";
+"Close" = "Close";
+
+"Filter" = "Filter";
+
+"Show detail with Amazon" = "Show detail with Amazon";
+"Send detail with e-mail" = "Send detail with e-mail";
+"Open with Safari" = "Open with Safari";
+
+"Browser" = "Browser";
+
+"Select locale" = "Select locale";
+"Select locale of Amazon" = "Select locale of Amazon";
+
+"About" = "About";
+"About this software" = "About this software";
+"Help" = "Help";
+
+/* Item view */
+"Name" = "Name";
+"Title" = "Title";
+"Author" = "Author";
+"Manufacturer" = "Manufacturer";
+"Price" = "Price";
+"Category" = "Category";
+"Add to shelf" = "Add to shelf";
+
+/* index names (amazon) */
+"All" = "All";
+"Blended" = "All";
+"Apparel" = "Apparel";
+"Books" = "Books";
+"DVD" = "DVD";
+"Electronics" = "Electronics";
+"ForeignBooks" = "Foreign Books";
+"Hobbies" = "Hobbies";
+"Kitchen" = "Kitchen";
+"Music" = "Music";
+"MusicTracks" = "Music Tracks";
+"Software" = "Software";
+"SportingGoods" = "Sporting Goods";
+"Toys" = "Toys";
+"Video" = "Video";
+"VideoGames" = "Video Games";

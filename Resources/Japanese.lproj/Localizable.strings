@@ -1,0 +1,93 @@
+"AppName" = "ItemShelf";
+"SupportURL" = "http://itemshelf.com/index-j.html";
+"HelpURL" = "http://itemshelf.com/help-j-1_1.html";
+
+"Cancel" = "キャンセル";
+
+"Add shelf" = "棚の追加";
+"Shelves" = "棚一覧";
+"Shelf name" = "棚の名前";
+"Item" = "アイテム";
+
+"Add new shelf" = "棚を追加...";
+"Add normal shelf" = "通常の棚を追加";
+"Add smart shelf" = "スマート棚を追加";
+"Edit shelf" = "棚の編集";
+
+"Scan" = "取り込み";
+"History" = "履歴";
+"Unclassified" = "未分類";
+"Wishlist" = "ほしい物";
+"ItemShelf" = "アイテム棚";
+"Config" = "設定";
+
+"Camera scan" = "カメラ";
+"Scan barcode with iPhone's camera" = "バーコードを iPhone のカメラでスキャン(マクロレンズが必要です)";
+"Photo library scan" = "写真アルバム";
+"Scan barcode image from photo library" = "写真アルバムからバーコードをスキャン";
+"Enter item code" = "商品コードを入力";
+"EnterCodeDescription" = "商品コードを手で入力 (ISBN, ASIN, JAN/EAN/UPCバーコードのいずれか).";
+"Enter title" = "タイトルを入力";
+"EnterTitleDescription" = "タイトルを入力して検索";
+
+"Title" = "タイトル";
+"Code" = "コード";
+"NumPadNoteText" = "'ISBN' や '-' を入力する必要はありません。\nまた、ASIN を入力する場合は、テキスト入力欄をタップしてフルキーボードを表示してください。";
+"Illegal message was received" = "不正なデータを受信しました";
+"Cannot find item information" = "該当する商品情報が見つかりませんでした";
+"Cannot connect Amazon service" = "Amazon サービスに接続できませんでした";
+"Could not recognize barcode symbol" = "バーコードを認識できませんでした";
+
+"Code is too short" = "コードが短すぎます";
+"Keyword is too short" = "キーワードが短すぎます";
+"Close" = "閉じる";
+"Error" = "エラー";
+
+"Filter" = "フィルタ";
+
+"Show detail with Amazon" = "Amazon で詳細を見る";
+"Send detail with e-mail" = "詳細をメールで送る";
+"Open with Safari" = "Safariで開く";
+
+"Browser" = "ブラウザ";
+
+"Select locale" = "地域の選択";
+"Select locale of Amazon" = "使用する Amazon の国名を選択";
+
+"About" = "情報";
+"About this software" = "このソフトウェアについて";
+"Help" = "ヘルプ";
+
+/* */
+"Name" = "名前";
+"Title" = "タイトル";
+"Author" = "著者";
+"Manufacturer" = "製造元";
+"Price" = "価格";
+"Category" = "分類";
+"Add to shelf" = "棚に加える";
+
+/* index 名 */
+"All" = "すべて";
+"Blended" = "すべて";
+"Apparel" = "アパレル";
+"Baby" = "ベビー用品";
+"Beauty" = "ビューティー";
+"Books" = "本";
+"Classical" = "クラシック";
+"DVD" = "DVD";
+"Electronics" = "エレクトロニクス";
+"ForeignBooks" = "洋書";
+"Grocery" = "雑貨";
+"HealthPersonalCare" = "ヘルスケア";
+"Hobbies" = "ホビー";
+"Kitchen" = "キッチン";
+"Music" = "音楽";
+"MusicTracks" = "音楽トラック";
+"Software" = "ソフトウェア";
+"SportingGoods" = "スポーツ用品";
+"Toys" = "おもちゃ";
+"VHS" = "VHS";
+"Video" = "ビデオ";
+"VideoGames" = "ビデオゲーム";
+"Watches" = "時計";

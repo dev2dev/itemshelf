@@ -1,0 +1,38 @@
+Zebra Barcode Reader
+
+version 0.5 (2008-07-25):
+  Introducing zebra widgets!  Prioritized by popular demand, this
+  release includes fully functional barcode scanning widgets for GTK,
+  PyGTK, and Qt.  Application developers may now seamlessly integrate
+  barcode reader support with their user interface.
+
+  This release also fixes many bugs; existing users are encouraged to
+  upgrade.  
+
+version 0.4 (2008-05-31):
+  new support for EAN-8, Code 39 and Interleaved 2 of 5!
+  this release also introduces the long awaited decoder configuration
+  options and fixes several bugs
+
+version 0.3 (2008-02-25):
+  this is a beta release of the enhanced internal architecture.
+  support has been added for version 2 of the video4linux API and many
+  more image formats.  several other feature enhancements and bug
+  fixes are also included.  image scanning is slightly improved for
+  some images, but the base scan/decode function is relatively
+  untouched.  significant new code is represented in this release
+  - all bug reports are welcome and will be addressed promptly!
+
+version 0.2 (2007-05-16):
+  this release introduces significant enhancements, bug fixes and new
+  features!  basic EAN-13/UPC-A reading has been improved and should
+  now be much more reliable.  by popular request, new support has been
+  added for decoding Code 128.  additionally, the build process was
+  improved and there is even basic documentation for the application
+  commands
+
+version 0.1 (2007-03-24):
+  first official Zebra release!
+  supports basic scanning and decoding of EAN-13 and UPC-A symbols
+  using a webcam (zebracam) or from stored image files (zebraimg).
+  still need to add support for addons and EAN-8/UPC-E

@@ -1,0 +1,304 @@
+2008-11-15 : Takuya Murakami
+	* Ported to iPhone environment, without any code changes.
+
+version 0.5:
+  * release updates (version, NEWS, packaging)
+  * add pkg-config files
+  * update to latest libtool and new autoconf macros
+  * cleanup library symbol exports
+    * remove test programs using internal hooks
+  * improve portability of some format specifiers
+  * fix missing stub for --without-x - thanks to Simon Schmeisser for a patch!
+  * fix --disable-pthread compile errors and warnings
+  * fix XImage size mismatch background artifacts
+  * fix new generated file distribution errors
+  * switch Qt headers to old-style names (investigate possible Qt3 support?)
+  * add independent ABI versioning for GTK and Qt widget libraries
+  * reimplement widget internals to support image scanning and
+    improve locking efficiency
+  * add image scanning to widgets. including builtin conversions from
+    toolkit image types: GtkPixbuf and QImage
+  * add video opened hooks to widgets (improved use model)
+  * add logo, used when there is nothing better to draw
+  * add userdata to image object
+  * fix image reuse cleanup bug
+  * fix format specifiers in some error messages
+  * enhance widget tests to support enable/disable and scan from image
+  * fix broken deallocation assumptions in test_qt
+  * widget API documentation (still need to hookup gtkdoc, and PyGtk docs)
+  * API documentation toplevel overview
+  * update configure summary for new features
+  * replace all decoder assertions w/non-fatal debug spew (bug #1986478)
+  * fix glib-genmarshal check
+  * add first pass of Qt widget!
+    - test/example in test/test_qt.cpp
+    - factor video device scan to share among tests
+  * more C++ integration fixes
+    - additional Image ref tweaks
+    - add Video.close() and Window.clear() APIs
+  * fix missing image scanner handler call
+  * add dereference operator to C++ Symbol
+  * add count attribute to C++ Symbol
+  * fix broken C++ header definitions
+  * fix broken C++ Image references
+  * expose internal reference counting interface
+  * fix window locking bug
+  * cleanup some minor memory leaks
+  * convert Code 128 assertions to non-fatal warning spew
+  * fix single buffer video hang (bug #1984543)
+  * replace inferred video size assertion with warning message (bug #1984543)
+  * add first pass of GTK widget!
+  * add PyGTK widget wrapper
+  * API change: modify window draw/redraw interface to improve interoperability
+    with toolkits
+    - add window locking for thread safety
+    - zebra_window_draw() no longer actually "draws" anything
+    => use window.draw to update the image from video thread
+       then schedule window.redraw from toolkit GUI thread
+  * fix missing C++ std lib dependencies
+  * fix uninitialized handler/userdata bug in decoder
+  * fix broken Code 128 checksum assertion
+  * fix video destructor segfault
+  * fix window destructor Xvideo errors (XID is unsigned...)
+  * switch configure to use pkg-config to find most dependencies
+  * API documentation updates
+
+version 0.4:
+  * release updates (version, NEWS, packaging, examples)
+  * couple of portability tweaks
+  * finish format conversion resize cases
+  * add missing conversions
+  * fix some broken conversions
+  * fix some broken redraw and Xv checks
+  * add decoder configuration API
+    - only boolean configs currently implemented
+    - integrate config option parsing w/zebracam and zebraimg
+    - add config to enable/disable each symbology type
+    - add optional conversions from EAN-13 to UPC-A, ISBN-10 and ISBN-13
+      (disabled by default)
+    - add config to emit/suppress check digit
+      NB behavior change!  check digit is now emitted by default
+  * related documentation updates
+    - split common options to a separate entity
+  * fallback to gettimeofday when POSIX timers are not available
+  * image format conversion fixes
+    - fix format size roundoff (NB now rounds *down*)
+    - add convert and resize API to pad/crop image to specific size
+      (eg, to handle Xv min/max image size)
+      NB this is still not implemented for many conversions
+  * fix window deletion visibility inconsistency
+  * add couple processor commands
+    - 'q' to delete window
+    - 'd' to dump displayed image for debug
+  * remove problematic includes used for v4l2 configure test
+  * address compiler portability concerns w/debug print vararg macro
+  * workaround v4l1_set_format() failed consistency check for broken drivers
+    - change from error to warning w/more useful message
+    - calc expected image size using expected value instead of driver value
+  * add missing example scripts to distribution
+  * add missing files for Interleaved 2 of 5
+  * add support for Interleaved 2 of 5 symbology!
+    - again no check digit option yet
+  * increase decode window from 8 to 16 bars
+    - remove Code 39 "extra bar" hack
+    - add Code 39 quiet zone check
+    - facilitate Interleaved 2 of 5
+  * optimize character width calculations for all symbologies
+  * fix image scanner bug w/lost symbols at end of scan passes
+  * fix EAN-8 buffer overrun case
+  * add API doc footer
+  * add API documentation generated by Doxygen
+    - markup, cleanup and finish writing header comments
+    - setup Doxygen config file
+  * add/fix window GC
+  * add base support for Code 39 (no check digit or full ASCII options yet)
+  * cleanup decoder locking
+  * add support for EAN-8!
+
+version 0.3:
+  * add interface stub files
+  * fix wait timeouts
+  * fix XImage format filtering
+  * fix several error handling corner cases
+  * fix c++ error handling
+  * add missing Window.h
+  * add better hierarchy to library sources
+  * build configuration fixes
+  * portability fixes
+  * packaging updates
+  * fix zebracam beeps
+  * fix some RGB component ordering and XImage format problems
+  * fix window resize and redraw state problems
+  * fix EAN testcase in test_decode - thanks to Steffen Kube for the patch!
+  * add APIs and (hidden) zebracam options to force specific formats for debug
+  * add example scripts
+  * documentation updates
+  * remove implementation of deprecated img_walker
+  * add XImage formats
+    - basic support for 16-bit depths
+  * add some missing rgb format conversions
+  * add basic overlay
+    - currently only markers at detected scan locations (needs improved)
+  * fix memory leak for converted images w/new cleanup semantics
+  * migrate inter-frame consistency check from old zebracam into image_scanner
+    - add API to enable/disable/flush result cache
+    - add API to retrieve cache status from returned symbol
+  * cleanup user_wait blocking semantics for various state combinations
+  * fix bug w/v4l1 not unlinking dequeued image
+  * major restructuring for improved modularity
+    NB not all changes are are backward compatible!
+    - modular support for v4l2 falling back to v4l1
+    - flexible support for more varied image formats (incomplete)
+    - added reusable abstractions for: an "image" object and associated
+      metadata, a "video" input object and a "window" output object
+    - added new "processor" API to wrap everything together, simplifying
+      trivial application usage (including zebracam and zebraimg)
+    - removed deprecated "img_walker" interface, completely replaced by
+      more integrated "image_scanner" (moving toward more image processing)
+    - updated/added c++ APIs, including improved iterator interfaces
+  * removed SDL dependency due to various usage incompatibilities
+    (most notably the inability to embed video window into a widget)
+  * cleaned up zebracam and zebraimg command line processing (bug #1838535)
+  * many useful enhancements thanks to proposal by mhirsch45 (req #1759923)
+    including:
+    - v4l2 support
+    - support for UYVY image format
+    - zebracam cursor hiding
+    - zebracam audio mute
+    - command line video device specification,
+  * significant error handling and debug improvements
+  * some associated documentation updates
+  * various new test programs (slowly working toward more formal test suite)
+  * add missing xlink namespace to dbg_scan generated output (bug #1764188)
+  * qualify char types as [un]signed to avoid non-portable C ambiguity
+    - thanks to mhirsch45@users.sf.net and Colin Leroy for the patches!
+      (bug #1759914)
+  * add integrated 2D image scanning API
+    - automatically ties to internal scanner and decoder
+    - results reported via new symbol API
+    - deprecated previous, cumbersome img_walker interface
+    - uses new simpler/faster and denser grid pattern (FIXME add 45 and 135)
+    - first step toward more sophisticated image processing
+  * updated zebraimg to use new ImageScanner API
+    - add initial decode location tracking
+  * updated zebracam to use new img_scanner API
+    - extended cache to track multiple symbols per-image
+    - add initial decode location tracking
+    - removed scan grid overlay
+  * add configure check for ImageMagick version >= 6.3.0
+  * configure dumps ImageMagick, SDL and firefox versions for debug
+  * add NPAPI plugin stub and build infrastructure
+  * flush zebracam output after each scanned symbol
+  * integrate RPM packaging spec file - thanks to Vít Hrachový for the draft!
+    (patch #1723536)
+  * finally add HACKING to distribution/install (bug #1698202)
+  * add extra documentation files to install (README NEWS INSTALL, etc)
+  * Debian package patch for 0.2 - thanks to Vít Hrachový:
+    - add libsdl1.2-dev as a build dependency
+    - update automake (>= 1:1.10) as a build dependency
+    - new package
+
+version 0.2:
+  * update distribution to include debian packaging
+  * add consistency checking to zebracam
+  * add redundant output suppression to zebraimg
+  * fix couple of Code 128 decode table bugs
+  * fix reversed Code 128 decode
+  * add outstanding scanner edge flush to new_scan()
+    - API change: scanner reset/new_scan() now return scan/decode status
+    - update zebracam and zebraimg to call this between each walker pass
+      (interface still needs improvement...)
+    => improves in scan results for many cases
+  * fix dbg_scan filename generation so results go in local directory
+  * continue Code 128 refinement
+    - finish character set C decode/expansion
+    - add per-character validation
+    - resolve scan direction in separate postprocessing pass before handling
+      ASCII conversion
+    - add several img_walker passes parallel to major axis (for long symbols)
+    - add simple character set C example to test_decode
+  * promote zebraimg images to TrueColor so colored scan pattern always shows
+  * more dbg_scan tweaks
+  * significant scanner improvements
+    - changed "classic" [-1 0 1] first differential kernel to [-1 1]
+      to improve minimum edge resolution to single pixel elements
+      => still need to do some more research and validate assumptions
+    - adaptive thresholding fixes
+    - adjusted filtering for better edge detection
+    - separate constants out to defines (FIXME add config API?)
+  * fix EAN-13 secondary determinant decoding
+  * dbg_scan tweaks to make annotations smaller/more usable
+  * add get_color() interface to decoder
+  * annotated zebraimg scan pattern for marginally useful high-level debug
+  * random include cleanup
+  * cleanup 64-bit compile warnings in zebraimg (bug #1712504)
+  * add first-pass partial support for Code 128
+    - separate out more EAN state from shared state
+    - internal interface changes
+    - finish dynamic buffer management
+    - add shared resource locking
+    - add Code 128 to test_decode program
+    => still needs additional functionality and plenty of debug
+    => reading both Code 128 *and* EAN still destabilized
+  * add diagnostic program test_video to dump more verbose video debug
+  * incorporate documentation into Debian package
+    - thanks to Vít Hrachový for the patch!
+  * fix VPATH doc builds (requires automake-1.10 and autoconf-2.61)
+  * build and dist fixes
+    - suppress documentation rebuilds in distributed sources
+  * add Debian packaging sources - thanks to Vít Hrachový for the patch!
+  * add DocBook template and build infrastructure
+  * add manpages for zebracam and zebraimg
+  * add GNU standard options to zebracam and zebraimg
+  * internal decoder restructuring to support additional symbologies
+    - separated out 1-D decoder infrastructure into generic internal API
+    - moved EAN/UPC specific decoding into it's own module
+  * fix confusing configure behavior which quietly avoided building
+    targets with missing dependencies(?!)
+    configure will now fail with a descriptive error message if you 
+    do not have Magick++ and fail to specify --without-imagemagick or
+    do not have SDL and fail to specify --without-sdl
+  * add configure summary describing what will be built (req #1698196)
+  * fix parity encoding in test_decode and add decoded symbol output
+  * introduce Code 128 symbol type
+  * increase width of zebra_symbol_type_t to 16 bits
+  * add HACKING (bug #1698202)
+
+version 0.1:
+  * add NEWS and ChangeLog
+  * fix some config/build issues found on other boxes
+  * add missing ImageWalker install
+  * fix scanner runaway threshold calculation bug
+  * fix zebracam/zebraimg bugs overwriting currently scanning image w/scan
+    pattern
+  * add c++ interface to img_walker
+  * apply ImageWalker to zebraimg
+  * add decoder soft reset on partial mismatch
+  * finish basic decoder symbol assembly/reporting
+  * add decoder symbol checksum verification
+  * add callback API option to decoder for "async" symbol processing
+  * add "image walker" library API to trace scan pattern over 2D images
+  * apply image walker to zebracam (C++/zebraimg scan pattern still TBD)
+  * add audio feedback to zebracam (still has long latency)
+  * add zebracam key cmd to dump frame to file (for debugging)
+  * fixes for decoder/scanner reset/new_scan
+  * fixes to scanner initialization and algorithm tweaks
+  * made decoder less sensitive to violated quiet-zone
+  * apply zebraimg workaround for imagemagick image display bug
+  * add string names for symbol types to library and API to access them
+  * add dbg_scan test program for visually debugging image scanner (and
+    decoder)
+  * add test_walk for basic image walker sanity/debug
+  * removed recursive makes in favor of monolithic build
+  * renamed some makefiles accordingly
+  * finished some final symbol data construction
+  * added result callbacks to decoder APIs for data reporting
+  * zebraimg hooks into callback
+  * zebracam still seems to "hang" in undecodeable state?
+  * populate svn with current sources.
+  * most of the basic functionality is included and working.
+  * still need to combine final decode data, finish addons, etc (see TODO).
+  * c++ wrappers are included and tested, but API may need tweaked.
+  * zebraimg and zebracam basically working but need cleanup/polish.
+  * need to create some basic documentation...
+  * initial repository layout
