@@ -41,6 +41,9 @@
 
 @synthesize handle;
 
+/**
+   Initialize with sqlite3_stmt
+*/
 - (id)initWithStmt:(sqlite3_stmt *)st
 {
     self = [super init];
@@ -58,6 +61,9 @@
     [super dealloc];
 }
 
+/**
+   Execute step (sqlite3_step)
+*/
 - (int)step
 {
     int ret = sqlite3_step(stmt);
@@ -67,52 +73,82 @@
     return ret;
 }
 
+/**
+   Reset statement (sqlite3_reset)
+*/
 - (void)reset
 {
     sqlite3_reset(stmt);
 }
 
+/**
+   Bind integer value
+*/
 - (void)bindInt:(int)idx val:(int)val
 {
     sqlite3_bind_int(stmt, idx+1, val);
 }
 
+/**
+   Bind double value
+*/
 - (void)bindDouble:(int)idx val:(double)val
 {
     sqlite3_bind_double(stmt, idx+1, val);
 }
 
+/**
+   Bind C-string value
+*/
 - (void)bindCString:(int)idx val:(const char *)val
 {
     sqlite3_bind_text(stmt, idx+1, val, -1, SQLITE_TRANSIENT);
 }
 
+/**
+   Bind stringvalue
+*/
 - (void)bindString:(int)idx val:(NSString*)val
 {
     sqlite3_bind_text(stmt, idx+1, [val UTF8String], -1, SQLITE_TRANSIENT);
 }
 
+/**
+   Bind date value
+*/
 - (void)bindDate:(int)idx val:(NSDate*)date
 {
     sqlite3_bind_text(stmt, idx+1, [Database cstringFromDate:date], -1, SQLITE_TRANSIENT);
 }
 
+/**
+   Get integer value
+*/
 - (int)colInt:(int)idx
 {
     return sqlite3_column_int(stmt, idx);
 }
 
+/**
+   Get double value
+*/
 - (double)colDouble:(int)idx
 {
     return sqlite3_column_double(stmt, idx);
 }
 
+/**
+   Get C-string value
+*/
 - (const char *)colCString:(int)idx
 {
     const char *s = (const char*)sqlite3_column_text(stmt, idx);
     return s;
 }
 
+/**
+   Get stringvalue
+*/
 - (NSString*)colString:(int)idx
 {
     const char *s = (const char*)sqlite3_column_text(stmt, idx);
@@ -123,6 +159,9 @@
     return ns;
 }
 
+/**
+   Get date value
+*/
 - (NSDate*)colDate:(int)idx
 {
     NSDate *date = nil;
@@ -146,6 +185,9 @@ static Database *theDatabase = nil;
 
 static NSDateFormatter *dateFormatter = nil;
 
+/**
+   Return the database instance (singleton)
+*/
 + (Database *)instance
 {
     if (!theDatabase) {
@@ -187,6 +229,9 @@ static NSDateFormatter *dateFormatter = nil;
     [super dealloc];
 }
 
+/**
+   Execute SQL statement
+*/
 - (void)exec:(const char *)sql
 {
     ASSERT(handle != 0);
@@ -199,6 +244,12 @@ static NSDateFormatter *dateFormatter = nil;
     }
 }
 
+/**
+   Prepare statement
+
+   @param[in] sql SQL statement
+   @return Allocated dbstmt instance
+*/
 - (dbstmt *)prepare:(const char *)sql
 {
     sqlite3_stmt *stmt;
@@ -213,24 +264,35 @@ static NSDateFormatter *dateFormatter = nil;
     return dbs;
 }
 
+/**
+   Get last inserted row id
+*/
 - (int)lastInsertRowId
 {
     return sqlite3_last_insert_rowid(handle);
 }
 
+/**
+   Start transaction
+*/
 - (void)beginTransaction
 {
     [self exec:"BEGIN;"];
 }
 
+/**
+   Commit transaction
+*/
 - (void)commitTransaction
 {
     [self exec:"COMMIT;"];
 }
 
-// データベースを開く
-//   データベースがあったときは YES を返す。
-//   なかったときは新規作成して NO を返す
+/**
+   Open database
+
+   @return Returns YES if database exists, otherwise create database and returns NO.
+*/
 - (BOOL)open
 {
     // Load from DB
@@ -250,7 +312,9 @@ static NSDateFormatter *dateFormatter = nil;
     return isExistedDb;
 }
 
-// テーブルを作成・更新する
+/**
+   Create / upgrade tables
+*/
 - (void)checkTables
 {
     [Item checkTable];
@@ -260,6 +324,9 @@ static NSDateFormatter *dateFormatter = nil;
 //////////////////////////////////////////////////////////////////////////////////
 // Utility
 
+/**
+   Generate NSDate from C-string
+*/
 + (NSDate*)dateFromCString:(const char *)str
 {
     NSDate *date = [dateFormatter dateFromString:
@@ -267,6 +334,9 @@ static NSDateFormatter *dateFormatter = nil;
     return date;
 }
 
+/**
+   Get C-string from NSDate
+*/
 + (const char *)cstringFromDate:(NSDate*)date
 {
     const char *s = [[dateFormatter stringFromDate:date] UTF8String];

@@ -39,9 +39,12 @@
 #import <sqlite3.h>
 #import "Common.h"
 
+/**
+   Wrapper class of sqlite3_stmt
+*/
 @interface dbstmt : NSObject {
-    sqlite3_stmt *stmt;
-    sqlite3 *handle;
+    sqlite3_stmt *stmt;	///< sqlite3_stmt handle.
+    sqlite3 *handle;    ///< database handle.
 }
 
 @property(nonatomic,assign) sqlite3 *handle;
@@ -63,9 +66,11 @@
 - (NSDate*)colDate:(int)idx;
 @end
 
-
+/**
+   Wrapper class of sqlite3 database
+*/
 @interface Database : NSObject {
-    sqlite3 *handle;
+    sqlite3 *handle; ///< Database handle
 }
 
 @property(nonatomic,readonly) sqlite3 *handle;
