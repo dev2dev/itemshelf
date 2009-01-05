@@ -66,28 +66,43 @@
     [super dealloc];
 }
 
+/**
+   Add item to shelf
+*/
 - (void)addItem:(Item*)item
 {
     [array addObject:item];
 }
 
+/**
+   Remove item from shelf
+*/
 - (void)removeItem:(Item*)item
 {
     [array removeObject:item];
 }
 
+/**
+   Check if the item is contained in this shelf.
+
+   @return Returns YES if the item is contained.
+*/
 - (BOOL)containsItem:(Item*)item
 {
     return [array containsObject:item];
 }
 
-// enumeration
+/**
+   NSFastEnumeration protocol
+*/
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len
 {
     return [array countByEnumeratingWithState:state objects:stackbuf count:len];
 }
-
-
+ 
+/**
+   Used from sortBySorder (private)
+*/
 static int compareBySorder(Item *t1, Item *t2, void *context)
 {
     if (t1.sorder == t2.sorder) {
@@ -99,6 +114,9 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     return NSOrderedDescending;
 }
 
+/**
+   Sort items which sorder
+*/
 - (void)sortBySorder
 {
     [array sortUsingFunction:compareBySorder context:NULL];
@@ -107,6 +125,12 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
 ///////////////////////////////////////////////////////////////
 // データベース処理
 
+/**
+   Create/upgrade Shelf table in the database.
+
+   If no table exist, create now.
+   If the table is old format, upgrade it.
+*/
 + (void)checkTable
 {
     Database *db = [Database instance];
@@ -173,6 +197,9 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     }
 }
 
+/**
+   Load row of shelf table of the database.
+*/
 - (void)loadRow:(dbstmt *)stmt
 {
     self.pkey   = [stmt colInt:0];
@@ -187,6 +214,9 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
           self.shelfType, self.titleFilter, self.authorFilter, self.manufacturerFilter);
 }
 
+/**
+   Insert row to shelf table of the database.
+*/
 - (void)insert
 {
     Database *db = [Database instance];
@@ -210,6 +240,9 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [db commitTransaction];
 }
 
+/**
+   Delete row from shelf table of the database.
+*/
 - (void)delete
 {
     Database *db = [Database instance];
@@ -233,6 +266,9 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [db commitTransaction];
 }
 
+/**
+   Update shelf name of the database.
+*/
 - (void)updateName
 {
     const char *sql = "UPDATE Shelf SET name = ? WHERE pkey = ?;";
@@ -244,6 +280,9 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [stmt release];
 }
 
+/**
+   Update sorder name of the database.
+*/
 - (void)updateSorder
 {
     const char *sql = "UPDATE Shelf SET sorder = ? WHERE pkey = ?;";
@@ -255,6 +294,9 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [stmt release];
 }
 
+/**
+   Update smart filters of the database.
+*/
 - (void)updateSmartFilters
 {
     const char *sql = "UPDATE Shelf SET titleFilter = ?, authorFilter = ?, manufacturerFilter = ? WHERE pkey = ?;";

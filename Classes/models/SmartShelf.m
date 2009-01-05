@@ -43,7 +43,9 @@ static NSMutableArray *titleFilterStrings = nil;
 static NSMutableArray *authorFilterStrings = nil;
 static NSMutableArray *manufacturerFilterStrings = nil;
 
-// SmartShelf を update する
+/**
+   Update all items in smart shelves.
+*/
 - (void)updateSmartShelf:(NSMutableArray *)shelves
 {
     if (shelfType == ShelfTypeNormal) return;
@@ -69,7 +71,9 @@ static NSMutableArray *manufacturerFilterStrings = nil;
     [manufacturerFilterStrings release];
 }
 
-// ',' で分割した文字列配列を返す
+/**
+   Returns array of filter tokens, which is separated with comma delimiter. (private)
+*/ 
 - (NSMutableArray *)makeFilterStrings:(NSString *)filter
 {
     NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:3];
@@ -99,6 +103,9 @@ static NSMutableArray *manufacturerFilterStrings = nil;
     return ary;
 }
 
+/**
+   Check if the item is match to the smart shelf (private)
+*/
 - (BOOL)isMatchSmartShelf:(Item *)item
 {
     if (shelfType == ShelfTypeNormal) {
@@ -118,6 +125,9 @@ static NSMutableArray *manufacturerFilterStrings = nil;
     return YES;
 }
 
+/**
+   Check if the item is match to the filter tokens (private)
+*/
 - (BOOL)matchSmartFilter:(NSMutableArray *)filterStrings value:(NSString*)value
 {
     if (filterStrings.count == 0) return YES;

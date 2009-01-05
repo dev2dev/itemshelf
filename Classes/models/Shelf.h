@@ -38,30 +38,36 @@
 #import "Common.h"
 #import "Database.h"
 
+/**
+   Shelf type
+*/
 typedef enum 
 {
-    ShelfTypeNormal,
-    ShelfTypeSmart
+    ShelfTypeNormal,  ///< Normal shelf
+    ShelfTypeSmart    ///< Smart shelf
 } ShelfType;
 
-#define SHELF_ALL_PKEY	-99999	// All Shelf の pkey
+#define SHELF_ALL_PKEY	-99999	///< Special primary key for "All shelf".
 
 @class Item;
 
+/**
+   Shelf class
+*/
 @interface Shelf : NSObject <NSFastEnumeration>
 {
-    NSMutableArray *array;
+    NSMutableArray *array;	///< Array of items.
 	
-    int pkey;
-    NSString *name;
-    int sorder;
+    int pkey;			///< Primary key of this shelf.
+    NSString *name;		///< Name of this shelf.
+    int sorder;			///< Sort order
 
-    ShelfType shelfType;
+    ShelfType shelfType;	///< Shelf type
 
     // smart shelf filter
-    NSString *titleFilter;
-    NSString *authorFilter;
-    NSString *manufacturerFilter;
+    NSString *titleFilter;	///< Title filter of smart shelf
+    NSString *authorFilter;	///< Author filter of smart shelf
+    NSString *manufacturerFilter; ///< Manufacturer filter of smart shelf
 }
 
 @property(nonatomic,retain) NSMutableArray *array;
@@ -89,6 +95,9 @@ typedef enum
 - (void)updateSmartFilters;
 @end
 
+/**
+   Smart shelf
+*/
 @interface Shelf(SmartShelf)
 - (void)updateSmartShelf:(NSMutableArray *)shelves;
 
