@@ -54,21 +54,6 @@
     [window makeKeyAndVisible];
 }
 
-
-/*
-// Optional UITabBarControllerDelegate method
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-}
-*/
-
-/*
-// Optional UITabBarControllerDelegate method
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed {
-}
-
-*/
-
-
 - (void)dealloc {
     [[DataModel sharedDataModel] release];
     [navigationController release];
@@ -76,11 +61,15 @@
     [super dealloc];
 }
 
-// データファイルのパスを取得
+/**
+   Get path of data file.
+
+   @param[in] filename Name of the data file.
+   @return Full path of the data file.
+ */
 + (NSString*)pathOfDataFile:(NSString*)filename
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(
-                                                         NSDocumentDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 
     NSString *dataDir = [paths objectAtIndex:0];
     if (filename == nil) {
@@ -90,7 +79,11 @@
     return path;
 }
 
-// カスタム URL の処理
+/**
+   Handle custom URL
+
+   This application accept "itemshelf://" URL scheme.
+*/
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     if (![url.scheme isEqualToString:@"itemshelf"]) {
@@ -99,16 +92,16 @@
 
     LOG(@"host = %@, path = %@", url.host, url.path);
 	
-    // host 部分に ASIN / ISBN / JAN などが入っている。
+    // Get keyword (ASIN/ISBN/JAN etc.) from host part.
     NSString *code = url.host;
 
-    // path 部分に国が入っている
+    // Get country code from path part.
     NSString *country = [url.path lastPathComponent];
     if (country.length != 2) {
         country = nil;
     }
 	
-    // ScanView 表示させ、検索を開始する
+    // Show ScanView and start search.
     ScanViewController *vc = [[ScanViewController alloc] initWithNibName:@"ScanView" bundle:nil];
     UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:vc];
     [navigationController presentModalViewController:nv animated:NO];
