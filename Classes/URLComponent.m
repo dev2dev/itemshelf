@@ -32,11 +32,13 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// URL の構造
+// URL compomnents
+
+// Structure of URL
 //
 //     <scheme>://<net_loc>/<path>;<params>?<query>#<fragment>
 
-// 記号の ASCII コード
+// ASCII code:
 //   0x26 : &
 //   0x3D : =
 //   0x3F : ?
@@ -94,13 +96,13 @@
     [self parseQuery];
 }
 
-// Amazon から帰ってくる URL は、
-// XML に埋め込む都合上、?, =, ; などが encode されているため、解除する
 - (void)setURLString:(NSString *)urlString
 {
     NSMutableString *ms = [[[NSMutableString alloc] init] autorelease];
     [ms setString:urlString];
 
+    // Decode some characters (?, =, ; etc.) in the URL, 
+    // because the URL in response of Amazon API is encoded.
 #define REPLACE(x, y)                                                   \
     [ms replaceOccurrencesOfString:x withString:y options:NSLiteralSearch range:NSMakeRange(0, [ms length])]
     REPLACE(@"%23", @"#");
@@ -116,6 +118,7 @@
 - (NSString*)absoluteString
 {
     [self composeQuery];
+
     NSString *s = [NSString stringWithFormat:@"%@://%@%@", scheme, host, path];
     if (params) {
         s = [s stringByAppendingFormat:@";%@", params];
