@@ -239,6 +239,11 @@ CGPoint lastTouchLocation;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+   @name TableViewDataSource protocol
+*/
+//@{
+
 #pragma mark TableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -319,8 +324,15 @@ CGPoint lastTouchLocation;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+//@}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // Edit handling
+
+/**
+   @name Edit handling
+*/
+//@{
 
 // Edit button process
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
@@ -367,8 +379,15 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [model moveRowAtIndex:fromIndexPath.row toIndex:toIndexPath.row];
 }
 
+//@}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // SearchBar processing
+
+/**
+   @name SearchBar processing
+*/
+//@{
 
 /**
    Toggel search bar
@@ -464,9 +483,16 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [sb resignFirstResponder];
 }
 
+//@}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // Scan processing
 
+/**
+   @name Scan button processing
+*/
+
+//@{
 - (void)scanButtonTapped:(id)sender
 {
     ScanViewController *vc = [[ScanViewController alloc] initWithNibName:@"ScanView" bundle:nil];
@@ -475,6 +501,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [self doModalWithNavigationController:vc];
     [vc release];
 }
+//@}
 
 - (void)didReceiveMemoryWarning {
     [Item clearAllImageCache];
