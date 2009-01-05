@@ -40,15 +40,15 @@
 #import "ScanViewController.h"
 #import "DataModel.h"
 
+static int itemsPerLine = 1;
+
 //////////////////////////////////////////////////////////////////////////////////////////
-// タッチイベントつき UITableView 実装
+// UITableView with touch event handlers
 
 @implementation UITableViewWithTouchEvent
 
-static int itemsPerLine = 1;
 CGPoint lastTouchLocation;
 
-// タッチイベントを取る (X座標が必要なため)
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
@@ -59,6 +59,9 @@ CGPoint lastTouchLocation;
     [super touchesMoved:touches withEvent:event];
 }
 
+/**
+   Remember last touched location (coordinates)
+*/
 - (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
 {
     UITouch *touch = [touches anyObject];
@@ -74,13 +77,13 @@ CGPoint lastTouchLocation;
 @end
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// ItemListViewController 実装
+// ItemListViewController implementation
 
 @implementation ItemListViewController
 
 - (void)setShelf:(Shelf *)shelf
 {
-    // Model 生成
+    // Generate ItemListModel
     [model release];
     model = [[ItemListModel alloc] initWithShelf:shelf];
 }
@@ -94,20 +97,20 @@ CGPoint lastTouchLocation;
     NSString *title = model.shelf.name;
     self.navigationItem.title = title;
 
-    // Scan ボタンの有効／無効
+    // Disable scan button for smart shelf
     if (model.shelf.shelfType == ShelfTypeNormal) {
         scanButton.enabled = YES;
     } else {
         scanButton.enabled = NO;
     }
 
-    // Edit ボタン追加
+    // Add Edit button
     self.navigationItem.rightBarButtonItem = [self editButtonItem];
     if (itemsPerLine != 1) {
         self.navigationItem.rightBarButtonItem.enabled = NO;
     }
 	
-    // TableView を生成する
+    // Generate table view with touch event handlers
     tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:CGRectMake(0, 0, 320, 372)];
     tableView.rowHeight = ITEM_CELL_HEIGHT;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -116,7 +119,7 @@ CGPoint lastTouchLocation;
     [self.view addSubview:tableView];
     [tableView release];
 	
-    // SearchBar 作成
+    // Create SearchBar
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     searchBar.hidden = YES;
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -125,7 +128,7 @@ CGPoint lastTouchLocation;
     searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     searchBar.delegate = self;
 
-    // フィルタボタン設定
+    // Initiate filter button title
     filterButton.title = NSLocalizedString(@"All", @"");
 }
 
@@ -144,13 +147,17 @@ CGPoint lastTouchLocation;
     [super viewWillAppear:animated];
 }
 
-// タイトル更新
+/**
+   Update title with shelf name and item count.
+*/
 - (void)updateTitle
 {
     self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", model.shelf.name, model.count];
 }
 
-// フィルタ設定
+/**
+   Set filter string
+*/
 - (void)setFilter:(NSString *)f
 {
     [model setFilter:f];
@@ -165,7 +172,9 @@ CGPoint lastTouchLocation;
     [tableView reloadData];
 }
 
-// フィルタボタンタップ処理
+/**
+   Filter button tapped handler
+*/
 - (void)filterButtonTapped:(id)sender
 {
     NSMutableArray *filters = [[DataModel sharedDataModel] makeFilter:model.shelf];
@@ -179,11 +188,12 @@ CGPoint lastTouchLocation;
     vc.selectedIndex = filterIndex;
 	
     [self doModalWithNavigationController:vc];
-	
-    //[self.navigationController pushViewController:vc animated:YES];
     [filters release];
 }
 
+/**
+   Called when filter is selected
+*/
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
 {
     if (vc.selectedIndex == 0) {
@@ -194,6 +204,9 @@ CGPoint lastTouchLocation;
     }
 }
 
+/**
+   Toggle cell view mode (1 - 4 cells per line)
+*/
 - (IBAction)toggleCellView:(id)sender
 {
     NSArray *ary = [tableView indexPathsForVisibleRows];
@@ -307,9 +320,9 @@ CGPoint lastTouchLocation;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Edit 処理
+// Edit handling
 
-// Editボタン処理
+// Edit button process
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
@@ -318,7 +331,7 @@ CGPoint lastTouchLocation;
     [tableView setEditing:editing animated:animated];
 }
 
-// 編集スタイルを返す
+// Return editing style
 - (UITableViewCellEditingStyle)tableView:(UITableView*)tv
            editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath
 {
@@ -329,7 +342,7 @@ CGPoint lastTouchLocation;
     return UITableViewCellEditingStyleNone;
 }
 
-// 削除処理
+// delete row
 - (void)tableView:(UITableView *)tv commitEditingStyle:(UITableViewCellEditingStyle)style
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
@@ -342,20 +355,24 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     }
 }
 
-// 並べ替え処理
+// Reorder: can move?
 - (BOOL)tableView:(UITableView *)tv canMoveRowAtIndexPath:(NSIndexPath*)indexPath
 {
     return YES; // 全セル移動可能
 }
 
+// Reorder cell
 - (void)tableView:(UITableView *)tv moveRowAtIndexPath:(NSIndexPath*)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath
 {
     [model moveRowAtIndex:fromIndexPath.row toIndex:toIndexPath.row];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// SearchBar 処理
+// SearchBar processing
 
+/**
+   Toggel search bar
+*/
 - (IBAction)toggleSearchBar:(id)sender
 {
     searchBar.hidden = !searchBar.hidden;
@@ -369,6 +386,9 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [tableView reloadData];
 }
 
+/**
+   Show search bar with animation
+*/
 - (void)showSearchBar
 {
     self.navigationItem.rightBarButtonItem = nil;
@@ -385,6 +405,9 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [searchBar becomeFirstResponder];
 }
 
+/**
+   Hide search bar with animation
+*/
 - (void)hideSearchBar
 {
     self.navigationItem.rightBarButtonItem = [self editButtonItem];
@@ -401,10 +424,10 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)sb
 {
-    // 編集中は cancel ボタンを出す
+    // Enable cancel button when editing text
     sb.showsCancelButton = YES; 
 	
-    // Edit, Filter ボタンを disable にしておく
+    // Disable Edit, Filter buttons.
     self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
@@ -413,7 +436,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 {
     sb.showsCancelButton = NO;
 	
-    // Edit, Filter ボタンを enabled に戻す
+    // Back to enabeld for Edit, Filter buttons.
     self.navigationItem.leftBarButtonItem.enabled = YES;
     self.navigationItem.rightBarButtonItem.enabled = YES;
 }
@@ -421,7 +444,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 - (void)searchBar:(UISearchBar *)sb textDidChange:(NSString *)text
 {
     [model setSearchText:text];
-    // タイトルは検索窓で隠れているので、updateTitle はしなくてよい
+    // No need to updateTitle here (title is hidden by search bar)
 
     [tableView reloadData];
 }
@@ -442,7 +465,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Scan 処理
+// Scan processing
 
 - (void)scanButtonTapped:(id)sender
 {

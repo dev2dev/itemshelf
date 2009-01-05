@@ -43,6 +43,11 @@
 #import "StringArray.h"
 #import "GenSelectListViewController.h"
 
+/**
+   Extended UITableView class with touch event handlers.
+   
+   This is needed to get X-coordinate for 4-items per row mode.
+*/
 @interface UITableViewWithTouchEvent : UITableView
 
 @end
