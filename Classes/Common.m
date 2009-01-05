@@ -35,6 +35,9 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 
+/**
+   Called when assertion failed from ASSERT macro.
+*/
 void AssertFailed(const char *filename, int line)
 {
     NSLog(@"Assertion failed: %s line %d", filename, line);
@@ -56,6 +59,12 @@ void AssertFailed(const char *filename, int line)
   return self;
   }
 */
+
+/**
+   @brief Show alert dialog
+   @param[in] title Dialog title
+   @param[in] message Dialog message
+*/
 + (void)showAlertDialog:(NSString*)title message:(NSString*)message
 {
     UIAlertView *av = [[UIAlertView alloc]
@@ -68,7 +77,9 @@ void AssertFailed(const char *filename, int line)
     [av release];
 }
 
-
+/**
+   @brief Resize UIImage to fit in speficied size
+*/
 + (UIImage *)resizeImageWithin:(UIImage *)image width:(double)maxWidth height:(double)maxHeight
 {
     double ratio = 1.0;
@@ -94,6 +105,9 @@ void AssertFailed(const char *filename, int line)
     return [Common resizeImage:image width:width height:height];
 }
 
+/**
+   @brief Resize image with specified size
+*/
 + (UIImage *)resizeImage:(UIImage *)image width:(double)width height:(double)height
 {
     //	return [image _imageScaledToSize:CGSizeMake(width, height) interpolationQuality:0];
@@ -111,6 +125,11 @@ void AssertFailed(const char *filename, int line)
 
 @implementation UIViewController (MyExt)
 
+/**
+   @brief Show modal view with navigation controller
+
+   @param[in] vc View controller to show modal.
+*/
 - (void)doModalWithNavigationController:(UIViewController *)vc
 {
     UINavigationController *newnv = [[UINavigationController alloc]

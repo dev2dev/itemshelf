@@ -51,36 +51,36 @@
 // Item 情報 : とりあえず仮で
 @interface Item : NSObject 
 {
-    int pkey;			// 主キー (データベース用)
-    NSDate *date;		// 登録日
-    int shelfId;		// 棚ID (SHELF_*) (旧 itemState)
+    int pkey;		///< Primary key (for database)
+    NSDate *date;	///< Registered date
+    int shelfId;	///< Shelf ID (SHELF_*)
 
-    int idType;			// ID 種別 (zebra_symbol_idtype_t)
-    NSString *idString;	// ID 文字列 (JAN/EAN/UPC など)
-    NSString *asin;		// Amazon Standard Identification Number
+    int idType;		///< ID type (same as zebra_symbol_idtype_t)
+    NSString *idString;	///< ID string (JAN/EAN/UPC etc.)
+    NSString *asin;	///< ASIN: Amazon Standard Identification Number
 
-    NSString *name;		// 商品名
-    NSString *author;	// 著者
-    NSString *manufacturer;	 // 製造者
-    NSString *productGroup;	// Product Group
-    NSString *detailURL;	// 詳細ページ
-    NSString *price;        // 価格
-    NSString *tags;			// タグ情報 (現在は使用していない、将来の予約用)
+    NSString *name;	///< Item name
+    NSString *author;	///< Author
+    NSString *manufacturer;	///< Manufacturer name
+    NSString *productGroup;	///< Product Group (Category)
+    NSString *detailURL;	///< URL of detail page of the item
+    NSString *price;	///< Price info
+    NSString *tags;	///< Tag info (reserved)
 
-    NSString *memo;		// ユーザ定義メモ
-    NSString *imageURL;	// 画像 URL
+    NSString *memo;	///< User defined memo (reserved)
+    NSString *imageURL;	///< URL of image
 	
-    UIImage *imageCache; // 画像キャッシュ
+    UIImage *imageCache; ///< Image cache
 	
-    int sorder;		// 並び順
+    int sorder;		///< Sort order
 	
     // image download 用
-    NSMutableData *buffer;  // 画像ダウンロード用の一時バッファ
-    id<ItemDelegate> itemDelegate;
+    NSMutableData *buffer;  ///< Temporary buffer to download image
+    id<ItemDelegate> itemDelegate; ///< Delegate of ItemDelegate protocol
 
     // ItemView 用
-    NSMutableArray *infoStrings; // 説明文字の配列
-    BOOL registeredWithShelf;
+    NSMutableArray *infoStrings; ///< Information strings, used with ItemView
+    BOOL registeredWithShelf;  ///< Is registered in shelf?
 }
 
 @property(nonatomic,assign) int pkey;

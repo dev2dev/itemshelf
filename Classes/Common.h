@@ -46,6 +46,9 @@ void AssertFailed(const char *filename, int line);
 
 #import "StringArray.h"
 
+/**
+   Common utility class
+ */
 @interface Common : NSObject {
 }
 
@@ -54,6 +57,9 @@ void AssertFailed(const char *filename, int line);
 + (UIImage *)resizeImage:(UIImage *)image width:(double)width height:(double)height;
 @end
 
+/**
+   Extended UIViewController
+*/
 @interface UIViewController (MyExt)
 - (void)doModalWithNavigationController:(UIViewController *)vc;
 @end
