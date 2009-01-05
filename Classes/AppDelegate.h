@@ -38,6 +38,9 @@
 #import "Common.h"
 #import "SearchController.h"
 
+/**
+   Application delegate
+*/
 @interface AppDelegate : NSObject <UIApplicationDelegate, SearchControllerDelegate>
 {
     IBOutlet UIWindow *window;
