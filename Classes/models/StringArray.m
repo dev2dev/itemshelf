@@ -36,11 +36,23 @@
 
 @implementation NSArray (StringArray)
 
+/**
+   Returns string at index
+
+   @param[in] index Index of string.
+   @return string
+*/
 - (NSString*)stringAtIndex:(int)index
 {
     return (NSString*)[self objectAtIndex:index];
 }
 
+/**
+   Search string in the array.
+
+   @param[in] string String to search.
+   @return Index of found string. If no string found, returns -1.
+*/
 - (int)findString:(NSString*)string
 {
     int i = 0;
@@ -63,6 +75,9 @@ static int compareByString(NSString *t1, NSString *t2, void *context)
     return [t1 compare:t2];
 }
 
+/**
+   Sort by string
+*/
 - (void)sortByString
 {
     [self sortUsingFunction:compareByString context:NULL];

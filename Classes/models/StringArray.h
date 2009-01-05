@@ -35,11 +35,17 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 
+/**
+   Array of string, extension to the NSArray
+*/
 @interface NSArray (StringArray)
 - (NSString*)stringAtIndex:(int)index;
 - (int)findString:(NSString*)string;
 @end
 
+/**
+   Array of string, extension to the NSMutableArray
+*/
 @interface NSMutableArray (StringArray)
 - (void)sortByString;
 @end
