@@ -37,7 +37,7 @@
 #import "Item.h"
 #import "Shelf.h"
 
-@implementation Shelf (SmartShelf)
+@implementation Shelf(SmartShelf)
 
 static NSMutableArray *titleFilterStrings = nil;
 static NSMutableArray *authorFilterStrings = nil;
@@ -52,15 +52,15 @@ static NSMutableArray *manufacturerFilterStrings = nil;
 
     [array removeAllObjects];
 
-    titleFilterStrings = [self makeFilterStrings:titleFilter];
-    authorFilterStrings = [self makeFilterStrings:authorFilter];
-    manufacturerFilterStrings = [self makeFilterStrings:manufacturerFilter];
+    titleFilterStrings = [self _makeFilterStrings:titleFilter];
+    authorFilterStrings = [self _makeFilterStrings:authorFilter];
+    manufacturerFilterStrings = [self _makeFilterStrings:manufacturerFilter];
 
     for (Shelf *shelf in shelves) {
         if (shelf.shelfType != ShelfTypeNormal) continue;
 
         for (Item *item in shelf.array) {
-            if ([self isMatchSmartShelf:item]) {
+            if ([self _isMatchSmartShelf:item]) {
                 [array addObject:item];
             }
         }
@@ -74,7 +74,7 @@ static NSMutableArray *manufacturerFilterStrings = nil;
 /**
    Returns array of filter tokens, which is separated with comma delimiter. (private)
 */ 
-- (NSMutableArray *)makeFilterStrings:(NSString *)filter
+- (NSMutableArray *)_makeFilterStrings:(NSString *)filter
 {
     NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:3];
 
@@ -106,20 +106,20 @@ static NSMutableArray *manufacturerFilterStrings = nil;
 /**
    Check if the item is match to the smart shelf (private)
 */
-- (BOOL)isMatchSmartShelf:(Item *)item
+- (BOOL)_isMatchSmartShelf:(Item *)item
 {
     if (shelfType == ShelfTypeNormal) {
         return NO;
     }
 
     BOOL result;
-    result = [self matchSmartFilter:titleFilterStrings value:item.name];
+    result = [self _isMatchSmartFilter:titleFilterStrings value:item.name];
     if (!result) return NO;
 
-    result = [self matchSmartFilter:authorFilterStrings value:item.author];
+    result = [self _isMatchSmartFilter:authorFilterStrings value:item.author];
     if (!result) return NO;
 
-    result = [self matchSmartFilter:manufacturerFilterStrings value:item.manufacturer];
+    result = [self _isMatchSmartFilter:manufacturerFilterStrings value:item.manufacturer];
     if (!result) return NO;
 
     return YES;
@@ -128,7 +128,7 @@ static NSMutableArray *manufacturerFilterStrings = nil;
 /**
    Check if the item is match to the filter tokens (private)
 */
-- (BOOL)matchSmartFilter:(NSMutableArray *)filterStrings value:(NSString*)value
+- (BOOL)_isMatchSmartFilter:(NSMutableArray *)filterStrings value:(NSString*)value
 {
     if (filterStrings.count == 0) return YES;
 	

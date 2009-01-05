@@ -102,7 +102,7 @@ typedef enum
 - (void)updateSmartShelf:(NSMutableArray *)shelves;
 
 // private
-- (NSMutableArray *)makeFilterStrings:(NSString *)filter;
-- (BOOL)isMatchSmartShelf:(Item *)item;
-- (BOOL)matchSmartFilter:(NSMutableArray *)filterStrings value:(NSString*)value;
+- (NSMutableArray *)_makeFilterStrings:(NSString *)filter;
+- (BOOL)_isMatchSmartShelf:(Item *)item;
+- (BOOL)_isMatchSmartFilter:(NSMutableArray *)filterStrings value:(NSString*)value;
 @end
