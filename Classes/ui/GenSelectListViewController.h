@@ -38,17 +38,26 @@
 
 @class GenSelectListViewController;
 
+/**
+   GenSelectListView delegate protocol
+*/
 @protocol GenSelectListViewDelegate
+/**
+   Called when list item is selected.
+*/
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id;
 @end
 
+/**
+   Generic list selection view controller
+*/
 @interface GenSelectListViewController : UITableViewController
 {
-    id<GenSelectListViewDelegate> delegate;
-    int identifier;
+    id<GenSelectListViewDelegate> delegate;     ///< delegate
+    int identifier;     ///< identifier of this controller (use can use this to identify)
 	
-    NSArray *list;
-    int selectedIndex;
+    NSArray *list;      ///< list of options
+    int selectedIndex;  ///< selected index of options list
 }
 
 @property(nonatomic,assign) id<GenSelectListViewDelegate> delegate;
@@ -57,7 +66,7 @@
 @property(nonatomic,assign) int selectedIndex;
 
 + (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id;
-- (void)cancelAction:(id)sender;
+- (void)_cancelAction:(id)sender;
 - (NSString *)selectedString;
 
 @end

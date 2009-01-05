@@ -38,6 +38,15 @@
 
 @synthesize delegate, list, identifier, selectedIndex;
 
+/**
+   Generate GenSelectListViewController
+
+   @param[in] delegate Delegate
+   @param[in] ary Array of option strings
+   @param[in] title Title of this view
+   @param[in] id User defined identifier
+   @return Instance of GenSelectListViewController
+*/
 + (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id
 {
     GenSelectListViewController *vc = [[[GenSelectListViewController alloc]
@@ -51,7 +60,7 @@
     vc.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                target:vc
-                                               action:@selector(cancelAction:)] autorelease];
+                                               action:@selector(_cancelAction:)] autorelease];
     return vc;
 }
 
@@ -61,7 +70,15 @@
     [super dealloc];
 }
 
-- (void)closeView
+/**
+   Returns selected string
+*/
+- (NSString *)selectedString
+{
+    return [list objectAtIndex:selectedIndex];
+}
+
+- (void)_closeView
 {
     if (self.navigationController.viewControllers.count == 1) {
         [self.navigationController dismissModalViewControllerAnimated:YES];
@@ -70,9 +87,9 @@
     }
 }
 
-- (void)cancelAction:(id)sender
+- (void)_cancelAction:(id)sender
 {
-    [self closeView];
+    [self _closeView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,6 +98,10 @@
     [[self tableView] reloadData];
 }
 
+/**
+   @name Table view delegate / data source
+*/
+//@{
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
     return 1;
 }
@@ -115,12 +136,9 @@
     self.selectedIndex = indexPath.row;
     [delegate genSelectListViewChanged:self identifier:identifier];
 
-    [self closeView];
+    [self _closeView];
 }
 
-- (NSString *)selectedString
-{
-    return [list objectAtIndex:selectedIndex];
-}
+//@}
 
 @end
