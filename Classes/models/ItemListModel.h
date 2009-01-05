@@ -41,19 +41,20 @@
 #import "Item.h"
 #import "StringArray.h"
 
+/**
+   Item list model, used from ItemListViewController
+
+   This model contains array of items, "filtered" with
+   search string and category.
+*/
 @interface ItemListModel : NSObject
 {
-    // 棚ID
-    Shelf *shelf;
+    Shelf *shelf;		///< Shelf
 	
-    // フィルタ文字列 (nil の場合はフィルタなし)
-    NSString *filter;
-	
-    // 検索中文字列
-    NSString *searchText;
+    NSString *filter;		///< Filter string (if nil, no filter)
+    NSString *searchText;	///< Search string
 
-    // フィルタされたリスト
-    NSMutableArray *filteredList;
+    NSMutableArray *filteredList; ///< Filtered array of items.
 }
 
 @property(nonatomic,readonly) Shelf *shelf;

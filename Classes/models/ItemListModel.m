@@ -39,6 +39,12 @@
 
 @synthesize shelf;
 
+/**
+   Initialize the model with specified shelf
+
+   @param[in] sh Shelf
+   @return initialized instance
+*/
 - (id)initWithShelf:(Shelf *)sh
 {
     self = [super init];
@@ -61,11 +67,20 @@
     [super dealloc];
 }
 
+/**
+   Returns number of filtered items
+*/
 - (int)count
 {
     return [filteredList count];
 }
 
+/**
+   Get the item at index in filtered items.
+
+   @param[in] index Index of the item.
+   @note The index is reversed order.
+*/
 - (Item *)itemAtIndex:(int)index
 {
     int n = [filteredList count] - 1 - index;
@@ -77,11 +92,19 @@
     return item;
 }
 
+/**
+   Returns current filter string
+*/
 - (NSString*)filter
 {
     return filter;
 }
 
+/**
+   Set filter string.
+
+   @param[in] f Filter string
+*/
 - (void)setFilter:(NSString *)f
 {
     if (filter != f) {
@@ -91,6 +114,11 @@
     }
 }
 
+/**
+   Set search string.
+
+   @param[in] t Search string
+*/
 - (void)setSearchText:(NSString *)t
 {
     if (searchText != t) {
@@ -100,7 +128,9 @@
     }
 }
 
-// フィルタリスト更新
+/**
+   Update filtered items (private)
+*/
 - (void)updateFilter
 {
     ASSERT(shelf);
@@ -135,12 +165,23 @@
     }
 }
 
+/**
+   Remove item from the model
+*/
 - (void)removeObject:(Item *)item
 {
     [filteredList removeObject:item];
     [[DataModel sharedDataModel] removeItem:item];
 }
 
+/**
+   Move item order
+
+   @param[in] fromIndex Index from which the item move.
+   @param[in] toIndex Index to which the item move.
+
+   @note Item data of original shelf will be sorted too.
+*/
 - (void)moveRowAtIndex:(int)fromIndex toIndex:(int)toIndex
 {
     // filteredList の中のインデックスを計算
