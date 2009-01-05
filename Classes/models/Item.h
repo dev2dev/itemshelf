@@ -112,12 +112,12 @@
 - (void)updateSorder;
 
 + (void)clearAllImageCache;
-- (void)refreshImageCache;
-- (void)putImageCache;
 - (UIImage *)getImage:(id<ItemDelegate>)delegate;
 - (void)cancelDownload;
-- (NSString*)imageFileName;
-- (NSString *)imagePath; // private
-- (void)deleteImageFile;
+- (void)_refreshImageCache;
+- (void)_putImageCache;
+- (NSString*)_imageFileName;
+- (NSString *)_imagePath; // private
+- (void)_deleteImageFile;
 
 @end

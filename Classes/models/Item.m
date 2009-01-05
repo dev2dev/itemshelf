@@ -292,7 +292,7 @@ static NSMutableArray *agingArray = nil;
 /**
    Refresh age of this item in image cache (private)
 */
-- (void)refreshImageCache
+- (void)_refreshImageCache
 {
     if (agingArray == nil) {
         agingArray = [[NSMutableArray alloc] initWithCapacity:MAX_IMAGE_CACHE_AGE];
@@ -305,7 +305,7 @@ static NSMutableArray *agingArray = nil;
 /**
    Put item in image cache (private)
 */
-- (void)putImageCache
+- (void)_putImageCache
 {
     if (agingArray == nil) {
         agingArray = [[NSMutableArray alloc] initWithCapacity:MAX_IMAGE_CACHE_AGE];
@@ -340,7 +340,7 @@ static NSMutableArray *agingArray = nil;
 
     // Returns image on memory cache
     if (imageCache != nil) {
-        [self refreshImageCache];
+        [self _refreshImageCache];
         return imageCache;
     }
 
@@ -350,12 +350,12 @@ static NSMutableArray *agingArray = nil;
     }
 
     // Check cache file on the file system.
-    NSString *imagePath = [self imagePath];
+    NSString *imagePath = [self _imagePath];
     if (imagePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
 #if 1
         // Cache exists.
         self.imageCache = [UIImage imageWithContentsOfFile:imagePath];
-        [self putImageCache];
+        [self _putImageCache];
         return self.imageCache;
 #else
         if (delegate == nil) return nil;
@@ -394,8 +394,8 @@ static NSMutableArray *agingArray = nil;
 - (void)taskLoadImage:(id)dummy
 {
     // TBD 排他制御
-    self.imageCache = [UIImage imageWithContentsOfFile:[self imagePath]];
-    [self putImageCache];
+    self.imageCache = [UIImage imageWithContentsOfFile:[self _imagePath]];
+    [self _putImageCache];
 
     if (itemDelegate) {
         [NSThread performSelectorOnMainThread:@selector(itemDidFinishDownloadImage:) 
@@ -416,7 +416,7 @@ static NSMutableArray *agingArray = nil;
     self.imageCache = [UIImage imageWithData:buffer];
 	
     // Write cache file
-    NSString *imagePath = [self imagePath];
+    NSString *imagePath = [self _imagePath];
     if (imagePath) {
         [buffer writeToFile:imagePath atomically:NO];
     }
@@ -450,7 +450,7 @@ static NSMutableArray *agingArray = nil;
 /**
    Get image (cache) file name (private)
 */
-- (NSString*)imageFileName
+- (NSString*)_imageFileName
 {
     if (pkey < 0) return nil;
 
@@ -461,19 +461,19 @@ static NSMutableArray *agingArray = nil;
 /**
   Get image (cache) file name (full path) (private)
 */
-- (NSString *)imagePath
+- (NSString *)_imagePath
 {
     if (pkey < 0) return nil;
 	
-    return [AppDelegate pathOfDataFile:[self imageFileName]];
+    return [AppDelegate pathOfDataFile:[self _imageFileName]];
 }
 
 /**
    Delege image (cache) file (private)
 */
-- (void)deleteImageFile
+- (void)_deleteImageFile
 {
-    NSString *path = [self imagePath];
+    NSString *path = [self _imagePath];
     if (path == nil) return;
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
