@@ -86,7 +86,10 @@
     }
     return self;
 }
-	
+
+/**
+   Set country code
+*/
 - (void)setCountry:(NSString*)country
 {
     [baseURI release];
@@ -124,7 +127,12 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // URL 取得
 
-// PC サイト用 URL 取得
+/**
+   Get detail URL of the Item (for PC browser)
+
+   @param[in] item Item
+   @return URL string
+*/
 + (NSString *)normalUrl:(Item *)item
 {
     URLComponent *comp = [[[URLComponent alloc]
@@ -139,8 +147,12 @@
                         stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonredirect.cgi/%@", [comp absoluteString]];
     return url;
 }
+/**
+   Get detail URL of the Item (for iPhone browser)
 
-// モバイルサイト用 URL 取得
+   @param[in] item Item
+   @return URL string
+*/
 + (NSString *)mobileUrl:(Item *)item
 {
     URLComponent *comp = [[[URLComponent alloc] 
@@ -155,6 +167,12 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // 検索処理
 
+/**
+   Execute item search
+
+   @note you must set searchTitle or searchKeyword property before call this.
+   And you can set searchIndex.
+*/
 - (void)itemSearch
 {
     [itemArray removeAllObjects];

@@ -48,27 +48,53 @@
 #define AMAZON_ERROR_NOTFOUND	1
 #define AMAZON_ERROR_BADREPLY   2
 
+/**
+   Amazon API delegate protocol
+*/
 @protocol AmazonApiDelegate
+/**
+   Called when amazon API is successfully finished
+
+   @param[in] amazonApi AmazonApi instance
+   @param[in] items Found items array
+*/
 -(void)amazonApiDidFinish:(AmazonApi*)amazonApi items:(NSMutableArray*)items;
+
+/**
+   Called when amazon API is failed.
+
+   @param[in] amazonApi AmazonApi instance
+   @param[in] reason Reason code
+   @param[in] message Error message
+*/
 -(void)amazonApiDidFailed:(AmazonApi*)amazonApi reason:(int)reason message:(NSString *)message;
 @end
 
+/**
+   Amazon API
+
+   To search items at Amazon, create the instance of AmazonApi,
+   set delegate, set searchKeyword or searchTitle (optionally searchIndex),
+   then call itemSearch.
+
+   The result will be passed with AmazonApiDelegate protocol.
+*/
 @interface AmazonApi : NSObject <HttpClientDelegate> {
     id<AmazonApiDelegate> delegate;
 
-    NSString *baseURI;
+    NSString *baseURI;		///< base URI to call amazon API
 	
-    NSString *searchKeyword;    // Keyword to search (barcode, isbn, etc.)
-    NSString *searchTitle;      // Title to search
-    NSString *searchIndex;
+    NSString *searchKeyword;    ///< Keyword to search (barcode, isbn, etc.)
+    NSString *searchTitle;      ///< Title to search
+    NSString *searchIndex;      ///< Search index (category)
 
-    NSMutableArray *itemArray;  // Searched items array
+    NSMutableArray *itemArray;  ///< Searched items array
 
     // For XML parser
-    int itemCounter;
-    NSMutableData *responseData;
-    NSMutableString *curString;	  // current string in XML element
-    AmazonXmlState *xmlState;
+    int itemCounter;		///< Item counter (for XML parser)
+    NSMutableData *responseData;///< response data (for XML parser)        
+    NSMutableString *curString;	///< current string in XML element (for XML parser)
+    AmazonXmlState *xmlState;   ///< XML parser state
 }
 
 @property(nonatomic, assign) id<AmazonApiDelegate> delegate;
@@ -85,7 +111,9 @@
 
 @end
 
-// XML state
+/**
+   XML parser state for AmazonApi
+*/
 @interface AmazonXmlState : NSObject {
     BOOL isLargeImage, isMediumImage, isOffers, isError;
     NSString *errorMessage;
