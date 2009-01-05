@@ -37,6 +37,8 @@
 #import "URLComponent.h"
 #import "HttpClient.h"
 
+// XML State
+
 @implementation AmazonXmlState
 @synthesize isLargeImage, isMediumImage, isOffers, isError;
 @synthesize errorMessage, indexName; 
@@ -75,7 +77,7 @@
     self = [super init];
     if (self) {
         itemArray = [[NSMutableArray alloc] initWithCapacity:10];
-        curString = nil;
+        curString = [[NSMutableString alloc] initWithCapacity:20];
         responseData = [[NSMutableData alloc] initWithCapacity:256];
         baseURI = nil;
 
@@ -87,9 +89,7 @@
 	
 - (void)setCountry:(NSString*)country
 {
-    if (baseURI != nil) {
-        [baseURI release];
-    }
+    [baseURI release];
 
     NSString *suffix;
 
@@ -235,10 +235,7 @@
 // 開始タグの処理
 - (void)parser:(NSXMLParser*)parser didStartElement:(NSString*)elem namespaceURI:(NSString *)nspace qualifiedName:(NSString *)qname attributes:(NSDictionary *)attributes
 {
-    if (curString) {
-        [curString release];
-        curString = nil;
-    }
+    [curString setString:@""];
 	
     if ([elem isEqualToString:@"Item"]) {
         itemCounter++;
@@ -274,9 +271,6 @@
 // 文字列処理
 - (void)parser:(NSXMLParser*)parser foundCharacters:(NSString*)string
 {
-    if (!curString) {
-        curString = [[NSMutableString alloc] initWithCapacity:20];
-    }
     [curString appendString:string];
 }
 
@@ -286,8 +280,7 @@
     LOG(@"%@ = %@", elem, curString);
 
     if (itemCounter >= AMAZON_MAX_SEARCH_ITEMS) {
-        [curString release];
-        curString = nil;
+        [curString setString:@""];
         return;
     }
 
@@ -305,51 +298,49 @@
     }
     else if ([elem isEqualToString:@"Message"]) {
         if (xmlState.isError) {
-            xmlState.errorMessage = curString;
+            xmlState.errorMessage = [NSString stringWithString:curString];
         }
     }
     else if ([elem isEqualToString:@"SearchIndex"] || [elem isEqualToString:@"IndexName"]) {
-        if (curString != nil) {
-            xmlState.indexName = curString;
+        if (curString.length > 0) {
+            xmlState.indexName = [NSString stringWithString:curString];
         }
     }
 
     if (itemCounter < 0) {
-        [curString release];
-        curString = nil;
+        [curString setString:@""];
         return;
     }
     Item *item = [itemArray objectAtIndex:itemCounter];
 	
     if ([elem isEqualToString:@"ASIN"]) {
-        item.asin = curString;
+        item.asin = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"Title"]) {
-        item.name = curString;
+        item.name = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"Author"]) {
-        item.author = curString;
+        item.author = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"Manufacturer"]) {
-        item.manufacturer = curString;
+        item.manufacturer = [NSString stringWithString:curString];
         //	} else if ([elem isEqualToString:@"ProductGroup"]) {
-        //		item.productGroup = curString;
+        //		item.productGroup = [NSString stringWithString:curString];
         //	} else if ([elem isEqualToString:@"IndexName"]) {
-        //		item.productGroup = curString;
+        //		item.productGroup = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"DetailPageURL"]) {
-        item.detailURL = curString;
+        item.detailURL = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"FormattedPrice"]) {
         // 金額は、Offers の中のものだけを見る。
         // (OfferSummary の中にも FormattedPrice があるので)
         if (xmlState.isOffers) {
-            item.price = curString;
+            item.price = [NSString stringWithString:curString];
         }
     } else if ([elem isEqualToString:@"URL"]) {
         // MediumImage の URL だけを見る
         // かつ、最初の1個目だけ見る
         if (xmlState.isMediumImage && [item.imageURL isEqualToString:@""]) {
-            item.imageURL = curString;
+            item.imageURL = [NSString stringWithString:curString];
         }
     }
-    [curString release];
-    curString = nil;
+    [curString setString:@""];
 }
 
 @end
