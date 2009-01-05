@@ -42,6 +42,9 @@
 
 static DataModel *theDataModel = nil; // singleton
 
+/**
+   Return the singleton instance of DataModel
+*/
 + (DataModel*)sharedDataModel
 {
     if (theDataModel == nil) {
@@ -81,6 +84,12 @@ static DataModel *theDataModel = nil; // singleton
 ///////////////////////////////////////////////////////////////////
 // Shelf 操作
 
+/**
+   Returns shelf with shelf id
+
+   @param[in] shelfId Shelf id
+   @return shelf
+*/
 - (Shelf *)shelf:(int)shelfId
 {
     for (Shelf *shelf in shelves) {
@@ -91,23 +100,42 @@ static DataModel *theDataModel = nil; // singleton
     return nil;
 }
 
+/**
+   Returns shelf with shelf index
+
+   @param[in] index Index of shelf
+   @return shelf
+*/
 - (Shelf *)shelfAtIndex:(int)index
 {
     ASSERT(index < shelves.count);
     return [shelves objectAtIndex:index];
 }
 
+/**
+   Returns number of all shelves.
+*/
 - (int)shelvesCount
 {
     return [shelves count];
 }
 
+/**
+   Add shelf
+   @param[in] shelf Shelf to add
+*/
 - (void)addShelf:(Shelf *)shelf
 {
     [shelves addObject:shelf];
     [shelf insert];
 }
 
+/**
+   Remove shelf
+   @param[in] shelf Shelf to remove
+
+   @note All items in the shelf will be removed.
+*/
 - (void)removeShelf:(Shelf *)shelf
 {
     [shelf delete];
@@ -116,6 +144,12 @@ static DataModel *theDataModel = nil; // singleton
     [self updateSmartShelves];
 }
 
+/**
+   Reorder shelves
+
+   @param[in] from Index to move shelf from.
+   @param[in] to Index to move shelf to.
+*/
 - (void)reorderShelf:(int)from to:(int)to
 {
     Shelf *shelf = [[shelves objectAtIndex:from] retain];
@@ -141,6 +175,9 @@ static DataModel *theDataModel = nil; // singleton
     [db commitTransaction];
 }
 
+/**
+  Returns NSMutableArray of normal shelves
+*/
 - (NSMutableArray *)normalShelves
 {
     NSMutableArray *ary = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
@@ -152,6 +189,11 @@ static DataModel *theDataModel = nil; // singleton
     return ary;
 }
 
+/**
+   Update all smart shelves.
+
+   You need to call this when some items were added or removed.
+*/
 - (void)updateSmartShelves
 {
     for (Shelf *shelf in shelves) {
@@ -164,6 +206,13 @@ static DataModel *theDataModel = nil; // singleton
 ///////////////////////////////////////////////////////////////////
 // Item 操作
 
+/**
+   Add item to shelf
+   
+   @param[in] item Item to add to shelf
+
+   @note item.shelfId must be set before call this.
+*/
 - (void)addItem:(Item *)item
 {
     Shelf *shelf = [self shelf:item.shelfId];
@@ -177,6 +226,11 @@ static DataModel *theDataModel = nil; // singleton
     [self updateSmartShelves];
 }
 
+/**
+   Remove item
+
+   @param[in] item Item to remove from shelf.
+*/
 - (void)removeItem:(Item *)item
 {
     [item delete];
@@ -191,6 +245,12 @@ static DataModel *theDataModel = nil; // singleton
     [self updateSmartShelves];
 }
 
+/**
+   Move item between shelves
+   
+   @param[in] item Item to move another shelf
+   @param[in] shelf Shelf to which move the item.
+*/
 - (void)changeShelf:(Item *)item withShelf:(int)shelf
 {
     if (item.shelfId == shelf) {
@@ -212,7 +272,11 @@ static DataModel *theDataModel = nil; // singleton
     [self updateSmartShelves];
 }
 
-// make filter
+/**
+   Make category filter array from all items in the shelf
+
+   @param[in] shelf Shelf for which to create category list.
+*/
 - (NSMutableArray *)makeFilter:(Shelf *)shelf
 {
     NSMutableArray *filters = [[NSMutableArray alloc] initWithCapacity:10];
@@ -233,7 +297,12 @@ static DataModel *theDataModel = nil; // singleton
     return filters;
 }
 
-// 同一アイテムを全棚から検索
+/**
+   Search same item from all shelves
+
+   @param[in] item Item to search.
+   @return Found item
+*/
 - (Item *)findSameItem:(Item*)item
 {
     for (int i = 0; i < shelves.count; i++) {
@@ -252,6 +321,9 @@ static DataModel *theDataModel = nil; // singleton
 ////////////////////////////////////////////////////////////////
 // Database operation
 
+/**
+   Load all data (shelves, items) from database.
+*/
 - (void)loadDB
 {
     Database *db = [Database instance];
@@ -297,18 +369,25 @@ static DataModel *theDataModel = nil; // singleton
 ////////////////////////////////////////////////////////////////
 // Configuration
 
+/**
+   Return countries array
+*/
 - (NSArray*)countries
 {
     return countries;
 }
 
-// 国コードを返す
+/**
+   Return current country code
+*/
 - (NSString *)country
 {
     return currentCountry;
 }
 
-// 国コードをセットする
+/**
+   Set current country code
+*/
 - (void)setCountry:(NSString *)country
 {
     if (currentCountry == country) {

@@ -39,12 +39,16 @@
 #import "Item.h"
 #import "Shelf.h"
 
+/**
+   Main data model of itemshelf, contains all shelves, items.
+   
+*/
 @interface DataModel : NSObject
 {
-    NSMutableArray *shelves;
+    NSMutableArray *shelves;	///< All shelves
 
-    NSString *currentCountry;
-    NSArray *countries;
+    NSString *currentCountry;	///< Current country setting
+    NSArray *countries;		///< Countries array
 }
 
 @property(nonatomic,retain) NSMutableArray *shelves;
