@@ -123,7 +123,11 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
 }
 
 ///////////////////////////////////////////////////////////////
-// データベース処理
+
+/**
+   @name Database operations
+*/
+//@{
 
 /**
    Create/upgrade Shelf table in the database.
@@ -309,5 +313,7 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [stmt step];
     [stmt release];
 }
+
+//@}
 
 @end

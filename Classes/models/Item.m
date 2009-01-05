@@ -88,13 +88,22 @@
     [super dealloc];
 }
 
+/**
+   Check if the item is equal.
+
+   asin field is used to compare items.
+*/
 - (BOOL)isEqualToItem:(Item*)item
 {
     return [self.asin isEqualToString:item.asin];
 }
 
 ////////////////////////////////////////////////////////////////////
-// Database operation
+
+/**
+   @name Database operation
+*/
+//@{
 
 + (void)checkTable
 {
@@ -237,10 +246,18 @@
     [stmt release];
 }
 
+//@}
+
 ////////////////////////////////////////////////////////////////////
-// Database operation
 
+/**
+   @name Image operation
+*/
+//@{
 
+/**
+   Return "NoImage" image (private)
+*/
 - (UIImage *)getNoImage
 {
     static UIImage *noImage = nil;
@@ -252,8 +269,16 @@
     return noImage;	
 }
 
+/**
+   Image cache array (aging array)
+*/
 static NSMutableArray *agingArray = nil;
 
+/**
+   Clear all image cache on memory.
+
+   This is called when memory low state.
+*/
 + (void)clearAllImageCache
 {
     NSLog(@"clearAllImageCache - maybe low memory");
@@ -264,6 +289,9 @@ static NSMutableArray *agingArray = nil;
     [agingArray removeAllObjects];
 }
 
+/**
+   Refresh age of this item in image cache (private)
+*/
 - (void)refreshImageCache
 {
     if (agingArray == nil) {
@@ -274,6 +302,9 @@ static NSMutableArray *agingArray = nil;
     [agingArray addObject:self];
 }
 
+/**
+   Put item in image cache (private)
+*/
 - (void)putImageCache
 {
     if (agingArray == nil) {
@@ -291,36 +322,44 @@ static NSMutableArray *agingArray = nil;
     }
 }	
 
-// イメージをダウンロードする
+/**
+   Get image of item
+
+   Returns image from:
+
+   1) Cache on memory (if it is on the cache)
+   2) Saved image on the file system.
+   3) Download image from the server.
+*/
 - (UIImage *)getImage:(id<ItemDelegate>)delegate
 {
-    // No image の場合
+    // Returns "NoImage" if no image URL.
     if (imageURL == nil || imageURL.length == 0) {
         return [self getNoImage];
     }
 
-    // メモリキャッシュあり
+    // Returns image on memory cache
     if (imageCache != nil) {
         [self refreshImageCache];
         return imageCache;
     }
 
-    // ダウンロード中は返せない
+    // Can't return image when downloading it.
     if (buffer != nil) {
         return nil;
     }
 
-    // ファイルキャッシュあり？
+    // Check cache file on the file system.
     NSString *imagePath = [self imagePath];
     if (imagePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
 #if 1
-        // キャッシュファイルあり
+        // Cache exists.
         self.imageCache = [UIImage imageWithContentsOfFile:imagePath];
         [self putImageCache];
         return self.imageCache;
 #else
         if (delegate == nil) return nil;
-        // キャッシュファイルをバックグランドでロードする
+        // Load cache file on back ground.
         itemDelegate = delegate;
         NSInvocationOperation *op = [[[NSInvocationOperation alloc] 
                                          initWithTarget:self
@@ -333,7 +372,7 @@ static NSMutableArray *agingArray = nil;
 
     if (delegate == nil) return nil;
 	
-    // キャッシュなし : イメージをネットワークからダウンロード開始する
+    // No cache. Start download image from network.
     itemDelegate = delegate;
 	
     NSURLRequest *req =
@@ -365,7 +404,6 @@ static NSMutableArray *agingArray = nil;
 }
 #endif
 
-// NSURLConnection delegates
 - (void)connection:(NSURLConnection *)conn didReceiveData:(NSData *)data
 {
     [buffer appendData:data];
@@ -377,7 +415,7 @@ static NSMutableArray *agingArray = nil;
 	
     self.imageCache = [UIImage imageWithData:buffer];
 	
-    // キャッシュファイルを書き出す
+    // Write cache file
     NSString *imagePath = [self imagePath];
     if (imagePath) {
         [buffer writeToFile:imagePath atomically:NO];
@@ -401,12 +439,17 @@ static NSMutableArray *agingArray = nil;
         [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 }
 
+/**
+   Cancel image download
+*/
 - (void)cancelDownload
 {
     itemDelegate = nil;
 }
 
-// 画像ファイル名を決定
+/**
+   Get image (cache) file name (private)
+*/
 - (NSString*)imageFileName
 {
     if (pkey < 0) return nil;
@@ -415,7 +458,9 @@ static NSMutableArray *agingArray = nil;
     return filename;
 }
 
-// 画像ダウンロードパスを決定
+/**
+  Get image (cache) file name (full path) (private)
+*/
 - (NSString *)imagePath
 {
     if (pkey < 0) return nil;
@@ -423,7 +468,9 @@ static NSMutableArray *agingArray = nil;
     return [AppDelegate pathOfDataFile:[self imageFileName]];
 }
 
-// 画像ファイルを消去
+/**
+   Delege image (cache) file (private)
+*/
 - (void)deleteImageFile
 {
     NSString *path = [self imagePath];
@@ -432,5 +479,7 @@ static NSMutableArray *agingArray = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:path error:NULL];
 }
+
+//@}
 
 @end
