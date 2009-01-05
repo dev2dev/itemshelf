@@ -43,6 +43,11 @@
 
 static SearchControllerType currentSearchControllerType = SearchControllerTypeAmazon;
 
+/**
+   Create SearchController instance (factory method)
+
+   @note At this moment, this supports only Amazon.
+*/
 + (SearchController *)createController
 {
     SearchController *c = nil;
@@ -89,12 +94,23 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Search functions
 
+/**
+   Search item with keyword
+
+   @param[in] keyword Search keyword
+*/
 - (void)searchWithKeyword:(NSString*)keyword
 {
     // must be override
     ASSERT(NO);
 }
 
+/**
+   Search item with title
+
+   @param[in] title Title to search
+   @param[in] searchIndex Search index (category)
+*/
 - (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex
 {
     // must be override
@@ -104,7 +120,7 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 ////////////////////////////////////////////////////////////////////////////////////////////
 // ActivityIndicator
 
-- (void)showActivityIndicator
+- (void)_showActivityIndicator
 {
     ASSERT(viewController != nil);
     ASSERT(activityIndicator == nil);
@@ -121,7 +137,7 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
     [activityIndicator startAnimating];
 }
 
-- (void)dismissActivityIndicator
+- (void)_dismissActivityIndicator
 {
     ASSERT(viewController != nil);
     ASSERT(activityIndicator);
@@ -142,7 +158,7 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 - (void)searchWithKeyword:(NSString*)keyword
 {
     ASSERT(viewController != nil);
-    [self showActivityIndicator];
+    [self _showActivityIndicator];
 
     autoRegisterShelf = YES;
 
@@ -159,7 +175,7 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 - (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex
 {
     ASSERT(viewController != nil);
-    [self showActivityIndicator];
+    [self _showActivityIndicator];
 
     autoRegisterShelf = NO;
 
@@ -174,12 +190,15 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
     [amazon itemSearch];
 }
 
-// AmazonApiDelegate
+/**
+   @name AmazonApiDelegate
+*/
+//@{
 
 // 検索成功時の処理
 - (void)amazonApiDidFinish:(AmazonApi *)amazon items:(NSMutableArray *)itemArray
 {
-    [self dismissActivityIndicator];
+    [self _dismissActivityIndicator];
 
     // add history
     DataModel *dm = [DataModel sharedDataModel];
@@ -225,7 +244,7 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 // 検索失敗
 - (void)amazonApiDidFailed:(AmazonApi *)amazon reason:(int)reason message:(NSString *)message
 {
-    [self dismissActivityIndicator];
+    [self _dismissActivityIndicator];
 	
     NSString *reasonString = @"Unknown error";
     switch (reason) {
@@ -255,5 +274,7 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
     }
     [self release];
 }
+
+//@}
 
 @end

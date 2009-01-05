@@ -32,30 +32,17 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-/*
-  Search Controller
-
-  Web API を用いてアイテムの検索を実行し、ItemView を用いて検索結果を表示する。
-  ActivityIndicator の表示など、UI に関する制御も一部行う。
-
-  利用するときは、createController を使ってインスタンスを生成し、
-  プロパティを設定、searchXXX を使って検索を実行する。設定するプロパティは以下の通り。
-
-  delegate (option) : 検索完了時に呼び出す delegate を指定
-  viewController (mandatory) : 現在表示中の　View Controller を指定
-  selectedShelf (option) : 現在選択中の棚を指定
-  country (option) : 検索を行う国コードを指定
-*/
-
 #import <UIKit/UIKit.h>
 #import "AmazonApi.h"
 #import "Shelf.h"
 
 @class SearchController;
 
-// 検索先の種別
+/**
+   Type of SearchController
+*/
 typedef enum {
-    SearchControllerTypeAmazon
+    SearchControllerTypeAmazon  ///< Amazon
 } SearchControllerType;
 
 
@@ -63,6 +50,24 @@ typedef enum {
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result;
 @end
 
+/**
+  Search Controller
+
+  This class execute item search with web API, and show result with ItemView.
+  Also execute some UI control (activity indicator etc.)
+
+  To use this, create instance with createController method, set up
+  properties, then call searchXXX method. 
+  Following properties should be set.
+
+  - delegate (option) : Delegate to callback when search finished.
+  - viewController (mandatory) : Current view controller.
+  - selectedShelf (option) : Current selected shelf.
+  - country (option) : Country code to search.
+
+  This is abstract class. You must inherit this class and override
+  searchWithKeyword: and searchWithTitle:withIndex: method.
+*/
 @interface SearchController : NSObject
 {
     id<SearchControllerDelegate> delegate;
@@ -85,11 +90,14 @@ typedef enum {
 - (void)searchWithKeyword:(NSString*)keyword;
 - (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex;
 
-- (void)showActivityIndicator;
-- (void)dismissActivityIndicator;
+- (void)_showActivityIndicator;
+- (void)_dismissActivityIndicator;
 	
 @end
 
+/**
+   Search controller for Amazon
+*/
 @interface SearchControllerAmazon : SearchController <AmazonApiDelegate>
 {
 }
