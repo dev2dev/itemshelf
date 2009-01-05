@@ -38,11 +38,14 @@
 #import "Common.h"
 #import "zebra.h"
 
+/**
+   Wrapper class for zebra barcode reader
+*/
 @interface BarcodeReader : NSObject {
-    zebra_image_scanner_t *scanner;
+    zebra_image_scanner_t *scanner;	///< image scanner of zebra.
 
-    int type; // シンボルタイプ (zebra_symbol_type_t と同じ)
-    NSString *data; // シンボルデータ
+    int type; ///< Symbol type (same as zebra_symbol_type_t)
+    NSString *data; ///< Decoded symbol data
 }
 
 @property(nonatomic,assign) int type;

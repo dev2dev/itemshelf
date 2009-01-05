@@ -59,6 +59,12 @@ static void data_handler(zebra_image_t *zimage, const void *userdata);
     [super dealloc];
 }
 
+/**
+   Recognize barcode image
+
+   @param[in] uiimage UIImage to scan barcode image
+   @return Returns YES if scan is successfully completed.
+*/
 - (BOOL)recognize:(UIImage *)uimage
 {
     self.data = nil;
@@ -73,7 +79,11 @@ static void data_handler(zebra_image_t *zimage, const void *userdata);
     return YES;
 }
 
-// スキャン完了すると呼ばれる
+/**
+   Callback handler of zebra library (private)
+
+   Called when scan of the each barcodes is completed.
+*/
 static void data_handler(zebra_image_t *zimage, const void *userdata)
 {
     const zebra_symbol_t *symbol = zebra_image_first_symbol(zimage);
@@ -96,9 +106,15 @@ static void data_handler(zebra_image_t *zimage, const void *userdata)
     ((uint32_t)(a) | ((uint32_t)(b) << 8) |             \
      ((uint32_t)(c) << 16) | ((uint32_t)(d) << 24))
 
+/**
+   Convert UIImage to zebra_image (private)
+
+   @param[in] uiimage Source UIImage
+   @return Converted zebra_image.
+ */
 - (zebra_image_t *)UIImageToZImage:(UIImage*)uimage
 {
-    // Step 1 : UIImage から gray scale の生データを取り出す
+    // Step 1 : Extrace gray scale (8bit) raw data from UIImage.
     CGImageRef image = uimage.CGImage;
 
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
@@ -117,7 +133,7 @@ static void data_handler(zebra_image_t *zimage, const void *userdata)
                                                  colorSpace, 0);
     CGContextDrawImage(context, imageRect, image);
 
-    // Step 2: zebra image に設定
+    // Step 2: Set zebra image.
     zebra_image_t *zimage = zebra_image_create();
     zebra_image_set_format(zimage, fourcc('Y', '8', 0, 0)); // gray scale
     zebra_image_set_size(zimage, width, height);
