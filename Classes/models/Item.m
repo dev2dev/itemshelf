@@ -258,7 +258,7 @@
 /**
    Return "NoImage" image (private)
 */
-- (UIImage *)getNoImage
+- (UIImage *)_getNoImage
 {
     static UIImage *noImage = nil;
 	
@@ -335,7 +335,7 @@ static NSMutableArray *agingArray = nil;
 {
     // Returns "NoImage" if no image URL.
     if (imageURL == nil || imageURL.length == 0) {
-        return [self getNoImage];
+        return [self _getNoImage];
     }
 
     // Returns image on memory cache
