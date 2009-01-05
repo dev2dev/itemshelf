@@ -34,10 +34,13 @@
 
 #import "Common.h"
 
+/**
+   URL query parameter
+*/
 @interface URLQuery : NSObject
 {
-    NSString *name;
-    NSString *value;
+    NSString *name;	///< parameter name
+    NSString *value;	///< value of the parameter
 }
 
 @property(nonatomic,retain) NSString *name;
@@ -45,11 +48,22 @@
 
 @end
 
+/**
+   URL component class
+
+   It likes NSURL. Main difference is that this class
+   can handle "splitted" URL parameters with URLQuery class.
+*/
 @interface URLComponent : NSObject
 {
-    NSString *scheme, *host, *path, *params, *query, *fragment;
+    NSString *scheme;
+    NSString *host;
+    NSString *path;
+    NSString *params;
+    NSString *query;
+    NSString *fragment;
 
-    NSMutableArray *queries;
+    NSMutableArray *queries;  ///< Query parameters
 }
 
 @property(nonatomic,retain) NSString *scheme;

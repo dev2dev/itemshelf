@@ -66,6 +66,9 @@
     [super dealloc];
 }
 
+/**
+   Initialize with NSURL
+*/
 - (id)initWithURL:(NSURL *)url
 {
     self = [super init];
@@ -75,6 +78,9 @@
     return self;
 }
 
+/**
+   Initialize with URL String
+*/
 - (id)initWithURLString:(NSString *)urlString
 {
     self = [super init];
@@ -84,6 +90,9 @@
     return self;
 }
 
+/**
+   Set URL
+*/
 - (void)setURL:(NSURL *)url
 {
     self.scheme = url.scheme;
@@ -96,13 +105,17 @@
     [self parseQuery];
 }
 
+/**
+   Set URL string
+   
+   @note Some characters (?, =, ; etc.) in the URL will be decoded to analyze it.
+   (Because the URL in response of Amazon API is encoded.)
+*/
 - (void)setURLString:(NSString *)urlString
 {
     NSMutableString *ms = [[[NSMutableString alloc] init] autorelease];
     [ms setString:urlString];
 
-    // Decode some characters (?, =, ; etc.) in the URL, 
-    // because the URL in response of Amazon API is encoded.
 #define REPLACE(x, y)                                                   \
     [ms replaceOccurrencesOfString:x withString:y options:NSLiteralSearch range:NSMakeRange(0, [ms length])]
     REPLACE(@"%23", @"#");
@@ -115,6 +128,9 @@
     [self setURL:url];
 }
 
+/**
+   Return absolute URL string
+*/
 - (NSString*)absoluteString
 {
     [self composeQuery];
@@ -132,12 +148,18 @@
     return s;
 }
 
+/**
+   Return NSURL
+*/
 - (NSURL*)url
 {
     NSURL *url = [NSURL URLWithString:[self absoluteString]];
     return url;
 }
 
+/**
+   Parse query string to 'queries' member (private)
+*/
 - (void)parseQuery
 {
     self.queries = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
@@ -160,6 +182,9 @@
     }
 }
 
+/**
+   Compose query string from 'queries' member (private)
+*/
 - (void)composeQuery
 {
     NSMutableString *q = nil;
@@ -179,6 +204,12 @@
     self.query = q;
 }
 
+/**
+   Get URLQuery of name
+
+   @param[in] name Name of the URL query parameter.
+   @return URLQuery instance if found.
+*/
 - (URLQuery*)URLQuery:(NSString*)name
 {
     for (URLQuery *p in self.queries) {
@@ -189,6 +220,12 @@
     return nil;
 }
 
+/**
+   Get query parameter value of name
+
+   @param[in] name Name of the URL query parameter.
+   @return value
+*/
 - (NSString*)query:(NSString*)name
 {
     URLQuery *p = [self URLQuery:name];
@@ -198,6 +235,14 @@
     return nil;
 }
 
+/**
+   Set query parameter
+
+   @param[in] name Name of the parameter
+   @param[in] value Value of the parameter
+
+   @note If same parameter exist, it will be overwritten.
+*/
 - (void)setQuery:(NSString*)name value:(NSString*)value
 {
     URLQuery *p = [self URLQuery:name];
@@ -213,6 +258,9 @@
     [p release];
 }
 
+/**
+   Remove query parameter
+*/
 - (void)removeQuery:(NSString*)name
 {
     URLQuery *p = [self URLQuery:name];
@@ -221,6 +269,9 @@
     }
 }
 
+/**
+   Debug log
+*/
 - (void)log
 {
 #ifdef DEBUG
