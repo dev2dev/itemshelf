@@ -58,19 +58,16 @@
 
     NSString *baseURI;
 	
-    NSString *searchingKeyword;  // 検索中文字列 (keyword)
-
-    NSString *searchKeyword;
-    NSString *searchTitle;
+    NSString *searchKeyword;    // Keyword to search (barcode, isbn, etc.)
+    NSString *searchTitle;      // Title to search
     NSString *searchIndex;
 
-    NSMutableArray *itemArray; // 検索結果の配列
+    NSMutableArray *itemArray;  // Searched items array
 
-    // XML パーサ用
+    // For XML parser
     int itemCounter;
     NSMutableData *responseData;
-    //NSMutableString *response;	// XML応答
-    NSMutableString *curString;	// 解析中XML文字要素
+    NSMutableString *curString;	  // current string in XML element
     AmazonXmlState *xmlState;
 }
 
@@ -88,7 +85,7 @@
 
 @end
 
-// XML 解析ステート
+// XML state
 @interface AmazonXmlState : NSObject {
     BOOL isLargeImage, isMediumImage, isOffers, isError;
     NSString *errorMessage;

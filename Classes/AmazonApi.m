@@ -110,7 +110,6 @@
     [responseData release];
     [itemArray release];
 
-    [searchingKeyword release];
     [searchKeyword release];
     [searchTitle release];
     [searchIndex release];
@@ -161,12 +160,6 @@
     [itemArray removeAllObjects];
 
     [responseData setLength:0];
-
-    // 検索キーワードを覚えておく
-    [searchingKeyword release];
-    if (searchKeyword) {
-        searchingKeyword = [searchKeyword retain];
-    }
 
     if (searchIndex == nil) {
         searchIndex = @"Blended";
@@ -252,8 +245,8 @@
 
         if (itemCounter < AMAZON_MAX_SEARCH_ITEMS) {
             Item *item = [[Item alloc] init];
-            item.idString = searchingKeyword;
-			
+
+            item.idString = searchKeyword;
             item.productGroup = xmlState.indexName;
 
             [itemArray addObject:item];
