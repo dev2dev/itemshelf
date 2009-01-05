@@ -114,7 +114,7 @@
 + (void)clearAllImageCache;
 - (UIImage *)getImage:(id<ItemDelegate>)delegate;
 - (void)cancelDownload;
-- (UIImage*)getNoImage;
+- (UIImage*)_getNoImage;
 - (void)_refreshImageCache;
 - (void)_putImageCache;
 - (NSString*)_imageFileName;

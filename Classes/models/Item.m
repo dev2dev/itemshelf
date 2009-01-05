@@ -203,7 +203,7 @@
 
 - (void)delete
 {
-    [self deleteImageFile];
+    [self _deleteImageFile];
 
     Database *db = [Database instance];
 
