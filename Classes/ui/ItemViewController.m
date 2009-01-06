@@ -35,7 +35,7 @@
 #import "ItemViewController.h"
 #import "DataModel.h"
 #import "WebViewController.h"
-#import "AmazonApi.h"
+#import "WebApi.h"
 
 @implementation ItemViewController
 
@@ -183,7 +183,7 @@
     }
 	
     if (indexPath.row == 1) {
-        cell.text = NSLocalizedString(@"Show detail with Amazon", @"");
+        cell.text = NSLocalizedString(@"Show detail with Amazon", @""); // ###
         cell.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
@@ -268,7 +268,7 @@
 
     if (indexPath.row == 1) {
         // 詳細を表示
-        NSString *detailURL = [AmazonApi mobileUrl:item];
+        NSString *detailURL = [WebApi detailUrl:item isMobile:YES];
         WebViewController *vc = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
         vc.urlString = detailURL;
 
@@ -381,8 +381,8 @@
     [body appendString:@"\n\n"];
 	
     // 詳細 URL
-    NSString *detailURL = [AmazonApi normalUrl:item];
-    [body appendFormat:@"<a href='%@'>Amazon link</a>", detailURL];
+    NSString *detailURL = [WebApi detailUrl:item isMobile:NO];
+    [body appendFormat:@"<a href='%@'>Detail link of the item</a>", detailURL];
 	
     // ここでいったん body を完全に　URL encode する
     NSString *tmp = [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -411,7 +411,7 @@
 - (void)openSafari
 {
     Item *item = [itemArray objectAtIndex:0];
-    NSString *detailURL = [AmazonApi mobileUrl:item];
+    NSString *detailURL = [WebApi detailUrl:item isMobile:YES];
     NSURL *url = [NSURL URLWithString:[detailURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
 }
