@@ -100,6 +100,10 @@
     if (country.length != 2) {
         country = nil;
     }
+    int serviceId = -1;
+    if (country != nil) {
+        serviceId = [WebApi serviceIdFromCountryCode:country];
+    }
 	
     // Show ScanView and start search.
     ScanViewController *vc = [[ScanViewController alloc] initWithNibName:@"ScanView" bundle:nil];
@@ -110,8 +114,7 @@
     sc.delegate = self;
     sc.viewController = vc;
     sc.selectedShelf = nil;
-    sc.country = country;
-    [sc searchWithKeyword:code];
+    [sc searchWithKeyword:code withServiceId:serviceId];
 
     [vc release];
     [nv release];

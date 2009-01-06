@@ -39,7 +39,7 @@
 
 @implementation SearchController
 
-@synthesize delegate, viewController, selectedShelf, country;
+@synthesize delegate, viewController, selectedShelf;
 
 /**
    Create SearchController instance (factory method)
@@ -57,7 +57,6 @@
         self.delegate = nil;
         self.viewController = nil;
         self.selectedShelf = nil;
-        self.country = nil;
         activityIndicator = nil;
     }
     return self;
@@ -67,7 +66,6 @@
 {
     [viewController release];
     [selectedShelf release];
-    [country release];
 
     if (activityIndicator) {
         [activityIndicator removeFromSuperview];
@@ -84,14 +82,14 @@
 
    @param[in] keyword Search keyword
 */
-- (void)searchWithKeyword:(NSString*)keyword
+- (void)searchWithKeyword:(NSString*)keyword withServiceId:(int)serviceId;
 {
     ASSERT(viewController != nil);
     [self _showActivityIndicator];
 
     autoRegisterShelf = YES;
 
-    WebApi *api = [WebApi createWebApi:-1];
+    WebApi *api = [WebApi createWebApi:serviceId];
     api.delegate = self;
 
     api.searchKeyword = keyword;

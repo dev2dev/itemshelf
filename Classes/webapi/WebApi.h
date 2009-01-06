@@ -34,7 +34,7 @@
 
 // Web API
 
-#define ENABLE_KAKAKUCOM   0
+#define ENABLE_KAKAKUCOM   1
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
@@ -110,6 +110,7 @@ enum {
 
 + (int)defaultServiceId;
 + (int)fallbackServiceId;
++ (int)serviceIdFromCountryCode:(NSString*)country;
 + (void)setDefaultServiceId:(int)serviceId;
 + (WebApi*)createWebApi:(int)serviceId;
 + (NSArray*)serviceIdStrings;

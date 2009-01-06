@@ -67,7 +67,14 @@
 + (int)fallbackServiceId
 {
     NSString *country = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
-    
+    return [self serviceIdFromCountryCode:country];
+}
+
+/**
+   Get service id from country code
+*/
++ (int)serviceIdFromCountryCode:(NSString*)country
+{
     int serviceId = AmazonUS; // default
     
     if ([country isEqualToString:@"CA"]) serviceId = AmazonCA;

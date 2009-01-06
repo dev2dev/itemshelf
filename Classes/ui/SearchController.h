@@ -66,7 +66,6 @@
     UIViewController *viewController;
 
     Shelf *selectedShelf;
-    NSString *country;
 
     UIActivityIndicatorView *activityIndicator;
     BOOL autoRegisterShelf;
@@ -75,11 +74,10 @@
 @property(nonatomic,assign) id<SearchControllerDelegate> delegate;
 @property(nonatomic,retain) UIViewController *viewController;
 @property(nonatomic,retain) Shelf *selectedShelf;
-@property(nonatomic,retain) NSString *country;
 
 + (SearchController *)createController;
 
-- (void)searchWithKeyword:(NSString*)keyword;
+- (void)searchWithKeyword:(NSString*)keyword withServiceId:(int)serviceId;
 - (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex;
 
 - (void)_showActivityIndicator;

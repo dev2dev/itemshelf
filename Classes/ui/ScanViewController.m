@@ -248,7 +248,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     sc.delegate = self;
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
-    [sc searchWithKeyword:reader.data];
+    [sc searchWithKeyword:reader.data withServiceId:-1];
 }
 
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result

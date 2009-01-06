@@ -91,11 +91,12 @@
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
 
     // タイトル検索のみ
-    [comp setQuery:@"Keywords" value:searchTitle];
+    [comp setQuery:@"Keyword" value:searchTitle];
 
     [comp setQuery:@"SortOrder" value:@"popularityRank"];
     [comp setQuery:@"HitNum" value:@"20"];
-
+    [comp log];
+    
     // カテゴリ指定はしない、オーダは固定
     NSURL *url = [comp url];
     [super sendHttpRequest:url];

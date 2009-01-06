@@ -131,7 +131,7 @@
     sc.delegate = self;
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
-    [sc searchWithKeyword:textField.text];
+    [sc searchWithKeyword:textField.text withServiceId:-1];
 }
 
 - (void)searchControllerFinish:(SearchController*)sc result:(BOOL)result
