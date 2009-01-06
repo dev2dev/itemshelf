@@ -60,7 +60,7 @@
   This is abstract class. You must inherit this class and override
   searchWithKeyword: and searchWithTitle:withIndex: method.
 */
-@interface SearchController : NSObject
+@interface SearchController : NSObject <WebApiDelegate>
 {
     id<SearchControllerDelegate> delegate;
     UIViewController *viewController;

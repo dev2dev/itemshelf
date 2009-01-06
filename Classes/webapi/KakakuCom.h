@@ -50,10 +50,6 @@
    The result will be passed with WebApiDelegate protocol.
 */
 @interface KakakuComApi : WebApi {
-    //NSString *searchKeyword;    ///< Keyword to search (barcode, isbn, etc.)
-    NSString *searchTitle;      ///< Title to search
-    //NSString *searchIndex;      ///< Search index (category)
-    
     NSMutableArray *itemArray;  ///< Searched items array
 
     // For XML parser
@@ -61,10 +57,6 @@
     NSMutableData *responseData;///< response data (for XML parser)        
     NSMutableString *curString;	///< current string in XML element (for XML parser)
 }
-
-//@property(nonatomic, retain) NSString *searchKeyword;
-@property(nonatomic, retain) NSString *searchTitle;
-//@property(nonatomic, retain) NSString *searchIndex;
 
 - (void)itemSearch;
 

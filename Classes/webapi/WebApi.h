@@ -110,14 +110,14 @@ enum {
 
 + (int)defaultServiceId;
 + (int)fallbackServiceId;
-+ (void)setDefaultServiceId;
++ (void)setDefaultServiceId:(int)serviceId;
 + (WebApi*)createWebApi:(int)serviceId;
++ (NSArray*)serviceIdStrings;
 
-//+ (NSString *)normalUrl:(Item *)item;
-//+ (NSString *)mobileUrl:(Item *)item;
++ (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile;
 
 - (void)itemSearch;
-- (void)setCountry:(NSString*)country;
+- (void)setServiceId:(int)sid;
 
 // used by derived class
 - (void)sendHttpRequest:(NSURL*)url;

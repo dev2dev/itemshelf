@@ -127,27 +127,29 @@
    @param[in] item Item
    @return URL string
 */
-+ (NSString *)detailUrl:(URLComponent *)comp isMobile:(BOOL)isMobile
++ (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile
 {
-    NSRange *range;
-    range = [comp.host rangeOfString:@"amazon"];
+    URLComponent *comp = [[[URLComponent alloc]
+                              initWithURLString:item.detailURL]
+                             autorelease];
+
+    NSRange range = [comp.host rangeOfString:@"amazon"];
     if (range.location == NSNotFound) {
         // not amazon URL
         return nil;
     }
 
+    NSString *url;
     if (!isMobile) {
         // SubscriptionId と tag (associate id) を抜く
         [comp removeQuery:@"SubscriptionId"];
         [comp removeQuery:@"tag"];
 	
-        NSString *url =
-            [NSString
+        url = [NSString
                 stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonredirect.cgi/%@",
                 [comp absoluteString]];
     } else {
-        NSString *url =
-            [NSString
+        url = [NSString
                 stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonmobile.cgi?host=%@&asin=%@",
                 comp.host, item.asin];
     }

@@ -41,7 +41,7 @@
 #import "KakakuCom.h"
 
 @implementation WebApi
-@synthesize delegate, serviceId;
+@synthesize delegate;
 @synthesize searchKeyword, searchIndex, searchTitle;
 
 ////////////////////////////////////////////////////////////////////////
@@ -68,12 +68,13 @@
 {
     NSString *country = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
     
+    int serviceId = AmazonUS; // default
+    
     if ([country isEqualToString:@"CA"]) serviceId = AmazonCA;
     else if ([country isEqualToString:@"UK"]) serviceId = AmazonUK;
     else if ([country isEqualToString:@"FR"]) serviceId = AmazonFR;
     else if ([country isEqualToString:@"DE"]) serviceId = AmazonDE;
     else if ([country isEqualToString:@"JP"]) serviceId = AmazonJP;
-    else serviceId = AmazonUS;
 
     return serviceId;
 }
@@ -125,7 +126,7 @@
 /**
    Get service id strings
 */
-+ (NSArray *)getServiceIdStrings
++ (NSArray *)serviceIdStrings
 {
     // This array must be same order with enum values.
     NSArray *ary =
@@ -153,12 +154,8 @@
 */
 + (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile
 {
-    URLComponent *comp = [[[URLComponent alloc]
-                              initWithURLString:item.detailURL]
-                             autorelease];
-
     NSString *url = nil;
-    url = [AmazonApi detailUrl:comp isMobile:isMobile];
+    url = [AmazonApi detailUrl:item isMobile:isMobile];
     if (url != nil) return url;
     
     return item.detailURL;
@@ -210,7 +207,7 @@
 - (void)sendHttpRequest:(NSURL*)url
 {
     HttpClient *httpClient = [[HttpClient alloc] init:self];
-    [httpClient requestGet:uri];
+    [httpClient requestGet:url];
     [httpClient release];
 }
 

@@ -38,6 +38,7 @@
 #import "Common.h"
 #import "Item.h"
 #import "WebApi.h"
+#import "URLComponent.h"
 
 @class AmazonXmlState;
 
@@ -64,10 +65,10 @@
     AmazonXmlState *xmlState;   ///< XML parser state
 }
 
-+ (NSString *)detailUrl:(URLComponent *)comp isMobile:(BOOL)isMobile
++ (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile;
 
 - (void)itemSearch;
-- (void)setCountry:(NSString*)country;
+//- (void)setCountry:(NSString*)country;
 
 @end
 

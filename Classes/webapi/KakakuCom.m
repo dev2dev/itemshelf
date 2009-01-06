@@ -59,12 +59,7 @@
 {
     [responseData release];
     [itemArray release];
-
-    [searchTitle release];
-
-    [baseURI release];
     [curString release];
-    [xmlState release];
 
     [super dealloc];
 }
@@ -122,11 +117,6 @@
 	
     itemCounter = -1;
 	
-    if (xmlState) {
-        [xmlState release];
-    }
-    xmlState = [[KakakuComXmlState alloc] init];
-	
     [parser setDelegate:self];
     [parser setShouldResolveExternalEntities:YES];
     BOOL result = [parser parse];
@@ -141,7 +131,7 @@
             [delegate webApiDidFinish:self items:itemArray];
         } else {
             // no data
-            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:xmlState.errorMessage];
+            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:@"No items"]; //###
         }
     }
 }

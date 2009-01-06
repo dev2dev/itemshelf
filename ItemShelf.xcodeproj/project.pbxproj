@@ -42,6 +42,9 @@
 		3E22CE280EF9153F00E8A966 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */; };
 		3E2C0C550ED9ADDB00867F11 /* GenSelectListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */; };
 		3E2C12FB0ED98D480080293B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C12FA0ED98D480080293B /* InfoPlist.strings */; };
+		3E37D19C0F1395AB005B6B90 /* AmazonApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37D1940F139573005B6B90 /* AmazonApi.m */; };
+		3E37D19D0F1395AB005B6B90 /* KakakuCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37D1960F139573005B6B90 /* KakakuCom.m */; };
+		3E37D19E0F1395AB005B6B90 /* WebApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37D1980F139573005B6B90 /* WebApi.m */; };
 		3E3AA5AD0EE02EF200339BAB /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3AA5AC0EE02EF200339BAB /* AboutView.xib */; };
 		3E3EA1510ED9A072006892E9 /* ConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3EA1500ED9A072006892E9 /* ConfigView.xib */; };
 		3E42210C0EE9529800164EF4 /* KeywordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E42210B0EE9529800164EF4 /* KeywordView.xib */; };
@@ -55,7 +58,6 @@
 		3E5DFA420EE14C14000F6998 /* libItemShelfLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5DFA390EE14BE6000F6998 /* libItemShelfLib.a */; };
 		3E5DFA4B0EE14C48000F6998 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		3E5DFA4C0EE14C48000F6998 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28216C960DB411BC00E5133A /* ScanViewController.m */; };
-		3E5DFA4D0EE14C48000F6998 /* AmazonApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E32787F0ECDD24F0078AF4A /* AmazonApi.m */; };
 		3E5DFA4E0EE14C48000F6998 /* BarcodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7D4B130ECF00B30026EA36 /* BarcodeReader.m */; };
 		3E5DFA4F0EE14C48000F6998 /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6F53130ECFBFFB00E68A4B /* ItemViewController.m */; };
 		3E5DFA500EE14C48000F6998 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE52F0ECFE3CB00274073 /* Item.m */; };
@@ -215,8 +217,12 @@
 		3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenSelectListView.xib; sourceTree = "<group>"; };
 		3E2C12F80ED98D370080293B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E2C12FC0ED98D4F0080293B /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3E32787E0ECDD2430078AF4A /* AmazonApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonApi.h; sourceTree = "<group>"; };
-		3E32787F0ECDD24F0078AF4A /* AmazonApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonApi.m; sourceTree = "<group>"; };
+		3E37D1930F139573005B6B90 /* AmazonApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonApi.h; sourceTree = "<group>"; };
+		3E37D1940F139573005B6B90 /* AmazonApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonApi.m; sourceTree = "<group>"; };
+		3E37D1950F139573005B6B90 /* KakakuCom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KakakuCom.h; sourceTree = "<group>"; };
+		3E37D1960F139573005B6B90 /* KakakuCom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KakakuCom.m; sourceTree = "<group>"; };
+		3E37D1970F139573005B6B90 /* WebApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebApi.h; sourceTree = "<group>"; };
+		3E37D1980F139573005B6B90 /* WebApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebApi.m; sourceTree = "<group>"; };
 		3E3AA5940EE02E8300339BAB /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		3E3AA5950EE02E8300339BAB /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		3E3AA5AC0EE02EF200339BAB /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
@@ -232,7 +238,7 @@
 		3E42FD410EDD6BEF00FD4879 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = SOURCE_ROOT; };
 		3E4406FD0EF7FF7B00EB1C72 /* SearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
 		3E4406FE0EF7FF7B00EB1C72 /* SearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
-		3E46ED280EF9362A00D12D8A /* UnitTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UnitTest-Info.plist"; sourceTree = "<group>"; };
+		3E46ED280EF9362A00D12D8A /* UnitTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UnitTest-Info.plist"; path = "../UnitTest-Info.plist"; sourceTree = "<group>"; };
 		3E46ED440EF939FB00D12D8A /* TestUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUtility.h; sourceTree = "<group>"; };
 		3E46ED450EF939FB00D12D8A /* TestUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUtility.m; sourceTree = "<group>"; };
 		3E554C840ED98A0900166874 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -349,6 +355,7 @@
 			children = (
 				3E7BD5BB0EDD61D40083CBE5 /* models */,
 				3E7BD5BA0EDD61B80083CBE5 /* ui */,
+				3E37D1900F13953B005B6B90 /* webapi */,
 				3E7BD5BC0EDD61F70083CBE5 /* Utility */,
 				1D3623240D0F684500981E51 /* AppDelegate.h */,
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
@@ -370,7 +377,6 @@
 		29B97314FDCFA39411CA2CEA /* iWantThis */ = {
 			isa = PBXGroup;
 			children = (
-				3E46ED280EF9362A00D12D8A /* UnitTest-Info.plist */,
 				3E1FDD170ECEF55B00915E3E /* zebra */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -395,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107310486CEB800E47090 /* Info.plist */,
+				3E46ED280EF9362A00D12D8A /* UnitTest-Info.plist */,
 				3E554C860ED98A4400166874 /* Localizable.strings */,
 				3E2C12FA0ED98D480080293B /* InfoPlist.strings */,
 				3E7BD5BE0EDD625B0083CBE5 /* View */,
@@ -550,6 +557,19 @@
 			path = UnitTesting;
 			sourceTree = "<group>";
 		};
+		3E37D1900F13953B005B6B90 /* webapi */ = {
+			isa = PBXGroup;
+			children = (
+				3E37D1930F139573005B6B90 /* AmazonApi.h */,
+				3E37D1940F139573005B6B90 /* AmazonApi.m */,
+				3E37D1950F139573005B6B90 /* KakakuCom.h */,
+				3E37D1960F139573005B6B90 /* KakakuCom.m */,
+				3E37D1970F139573005B6B90 /* WebApi.h */,
+				3E37D1980F139573005B6B90 /* WebApi.m */,
+			);
+			path = webapi;
+			sourceTree = "<group>";
+		};
 		3E7BD5BA0EDD61B80083CBE5 /* ui */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,8 +632,6 @@
 				3EED26050EDEE16500C04A84 /* Common.m */,
 				3E7D4B120ECF00B30026EA36 /* BarcodeReader.h */,
 				3E7D4B130ECF00B30026EA36 /* BarcodeReader.m */,
-				3E32787E0ECDD2430078AF4A /* AmazonApi.h */,
-				3E32787F0ECDD24F0078AF4A /* AmazonApi.m */,
 				3E22CC830EF90F4F00E8A966 /* HttpClient.h */,
 				3E22CC840EF90F4F00E8A966 /* HttpClient.m */,
 				3ECD3DAE0ED6C84A0000A9A5 /* URLComponent.h */,
@@ -852,6 +870,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E37D19C0F1395AB005B6B90 /* AmazonApi.m in Sources */,
+				3E37D19D0F1395AB005B6B90 /* KakakuCom.m in Sources */,
+				3E37D19E0F1395AB005B6B90 /* WebApi.m in Sources */,
 				3E5DFA5B0EE14C48000F6998 /* Common.m in Sources */,
 				3E22CD400EF9142E00E8A966 /* HttpClient.m in Sources */,
 				3E5DFA560EE14C48000F6998 /* URLComponent.m in Sources */,
@@ -877,7 +898,6 @@
 				3E22CD490EF9142E00E8A966 /* ItemListModel.m in Sources */,
 				3E22CD4A0EF9142E00E8A966 /* StringArray.m in Sources */,
 				3E5DFA4B0EE14C48000F6998 /* AppDelegate.m in Sources */,
-				3E5DFA4D0EE14C48000F6998 /* AmazonApi.m in Sources */,
 				3E5DFA4E0EE14C48000F6998 /* BarcodeReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
