@@ -70,7 +70,6 @@
 // Amazon API
 	
 @implementation AmazonApi
-@synthesize searchKeyword, searchIndex, searchTitle;
 
 - (id)init
 {
@@ -112,10 +111,6 @@
 {
     [responseData release];
     [itemArray release];
-
-    [searchKeyword release];
-    [searchTitle release];
-    [searchIndex release];
 
     [baseURI release];
     [curString release];

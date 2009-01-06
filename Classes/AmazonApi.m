@@ -203,6 +203,11 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // HttpClientDelegate
 
+/**
+   @name HttpClientDelegate
+*/
+//@{
+
 - (void)httpClientDidFailed:(HttpClient*)client error:(NSError*)err
 {
     // show error : TBD
@@ -247,8 +252,15 @@
     }
 }
 
+//@}
+
 /////////////////////////////////////////////////////////////////////////////////////
 // パーサ delegate
+
+/**
+   @name NXSMLParser delegate
+*/
+//@{
 
 // 開始タグの処理
 - (void)parser:(NSXMLParser*)parser didStartElement:(NSString*)elem namespaceURI:(NSString *)nspace qualifiedName:(NSString *)qname attributes:(NSDictionary *)attributes
@@ -360,5 +372,7 @@
     }
     [curString setString:@""];
 }
+
+//@}
 
 @end

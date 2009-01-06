@@ -45,6 +45,7 @@
 #define WEBAPI_ERROR_NETWORK	0
 #define WEBAPI_ERROR_NOTFOUND	1
 #define WEBAPI_ERROR_BADREPLY   2
+#define WEBAPI_ERROR_BADPARAM   3
 
 // service ids
 enum {
@@ -93,9 +94,16 @@ enum {
 */
 @interface WebApi : NSObject <HttpClientDelegate> {
     id<WebApiDelegate> delegate;
+
+    NSString *searchKeyword;    ///< Keyword to search (barcode, isbn, etc.)
+    NSString *searchTitle;      ///< Title to search
+    NSString *searchIndex;      ///< Search index (category)
 }
 
 @property(nonatomic, assign) id<WebApiDelegate> delegate;
+@property(nonatomic, retain) NSString *searchKeyword;
+@property(nonatomic, retain) NSString *searchTitle;
+@property(nonatomic, retain) NSString *searchIndex;
 
 + (int)defaultServiceId;
 + (int)fallbackServiceId;

@@ -189,6 +189,10 @@
     case WEBAPI_ERROR_NOTFOUND:
         reasonString = NSLocalizedString(@"Cannot find item information", @"");
         break;
+
+    case WEBAPI_ERROR_BADPARAM:
+        reasonString = NSLocalizedString(@"Error", @""); // ### ad hoc...
+        break;
     }
 
     if (message) {

@@ -60,23 +60,25 @@ static DataModel *theDataModel = nil; // singleton
         shelves = [[NSMutableArray alloc] initWithCapacity:10];
     }
 	
-    countries = [[NSArray arrayWithObjects:@"US", @"UK", @"CA", @"FR", @"DE", @"JP", nil] retain];
+//    countries = [[NSArray arrayWithObjects:@"US", @"UK", @"CA", @"FR", @"DE", @"JP", nil] retain];
 
     // load setting
+#if 0
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     currentCountry = [defaults stringForKey:@"Country"];
     if (currentCountry == nil) {
         currentCountry = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
     }
     [currentCountry retain];
+#endif
     return self;
 }
 
 - (void)dealloc
 {
     [shelves release];
-    [currentCountry release];
-    [countries release];
+    //[currentCountry release];
+    //[countries release];
 
     [super dealloc];
 }
@@ -369,6 +371,7 @@ static DataModel *theDataModel = nil; // singleton
 ////////////////////////////////////////////////////////////////
 // Configuration
 
+#if 0
 /**
    Return countries array
 */
@@ -399,5 +402,7 @@ static DataModel *theDataModel = nil; // singleton
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:currentCountry forKey:@"Country"];
 }
+
+#endif
 
 @end

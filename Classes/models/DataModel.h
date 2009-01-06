@@ -47,8 +47,8 @@
 {
     NSMutableArray *shelves;	///< All shelves
 
-    NSString *currentCountry;	///< Current country setting
-    NSArray *countries;		///< Countries array
+//    NSString *currentCountry;	///< Current country setting
+//    NSArray *countries;		///< Countries array
 }
 
 @property(nonatomic,retain) NSMutableArray *shelves;
@@ -73,8 +73,8 @@
 
 - (NSMutableArray*)makeFilter:(Shelf *)shelf;
 
-- (NSArray*)countries;
-- (NSString*)country;
-- (void)setCountry:(NSString*)country;
+//- (NSArray*)countries;
+//- (NSString*)country;
+//- (void)setCountry:(NSString*)country;
 
 @end

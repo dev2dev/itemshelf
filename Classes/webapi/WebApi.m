@@ -42,6 +42,7 @@
 
 @implementation WebApi
 @synthesize delegate, serviceId;
+@synthesize searchKeyword, searchIndex, searchTitle;
 
 ////////////////////////////////////////////////////////////////////////
 // static
@@ -171,8 +172,20 @@
     self = [super init];
     if (self) {
         delegate = nil;
+        searchKeyword = nil;
+        searchTitle = nil;
+        searchIndex = nil;
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [searchKeyword release];
+    [searchTitle release];
+    [searchIndex release];
+
+    [super dealloc];
 }
 
 /**

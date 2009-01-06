@@ -81,6 +81,15 @@
 */
 - (void)itemSearch
 {
+    if (searchKeyword != nil) {
+        // バーコード検索は対応しない
+        if (delegate) {
+            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADPARAM
+                      message:@"価格.com はバーコード検索に対応していません"];
+        }
+        return;
+    }
+
     [itemArray removeAllObjects];
     [responseData setLength:0];
 
