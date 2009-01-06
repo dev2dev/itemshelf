@@ -1,0 +1,16 @@
+The ItemShelf is an application to manage your favorite items in
+wishlist and virtual bookshelf. For example, when you find some items
+at shop, you can check the information of the item easily with this
+application, and save it to wishlist. Also you can manage your owned
+items with virtual bookshelf. 
+
+The information of the item can be read from barcode via camera, or
+you can input barcode manually.
+
+Features:
+
+- You can read barcode with iPhone's camera, and search with
+  Amazon. (You need macro lens)
+- You can enter ISBN, barcode number (JAN/EAN/UPC) or ASIN manually. 
+- You can search item with title.
+- You can manage items with your own wishlist and virtual bookshelf. 
