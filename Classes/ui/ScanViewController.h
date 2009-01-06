@@ -62,6 +62,6 @@
 - (void)enterKeyword:(id)sender;
 
 - (BOOL)execScan:(UIImagePickerControllerSourceType)type;
-- (void)selectLocale;
+- (void)selectService;
 
 @end

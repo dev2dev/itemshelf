@@ -34,34 +34,19 @@
 
 #import "SearchController.h"
 #import "ItemViewController.h"
-#import "AmazonApi.h"
+#import "WebApi.h"
 #import "DataModel.h"
 
 @implementation SearchController
 
 @synthesize delegate, viewController, selectedShelf, country;
 
-static SearchControllerType currentSearchControllerType = SearchControllerTypeAmazon;
-
 /**
    Create SearchController instance (factory method)
-
-   @note At this moment, this supports only Amazon.
 */
 + (SearchController *)createController
 {
-    SearchController *c = nil;
-
-    switch (currentSearchControllerType) {
-    case SearchControllerTypeAmazon:
-        c = [[SearchControllerAmazon alloc] init];
-        break;
-
-    default:
-        ASSERT(0);
-        break;
-    }
-
+    SearchController *c = [[SearchController alloc] init];
     return c;
 }
 
@@ -101,8 +86,16 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 */
 - (void)searchWithKeyword:(NSString*)keyword
 {
-    // must be override
-    ASSERT(NO);
+    ASSERT(viewController != nil);
+    [self _showActivityIndicator];
+
+    autoRegisterShelf = YES;
+
+    WebApi *api = [WebApi createWebApi:-1];
+    api.delegate = self;
+
+    api.searchKeyword = keyword;
+    [api itemSearch];
 }
 
 /**
@@ -113,90 +106,27 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 */
 - (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex
 {
-    // must be override
-    ASSERT(NO);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////
-// ActivityIndicator
-
-- (void)_showActivityIndicator
-{
-    ASSERT(viewController != nil);
-    ASSERT(activityIndicator == nil);
-
-
-    activityIndicator = [[UIActivityIndicatorView alloc]
-                            initWithFrame:CGRectMake(0, 0, viewController.view.bounds.size.width, viewController.view.bounds.size.height)];
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    activityIndicator.backgroundColor = [UIColor grayColor];
-    activityIndicator.contentMode = UIViewContentModeCenter;
-    activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
-        UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    [viewController.view addSubview:activityIndicator];
-    [activityIndicator startAnimating];
-}
-
-- (void)_dismissActivityIndicator
-{
-    ASSERT(viewController != nil);
-    ASSERT(activityIndicator);
-
-    [activityIndicator stopAnimating];
-    [activityIndicator removeFromSuperview];
-    [activityIndicator release];
-    activityIndicator = nil;
-}
-
-@end
-
-///////////////////////////////////////////////////////////////////////////
-// SearchController for Amazon
-
-@implementation SearchControllerAmazon
-
-- (void)searchWithKeyword:(NSString*)keyword
-{
-    ASSERT(viewController != nil);
-    [self _showActivityIndicator];
-
-    autoRegisterShelf = YES;
-
-    AmazonApi *amazon = [[AmazonApi alloc] init];
-    amazon.delegate = self;
-    if (country != nil) {
-        [amazon setCountry:country];
-    }
-
-    amazon.searchKeyword = keyword;
-    [amazon itemSearch];
-}
-
-- (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex
-{
     ASSERT(viewController != nil);
     [self _showActivityIndicator];
 
     autoRegisterShelf = NO;
 
-    AmazonApi *amazon = [[AmazonApi alloc] init];
-    amazon.delegate = self;
-    amazon.searchTitle = title;
-    amazon.searchIndex = searchIndex;
-    if (country != nil) {
-        [amazon setCountry:country];
-    }
+    WebApi *api = [WebApi createWebApi:-1];
+    api.delegate = self;
+    api.searchTitle = title;
+    api.searchIndex = searchIndex;
 
-    [amazon itemSearch];
+    [api itemSearch];
 }
 
-/**
-   @name AmazonApiDelegate
+////////////////////////////////////////////////////////////////////////////////////////////
+/*
+   @name WebApiDelegate
 */
 //@{
 
 // 検索成功時の処理
-- (void)amazonApiDidFinish:(AmazonApi *)amazon items:(NSMutableArray *)itemArray
+- (void)webApiDidFinish:(WebApi *)api items:(NSMutableArray *)itemArray
 {
     [self _dismissActivityIndicator];
 
@@ -231,7 +161,7 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
     ItemViewController *vc = [[[ItemViewController alloc] initWithNibName:@"ItemView" bundle:nil] autorelease];
     vc.itemArray = itemArray;
 
-    [amazon release];
+    [api release];
 
     [viewController.navigationController pushViewController:vc animated:YES];
 
@@ -242,21 +172,21 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 }
 
 // 検索失敗
-- (void)amazonApiDidFailed:(AmazonApi *)amazon reason:(int)reason message:(NSString *)message
+- (void)webApiDidFailed:(WebApi *)api reason:(int)reason message:(NSString *)message
 {
     [self _dismissActivityIndicator];
 	
     NSString *reasonString = @"Unknown error";
     switch (reason) {
-    case AMAZON_ERROR_NETWORK:
-        reasonString = NSLocalizedString(@"Cannot connect Amazon service", @"");
+    case WEBAPI_ERROR_NETWORK:
+        reasonString = NSLocalizedString(@"Cannot connect Amazon service", @""); // ### TBD
         break;
 
-    case AMAZON_ERROR_BADREPLY:
+    case WEBAPI_ERROR_BADREPLY:
         reasonString = NSLocalizedString(@"Illegal message was received", @"");
         break;
 
-    case AMAZON_ERROR_NOTFOUND:
+    case WEBAPI_ERROR_NOTFOUND:
         reasonString = NSLocalizedString(@"Cannot find item information", @"");
         break;
     }
@@ -267,7 +197,7 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 
     [Common showAlertDialog:@"Error" message:reasonString];
 
-    [amazon release];
+    [api release];
 
     if (delegate) {
         [delegate searchControllerFinish:self result:NO];
@@ -276,5 +206,39 @@ static SearchControllerType currentSearchControllerType = SearchControllerTypeAm
 }
 
 //@}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// ActivityIndicator
+
+- (void)_showActivityIndicator
+{
+    ASSERT(viewController != nil);
+    ASSERT(activityIndicator == nil);
+
+
+    activityIndicator = [[UIActivityIndicatorView alloc]
+                            initWithFrame:CGRectMake(0, 0, viewController.view.bounds.size.width, viewController.view.bounds.size.height)];
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    activityIndicator.backgroundColor = [UIColor grayColor];
+    activityIndicator.contentMode = UIViewContentModeCenter;
+    activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
+        UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    [viewController.view addSubview:activityIndicator];
+    [activityIndicator startAnimating];
+}
+
+- (void)_dismissActivityIndicator
+{
+    ASSERT(viewController != nil);
+    ASSERT(activityIndicator);
+
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
+    [activityIndicator release];
+    activityIndicator = nil;
+}
+
+@end
+
 
 @end

@@ -33,18 +33,10 @@
 */
 
 #import <UIKit/UIKit.h>
-#import "AmazonApi.h"
+#import "WebApi.h"
 #import "Shelf.h"
 
 @class SearchController;
-
-/**
-   Type of SearchController
-*/
-typedef enum {
-    SearchControllerTypeAmazon  ///< Amazon
-} SearchControllerType;
-
 
 @protocol SearchControllerDelegate
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result;
@@ -93,12 +85,4 @@ typedef enum {
 - (void)_showActivityIndicator;
 - (void)_dismissActivityIndicator;
 	
-@end
-
-/**
-   Search controller for Amazon
-*/
-@interface SearchControllerAmazon : SearchController <AmazonApiDelegate>
-{
-}
 @end

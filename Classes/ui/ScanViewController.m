@@ -38,6 +38,7 @@
 #import "NumPadViewController.h"
 #import "DataModel.h"
 #import "SearchController.h"
+#import "WebApi.h"
 
 @implementation ScanViewController
 @synthesize selectedShelf;
@@ -195,7 +196,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         [self enterKeyword:nil];
         break;
     case 4:
-        [self selectLocale];
+        [self selectService];
         break;
     }
 }
@@ -282,30 +283,28 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
-// 地域選択
+// サービス選択
 
-- (void)selectLocale
+- (void)selectService
 {
-    NSArray *countries = [[DataModel sharedDataModel] countries];
-    NSString *currentCountry = [[DataModel sharedDataModel] country];
+    NSArray *services = [WebApi serviceIdStrings];
+    int currentServiceId = [WebApi defaultServiceId];
 	
-    int idx = [countries findString:currentCountry];
-    if (idx < 0) idx = 0;
-
-    GenSelectListViewController *vc = [GenSelectListViewController
-                                          genSelectListViewController:self
-                                          array:countries
-                                          title:NSLocalizedString(@"Select locale", @"")
-                                          identifier:0];
-    vc.selectedIndex = idx;
+    GenSelectListViewController *vc =
+        [GenSelectListViewController
+            genSelectListViewController:self
+            array:services
+            title:NSLocalizedString(@"Select locale", @"")
+            identifier:0];
+    vc.selectedIndex = currentServiceId;
 	
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
 {
-    NSString *country = [vc selectedString];
-    [[DataModel sharedDataModel] setCountry:country];
+    int serviceId = [vc selectedIndex];
+    [WebApi setDefaultServiceId:serviceId];
 }
 
 @end
