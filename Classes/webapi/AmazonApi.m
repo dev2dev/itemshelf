@@ -125,44 +125,41 @@
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
-// URL 取得
 
 /**
-   Get detail URL of the Item (for PC browser)
+   Get detail URL of the Item
 
    @param[in] item Item
    @return URL string
 */
-+ (NSString *)normalUrl:(Item *)item
++ (NSString *)detailUrl:(URLComponent *)comp isMobile:(BOOL)isMobile
 {
-    URLComponent *comp = [[[URLComponent alloc]
-                              initWithURLString:item.detailURL]
-                             autorelease];
+    NSRange *range;
+    range = [comp.host rangeOfString:@"amazon"];
+    if (range.location == NSNotFound) {
+        // not amazon URL
+        return nil;
+    }
 
-    // SubscriptionId と tag (associate id) を抜く
-    [comp removeQuery:@"SubscriptionId"];
-    [comp removeQuery:@"tag"];
+    if (!isMobile) {
+        // SubscriptionId と tag (associate id) を抜く
+        [comp removeQuery:@"SubscriptionId"];
+        [comp removeQuery:@"tag"];
 	
-    NSString *url = [NSString
-                        stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonredirect.cgi/%@", [comp absoluteString]];
+        NSString *url =
+            [NSString
+                stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonredirect.cgi/%@",
+                [comp absoluteString]];
+    } else {
+        NSString *url =
+            [NSString
+                stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonmobile.cgi?host=%@&asin=%@",
+                comp.host, item.asin];
+    }
+
     return url;
 }
-/**
-   Get detail URL of the Item (for iPhone browser)
 
-   @param[in] item Item
-   @return URL string
-*/
-+ (NSString *)mobileUrl:(Item *)item
-{
-    URLComponent *comp = [[[URLComponent alloc] 
-                              initWithURLString:item.detailURL] autorelease];
-
-    NSString *url = [NSString
-                        stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonmobile.cgi?host=%@&asin=%@",
-                        comp.host, item.asin];
-    return url;
-}
 
 /////////////////////////////////////////////////////////////////////////////////////
 // 検索処理

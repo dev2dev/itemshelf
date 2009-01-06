@@ -141,6 +141,28 @@
     return ary;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+// Get URL of detail page
+
+/**
+   Get detail URL of the Item
+
+   @param[in] item Item
+   @return URL string
+*/
++ (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile
+{
+    URLComponent *comp = [[[URLComponent alloc]
+                              initWithURLString:item.detailURL]
+                             autorelease];
+
+    NSString *url = nil;
+    url = [AmazonApi detailUrl:comp isMobile:isMobile];
+    if (url != nil) return url;
+    
+    return item.detailURL;
+}
+
 ////////////////////////////////////////////////////////////////////////
 // WebApi
 

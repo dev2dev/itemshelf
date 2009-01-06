@@ -72,8 +72,8 @@
 @property(nonatomic, retain) NSString *searchTitle;
 @property(nonatomic, retain) NSString *searchIndex;
 
-+ (NSString *)normalUrl:(Item *)item;
-+ (NSString *)mobileUrl:(Item *)item;
++ (NSString *)detailUrl:(URLComponent *)comp isMobile:(BOOL)isMobile
+
 - (void)itemSearch;
 - (void)setCountry:(NSString*)country;
 
