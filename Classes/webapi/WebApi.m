@@ -46,34 +46,87 @@
 ////////////////////////////////////////////////////////////////////////
 // static
 
+/**
+   Get service id from current configuration
+*/
++ (int)defaultServiceId
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int serviceId = [defaults integerForKey:@"ServiceId"] - 1;
+
+    if (serviceId < 0) {  // no default settings
+        serviceId = [WebApi fallbackServiceId];
+    }
+    return serviceId;
+}
+
+/**
+   Get fallback service id from current region
+*/
++ (int)fallbackServiceId
+{
+    NSString *country = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+    
+    if ([country isEqualToString:@"CA"]) serviceId = AmazonCA;
+    else if ([country isEqualToString:@"UK"]) serviceId = AmazonUK;
+    else if ([country isEqualToString:@"FR"]) serviceId = AmazonFR;
+    else if ([country isEqualToString:@"DE"]) serviceId = AmazonDE;
+    else if ([country isEqualToString:@"JP"]) serviceId = AmazonJP;
+    else serviceId = AmazonUS;
+
+    return serviceId;
+}
+
+/**
+   Set (save) service id settings
+*/
++ (void)setDefaultServiceId:(int)serviceId
+{
+    ASSERT(0 <= serviceId && serviceId < MaxServiceId);
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:serviceId + 1 forKey:@"ServiceId"];
+}
+
+/**
+   Create WebApi instance
+*/
 + (WebApi*)createWebApi:(int)serviceId
 {
     WebApi *api;
 
-    switch (serviceId) {
-    case AmazonUS:
-    case AmazonCA:
-    case AmazonUK:
-    case AmazonFR:
-    case AmazonDE:
-    case AmazonJP:
-        api = [[AmazonApi alloc] init];
-        break;
+    if (serviceId < 0) {
+        serviceId = [self defaultServiceId];
+    } else {
+        switch (serviceId) {
+        case AmazonUS:
+        case AmazonCA:
+        case AmazonUK:
+        case AmazonFR:
+        case AmazonDE:
+        case AmazonJP:
+            api = [[AmazonApi alloc] init];
+            break;
 #if 0
-    case KakakuCom:
-        api = [[KakakuComApi alloc] init];
-        break;
+        case KakakuCom:
+            api = [[KakakuComApi alloc] init];
+            break;
 #endif
-    default:
-        ASSERT(NO);
+        default:
+            ASSERT(NO);
+        }
     }
 
     [api setServiceId:serviceId];
     return api;
 }
 
-+ (NSArray *)getServiceSelectorStrings
+/**
+   Get service id strings
+*/
++ (NSArray *)getServiceIdStrings
 {
+    // This array must be same order with enum values.
     NSArray *ary =
         [NSArray arrayWithObjects:@"Amazon (US)",
                  @"Amazon (CA)",
@@ -89,6 +142,7 @@
 }
 
 ////////////////////////////////////////////////////////////////////////
+// WebApi
 
 - (id)init
 {

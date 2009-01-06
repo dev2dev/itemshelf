@@ -46,7 +46,7 @@
 #define WEBAPI_ERROR_NOTFOUND	1
 #define WEBAPI_ERROR_BADREPLY   2
 
-// service selector
+// service ids
 enum {
     AmazonUS = 0,
     AmazonCA,
@@ -54,7 +54,9 @@ enum {
     AmazonFR,
     AmazonDE,
     AmazonJP,
-    KakakuCom
+    KakakuCom,
+
+    MaxServiceId
 };
 
 /**
@@ -91,13 +93,14 @@ enum {
 */
 @interface WebApi : NSObject <HttpClientDelegate> {
     id<WebApiDelegate> delegate;
-    NSString *serviceId;
 }
 
 @property(nonatomic, assign) id<WebApiDelegate> delegate;
-@property(nonatomic, copy) NSString *serviceId;
 
-+ (void)createWebApi:(NSString*)a_serviceId;
++ (int)defaultServiceId;
++ (int)fallbackServiceId;
++ (void)setDefaultServiceId;
++ (WebApi*)createWebApi:(int)serviceId;
 
 //+ (NSString *)normalUrl:(Item *)item;
 //+ (NSString *)mobileUrl:(Item *)item;
