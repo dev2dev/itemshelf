@@ -38,7 +38,7 @@
 #import "HttpClient.h"
 
 #import "AmazonApi.h"
-//#import "KakakuComApi.h"
+#import "KakakuCom.h"
 
 @implementation WebApi
 @synthesize delegate, serviceId;
@@ -108,7 +108,7 @@
         case AmazonJP:
             api = [[AmazonApi alloc] init];
             break;
-#if 0
+#if HAS_KAKAKUCOM
         case KakakuCom:
             api = [[KakakuComApi alloc] init];
             break;
@@ -135,7 +135,7 @@
                  @"Amazon (FR)",
                  @"Amazon (DE)",
                  @"Amazon (JP)",
-#if 0
+#if HAS_KAKAKUCOM
                  @"Kakaku.com (JP)",
 #endif
                  nil];
