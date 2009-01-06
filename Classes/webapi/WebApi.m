@@ -37,8 +37,58 @@
 #import "URLComponent.h"
 #import "HttpClient.h"
 
+#import "AmazonApi.h"
+//#import "KakakuComApi.h"
+
 @implementation WebApi
-@synthesize delegate;
+@synthesize delegate, serviceId;
+
+////////////////////////////////////////////////////////////////////////
+// static
+
++ (WebApi*)createWebApi:(int)serviceId
+{
+    WebApi *api;
+
+    switch (serviceId) {
+    case AmazonUS:
+    case AmazonCA:
+    case AmazonUK:
+    case AmazonFR:
+    case AmazonDE:
+    case AmazonJP:
+        api = [[AmazonApi alloc] init];
+        break;
+#if 0
+    case KakakuCom:
+        api = [[KakakuComApi alloc] init];
+        break;
+#endif
+    default:
+        ASSERT(NO);
+    }
+
+    [api setServiceId:serviceId];
+    return api;
+}
+
++ (NSArray *)getServiceSelectorStrings
+{
+    NSArray *ary =
+        [NSArray arrayWithObjects:@"Amazon (US)",
+                 @"Amazon (CA)",
+                 @"Amazon (UK)",
+                 @"Amazon (FR)",
+                 @"Amazon (DE)",
+                 @"Amazon (JP)",
+#if 0
+                 @"Kakaku.com (JP)",
+#endif
+                 nil];
+    return ary;
+}
+
+////////////////////////////////////////////////////////////////////////
 
 - (id)init
 {
@@ -50,11 +100,11 @@
 }
 
 /**
-   Set country code
+   Set Service ID
 */
-- (void)setCountry:(NSString*)country
+- (void)setServiceId:(int)sid
 {
-    ASSERT(NO); // must be override
+    // should be override
 }
 
 /**

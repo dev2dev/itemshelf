@@ -80,28 +80,28 @@
         curString = [[NSMutableString alloc] initWithCapacity:20];
         responseData = [[NSMutableData alloc] initWithCapacity:256];
         baseURI = nil;
-
-        NSString *country = [[DataModel sharedDataModel] country];
-        [self setCountry:country];
     }
     return self;
 }
 
 /**
-   Set country code
+   Set service ID
 */
-- (void)setCountry:(NSString*)country
+- (void)setServiceId:(int)sid
 {
     [baseURI release];
 
     NSString *suffix;
 
-    if ([country isEqualToString:@"JP"]) suffix = @"jp";
-    else if ([country isEqualToString:@"DE"]) suffix = @"de";
-    else if ([country isEqualToString:@"FR"]) suffix = @"fr";
-    else if ([country isEqualToString:@"CA"]) suffix = @"ca";
-    else if ([country isEqualToString:@"UK"]) suffix = @"co.uk";
-    else suffix = @"com";
+    switch (sid) {
+    case AmazonUS: suffix = @"com"; break;
+    case AmazonCA: suffix = @"ca"; break;
+    case AmazonUK: suffix = @"co.uk"; break;
+    case AmazonFR: suffix = @"fr"; break;
+    case AmazonDE: suffix = @"de"; break;
+    case AmazonJP: suffix = @"jp"; break;
+    default: ASSERT(NO);
+    }
 
     baseURI = [[NSString alloc]
                   initWithFormat:@"http://itemshelf.com/cgi-bin/awsitemsearch.cgi?Country=%@",

@@ -41,9 +41,21 @@
 
 @class WebApi;
 
+// error codes
 #define WEBAPI_ERROR_NETWORK	0
 #define WEBAPI_ERROR_NOTFOUND	1
 #define WEBAPI_ERROR_BADREPLY   2
+
+// service selector
+enum {
+    AmazonUS = 0,
+    AmazonCA,
+    AmazonUK,
+    AmazonFR,
+    AmazonDE,
+    AmazonJP,
+    KakakuCom
+};
 
 /**
    Web API delegate protocol
@@ -79,9 +91,13 @@
 */
 @interface WebApi : NSObject <HttpClientDelegate> {
     id<WebApiDelegate> delegate;
+    NSString *serviceId;
 }
 
 @property(nonatomic, assign) id<WebApiDelegate> delegate;
+@property(nonatomic, copy) NSString *serviceId;
+
++ (void)createWebApi:(NSString*)a_serviceId;
 
 //+ (NSString *)normalUrl:(Item *)item;
 //+ (NSString *)mobileUrl:(Item *)item;
@@ -89,6 +105,7 @@
 - (void)itemSearch;
 - (void)setCountry:(NSString*)country;
 
+// used by derived class
 - (void)sendHttpRequest:(NSURL*)url;
 
 @end
