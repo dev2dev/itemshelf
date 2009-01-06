@@ -99,8 +99,9 @@
 
     if (serviceId < 0) {
         serviceId = [self defaultServiceId];
-    } else {
-        switch (serviceId) {
+    }
+    
+    switch (serviceId) {
         case AmazonUS:
         case AmazonCA:
         case AmazonUK:
@@ -116,7 +117,6 @@
 #endif
         default:
             ASSERT(NO);
-        }
     }
 
     [api setServiceId:serviceId];
