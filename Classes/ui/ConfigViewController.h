@@ -37,7 +37,6 @@
 #import "GenSelectListViewController.h"
 
 @interface ConfigViewController : UITableViewController
-<GenSelectListViewDelegate>
 {
 }
 

@@ -147,11 +147,4 @@
     }
 }
 
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
-{
-    NSString *country = [vc selectedString];
-    [[DataModel sharedDataModel] setCountry:country];
-}
-
-
 @end
