@@ -32,63 +32,66 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// Web API
+// Amazon API
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import "Item.h"
-#import "HttpClient.h"
+#import "WebApi.h"
 
-@class WebApi;
+@class AmazonXmlState;
 
-#define WEBAPI_ERROR_NETWORK	0
-#define WEBAPI_ERROR_NOTFOUND	1
-#define WEBAPI_ERROR_BADREPLY   2
+#define AMAZON_MAX_SEARCH_ITEMS 25
 
 /**
-   Web API delegate protocol
+   Amazon API
+
+   To search items at Amazon, create the instance of AmazonApi,
+   set delegate, set searchKeyword or searchTitle (optionally searchIndex),
+   then call itemSearch.
+
+   The result will be passed with AmazonApiDelegate protocol.
 */
-@protocol WebApiDelegate
-/**
-   Called when web API is successfully finished
+@interface AmazonApi : WebApi {
+    NSString *baseURI;		///< base URI to call amazon API
+	
+    NSString *searchKeyword;    ///< Keyword to search (barcode, isbn, etc.)
+    NSString *searchTitle;      ///< Title to search
+    NSString *searchIndex;      ///< Search index (category)
 
-   @param[in] webApi webApi instance
-   @param[in] items Found items array
-*/
--(void)webApiDidFinish:(WebApi*)webApi items:(NSMutableArray*)items;
+    NSMutableArray *itemArray;  ///< Searched items array
 
-/**
-   Called when web API is failed.
-
-   @param[in] webApi WebApi instance
-   @param[in] reason Reason code
-   @param[in] message Error message
-*/
--(void)webApiDidFailed:(WebApi*)amazonApi reason:(int)reason message:(NSString *)message;
-@end
-
-/**
-   Web API
-
-   Base class of web api (amazon, kakaku.com etc.)
-
-   To search items, create the instance of derived class of WebApi.
-   set delegate, set parameters, then call itemSearch.
-
-   The result will be passed with webApiDelegate protocol.
-*/
-@interface WebApi : NSObject <HttpClientDelegate> {
-    id<WebApiDelegate> delegate;
+    // For XML parser
+    int itemCounter;		///< Item counter (for XML parser)
+    NSMutableData *responseData;///< response data (for XML parser)        
+    NSMutableString *curString;	///< current string in XML element (for XML parser)
+    AmazonXmlState *xmlState;   ///< XML parser state
 }
 
-@property(nonatomic, assign) id<WebApiDelegate> delegate;
+@property(nonatomic, retain) NSString *searchKeyword;
+@property(nonatomic, retain) NSString *searchTitle;
+@property(nonatomic, retain) NSString *searchIndex;
 
-//+ (NSString *)normalUrl:(Item *)item;
-//+ (NSString *)mobileUrl:(Item *)item;
-
++ (NSString *)normalUrl:(Item *)item;
++ (NSString *)mobileUrl:(Item *)item;
 - (void)itemSearch;
 - (void)setCountry:(NSString*)country;
 
-- (void)sendHttpRequest:(NSURL*)url;
+@end
 
+/**
+   XML parser state for AmazonApi
+*/
+@interface AmazonXmlState : NSObject {
+    BOOL isLargeImage, isMediumImage, isOffers, isError;
+    NSString *errorMessage;
+    NSString *indexName; 
+};
+
+@property(nonatomic, assign) BOOL isLargeImage;
+@property(nonatomic, assign) BOOL isMediumImage;
+@property(nonatomic, assign) BOOL isOffers;
+@property(nonatomic, assign) BOOL isError;
+@property(nonatomic, retain) NSString *errorMessage;
+@property(nonatomic, retain) NSString *indexName;
 @end
