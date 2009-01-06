@@ -54,7 +54,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int serviceId = [defaults integerForKey:@"ServiceId"] - 1;
 
-    if (serviceId < 0) {  // no default settings
+    if (serviceId < 0 || MaxServiceId <= serviceId) {  // no default settings or error...
         serviceId = [WebApi fallbackServiceId];
     }
     return serviceId;

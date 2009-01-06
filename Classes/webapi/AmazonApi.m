@@ -70,7 +70,7 @@
 // Amazon API
 	
 @implementation AmazonApi
-@synthesize delegate, searchKeyword, searchIndex, searchTitle;
+@synthesize searchKeyword, searchIndex, searchTitle;
 
 - (id)init
 {
@@ -224,13 +224,13 @@
     if (delegate) {
         if (!result) {
             // XML error
-            [delegate amazonApiDidFailed:self reason:AMAZON_ERROR_BADREPLY message:nil];
+            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:nil];
         } else if (itemArray.count > 0) {
             // success
-            [delegate amazonApiDidFinish:self items:itemArray];
+            [delegate webApiDidFinish:self items:itemArray];
         } else {
             // no data
-            [delegate amazonApiDidFailed:self reason:AMAZON_ERROR_NOTFOUND message:xmlState.errorMessage];
+            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:xmlState.errorMessage];
         }
     }
 }
