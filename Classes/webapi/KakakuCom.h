@@ -39,8 +39,6 @@
 #import "Item.h"
 #import "WebApi.h"
 
-#if HAS_KAKAKUCOM
-
 /**
    Kakaku com API
 
@@ -71,5 +69,3 @@
 - (void)itemSearch;
 
 @end
-
-#endif

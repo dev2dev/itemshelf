@@ -108,7 +108,7 @@
         case AmazonJP:
             api = [[AmazonApi alloc] init];
             break;
-#if HAS_KAKAKUCOM
+#if ENABLE_KAKAKUCOM
         case KakakuCom:
             api = [[KakakuComApi alloc] init];
             break;
@@ -135,7 +135,7 @@
                  @"Amazon (FR)",
                  @"Amazon (DE)",
                  @"Amazon (JP)",
-#if HAS_KAKAKUCOM
+#if ENABLE_KAKAKUCOM
                  @"Kakaku.com (JP)",
 #endif
                  nil];

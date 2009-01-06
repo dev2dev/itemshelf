@@ -34,7 +34,7 @@
 
 // Web API
 
-#define HAS_KAKAKUCOM   0
+#define ENABLE_KAKAKUCOM   0
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
@@ -57,7 +57,7 @@ enum {
     AmazonFR,
     AmazonDE,
     AmazonJP,
-#if HAS_KAKAKUCOM
+#if ENABLE_KAKAKUCOM
     KakakuCom,
 #endif
     MaxServiceId
