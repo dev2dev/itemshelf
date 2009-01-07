@@ -87,14 +87,11 @@
     [itemArray removeAllObjects];
     [responseData setLength:0];
 
-    NSString *baseURI = @"http://api.kakaku.com/Ver1.1/ItemSearch.aspx";
+    NSString *baseURI = @"http://itemshelf.com/cgi-bin/kakakucomsearch.cgi";
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
 
     // タイトル検索のみ
-    [comp setQuery:@"Keyword" value:searchKeyword];
-
-    [comp setQuery:@"SortOrder" value:@"popularityRank"];
-    [comp setQuery:@"HitNum" value:@"20"];
+    [comp setQuery:@"keyword" value:searchKeyword];
     [comp log];
     
     // カテゴリ指定はしない、オーダは固定
