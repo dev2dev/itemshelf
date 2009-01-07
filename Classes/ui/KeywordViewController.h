@@ -48,6 +48,7 @@
 {
     IBOutlet UITextField *textField;
     IBOutlet UIButton *indexButton;
+    IBOutlet UIButton *serviceIdButton;
 
     Shelf *selectedShelf;
     NSString *searchIndex;
@@ -62,5 +63,6 @@
 - (IBAction)doneAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)indexButtonTapped:(id)sender;
+- (IBAction)serviceIdButtonTapped:(id)sender;
 
 @end

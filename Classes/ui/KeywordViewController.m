@@ -70,6 +70,9 @@
 	
     [indexButton setTitle:NSLocalizedString(searchIndex, @"") forState:UIControlStateNormal];
 
+    // set service string
+    [serviceIdButton setTitle:[WebApi serviceIdString] forState:UIControlStateNormal];
+    
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                   target:self
@@ -135,19 +138,40 @@
             array:searchIndices
             title:NSLocalizedString(@"Category", @"")
             identifier:0];
-
-    vc.list = searchIndices;
+    //vc.list = searchIndices;
     vc.selectedIndex = searchSelectedIndex;
+	
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)serviceIdButtonTapped:(id)sender
+{
+    GenSelectListViewController *vc =
+        [GenSelectListViewController
+            genSelectListViewController:self
+            array:[WebApi serviceIdStrings]
+            title:NSLocalizedString(@"Select locale", @"")
+            identifier:1];
+    vc.selectedIndex = [WebApi defaultServiceId];
 	
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
 {
-    searchSelectedIndex = vc.selectedIndex;
-    [searchIndex release];
-    searchIndex = [[searchIndices objectAtIndex:searchSelectedIndex] retain];
-    [indexButton setTitle:NSLocalizedString(searchIndex, @"") forState:UIControlStateNormal];
+    switch (id) {
+    case 0: // serchIndex
+        searchSelectedIndex = vc.selectedIndex;
+        [searchIndex release];
+        searchIndex = [[searchIndices objectAtIndex:searchSelectedIndex] retain];
+        [indexButton setTitle:NSLocalizedString(searchIndex, @"") forState:UIControlStateNormal];
+        break;
+
+    case 1: // serviceId
+        [WebApi setDefaultServiceId:vc.selectedIndex];
+        [serviceIdButton setTitle:[WebApi serviceIdString] forState:UIControlStateNormal];
+        break;
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

@@ -60,6 +60,9 @@
 	
     noteLabel.text = NSLocalizedString(@"NumPadNoteText", @"");
 	
+    // set service string
+    [serviceIdButton setTitle:[WebApi serviceIdString] forState:UIControlStateNormal];
+
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                   target:self
@@ -144,6 +147,25 @@
 - (IBAction)cancelAction:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)serviceIdButtonTapped:(id)sender
+{
+    GenSelectListViewController *vc =
+        [GenSelectListViewController
+            genSelectListViewController:self
+            array:[WebApi serviceIdStrings]
+            title:NSLocalizedString(@"Select locale", @"")
+            identifier:0];
+    vc.selectedIndex = [WebApi defaultServiceId];
+	
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
+{
+    [WebApi setDefaultServiceId:vc.selectedIndex];
+    [serviceIdButton setTitle:[WebApi serviceIdString] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

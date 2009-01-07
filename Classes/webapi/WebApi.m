@@ -159,6 +159,15 @@
     return ary;
 }
 
+/**
+   Get service id string
+*/
++ (NSString *)serviceIdString
+{
+    NSArray *ary = [WebApi serviceIdStrings];
+    return [ary objectAtIndex:[WebApi defaultServiceId]];
+}
+
 /////////////////////////////////////////////////////////////////////////////////////
 // Get URL of detail page
 

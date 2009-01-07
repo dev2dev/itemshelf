@@ -37,12 +37,14 @@
 #import "Common.h"
 #import "Shelf.h"
 #import "SearchController.h"
+#import "GenSelectListViewController.h"
 
 @class NumPadViewController;
 
-@interface NumPadViewController : UIViewController <SearchControllerDelegate> {
+@interface NumPadViewController : UIViewController <SearchControllerDelegate, GenSelectListViewDelegate> {
     IBOutlet UITextField *textField;
     IBOutlet UILabel *noteLabel;
+    IBOutlet UIButton *serviceIdButton;
 
     Shelf *selectedShelf;
 }
@@ -53,5 +55,6 @@
 - (IBAction)padTapped:(id)sender;
 - (IBAction)doneAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
+- (IBAction)serviceIdButtonTapped:(id)sender;
 
 @end

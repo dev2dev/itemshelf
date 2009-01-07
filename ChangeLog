@@ -2,6 +2,7 @@
 	* Add rakuten support
 	* refactoring: searchKeyword -> searchCode
 	* Change idType meaning to serviceId
+	* Add service id button to some views
 	
 2009-01-06 : Takuya Murakami
 	* Add kakaku.com support	

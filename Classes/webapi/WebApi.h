@@ -120,6 +120,7 @@ enum {
 + (void)setDefaultServiceId:(int)serviceId;
 + (WebApi*)createWebApi:(int)serviceId;
 + (NSArray*)serviceIdStrings;
++ (NSString*)serviceIdString;
 
 + (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile;
 
