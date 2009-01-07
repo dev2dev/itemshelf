@@ -36,7 +36,7 @@
 #import "DataModel.h"
 #import "URLComponent.h"
 #import "WebApi.h"
-#import "Rakuten.h"
+#import "RakutenApi.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Rakuten API

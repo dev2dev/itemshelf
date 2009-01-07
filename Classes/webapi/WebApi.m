@@ -122,6 +122,7 @@
         case Rakuten:
             api = [[RakutenApi alloc] init];
             break;
+#endif
 #if ENABLE_KAKAKUCOM
         case KakakuCom:
             api = [[KakakuComApi alloc] init];

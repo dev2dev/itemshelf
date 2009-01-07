@@ -113,6 +113,7 @@
 		3ED6BE110ED588CB00F4C7EE /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED6BE100ED588CB00F4C7EE /* whiteButton.png */; };
 		3EDA86A90EFA7DE300C4D226 /* PlusItem.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA86A70EFA7DE300C4D226 /* PlusItem.png */; };
 		3EDA86AA0EFA7DE300C4D226 /* PlusShelf.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */; };
+		3EDD10C40F14C3430034709E /* RakutenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD10C20F14C3270034709E /* RakutenApi.m */; };
 		3EE6F10A0EFA9C3600E689A4 /* ItemTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6F1090EFA9C3600E689A4 /* ItemTest.m */; };
 		3EE6F1560EFA9EE900E689A4 /* NoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E817E830EE6C1C60015A97E /* NoImage.png */; };
 /* End PBXBuildFile section */
@@ -288,6 +289,8 @@
 		3ED6BE100ED588CB00F4C7EE /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteButton.png; sourceTree = "<group>"; };
 		3EDA86A70EFA7DE300C4D226 /* PlusItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusItem.png; sourceTree = "<group>"; };
 		3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusShelf.png; sourceTree = "<group>"; };
+		3EDD10C10F14C3270034709E /* RakutenApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakutenApi.h; sourceTree = "<group>"; };
+		3EDD10C20F14C3270034709E /* RakutenApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RakutenApi.m; sourceTree = "<group>"; };
 		3EE6F1090EFA9C3600E689A4 /* ItemTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTest.m; sourceTree = "<group>"; };
 		3EE751490EE996ED0018A317 /* ItemCell4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCell4.h; sourceTree = "<group>"; };
 		3EE7514A0EE996ED0018A317 /* ItemCell4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCell4.m; sourceTree = "<group>"; };
@@ -560,12 +563,14 @@
 		3E37D1900F13953B005B6B90 /* webapi */ = {
 			isa = PBXGroup;
 			children = (
-				3E37D1930F139573005B6B90 /* AmazonApi.h */,
-				3E37D1940F139573005B6B90 /* AmazonApi.m */,
-				3E37D1950F139573005B6B90 /* KakakuCom.h */,
-				3E37D1960F139573005B6B90 /* KakakuCom.m */,
 				3E37D1970F139573005B6B90 /* WebApi.h */,
 				3E37D1980F139573005B6B90 /* WebApi.m */,
+				3E37D1930F139573005B6B90 /* AmazonApi.h */,
+				3E37D1940F139573005B6B90 /* AmazonApi.m */,
+				3EDD10C10F14C3270034709E /* RakutenApi.h */,
+				3EDD10C20F14C3270034709E /* RakutenApi.m */,
+				3E37D1950F139573005B6B90 /* KakakuCom.h */,
+				3E37D1960F139573005B6B90 /* KakakuCom.m */,
 			);
 			path = webapi;
 			sourceTree = "<group>";
@@ -871,6 +876,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E37D19C0F1395AB005B6B90 /* AmazonApi.m in Sources */,
+				3EDD10C40F14C3430034709E /* RakutenApi.m in Sources */,
 				3E37D19D0F1395AB005B6B90 /* KakakuCom.m in Sources */,
 				3E37D19E0F1395AB005B6B90 /* WebApi.m in Sources */,
 				3E5DFA5B0EE14C48000F6998 /* Common.m in Sources */,

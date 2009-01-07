@@ -103,6 +103,7 @@
     if (self.idString.length > 0 && [self.idString isEqualToString:item.idString]) {
         return YES;
     }
+    return NO;
 }
 
 ////////////////////////////////////////////////////////////////////
