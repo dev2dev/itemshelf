@@ -114,7 +114,7 @@
     sc.delegate = self;
     sc.viewController = vc;
     sc.selectedShelf = nil;
-    [sc searchWithKeyword:code withServiceId:serviceId];
+    [sc searchWithCode:code withServiceId:serviceId];
 
     [vc release];
     [nv release];

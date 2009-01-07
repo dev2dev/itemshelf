@@ -58,7 +58,7 @@
   - country (option) : Country code to search.
 
   This is abstract class. You must inherit this class and override
-  searchWithKeyword: and searchWithTitle:withIndex: method.
+  searchWithCode: and searchWithTitle:withIndex: method.
 */
 @interface SearchController : NSObject <WebApiDelegate>
 {
@@ -77,7 +77,7 @@
 
 + (SearchController *)createController;
 
-- (void)searchWithKeyword:(NSString*)keyword withServiceId:(int)serviceId;
+- (void)searchWithCode:(NSString*)code withServiceId:(int)serviceId;
 - (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex;
 
 - (void)_showActivityIndicator;

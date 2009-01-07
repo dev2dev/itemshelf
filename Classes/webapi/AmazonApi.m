@@ -164,7 +164,7 @@
 /**
    Execute item search
 
-   @note you must set searchTitle or searchKeyword property before call this.
+   @note you must set searchKeyword or searchCode property before call this.
    And you can set searchIndex.
 */
 - (void)itemSearch
@@ -179,10 +179,10 @@
 
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
     [comp setQuery:@"SearchIndex" value:searchIndex];
-    if (searchTitle) {
-        [comp setQuery:@"Title" value:searchTitle];
+    if (searchKeyword) {
+        [comp setQuery:@"Title" value:searchKeyword];
     } else {
-        [comp setQuery:@"Keywords" value:searchKeyword];
+        [comp setQuery:@"Keywords" value:searchCode];
     }
     //[comp setQuery:@"Debug" value:@"1"];
     [comp log];
@@ -253,7 +253,7 @@
         if (itemCounter < AMAZON_MAX_SEARCH_ITEMS) {
             Item *item = [[Item alloc] init];
 
-            item.idString = searchKeyword;
+            item.idString = searchCode;
             item.productGroup = xmlState.indexName;
 
             [itemArray addObject:item];

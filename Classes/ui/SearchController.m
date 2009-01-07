@@ -78,11 +78,11 @@
 // Search functions
 
 /**
-   Search item with keyword
+   Search item with code
 
-   @param[in] keyword Search keyword
+   @param[in] code Code to search
 */
-- (void)searchWithKeyword:(NSString*)keyword withServiceId:(int)serviceId;
+- (void)searchWithCode:(NSString*)code withServiceId:(int)serviceId;
 {
     ASSERT(viewController != nil);
     [self _showActivityIndicator];
@@ -92,7 +92,7 @@
     WebApi *api = [WebApi createWebApi:serviceId];
     api.delegate = self;
 
-    api.searchKeyword = keyword;
+    api.searchCode = code;
     [api itemSearch];
 }
 
@@ -111,7 +111,7 @@
 
     WebApi *api = [WebApi createWebApi:-1];
     api.delegate = self;
-    api.searchTitle = title;
+    api.searchKeyword = title;
     api.searchIndex = searchIndex;
 
     [api itemSearch];
