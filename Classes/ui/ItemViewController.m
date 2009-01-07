@@ -113,6 +113,7 @@
         [self checkAndAppendString:item.infoStrings value:item.manufacturer withName:@"Manufacturer"];
         [self checkAndAppendString:item.infoStrings value:item.price withName:@"Price"];
         [self checkAndAppendString:item.infoStrings value:NSLocalizedString(item.productGroup, @"") withName:@"Category"];
+        [self checkAndAppendString:item.infoStrings value:item.idString withName:@"Code"];
         [self checkAndAppendString:item.infoStrings value:item.asin withName:@"ASIN"];
 		
         NSLog(@"DEBUG: ProductGroup = %@", item.productGroup);
