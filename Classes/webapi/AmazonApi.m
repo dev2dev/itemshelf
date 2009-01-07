@@ -88,6 +88,8 @@
 */
 - (void)setServiceId:(int)sid
 {
+    [super setServiceId:sid];
+
     [baseURI release];
 
     NSString *suffix;
@@ -253,6 +255,7 @@
         if (itemCounter < AMAZON_MAX_SEARCH_ITEMS) {
             Item *item = [[Item alloc] init];
 
+            item.idType = serviceId;
             item.idString = searchCode;
             item.productGroup = xmlState.indexName;
 

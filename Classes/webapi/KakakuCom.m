@@ -154,6 +154,7 @@
 
         Item *item = [[Item alloc] init];
 
+        item.idType = serviceId;
         item.productGroup = @"Other"; // とりあえず
 
         [itemArray addObject:item];
@@ -179,7 +180,7 @@
     Item *item = [itemArray objectAtIndex:itemCounter];
 	
     if ([elem isEqualToString:@"ProductID"]) {
-        item.asin = [NSString stringWithString:curString]; // とりあえず
+        item.idString = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"ProductName"]) {
         item.name = [NSString stringWithString:curString];
 //    } else if ([elem isEqualToString:@"Author"]) {

@@ -102,6 +102,8 @@ enum {
 @interface WebApi : NSObject <HttpClientDelegate> {
     id<WebApiDelegate> delegate;
 
+    int serviceId;      	///< serviceId
+
     NSString *searchCode;       ///< Code to search (barcode, isbn, etc.)
     NSString *searchKeyword;    ///< Keyword to search (title etc.)
     NSString *searchIndex;      ///< Search index (category)

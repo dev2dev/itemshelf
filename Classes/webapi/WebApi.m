@@ -205,7 +205,7 @@
 */
 - (void)setServiceId:(int)sid
 {
-    // should be override
+    serviceId = sid;
 }
 
 /**

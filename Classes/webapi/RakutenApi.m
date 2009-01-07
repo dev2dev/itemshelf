@@ -169,6 +169,7 @@
 
         Item *item = [[Item alloc] init];
 
+        item.idType = serviceId;
         item.productGroup = @"Other"; // とりあえず
 
         [itemArray addObject:item];
@@ -194,13 +195,9 @@
     Item *item = [itemArray objectAtIndex:itemCounter];
 	
     if ([elem isEqualToString:@"itemCode"]) {
-        item.asin = [NSString stringWithString:curString]; // とりあえず
+        item.idString = [NSString stringWithString:curString]; // とりあえず
     } else if ([elem isEqualToString:@"itemName"]) {
         item.name = [NSString stringWithString:curString];
-//    } else if ([elem isEqualToString:@"Author"]) {
-//        item.author = [NSString stringWithString:curString];
-//    } else if ([elem isEqualToString:@"MakerName"]) {
-//        item.manufacturer = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"itemUrl"]) {
         item.detailURL = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"itemPrice"]) {
@@ -208,6 +205,8 @@
     } else if ([elem isEqualToString:@"mediumImageUrl"]) {
         item.imageURL = [NSString stringWithString:curString];
     }
+
+    // Author, Manufacturer に該当するフィールドはなし
 
     // カテゴリはどうするか？
     // 一応、genreId はあるけど、Amazon とのマッピングは面倒

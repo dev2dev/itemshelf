@@ -95,7 +95,14 @@
 */
 - (BOOL)isEqualToItem:(Item*)item
 {
-    return [self.asin isEqualToString:item.asin];
+    // ASIN で比較
+    if (self.asin.length > 0 && [self.asin isEqualToString:item.asin]) {
+        return YES;
+    }
+    // idString で比較
+    if (self.idString.length > 0 && [self.idString isEqualToString:item.idString]) {
+        return YES;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////
