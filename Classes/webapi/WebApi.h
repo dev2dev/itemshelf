@@ -35,6 +35,7 @@
 // Web API
 
 #define ENABLE_KAKAKUCOM   1
+#define ENABLE_RAKUTEN     1
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
@@ -57,6 +58,9 @@ enum {
     AmazonFR,
     AmazonDE,
     AmazonJP,
+#if ENABLE_RAKUTEN
+    Rakuten,
+#endif
 #if ENABLE_KAKAKUCOM
     KakakuCom,
 #endif

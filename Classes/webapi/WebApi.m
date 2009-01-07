@@ -38,6 +38,7 @@
 #import "HttpClient.h"
 
 #import "AmazonApi.h"
+#import "RakutenApi.h"
 #import "KakakuCom.h"
 
 @implementation WebApi
@@ -117,6 +118,10 @@
         case AmazonJP:
             api = [[AmazonApi alloc] init];
             break;
+#if ENABLE_RAKUTEN
+        case Rakuten:
+            api = [[RakutenApi alloc] init];
+            break;
 #if ENABLE_KAKAKUCOM
         case KakakuCom:
             api = [[KakakuComApi alloc] init];
@@ -143,8 +148,11 @@
                  @"Amazon (FR)",
                  @"Amazon (DE)",
                  @"Amazon (JP)",
+#if ENABLE_RAKUTEN
+                 @"楽天 (JP)",
+#endif
 #if ENABLE_KAKAKUCOM
-                 @"Kakaku.com (JP)",
+                 @"価格.com (JP)",
 #endif
                  nil];
     return ary;
