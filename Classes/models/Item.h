@@ -55,8 +55,8 @@
     NSDate *date;	///< Registered date
     int shelfId;	///< Shelf ID (SHELF_*)
 
-    int idType;		///< ID type (same as zebra_symbol_idtype_t)
-    NSString *idString;	///< ID string (JAN/EAN/UPC etc.)
+    int idType;		///< ID type (same as service ID of WebApi)
+    NSString *idString;	///< ID string (Barcode or other uniq item ID of each service)
     NSString *asin;	///< ASIN: Amazon Standard Identification Number
 
     NSString *name;	///< Item name

@@ -1,3 +1,11 @@
+2009-01-07 : Takuya Murakami
+	* Add rakuten support
+	* refactoring: searchKeyword -> searchCode
+	* Change idType meaning to serviceId
+	
+2009-01-06 : Takuya Murakami
+	* Add kakaku.com support	
+	
 2009-01-05 : Takuya Murakami
 	* Support Doxygen
 
