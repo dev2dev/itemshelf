@@ -92,6 +92,21 @@
 
     // タイトル検索のみ
     [comp setQuery:@"keyword" value:searchKeyword];
+
+    // operation を searchIndex から決定する
+    NSString *operation = @"ItemSearch";
+    if ([searchIndex isEqualToString:@"Books"]) {
+        operation = @"BookSearch";
+    }
+    else if ([searchIndex isEqualToString:@"DVD"]) {
+        operation = @"DVDSearch";
+    }
+    else if ([searchIndex isEqualToString:@"Music"] ||
+             [searchIndex isEqualToString:@"Classical"]) {
+        operation = @"CDSearch";
+    }
+    [comp setQuery:@"operation" value:operation];
+
     [comp log];
     
     // カテゴリ指定はしない、オーダは固定
