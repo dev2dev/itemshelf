@@ -1,0 +1,12 @@
+Die ObjektAblage ist eine Applikation um deine Lieblings Güter in Wunschlisten und virtuellen Buchablagen zu managen.
+
+Die Information der Güter kann per Kamera über den Barcode eingelesen werden oder auch manuell eingegeben werden.
+
+Features:
+
+- Du kannst Barcodes mit deiner iPhone Kamera einlesen und über Amazon 
+  suchen.
+- Du kannst ISBN, Barcode-Nummern (JAN/EAN/UPC) oder ASIN manuell 
+  eingeben.
+- Du kannst Güter nach Titeln suchen.
+- Du kannst Güter mit deiner Wunschliste und virtuellen Buchablage managen.
