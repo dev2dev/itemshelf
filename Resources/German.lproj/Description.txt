@@ -1,4 +1,4 @@
-Die ObjektAblage ist eine Applikation um deine Lieblings Güter in Wunschlisten und virtuellen Buchablagen zu managen.
+Die ItemShelf (ArtikelAblage) ist eine Applikation um deine Lieblings Güter in Wunschlisten und virtuellen Buchablagen zu managen.
 
 Die Information der Güter kann per Kamera über den Barcode eingelesen werden oder auch manuell eingegeben werden.
 
