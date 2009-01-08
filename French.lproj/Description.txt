@@ -1,0 +1,16 @@
+ItemShelf est une application pour gérer vos éléments favoris en 
+idées de cadeaux et bibliothèque virtuelle. Par exemple, lorsque vous trouvez des articles 
+en magasin, vous pouvez vérifier les informations de l’objet facilement avec cette 
+application, et le sauvegarder dans la liste d’idées. Vous pouvez également gérer vos propres objets avec la bibliothèque virtuelle. 
+
+Les informations de l’objet peuvent être lues à partir de codes barres via l’appareil photo, ou 
+vous pouvez saisir manuellement les codes barres. 
+
+Caractéristiques: 
+
+- Vous pouvez lire le code-barres avec l’appareil photo de l'iPhone, et rechercher avec Amazon. (Vous avez besoin de macro lens) 
+- Vous pouvez entrer l'ISBN, numéro de code barre (JAN / EAN / UPC) ou ASIN manuellement. 
+- Vous pouvez rechercher l’objet avec le titre. 
+- Vous pouvez gérer les objets avec votre propre liste d’idées cadeaux et bibliothèque virtuelle.
+
+
