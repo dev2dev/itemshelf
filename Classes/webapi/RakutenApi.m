@@ -65,6 +65,22 @@
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
+// カテゴリ
+
+- (NSArray *)categoryStrings
+{
+    return [NSArray arrayWithObjects:@"All", @"Books", @"DVD", @"Music", nil];
+}
+
+/**
+   Get default category (should be override)
+*/
+- (int)defaultCategoryIndex
+{
+    return 0; // all
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
 // 検索処理
 
 /**
