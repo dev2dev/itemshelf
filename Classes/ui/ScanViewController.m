@@ -307,7 +307,10 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
 {
     int serviceId = [vc selectedIndex];
-    [[WebApiFactory instance] setServiceId:serviceId];
+
+    WebApiFactory *wf = [WebApiFactory webApiFactory];
+    wf.serviceId = serviceId;
+    [wf saveDefaults];
 }
 
 @end
