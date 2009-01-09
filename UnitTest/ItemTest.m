@@ -312,7 +312,7 @@
         // キャッシュに入れる
         item.imageURL = @"DUMMY";
         item.imageCache = testImage;
-        [item putImageCache];
+        [item _putImageCache];
 
         [item release];
     }
