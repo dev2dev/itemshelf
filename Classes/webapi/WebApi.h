@@ -89,6 +89,29 @@ enum {
 -(void)webApiDidFailed:(WebApi*)amazonApi reason:(int)reason message:(NSString *)message;
 @end
 
+/** 
+   Web API factory
+*/
+@interface WebApiFactory : NSObject {
+    int serviceId;
+}
+
+@property(nonatomic, assign) int serviceId;
+
++ (WebApiFactory *)webApiFactory;
+- (void)loadDefaults;
+- (void)saveDefaults;
+- (int)_fallbackServiceId;
+- (int)serviceIdFromCountryCode:(NSString*)country;
+- (WebApi*)createWebApi;
+- (WebApi*)createWebApiForCodeSearch;
+- (NSArray*)serviceIdStrings;
+- (NSString*)serviceIdString;
+
++ (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile;
+
+@end
+
 /**
    Web API
 

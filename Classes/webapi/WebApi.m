@@ -41,31 +41,54 @@
 #import "RakutenApi.h"
 #import "KakakuCom.h"
 
-@implementation WebApi
-@synthesize delegate;
-@synthesize searchCode, searchIndex, searchKeyword;
-
-////////////////////////////////////////////////////////////////////////
-// static
+@implementation WebApiFactory
+@synthesize serviceId;
 
 /**
-   Get service id from current configuration
+   create WebApiFactory instance
 */
-+ (int)defaultServiceId
++ (WebApiFactory *)webApiFactory
+{
+    return [[[WebApiFactory alloc] init] autorelease];
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self loadDefaults];
+    }
+    return self;
+}
+
+/**
+   Load settings
+*/
+- (void)loadDefaults
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    int serviceId = [defaults integerForKey:@"ServiceId"] - 1;
+    serviceId = [defaults integerForKey:@"ServiceId"] - 1;
 
     if (serviceId < 0 || MaxServiceId <= serviceId) {  // no default settings or error...
-        serviceId = [WebApi fallbackServiceId];
+        serviceId = [self _fallbackServiceId];
     }
-    return serviceId;
 }
+
+/**
+   Save settings
+*/
+- (void)saveDefaults
+{
+    ASSERT(0 <= serviceId && serviceId < MaxServiceId);
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:serviceId + 1 forKey:@"ServiceId"];
+}    
 
 /**
    Get fallback service id from current region
 */
-+ (int)fallbackServiceId
+- (int)_fallbackServiceId
 {
     NSString *country = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
     return [self serviceIdFromCountryCode:country];
@@ -74,41 +97,26 @@
 /**
    Get service id from country code
 */
-+ (int)serviceIdFromCountryCode:(NSString*)country
+- (int)serviceIdFromCountryCode:(NSString*)country
 {
-    int serviceId = AmazonUS; // default
+    int sid = AmazonUS; // default
     
-    if ([country isEqualToString:@"CA"]) serviceId = AmazonCA;
-    else if ([country isEqualToString:@"UK"]) serviceId = AmazonUK;
-    else if ([country isEqualToString:@"FR"]) serviceId = AmazonFR;
-    else if ([country isEqualToString:@"DE"]) serviceId = AmazonDE;
-    else if ([country isEqualToString:@"JP"]) serviceId = AmazonJP;
+    if ([country isEqualToString:@"CA"]) sid = AmazonCA;
+    else if ([country isEqualToString:@"UK"]) sid = AmazonUK;
+    else if ([country isEqualToString:@"FR"]) sid = AmazonFR;
+    else if ([country isEqualToString:@"DE"]) sid = AmazonDE;
+    else if ([country isEqualToString:@"JP"]) sid = AmazonJP;
 
-    return serviceId;
-}
-
-/**
-   Set (save) service id settings
-*/
-+ (void)setDefaultServiceId:(int)serviceId
-{
-    ASSERT(0 <= serviceId && serviceId < MaxServiceId);
-
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:serviceId + 1 forKey:@"ServiceId"];
+    return sid;
 }
 
 /**
    Create WebApi instance
 */
-+ (WebApi*)createWebApi:(int)serviceId
+- (WebApi*)createWebApi
 {
     WebApi *api;
 
-    if (serviceId < 0) {
-        serviceId = [self defaultServiceId];
-    }
-    
     switch (serviceId) {
         case AmazonUS:
         case AmazonCA:
@@ -137,9 +145,31 @@
 }
 
 /**
+   Create WebApi instance (for code search only)
+*/
+- (WebApi*)createWebApiForCodeSearch
+{
+    switch (serviceId) {
+    case AmazonUS:
+    case AmazonCA:
+    case AmazonUK:
+    case AmazonFR:
+    case AmazonDE:
+    case AmazonJP:
+        /* ok */
+        break;
+
+    default:
+        serviceId = [self _fallbackServiceId];
+        break;
+    }
+    return [self createWebApi];
+}
+
+/**
    Get service id strings
 */
-+ (NSArray *)serviceIdStrings
+- (NSArray *)serviceIdStrings
 {
     // This array must be same order with enum values.
     NSArray *ary =
@@ -162,14 +192,11 @@
 /**
    Get service id string
 */
-+ (NSString *)serviceIdString
+- (NSString *)serviceIdString
 {
-    NSArray *ary = [WebApi serviceIdStrings];
-    return [ary objectAtIndex:[WebApi defaultServiceId]];
+    NSArray *ary = [self serviceIdStrings];
+    return [ary objectAtIndex:serviceId];
 }
-
-/////////////////////////////////////////////////////////////////////////////////////
-// Get URL of detail page
 
 /**
    Get detail URL of the Item
@@ -186,8 +213,14 @@
     return item.detailURL;
 }
 
+@end
+
 ////////////////////////////////////////////////////////////////////////
 // WebApi
+
+@implementation WebApi
+@synthesize delegate;
+@synthesize searchCode, searchIndex, searchKeyword;
 
 - (id)init
 {

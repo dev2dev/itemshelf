@@ -61,7 +61,9 @@
     noteLabel.text = NSLocalizedString(@"NumPadNoteText", @"");
 	
     // set service string
-    [serviceIdButton setTitle:[WebApi serviceIdString] forState:UIControlStateNormal];
+    [serviceIdButton 
+        setTitle:[[WebApiFactory webApiFactory] serviceIdString]
+        forState:UIControlStateNormal];
 
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -130,11 +132,15 @@
 	
     [textField resignFirstResponder];
 
+
     SearchController *sc = [SearchController createController];
     sc.delegate = self;
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
-    [sc searchWithCode:textField.text withServiceId:-1];
+
+    WebApi *api = [[WebApiFactory webApiFactory] createWebApiForCodeSearch];
+    [sc search:api withCode:textField.text];
+    [api release];
 }
 
 - (void)searchControllerFinish:(SearchController*)sc result:(BOOL)result
@@ -151,21 +157,26 @@
 
 - (IBAction)serviceIdButtonTapped:(id)sender
 {
+    WebApiFactory *wf = [WebApiFactory webApiFactory];
+
     GenSelectListViewController *vc =
         [GenSelectListViewController
             genSelectListViewController:self
-            array:[WebApi serviceIdStrings]
+            array:[wf serviceIdStrings]
             title:NSLocalizedString(@"Select locale", @"")
             identifier:0];
-    vc.selectedIndex = [WebApi defaultServiceId];
+    vc.selectedIndex = [wf defaultServiceId];
 	
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
 {
-    [WebApi setDefaultServiceId:vc.selectedIndex];
-    [serviceIdButton setTitle:[WebApi serviceIdString] forState:UIControlStateNormal];
+    WebApiFactory *wf = [WebApiFactory webApiFactory];
+
+    wf.serviceId = vc.selectedIndex;
+    [wf saveDefaults];
+    [serviceIdButton setTitle:[wf serviceIdString] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

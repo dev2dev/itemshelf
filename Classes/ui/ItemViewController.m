@@ -269,7 +269,7 @@
 
     if (indexPath.row == 1) {
         // 詳細を表示
-        NSString *detailURL = [WebApi detailUrl:item isMobile:YES];
+        NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
         WebViewController *vc = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
         vc.urlString = detailURL;
 
@@ -382,7 +382,7 @@
     [body appendString:@"\n\n"];
 	
     // 詳細 URL
-    NSString *detailURL = [WebApi detailUrl:item isMobile:NO];
+    NSString *detailURL = [WebApiFactory detailUrl:item isMobile:NO];
     [body appendFormat:@"<a href='%@'>Detail link of the item</a>", detailURL];
 	
     // ここでいったん body を完全に　URL encode する
@@ -412,7 +412,7 @@
 - (void)openSafari
 {
     Item *item = [itemArray objectAtIndex:0];
-    NSString *detailURL = [WebApi detailUrl:item isMobile:YES];
+    NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
     NSURL *url = [NSURL URLWithString:[detailURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
 }

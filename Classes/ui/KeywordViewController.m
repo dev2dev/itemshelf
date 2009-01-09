@@ -71,7 +71,9 @@
     [indexButton setTitle:NSLocalizedString(searchIndex, @"") forState:UIControlStateNormal];
 
     // set service string
-    [serviceIdButton setTitle:[WebApi serviceIdString] forState:UIControlStateNormal];
+    [serviceIdButton
+        setTitle:[[WebApiFactory webApiFactory] serviceIdString]
+        forState:UIControlStateNormal];
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -115,7 +117,9 @@
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
 
-    [sc searchWithTitle:textField.text withIndex:searchIndex];
+    WebApi *api = [[WebApiFactory webApiFactory] createWebApi];
+    [sc search:api withTitle:textField.text withIndex:searchIndex];
+    [api release];
 }
 
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result
@@ -168,8 +172,10 @@
         break;
 
     case 1: // serviceId
-        [WebApi setDefaultServiceId:vc.selectedIndex];
-        [serviceIdButton setTitle:[WebApi serviceIdString] forState:UIControlStateNormal];
+        WebApiFactory *wf = [WebApiFactory webApiFactory];
+        wf.serviceId = vc.selectedIndex;
+        [wf saveDefaults];
+        [serviceIdButton setTitle:[wf serviceIdString] forState:UIControlStateNormal];
         break;
     }
 }

@@ -77,8 +77,8 @@
 
 + (SearchController *)createController;
 
-- (void)searchWithCode:(NSString*)code withServiceId:(int)serviceId;
-- (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex;
+- (void)search:(WebApi *)api withCode:(NSString*)code;
+- (void)search:(WebApi *)api WithTitle:(NSString *)title withIndex:(NSString*)searchIndex;
 
 - (void)_showActivityIndicator;
 - (void)_dismissActivityIndicator;

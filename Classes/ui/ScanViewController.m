@@ -244,11 +244,14 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         return;
     }
 
+    WebApi *api = [[WebApiFactory webApiFactory] createWebApiForCodeSearch];
+
     SearchController *sc = [SearchController createController];
     sc.delegate = self;
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
-    [sc searchWithCode:reader.data withServiceId:-1];
+    [sc search:api withCode:reader.data];
+    [api release];
 }
 
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result
@@ -287,8 +290,8 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 
 - (void)selectService
 {
-    NSArray *services = [WebApi serviceIdStrings];
-    int currentServiceId = [WebApi defaultServiceId];
+    WebApiFactory *wf = [WebApiFactory instance];
+    NSArray *services = [wf serviceIdStrings];
 	
     GenSelectListViewController *vc =
         [GenSelectListViewController
@@ -296,7 +299,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
             array:services
             title:NSLocalizedString(@"Select locale", @"")
             identifier:0];
-    vc.selectedIndex = currentServiceId;
+    vc.selectedIndex = wf.serviceId;
 	
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -304,7 +307,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
 {
     int serviceId = [vc selectedIndex];
-    [WebApi setDefaultServiceId:serviceId];
+    [[WebApiFactory instance] setServiceId:serviceId];
 }
 
 @end

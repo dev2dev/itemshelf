@@ -92,6 +92,8 @@
 
     LOG(@"host = %@, path = %@", url.host, url.path);
 	
+    WebApiFactory *wf = [WebApiFactory webApiFactory];
+
     // Get keyword (ASIN/ISBN/JAN etc.) from host part.
     NSString *code = url.host;
 
@@ -100,11 +102,11 @@
     if (country.length != 2) {
         country = nil;
     }
-    int serviceId = -1;
     if (country != nil) {
-        serviceId = [WebApi serviceIdFromCountryCode:country];
+        wf.serviceId = [wf serviceIdFromCountryCode:country];
     }
-	
+    WebApi *api = [[wf createWebApiForCodeSearch] autorelease];
+
     // Show ScanView and start search.
     ScanViewController *vc = [[ScanViewController alloc] initWithNibName:@"ScanView" bundle:nil];
     UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:vc];
@@ -114,7 +116,7 @@
     sc.delegate = self;
     sc.viewController = vc;
     sc.selectedShelf = nil;
-    [sc searchWithCode:code withServiceId:serviceId];
+    [sc search:api withCode:code];
 
     [vc release];
     [nv release];

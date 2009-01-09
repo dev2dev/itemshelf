@@ -82,17 +82,17 @@
 
    @param[in] code Code to search
 */
-- (void)searchWithCode:(NSString*)code withServiceId:(int)serviceId;
+- (void)search:(WebApi *)api withCode:(NSString*)code
 {
     ASSERT(viewController != nil);
     [self _showActivityIndicator];
 
     autoRegisterShelf = YES;
 
-    WebApi *api = [WebApi createWebApi:serviceId];
     api.delegate = self;
-
     api.searchCode = code;
+
+    [api retain];
     [api itemSearch];
 }
 
@@ -102,18 +102,18 @@
    @param[in] title Title to search
    @param[in] searchIndex Search index (category)
 */
-- (void)searchWithTitle:(NSString *)title withIndex:(NSString*)searchIndex
+- (void)search:(WebApi *)api withTitle:(NSString *)title withIndex:(NSString*)searchIndex
 {
     ASSERT(viewController != nil);
     [self _showActivityIndicator];
 
     autoRegisterShelf = NO;
 
-    WebApi *api = [WebApi createWebApi:-1];
     api.delegate = self;
     api.searchKeyword = title;
     api.searchIndex = searchIndex;
 
+    [api retain];
     [api itemSearch];
 }
 
