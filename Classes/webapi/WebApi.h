@@ -138,18 +138,11 @@ enum {
 @property(nonatomic, retain) NSString *searchKeyword;
 @property(nonatomic, retain) NSString *searchIndex;
 
-+ (int)defaultServiceId;
-+ (int)fallbackServiceId;
-+ (int)serviceIdFromCountryCode:(NSString*)country;
-+ (void)setDefaultServiceId:(int)serviceId;
-+ (WebApi*)createWebApi:(int)serviceId;
-+ (NSArray*)serviceIdStrings;
-+ (NSString*)serviceIdString;
-
-+ (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile;
-
 - (void)itemSearch;
 - (void)setServiceId:(int)sid;
+
+- (NSArray *)categoryStrings;
+- (int)defaultCategoryIndex;
 
 // used by derived class
 - (void)sendHttpRequest:(NSURL*)url;

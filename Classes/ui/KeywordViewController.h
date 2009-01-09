@@ -51,9 +51,8 @@
     IBOutlet UIButton *serviceIdButton;
 
     Shelf *selectedShelf;
-    NSString *searchIndex;
-    int searchSelectedIndex;
 
+    int searchSelectedIndex;
     NSArray *searchIndices;
 
     WebApiFactory *webApiFactory;

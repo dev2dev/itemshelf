@@ -266,6 +266,22 @@
 }
 
 /**
+   Get category list (should be override)
+*/
+- (NSArray *)categoryStrings
+{
+    return [NSArray arrayWithObjects:@"All", nil];
+}
+
+/**
+   Get default category (should be override)
+*/
+- (int)defaultCategoryIndex
+{
+    return 0;
+}
+
+/**
    Start http request
 */
 - (void)sendHttpRequest:(NSURL*)url

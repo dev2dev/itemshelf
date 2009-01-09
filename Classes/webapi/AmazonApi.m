@@ -161,6 +161,28 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////
+// カテゴリ
+
+- (NSArray *)categoryStrings
+{
+    return [NSArray
+               arrayWithObjects:@"Apparel", @"Baby", @"Beauty", @"Books",
+               @"Classical", @"DVD", @"Electronics", @"ForeignBooks", @"Grocery",
+               @"HealthPersonalCare", @"Hobbies", @"Kitchen", @"Music",
+               @"MusicTracks", @"Software", @"SportingGoods", @"Toys", @"VHS", @"Video",
+               @"VideoGames", @"Watches", nil];
+}
+
+/**
+   Get default category (should be override)
+*/
+- (int)defaultCategoryIndex
+{
+    return 3; // Books
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////
 // 検索処理
 
 /**

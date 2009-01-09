@@ -60,19 +60,8 @@
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
 	
-    searchIndices =
-        [[NSArray alloc]
-            initWithObjects:@"Apparel", @"Baby", @"Beauty", @"Books",
-            @"Classical", @"DVD", @"Electronics", @"ForeignBooks", @"Grocery",
-            @"HealthPersonalCare", @"Hobbies", @"Kitchen", @"Music",
-            @"MusicTracks", @"Software", @"SportingGoods", @"Toys", @"VHS", @"Video",
-            @"VideoGames", @"Watches", nil];
-
-    searchSelectedIndex = 3;  // books
-    searchIndex = [searchIndices objectAtIndex:searchSelectedIndex];
-	
-    [indexButton setTitle:NSLocalizedString(searchIndex, @"") forState:UIControlStateNormal];
-
+    [self setupCategories];
+ 
     // set service string
     [serviceIdButton
         setTitle:[webApiFactory serviceIdString]
@@ -88,8 +77,23 @@
                                                  action:@selector(cancelAction:)] autorelease];
 }
 
+- (void)setupCategories
+{
+    [searchIndices release];
+    WebApi *api = [webApiFactory createWebApi];
+
+    searchIndices = [api categoryStrings];
+    [searchIndices retain];
+
+    searchSelectedIndex = [api defaultCategoryIndex];
+
+    NSString *text = [searchIndices objectAtIndex:searchSelectedIndex];
+    [indexButton setTitle:NSLocalizedString(text, @"") forState:UIControlStateNormal];
+
+    [api release];
+}
+
 - (void)dealloc {
-    [searchIndex release];
     [searchIndices release];
     [webApiFactory release];
     [super dealloc];
@@ -122,6 +126,7 @@
     sc.selectedShelf = selectedShelf;
 
     WebApi *api = [webApiFactory createWebApi];
+    NSString *searchIndex = [searchIndices objectAtIndex:searchSelectedIndex];
     [sc search:api withTitle:textField.text withIndex:searchIndex];
     [api release];
 }
@@ -146,7 +151,6 @@
             array:searchIndices
             title:NSLocalizedString(@"Category", @"")
             identifier:0];
-    //vc.list = searchIndices;
     vc.selectedIndex = searchSelectedIndex;
 	
     [self.navigationController pushViewController:vc animated:YES];
@@ -170,15 +174,16 @@
     switch (id) {
     case 0: // serchIndex
         searchSelectedIndex = vc.selectedIndex;
-        [searchIndex release];
-        searchIndex = [[searchIndices objectAtIndex:searchSelectedIndex] retain];
-        [indexButton setTitle:NSLocalizedString(searchIndex, @"") forState:UIControlStateNormal];
+        NSString *text = [searchIndices objectAtIndex:searchSelectedIndex];
+        [indexButton setTitle:NSLocalizedString(text, @"") forState:UIControlStateNormal];
         break;
 
     case 1: // serviceId
         webApiFactory.serviceId = vc.selectedIndex;
         [webApiFactory saveDefaults];
         [serviceIdButton setTitle:[wf serviceIdString] forState:UIControlStateNormal];
+
+        [self setupCategories];
         break;
     }
 }
