@@ -139,7 +139,7 @@
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result
 {
     if (result) {
-        textField.text = nil;
+        //textField.text = nil;
     }
 }
 

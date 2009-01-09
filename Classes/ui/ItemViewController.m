@@ -185,12 +185,13 @@
     }
 	
     if (indexPath.row == 1) {
-        cell.text = NSLocalizedString(@"Show detail with Amazon", @""); // ###
+        cell.text = NSLocalizedString(@"Show detail", @"");
         cell.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if (indexPath.row == 2) {
         cell.text = NSLocalizedString(@"Search again with title", @"");
+        cell.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
     }
     else {
