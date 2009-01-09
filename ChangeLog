@@ -1,3 +1,6 @@
+2009-01-09 : Takuya Murakami
+	* Add search again feature on keyword view
+	
 2009-01-07 : Takuya Murakami
 	* Add rakuten support
 	* refactoring: searchKeyword -> searchCode
