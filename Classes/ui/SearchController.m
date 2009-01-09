@@ -177,7 +177,7 @@
     NSString *reasonString = @"Unknown error";
     switch (reason) {
     case WEBAPI_ERROR_NETWORK:
-        reasonString = NSLocalizedString(@"Cannot connect Amazon service", @""); // ### TBD
+        reasonString = NSLocalizedString(@"Cannot connect with service", @""); // ### TBD
         break;
 
     case WEBAPI_ERROR_BADREPLY:

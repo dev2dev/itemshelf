@@ -36,7 +36,7 @@
 	
 "Illegal message was received" = "Illegal message was received";
 "Cannot find item information" = "Cannot find item information";
-"Cannot connect Amazon service" = "Cannot connect Amazon service";
+"Cannot connect with service" = "Cannot connect with service";
 
 "Could not recognize barcode symbol" = "Could not recognize barcode symbol";
 "Code is too short" = "Code is too short";
