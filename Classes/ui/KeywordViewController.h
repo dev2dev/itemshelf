@@ -60,9 +60,10 @@
 }
 
 @property(nonatomic,assign) Shelf *selectedShelf;
-@property(nonatomic,retain) NString *initialText;
+@property(nonatomic,retain) NSString *initialText;
 
 + (KeywordViewController *)keywordViewController:(NSString*)title;
+- (void)_setupCategories;
 - (IBAction)doneAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)indexButtonTapped:(id)sender;

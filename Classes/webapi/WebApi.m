@@ -57,7 +57,7 @@
     self = [super init];
     if (self) {
         [self loadDefaults];
-        self.isCodeSearch = NO;
+        isCodeSearch = NO;
     }
     return self;
 }

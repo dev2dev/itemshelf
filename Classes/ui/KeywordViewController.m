@@ -38,7 +38,7 @@
 
 @implementation KeywordViewController
 
-@synthesize selectedShelf;
+@synthesize selectedShelf, initialText;
 
 + (KeywordViewController *)keywordViewController:(NSString*)title
 {
@@ -55,7 +55,7 @@
 {
     [super viewDidLoad];
 
-    WebApiFactory *webApiFactory = [[WebApiFactory alloc] init];
+    webApiFactory = [[WebApiFactory alloc] init];
 
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
@@ -64,7 +64,7 @@
         textField.text = initialText;
     }
 	
-    [self setupCategories];
+    [self _setupCategories];
  
     // set service string
     [serviceIdButton
@@ -81,7 +81,7 @@
                                                  action:@selector(cancelAction:)] autorelease];
 }
 
-- (void)setupCategories
+- (void)_setupCategories
 {
     [searchIndices release];
     WebApi *api = [webApiFactory createWebApi];
@@ -166,10 +166,10 @@
     GenSelectListViewController *vc =
         [GenSelectListViewController
             genSelectListViewController:self
-            array:[WebApi serviceIdStrings]
+            array:[webApiFactory serviceIdStrings]
             title:NSLocalizedString(@"Select locale", @"")
             identifier:1];
-    vc.selectedIndex = [WebApi defaultServiceId];
+    vc.selectedIndex = webApiFactory.serviceId;
 	
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -186,9 +186,9 @@
     case 1: // serviceId
         webApiFactory.serviceId = vc.selectedIndex;
         [webApiFactory saveDefaults];
-        [serviceIdButton setTitle:[wf serviceIdString] forState:UIControlStateNormal];
+        [serviceIdButton setTitle:[webApiFactory serviceIdString] forState:UIControlStateNormal];
 
-        [self setupCategories];
+        [self _setupCategories];
         break;
     }
 }

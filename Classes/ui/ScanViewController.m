@@ -244,7 +244,9 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         return;
     }
 
-    WebApi *api = [[WebApiFactory webApiFactory] createWebApiForCodeSearch];
+    WebApiFactory *wf = [WebApiFactory webApiFactory];
+    [wf setCodeSearch];
+    WebApi *api = [wf createWebApi];
 
     SearchController *sc = [SearchController createController];
     sc.delegate = self;
@@ -290,7 +292,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 
 - (void)selectService
 {
-    WebApiFactory *wf = [WebApiFactory instance];
+    WebApiFactory *wf = [WebApiFactory webApiFactory];
     NSArray *services = [wf serviceIdStrings];
 	
     GenSelectListViewController *vc =
