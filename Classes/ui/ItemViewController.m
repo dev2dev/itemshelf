@@ -36,6 +36,7 @@
 #import "DataModel.h"
 #import "WebViewController.h"
 #import "WebApi.h"
+#import "KeywordViewController.h"
 
 @implementation ItemViewController
 
@@ -189,7 +190,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if (indexPath.row == 2) {
-        cell.text = NSLocalizedString(@"Search with title again", @"");
+        cell.text = NSLocalizedString(@"Search again with title", @"");
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
     }
     else {
@@ -286,6 +287,7 @@
         v.selectedShelf = [[DataModel sharedDataModel] shelf:item.shelfId];
         v.initialText = item.name;
 
+        //[self.navigationController popViewControllerAnimated:NO];
         [self.navigationController pushViewController:v animated:YES];
     }
     else if (indexPath.row == 3 && !item.registeredWithShelf) {
