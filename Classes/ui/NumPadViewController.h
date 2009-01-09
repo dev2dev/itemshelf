@@ -47,6 +47,7 @@
     IBOutlet UIButton *serviceIdButton;
 
     Shelf *selectedShelf;
+    WebApiFactory *webApiFactory;
 }
 
 @property(nonatomic,assign) Shelf *selectedShelf;

@@ -54,6 +54,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    WebApiFactory *webApiFactory = [[WebApiFactory alloc] init];
+
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
 	
@@ -72,7 +75,7 @@
 
     // set service string
     [serviceIdButton
-        setTitle:[[WebApiFactory webApiFactory] serviceIdString]
+        setTitle:[webApiFactory serviceIdString]
         forState:UIControlStateNormal];
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
@@ -88,6 +91,7 @@
 - (void)dealloc {
     [searchIndex release];
     [searchIndices release];
+    [webApiFactory release];
     [super dealloc];
 }
 
@@ -117,7 +121,7 @@
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
 
-    WebApi *api = [[WebApiFactory webApiFactory] createWebApi];
+    WebApi *api = [webApiFactory createWebApi];
     [sc search:api withTitle:textField.text withIndex:searchIndex];
     [api release];
 }
@@ -172,9 +176,8 @@
         break;
 
     case 1: // serviceId
-        WebApiFactory *wf = [WebApiFactory webApiFactory];
-        wf.serviceId = vc.selectedIndex;
-        [wf saveDefaults];
+        webApiFactory.serviceId = vc.selectedIndex;
+        [webApiFactory saveDefaults];
         [serviceIdButton setTitle:[wf serviceIdString] forState:UIControlStateNormal];
         break;
     }

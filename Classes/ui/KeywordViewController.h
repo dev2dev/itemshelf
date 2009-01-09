@@ -55,6 +55,8 @@
     int searchSelectedIndex;
 
     NSArray *searchIndices;
+
+    WebApiFactory *webApiFactory;
 }
 
 @property(nonatomic,assign) Shelf *selectedShelf;

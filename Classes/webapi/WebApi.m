@@ -57,8 +57,32 @@
     self = [super init];
     if (self) {
         [self loadDefaults];
+        self.isCodeSearch = NO;
     }
     return self;
+}
+
+/**
+   Select service id for code search
+*/
+- (void)setCodeSearch
+{
+    isCodeSearch = YES;
+
+    switch (serviceId) {
+    case AmazonUS:
+    case AmazonCA:
+    case AmazonUK:
+    case AmazonFR:
+    case AmazonDE:
+    case AmazonJP:
+        /* ok */
+        break;
+
+    default:
+        serviceId = [self _fallbackServiceId];
+        break;
+    }
 }
 
 /**
@@ -145,47 +169,29 @@
 }
 
 /**
-   Create WebApi instance (for code search only)
-*/
-- (WebApi*)createWebApiForCodeSearch
-{
-    switch (serviceId) {
-    case AmazonUS:
-    case AmazonCA:
-    case AmazonUK:
-    case AmazonFR:
-    case AmazonDE:
-    case AmazonJP:
-        /* ok */
-        break;
-
-    default:
-        serviceId = [self _fallbackServiceId];
-        break;
-    }
-    return [self createWebApi];
-}
-
-/**
    Get service id strings
 */
 - (NSArray *)serviceIdStrings
 {
+    NSMutableArray *ary = [[[NSMutableArray alloc] init] autorelease];
+    
     // This array must be same order with enum values.
-    NSArray *ary =
-        [NSArray arrayWithObjects:@"Amazon (US)",
-                 @"Amazon (CA)",
-                 @"Amazon (UK)",
-                 @"Amazon (FR)",
-                 @"Amazon (DE)",
-                 @"Amazon (JP)",
+    [ary addObject:@"Amazon (US)"];
+    [ary addObject:@"Amazon (CA)"];
+    [ary addObject:@"Amazon (UK)"];
+    [ary addObject:@"Amazon (FR)"];
+    [ary addObject:@"Amazon (DE)"];
+    [ary addObject:@"Amazon (JP)"];
+
+    if (!isCodeSearch) {
+        // title search
 #if ENABLE_RAKUTEN
-                 @"楽天 (JP)",
+        [ary addObject:@"楽天 (JP)"];
 #endif
 #if ENABLE_KAKAKUCOM
-                 @"価格.com (JP)",
+        [ary addObject:@"価格.com (JP)"];
 #endif
-                 nil];
+    }
     return ary;
 }
 

@@ -94,17 +94,18 @@ enum {
 */
 @interface WebApiFactory : NSObject {
     int serviceId;
+    BOOL isCodeSearch;
 }
 
 @property(nonatomic, assign) int serviceId;
 
 + (WebApiFactory *)webApiFactory;
+- (void)setCodeSearch;
 - (void)loadDefaults;
 - (void)saveDefaults;
 - (int)_fallbackServiceId;
 - (int)serviceIdFromCountryCode:(NSString*)country;
 - (WebApi*)createWebApi;
-- (WebApi*)createWebApiForCodeSearch;
 - (NSArray*)serviceIdStrings;
 - (NSString*)serviceIdString;
 

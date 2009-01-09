@@ -55,6 +55,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    webApiFactory = [[WebApiFactory alloc] init];
+    [webApiFactory setCodeSearch];
+
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
 	
@@ -62,7 +66,7 @@
 	
     // set service string
     [serviceIdButton 
-        setTitle:[[WebApiFactory webApiFactory] serviceIdString]
+        setTitle:[webApiFactory serviceIdString]
         forState:UIControlStateNormal];
 
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
@@ -76,6 +80,7 @@
 }
 
 - (void)dealloc {
+    [webApiFactory release];
     [super dealloc];
 }
 
@@ -138,7 +143,7 @@
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
 
-    WebApi *api = [[WebApiFactory webApiFactory] createWebApiForCodeSearch];
+    WebApi *api = [webApiFactory createWebApi];
     [sc search:api withCode:textField.text];
     [api release];
 }
@@ -157,26 +162,22 @@
 
 - (IBAction)serviceIdButtonTapped:(id)sender
 {
-    WebApiFactory *wf = [WebApiFactory webApiFactory];
-
     GenSelectListViewController *vc =
         [GenSelectListViewController
             genSelectListViewController:self
-            array:[wf serviceIdStrings]
+            array:[webApiFactory serviceIdStrings]
             title:NSLocalizedString(@"Select locale", @"")
             identifier:0];
-    vc.selectedIndex = [wf defaultServiceId];
+    vc.selectedIndex = webApiFactory.serviceId;
 	
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
 {
-    WebApiFactory *wf = [WebApiFactory webApiFactory];
-
-    wf.serviceId = vc.selectedIndex;
-    [wf saveDefaults];
-    [serviceIdButton setTitle:[wf serviceIdString] forState:UIControlStateNormal];
+    webApiFactory.serviceId = vc.selectedIndex;
+    [webApiFactory saveDefaults];
+    [serviceIdButton setTitle:[webApiFactory serviceIdString] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
