@@ -50,6 +50,7 @@
     IBOutlet UIButton *indexButton;
     IBOutlet UIButton *serviceIdButton;
 
+    NSString *initialText;
     Shelf *selectedShelf;
 
     int searchSelectedIndex;
@@ -59,6 +60,7 @@
 }
 
 @property(nonatomic,assign) Shelf *selectedShelf;
+@property(nonatomic,retain) NString *initialText;
 
 + (KeywordViewController *)keywordViewController:(NSString*)title;
 - (IBAction)doneAction:(id)sender;

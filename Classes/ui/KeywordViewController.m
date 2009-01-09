@@ -59,6 +59,10 @@
 
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
+
+    if (initialText != nil) {
+        textField.text = initialText;
+    }
 	
     [self setupCategories];
  
@@ -95,6 +99,7 @@
 
 - (void)dealloc {
     [searchIndices release];
+    [initialText release];
     [webApiFactory release];
     [super dealloc];
 }

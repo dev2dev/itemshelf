@@ -144,8 +144,8 @@
 {
     Item *item = [itemArray objectAtIndex:section];
 	
-    // 画像 + 詳細表示セル + 情報数
-    return 2 + (item.registeredWithShelf ? 0 : 1) + item.infoStrings.count;
+    // 画像 + 詳細表示セル + 再検索 + 情報数
+    return 3 + (item.registeredWithShelf ? 0 : 1) + item.infoStrings.count;
 }
 
 // セルの高さを返す
@@ -187,8 +187,13 @@
         cell.text = NSLocalizedString(@"Show detail with Amazon", @""); // ###
         cell.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else {
-        int idx = indexPath.row - 2;
+    }
+    else if (indexPath.row == 2) {
+        cell.text = NSLocalizedString(@"Search with title again", @"");
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
+    }
+    else {
+        int idx = indexPath.row - 3;
 		
         if (!item.registeredWithShelf) {
             idx--;
@@ -275,7 +280,15 @@
 
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (indexPath.row == 2 && !item.registeredWithShelf) {
+    else if (indexPath.row == 2) {
+        // 再検索
+        KeywordViewController *v = [KeywordViewController keywordViewController:NSLocalizedString(@"Title", @"")];
+        v.selectedShelf = [[DataModel sharedDataModel] shelf:item.shelfId];
+        v.initialText = item.name;
+
+        [self.navigationController pushViewController:v animated:YES];
+    }
+    else if (indexPath.row == 3 && !item.registeredWithShelf) {
         // 棚に登録
         [[DataModel sharedDataModel] addItem:item];
         [tv reloadData];
