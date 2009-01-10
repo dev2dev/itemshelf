@@ -170,7 +170,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     case 4:
         imgView.image = localeIcon;
         nameLabel.text = NSLocalizedString(@"Select locale", @"");
-        descLabel.text = NSLocalizedString(@"Select locale of Amazon", @"");
+        descLabel.text = NSLocalizedString(@"Select locale of service", @"");
         break;
     }
 	
