@@ -41,7 +41,6 @@
 		3E22CE270EF9153F00E8A966 /* AudioToolbox in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECBBB4D0EDC4A8200865EF7 /* AudioToolbox */; };
 		3E22CE280EF9153F00E8A966 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */; };
 		3E2C0C550ED9ADDB00867F11 /* GenSelectListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */; };
-		3E2C12FB0ED98D480080293B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C12FA0ED98D480080293B /* InfoPlist.strings */; };
 		3E37D19C0F1395AB005B6B90 /* AmazonApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37D1940F139573005B6B90 /* AmazonApi.m */; };
 		3E37D19D0F1395AB005B6B90 /* KakakuCom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37D1960F139573005B6B90 /* KakakuCom.m */; };
 		3E37D19E0F1395AB005B6B90 /* WebApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37D1980F139573005B6B90 /* WebApi.m */; };
@@ -116,6 +115,7 @@
 		3EDD10C40F14C3430034709E /* RakutenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD10C20F14C3270034709E /* RakutenApi.m */; };
 		3EE6F10A0EFA9C3600E689A4 /* ItemTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6F1090EFA9C3600E689A4 /* ItemTest.m */; };
 		3EE6F1560EFA9EE900E689A4 /* NoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E817E830EE6C1C60015A97E /* NoImage.png */; };
+		3EFA450D0F179B7000F5F6D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C12F80ED98D370080293B /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,7 +169,6 @@
 		3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ItemCellBack.png; sourceTree = "<group>"; };
 		3E15194C0EDAC11900F510E9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		3E1519680EDAE78100F510E9 /* Icon-rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-rendered.png"; sourceTree = "<group>"; };
-		3E1CE61E0F16367500670F64 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E1FDD230ECEF5FA00915E3E /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		3E1FDD240ECEF60600915E3E /* zebra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zebra.h; sourceTree = "<group>"; };
 		3E1FDD450ECEF78200915E3E /* config.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = config.c; sourceTree = "<group>"; };
@@ -217,8 +216,7 @@
 		3E2C0C460ED9AD1300867F11 /* GenSelectListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenSelectListViewController.h; sourceTree = "<group>"; };
 		3E2C0C470ED9AD1300867F11 /* GenSelectListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenSelectListViewController.m; sourceTree = "<group>"; };
 		3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenSelectListView.xib; sourceTree = "<group>"; };
-		3E2C12F80ED98D370080293B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3E2C12FC0ED98D4F0080293B /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3E2C12F80ED98D370080293B /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		3E37D1930F139573005B6B90 /* AmazonApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonApi.h; sourceTree = "<group>"; };
 		3E37D1940F139573005B6B90 /* AmazonApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonApi.m; sourceTree = "<group>"; };
 		3E37D1950F139573005B6B90 /* KakakuCom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KakakuCom.h; sourceTree = "<group>"; };
@@ -245,7 +243,6 @@
 		3E46ED450EF939FB00D12D8A /* TestUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUtility.m; sourceTree = "<group>"; };
 		3E4BB2210F1636A100EDAD74 /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E4BB2220F1636A700EDAD74 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3E4BB2240F1636DE00EDAD74 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E554C840ED98A0900166874 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E554C880ED98A4E00166874 /* Japanese */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 10; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E581EE50ED1A10100615FB2 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
@@ -410,7 +407,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				3E46ED280EF9362A00D12D8A /* UnitTest-Info.plist */,
 				3E554C860ED98A4400166874 /* Localizable.strings */,
-				3E2C12FA0ED98D480080293B /* InfoPlist.strings */,
+				3E2C12F80ED98D370080293B /* InfoPlist.strings */,
 				3E7BD5BE0EDD625B0083CBE5 /* View */,
 				3E15194B0EDAC0ED00F510E9 /* images */,
 				3E42FD410EDD6BEF00FD4879 /* Entitlements.plist */,
@@ -795,7 +792,7 @@
 				3ECD3DD10ED06434001A775F /* backward.png in Resources */,
 				3ED6BE110ED588CB00F4C7EE /* whiteButton.png in Resources */,
 				3E554C870ED98A4400166874 /* Localizable.strings in Resources */,
-				3E2C12FB0ED98D480080293B /* InfoPlist.strings in Resources */,
+				3EFA450D0F179B7000F5F6D9 /* InfoPlist.strings in Resources */,
 				3E3EA1510ED9A072006892E9 /* ConfigView.xib in Resources */,
 				3E2C0C550ED9ADDB00867F11 /* GenSelectListView.xib in Resources */,
 				3EBC16FA0EDA822B00A35747 /* EnterCode.png in Resources */,
@@ -963,17 +960,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3E2C12FA0ED98D480080293B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3E2C12F80ED98D370080293B /* English */,
-				3E2C12FC0ED98D4F0080293B /* Japanese */,
-				3E1CE61E0F16367500670F64 /* German */,
-				3E4BB2240F1636DE00EDAD74 /* French */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		3E554C860ED98A4400166874 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1148,7 +1134,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
-				SDKROOT = iphoneos2.1;
+				SDKROOT = iphoneos2.0;
 			};
 			name = "Adhoc Distribution";
 		};
@@ -1233,7 +1219,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
-				SDKROOT = iphoneos2.1;
+				SDKROOT = iphoneos2.0;
 			};
 			name = "AppStore Distribution";
 		};
@@ -1311,7 +1297,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
-				SDKROOT = iphoneos2.1;
+				SDKROOT = iphoneos2.0;
 			};
 			name = Debug;
 		};
@@ -1329,7 +1315,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
-				SDKROOT = iphoneos2.1;
+				SDKROOT = iphoneos2.0;
 			};
 			name = Release;
 		};

@@ -190,7 +190,8 @@
     } else if ([elem isEqualToString:@"ItemPageUrl"]) {
         item.detailURL = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"LowestPrice"]) {
-        item.price = [NSString stringWithString:curString];
+        double price = [[NSString stringWithString:curString] doubleValue];
+        item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
     } else if ([elem isEqualToString:@"ImageUrl"]) {
         item.imageURL = [NSString stringWithString:curString];
     }

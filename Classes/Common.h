@@ -55,6 +55,7 @@ void AssertFailed(const char *filename, int line);
 + (void)showAlertDialog:(NSString*)title message:(NSString*)message;
 + (UIImage *)resizeImageWithin:(UIImage *)image width:(double)maxWidth height:(double)maxHeight;
 + (UIImage *)resizeImage:(UIImage *)image width:(double)width height:(double)height;
++ (NSString *)currencyString:(double)value withLocaleString:(NSString *)locale;
 @end
 
 /**

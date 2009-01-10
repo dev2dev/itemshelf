@@ -121,6 +121,31 @@ void AssertFailed(const char *filename, int line)
     return newImage;
 }
 
+/**
+   @brief Conver currency string
+*/
++ (NSString *)currencyString:(double)value withLocaleString:(NSString *)locale
+{
+    static NSNumberFormatter *nf = nil;
+
+    if (nf == nil) {
+        nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    }
+
+    if (locale == nil) {
+        [nf setLocale:[NSLocale currentLocale]];
+    } else {
+        NSLocale *loc = [[NSLocale alloc] initWithLocaleIdentifier:locale];
+        [nf setLocale:loc];
+        [loc release];
+    }
+    NSString *ret = [nf stringFromNumber:[NSNumber numberWithDouble:value]];
+    [nf release];
+
+    return ret;
+}
+
 @end
 
 @implementation UIViewController (MyExt)

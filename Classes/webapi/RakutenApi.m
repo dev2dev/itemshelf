@@ -216,10 +216,12 @@
         item.name = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"itemUrl"]) {
         item.detailURL = [NSString stringWithString:curString];
-    } else if ([elem isEqualToString:@"itemPrice"]) {
-        item.price = [NSString stringWithString:curString];
     } else if ([elem isEqualToString:@"mediumImageUrl"]) {
         item.imageURL = [NSString stringWithString:curString];
+    }
+    else if ([elem isEqualToString:@"itemPrice"]) {
+        double price = [[NSString stringWithString:curString] doubleValue];
+        item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
     }
 
     // Author, Manufacturer に該当するフィールドはなし
