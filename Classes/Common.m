@@ -141,7 +141,6 @@ void AssertFailed(const char *filename, int line)
         [loc release];
     }
     NSString *ret = [nf stringFromNumber:[NSNumber numberWithDouble:value]];
-    [nf release];
 
     return ret;
 }
