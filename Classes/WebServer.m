@@ -363,6 +363,13 @@
     }
     if (!end) return;
 
+    // Check data format
+    if (strncmp(start, "SQLite format 3", 15) != 0) {
+        [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
+        [self send:s string:@"This is not itemshelf database file. Try again."];
+        return;
+    }
+
     // okay, save data between start and end.
     NSString *path = [[Database instance] dbPath];
     int f = open([path UTF8String], O_WRONLY);
