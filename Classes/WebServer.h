@@ -59,8 +59,10 @@
 - (NSString*)serverUrl;
 - (void)threadMain:(id)dummy;
 - (void)handleHttpRequest:(int)s;
-- (char *)recvData:(int)s;
+- (char *)recvData:(int)s length:(int *)datalen;
 - (void)send:(int)s string:(NSString *)string;
 - (void)sendIndexHtml:(int)s;
+- (void)sendBackup:(int)s;
+- (void)restore:(int)s body:(char*)body bodylen:(int)bodylen;
 
 @end

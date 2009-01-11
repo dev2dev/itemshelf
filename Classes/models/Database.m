@@ -315,10 +315,10 @@ static NSDateFormatter *dateFormatter = nil;
     if (sqlite3_open([dbPath UTF8String], &handle) != 0) {
         // ouch!
         // re-create database
-        [fileManager removeItemAtPath:dbPath];
+        [fileManager removeItemAtPath:dbPath error:NULL];
         sqlite3_open([dbPath UTF8String], &handle);
 
-        isExistDb = NO;
+        isExistedDb = NO;
     }
 
     [self checkTables];

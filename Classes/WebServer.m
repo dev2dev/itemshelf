@@ -32,10 +32,11 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "WebServer.h"
 #import <arpa/inet.h>
+#import <fcntl.h>
 
-#import <Database.h>
+#import "WebServer.h"
+#import "Database.h"
 
 #define PORT_NUMBER		8888
 
@@ -194,6 +195,7 @@
     *p = 0;
     char *header = buf;
     char *body = p + 4;
+    int bodylen = datalen - (body - header);
 
     // get request line
     p = strstr(header, "\r\n");
@@ -204,12 +206,12 @@
 
     // parse request line
     char *p2 = NULL;
-    p = strtok(header, " ");
+    p = strtok(reqline, " ");
     if (p) p2 = strtok(NULL, " ");
 
     if (!p2) goto error;
 
-    NSString *filereq = [NSString stringWithCString:p2]
+    NSString *filereq = [NSString stringWithCString:p2];
 
     // Request to '/' url.
     if ([filereq isEqualToString:@"/"])
@@ -224,7 +226,7 @@
             
     // upload
     else if ([filereq isEqualToString:@"/restore"]) {
-        [self restore:s body:body];
+        [self restore:s body:body bodylen:bodylen];
     }
 
     free(buf);
@@ -322,7 +324,8 @@
     [self send:s string:@"Restore completed. Please restart the application."];
 
     // terminate application ...
-    [[UIApplication sharedAppliation] terminate];
+    //[[UIApplication sharedApplication] terminate];
+    exit(0);
 }
 
 @end
