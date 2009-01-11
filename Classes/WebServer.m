@@ -148,50 +148,106 @@
     [NSThread exit];
 }
 
-#define BUFSZ   4096
+#define BUFSZ   1024*4
+
+- (char *)recvData:(int)s
+{
+    char *buf = malloc(BUFSZ);
+    int buflen = BUFSZ;
+    int totallen = 0;
+    char *p = buf;
+    for (;;) {
+        int len = read(s, p, buflen - totallen);
+        if (len < 0) {
+            free(buf);
+            return NULL; // error
+        }
+        if (len == 0) {
+            *p = 0; // EOF
+            break;
+        }
+        p += len;
+        totallen += len;
+
+        if (buflen == totallen) {
+            buflen += BUFSZ;
+            buf = realloc(buf, buflen); // ###
+            p = buf + totallen;
+        }
+    }
+
+    return buf;
+}
 
 - (void)handleHttpRequest:(int)s
 {
-    char buf[BUFSZ+1];
+    char *buf = [self recvData:s];
+    if (buf == NULL) return; // error
 
-    int len = read(s, buf, BUFSZ);
-    if (len < 0) {
-        return;
-    }
-    buf[len] = '\0'; // null terminate
-	
+    NSArray *reqs = [[NSString stringWithCString:buf] componentsSeparatedByString:@"\r\n"];
+    free(buf);
+
     // get request line
-    NSArray *reqs = [[NSString stringWithCString:buf] componentsSeparatedByString:@"\n"];
-    NSString *getreq = [[reqs objectAtIndex:0] substringFromIndex:4]; // GET .....
+    NSString *reqline = [reqs objectAtIndex:0];
+    NSRange range = [raqline rangeOfString:@" "];
+    if (range.location == NSNotFound) return ; // error
+    
+    NSString *req = [reqline substringToIndex:range.location];
+    reqline = [reqline substringFromIndex:range.location+1];
 
-    // get requested file name
-    NSRange range = [getreq rangeOfString:@"HTTP/"];
-    if (range.location == NSNotFound) {
-        // GET request error ...
-        return;
-    }
-    NSString *filereq = [[getreq substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    range = [reqline rangeOfString:@"HTTP/"];
+    if (range.location == NSNotFound) return ; // error
+
+    NSString *filereq = [[getreq substringToIndex:range.location]
+                            stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
     // Request to '/' url.
-    // Return redirect to target file name.
     if ([filereq isEqualToString:@"/"])
     {
-        NSString *outcontent = [NSString stringWithFormat:@"HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"];
-        write(s, [outcontent UTF8String], [outcontent length]);
-		
-        outcontent = [NSString stringWithFormat:@"<html><head><meta http-equiv=\"refresh\" content=\"0;url=%@\"></head></html>", filename];
-        write(s, [outcontent UTF8String], [outcontent length]);
-		
-        return;
+        [self sendIndexHtml:s];
     }
-		
-    // Ad hoc...
-    // No need to read request... Just send only one file!
-    NSString *content = [NSString stringWithFormat:@"HTTP/1.0 200 OK\r\nContent-Type: %@\r\n\r\n", contentType];
-    write(s, [content UTF8String], [content length]);
+
+    // download
+    else if ([filereq isEqualToString:@"/itemshelf.db"]) {
+        [self sendBackup:s];
+    }
+            
+    // upload
+    else if ([filereq isEqualToString:@"/restore"]) {
+        [self restore:reqs];
+    }
+}
+
+- (void)send:(int)s string:(NSString *)string
+{
+    write(s, [string UTF8String], [string length]);
+}
+
+- (void)sendIndexHtml:(int)s
+{
+    [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"];
+
+    [self send:s string:@"<html><body>"];
+    [self send:s string:@"<h1>Backup</h1>"];
+    [self send:s string:@"<form method=\"get\" action=\"/itemshelf.db\"><input type=submit value=\"Backup\"></form>"];
+
+    [self send:s string:@"<h1>Restore</h1>"];
+    [self send:s string:@"<form method=\"post\" enctype=\"multipart/form-data\"action=\"/restore\">"];
+    [self send:s string:@"Select file to restore : <input type=file name=filename><br>"];
+    [self send:s string:@"<input type=submit value=\"Restore\"></form>"];
+
+    [self send:s string:@"</body></html>"];
+}
+
+- (void)sendBackup:(int)s
+{
+    [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type:application/octet-stream\r\n\r\n"];
+
+    //write(s, hoge, len);
+}
 	
-    const char *utf8 = [contentBody UTF8String];
-    write(s, utf8, strlen(utf8));
+- (void)restore:(NSArray*)reqs
+{
 }
 
 @end
