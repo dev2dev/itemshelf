@@ -267,6 +267,11 @@
     free(body);
 }
 
+/**
+   Request handler
+
+   @note You need to override this method
+*/
 - (void)requestHandler:(int)s filereq:(NSString*)filereq body:(char *)body bodylen:(int)bodylen
 {
     // must be override

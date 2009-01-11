@@ -62,14 +62,6 @@
 }
 
 /**
-   Send reply in string
-*/
-- (void)send:(int)s string:(NSString *)string
-{
-    write(s, [string UTF8String], [string length]);
-}
-
-/**
    Send top page
 */
 - (void)sendIndexHtml:(int)s

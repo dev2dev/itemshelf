@@ -37,7 +37,7 @@
 #import <netinet/in.h>
 
 /**
-   Web server for backup and restore
+   Simple web server
 */
 @interface WebServer : NSObject
 {
