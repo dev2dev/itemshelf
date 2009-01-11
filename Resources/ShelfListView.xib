@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">528</int>
-		<string key="IBDocument.SystemVersion">9F33</string>
+		<string key="IBDocument.SystemVersion">9G55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">677</string>
-		<string key="IBDocument.AppKitVersion">949.34</string>
-		<string key="IBDocument.HIToolboxVersion">352.00</string>
+		<string key="IBDocument.AppKitVersion">949.43</string>
+		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="48"/>
+			<integer value="29"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -59,34 +59,6 @@
 					<object class="IBUIToolbar" id="894468907">
 						<reference key="NSNextResponder" ref="968231987"/>
 						<int key="NSvFlags">266</int>
-						<object class="NSMutableArray" key="NSSubviews">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIButton" id="771087058">
-								<reference key="NSNextResponder" ref="894468907"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{290, 13}, {18, 19}}</string>
-								<reference key="NSSuperview" ref="894468907"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">1.500000e+01</double>
-									<int key="NSfFlags">16</int>
-								</object>
-								<int key="IBUIButtonType">3</int>
-								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
-								<object class="NSColor" key="IBUIHighlightedTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAxIDEAA</bytes>
-								</object>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
-								</object>
-							</object>
-						</object>
 						<string key="NSFrame">{{0, 392}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="968231987"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -116,8 +88,8 @@
 								<int key="IBUISystemItemIdentifier">5</int>
 								<reference key="IBUIToolbar" ref="894468907"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="50330524">
-								<reference key="IBUICustomView" ref="771087058"/>
+							<object class="IBUIBarButtonItem" id="914236624">
+								<int key="IBUISystemItemIdentifier">9</int>
 								<reference key="IBUIToolbar" ref="894468907"/>
 							</object>
 						</object>
@@ -183,20 +155,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">infoButtonTapped:</string>
-						<reference key="source" ref="771087058"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">47</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">addShelfButtonTapped:</string>
 						<reference key="source" ref="414287810"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">50</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">actionButtonTapped:</string>
+						<reference key="source" ref="914236624"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">53</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -243,9 +214,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="884088818"/>
 							<reference ref="413239697"/>
-							<reference ref="50330524"/>
 							<reference ref="414287810"/>
 							<reference ref="419498854"/>
+							<reference ref="914236624"/>
 						</object>
 						<reference key="parent" ref="968231987"/>
 					</object>
@@ -260,20 +231,6 @@
 						<reference key="parent" ref="894468907"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">46</int>
-						<reference key="object" ref="50330524"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="771087058"/>
-						</object>
-						<reference key="parent" ref="894468907"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">45</int>
-						<reference key="object" ref="771087058"/>
-						<reference key="parent" ref="50330524"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">48</int>
 						<reference key="object" ref="414287810"/>
 						<reference key="parent" ref="894468907"/>
@@ -281,6 +238,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
 						<reference key="object" ref="419498854"/>
+						<reference key="parent" ref="894468907"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">51</int>
+						<reference key="object" ref="914236624"/>
 						<reference key="parent" ref="894468907"/>
 					</object>
 				</object>
@@ -297,15 +259,15 @@
 					<string>29.IBPluginDependency</string>
 					<string>31.IBPluginDependency</string>
 					<string>34.IBPluginDependency</string>
-					<string>45.IBPluginDependency</string>
 					<string>48.IBPluginDependency</string>
 					<string>49.IBPluginDependency</string>
+					<string>51.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ShelfListViewController</string>
 					<string>UIResponder</string>
-					<string>{{318, 148}, {320, 480}}</string>
+					<string>{{663, 166}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -336,7 +298,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">50</int>
+			<int key="maxID">53</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -355,8 +317,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>actionButtonTapped:</string>
 							<string>addShelfButtonTapped:</string>
-							<string>infoButtonTapped:</string>
 							<string>scanButtonTapped:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">

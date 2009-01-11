@@ -49,7 +49,7 @@
 
 - (IBAction)addShelfButtonTapped:(id)sender;
 - (IBAction)scanButtonTapped:(id)sender;
-- (IBAction)infoButtonTapped:(id)sender;
+- (IBAction)actionButtonTapped:(id)sender;
 
 - (void)addShelf;
 

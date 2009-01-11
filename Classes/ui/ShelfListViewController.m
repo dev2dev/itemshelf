@@ -304,7 +304,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Config 処理
 
-- (IBAction)infoButtonTapped:(id)sender
+- (IBAction)actionButtonTapped:(id)sender
 {
     ConfigViewController *vc = [[ConfigViewController alloc] initWithNibName:@"ConfigView" bundle:nil];
 #if 1

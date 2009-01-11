@@ -172,7 +172,7 @@
 {
     char *p = line;
 
-    whiel (p < line + size) {
+    while (p < line + size) {
         int len = read(s, p, 1);
         if (len <= 0) {
             return NO;
@@ -232,7 +232,7 @@
 
     // read headers
     for (;;) {
-        if (![self readLine:s line:line size:(sizeof)line]) {
+        if (![self readLine:s line:line size:1024]) {
             return; // error
         }
         NSLog(@"%s", line);
