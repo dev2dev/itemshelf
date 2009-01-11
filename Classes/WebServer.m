@@ -43,8 +43,9 @@
 
 @implementation WebServer
 
-@synthesize contentBody, contentType, filename;
-
+/**
+   Start web server
+*/
 - (BOOL)startServer
 {
     int on;
@@ -77,13 +78,17 @@
         close(listen_sock);
         return NO;
     }
-	
+
+    [self retain];
     thread = [[NSThread alloc] initWithTarget:self selector:@selector(threadMain:) object:nil];
     [thread start];
 	
     return YES;
 }
 
+/**
+   Stop web server
+*/
 - (void)stopServer
 {
     if (listen_sock >= 0) {
@@ -92,6 +97,9 @@
     listen_sock = -1;
 }
 
+/**
+   Decide server URL
+*/
 - (NSString*)serverUrl
 {
     // connect dummy UDP socket to get local IP address.
@@ -122,6 +130,9 @@
     return url;
 }
 
+/**
+   Server thread
+*/
 - (void)threadMain:(id)dummy
 {	
     NSAutoreleasePool *pool;
@@ -149,6 +160,8 @@
     listen_sock = -1;
 	
     [pool release];
+
+    [self release];
     [NSThread exit];
 }
 
@@ -269,11 +282,17 @@
     return;
 }
 
+/**
+   Send reply in string
+*/
 - (void)send:(int)s string:(NSString *)string
 {
     write(s, [string UTF8String], [string length]);
 }
 
+/**
+   Send top page
+*/
 - (void)sendIndexHtml:(int)s
 {
     [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"];
@@ -290,6 +309,9 @@
     [self send:s string:@"</body></html>"];
 }
 
+/**
+   Send backup file
+*/
 - (void)sendBackup:(int)s
 {
     NSString *path = [[Database instance] dbPath];
@@ -312,7 +334,10 @@
     }
     close(f);
 }
-	
+
+/**
+   Restore from backup file
+*/
 - (void)restore:(int)s body:(char *)body bodylen:(int)bodylen
 {
     NSLog(@"%s", body);

@@ -164,9 +164,7 @@
 {
     BOOL result = NO;
     
-    if (webServer == nil) {
-        webServer = [[WebServer alloc] init];
-    }
+    webServer = [[WebServer alloc] init];
     NSString *url = [webServer serverUrl];
     if (url != nil) {
         result = [webServer startServer];
@@ -174,6 +172,7 @@
     
     UIAlertView *v;
     if (!result) {
+        [webServer release];
         v = [[UIAlertView alloc]
              initWithTitle:@"Error"
              message:NSLocalizedString(@"Cannot start web server.", @"")
@@ -195,6 +194,8 @@
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [webServer stopServer];
+    [webServer release];
+    webServer = nil;
 }
 
 @end

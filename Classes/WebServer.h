@@ -36,21 +36,16 @@
 #import <sys/socket.h>
 #import <netinet/in.h>
 
+/**
+   Web server for backup and restore
+*/
 @interface WebServer : NSObject
 {
     int listen_sock;
     struct sockaddr_in serv_addr;
 	
-    NSString *contentType;
-    NSString *contentBody;
-    NSString *filename;
-	
     NSThread *thread;
 }
-
-@property(nonatomic,retain) NSString* contentType;
-@property(nonatomic,retain) NSString* contentBody;
-@property(nonatomic,retain) NSString* filename;
 
 - (BOOL)startServer;
 - (void)stopServer;
