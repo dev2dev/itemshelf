@@ -35,10 +35,14 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import "GenSelectListViewController.h"
+#import "WebServer.h"
 
 @interface ConfigViewController : UITableViewController
 {
+    WebServer *webServer;
 }
 
 - (void)doneAction:(id)sender;
+- (void)_doBackup;
+
 @end

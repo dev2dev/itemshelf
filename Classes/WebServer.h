@@ -58,8 +58,10 @@
 // private
 - (NSString*)serverUrl;
 - (void)threadMain:(id)dummy;
+
+- (BOOL)readLine:(int)s line:(char *)line;
+- (char *)readBody:(int)s contentLength:(int)contentLength;
 - (void)handleHttpRequest:(int)s;
-- (char *)recvData:(int)s length:(int *)datalen;
 - (void)send:(int)s string:(NSString *)string;
 - (void)sendIndexHtml:(int)s;
 - (void)sendBackup:(int)s;

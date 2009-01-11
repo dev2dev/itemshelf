@@ -151,67 +151,102 @@
     [NSThread exit];
 }
 
-#define BUFSZ   1024*4
-
-- (char *)recvData:(int)s length:(int *)datalen;
+/**
+   Read http header line
+*/
+- (BOOL)readLine:(int)s line:(char *)line
 {
-    char *buf = malloc(BUFSZ);
-    int buflen = BUFSZ;
-    int totallen = 0;
-    char *p = buf;
-    for (;;) {
-        int len = read(s, p, buflen - totallen);
-        if (len < 0) {
-            free(buf);
-            return NULL; // error
-        }
-        if (len == 0) {
-            *p = 0; // fail safe...
-            break;
-        }
-        p += len;
-        totallen += len;
+    char *p = line;
 
-        if (buflen == totallen) {
-            buflen += BUFSZ;
-            buf = realloc(buf, buflen); // ###
-            p = buf + totallen;
+    for (;;) {
+        int len = read(s, p, 1);
+        if (len <= 0) {
+            return NO;
         }
+        if (p > line && *p == '\n' && *(p-1) == '\r') {
+            *(p-1) = 0; // null terminate;
+            return YES;
+        }
+        p++;
+    }
+    return NO; // not reach here...
+}
+
+/**
+   Recv http body
+*/
+- (char *)readBody:(int)s contentLength:(int)contentLength
+{
+    char *buf, *p;
+    int len, remain;
+
+    if (contentLength < 0) {
+        len = 1024*10; // ad hoc
+    } else {
+        len = contentLength;
+    }
+    
+    buf = malloc(len + 1);
+    p = buf;
+    remain = len;
+
+    while (remain > 0) {
+        int rlen = read(s, p, remain);
+        if (rlen < 0) {
+            free(buf);
+            return NULL;
+        }
+        if (contentLength < 0) break;
+
+        p += rlen;
+        remain -= rlen;
     }
 
-    *datalen = totallen;
+    *p = 0; // null terminate;
     return buf;
 }
 
+/**
+   Handle http request
+*/
 - (void)handleHttpRequest:(int)s
 {
-    int datalen = 0;
-    char *buf = [self recvData:s length:&datalen];
-    if (buf == NULL) return; // error
+    char line[1024];
+    int lineno = 0;
+    NSString *filereq;
+    int contentLength = -1;
 
-    // get header and body
-    char *p = strstr(buf, "\r\n\r\n");
-    if (!p) goto error;
-    *p = 0;
-    char *header = buf;
-    char *body = p + 4;
-    int bodylen = datalen - (body - header);
+    // read headers
+    for (;;) {
+        if (![self readLine:s line:line]) {
+            return; // error
+        }
+        NSLog(@"%s", line);
+        
+        if (strlen(line) == 0) {
+            break; // end of header
+        }
 
-    // get request line
-    p = strstr(header, "\r\n");
-    if (!p) goto error;
-    *p = 0;
-    char *reqline = header;
-    header = p + 2;
+        if (lineno == 0) {
+            // request line
+            char *p, *p2;
+            p = strtok(line, " ");
+            if (p) p2 = strtok(NULL, " ");
+            filereq = [NSString stringWithCString:p2];
+        }
 
-    // parse request line
-    char *p2 = NULL;
-    p = strtok(reqline, " ");
-    if (p) p2 = strtok(NULL, " ");
+        else if (strncasecmp(line, "Content-Length:", 15) == 0) {
+            contentLength = atoi(line + 15);
+        }
 
-    if (!p2) goto error;
+        lineno++;
+    }
 
-    NSString *filereq = [NSString stringWithCString:p2];
+    // read body
+    char *body = NULL;
+    if (contentLength > 0) {
+        body = [self readBody:s contentLength:contentLength];
+    }
 
     // Request to '/' url.
     if ([filereq isEqualToString:@"/"])
@@ -226,14 +261,10 @@
             
     // upload
     else if ([filereq isEqualToString:@"/restore"]) {
-        [self restore:s body:body bodylen:bodylen];
+        [self restore:s body:body bodylen:contentLength];
     }
 
-    free(buf);
-    return;
-
- error:
-    free(buf);
+    free(body);
     return;
 }
 
@@ -283,6 +314,7 @@
 	
 - (void)restore:(int)s body:(char *)body bodylen:(int)bodylen
 {
+    NSLog(@"%s", body);
     // get mimepart delimiter
     char *p = strstr(body, "\r\n");
     if (!p) return;
@@ -296,9 +328,10 @@
 
     // find data end pointer
     char *end = NULL;
+    int delimlen = strlen(delimiter);
     for (p = start; p < body + bodylen; p++) {
-        if (strcmp(p, delimiter) == 0) {
-            end = p;
+        if (strncmp(p, delimiter, delimlen) == 0) {
+            end = p - 2; // previous new line
             break;
         }
     }

@@ -75,14 +75,16 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
     switch (section) {
-    case 0:
-        return NSLocalizedString(@"About", @"");
+        case 0:
+            return NSLocalizedString(@"Backup", @"");
+        case 1:
+            return NSLocalizedString(@"About", @"");
     }
     return nil;
 }
@@ -90,8 +92,10 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-    case 0: // about
-        return 2;
+        case 0: // backup
+            return 1;
+        case 1: // about
+            return 2;
     }
     return 0;
 }
@@ -115,18 +119,23 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;	
 	
     switch (indexPath.section) {
-    case 0: // about
-        switch (indexPath.row) {
-        case 0:
-            cell.text = NSLocalizedString(@"Help", @"");
+        case 0: // backup
+            cell.text = NSLocalizedString(@"Backup and restore", @"");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
-        case 1:
-            cell.text = NSLocalizedString(@"About this software", @"");
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+        case 1: // about
+            switch (indexPath.row) {
+                case 0:
+                    cell.text = NSLocalizedString(@"Help", @"");
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    break;
+                case 1:
+                    cell.text = NSLocalizedString(@"About this software", @"");
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    break;
+            }
             break;
-        }
-        break;
     }
 
     return cell;
@@ -135,16 +144,57 @@
 // セルタップ時の処理					
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.row == 0) {
+        // backup
+        [self _doBackup];
+    }
+    else if (indexPath.section == 1 && indexPath.row == 0) {
         // show help
         NSURL *url = [NSURL URLWithString:NSLocalizedString(@"HelpURL", @"")];
         [[UIApplication sharedApplication] openURL:url];
     }
-    else if (indexPath.section == 0 && indexPath.row == 1) {
+    else if (indexPath.section == 1 && indexPath.row == 1) {
         AboutViewController *aout = [[[AboutViewController alloc]
                                          initWithNibName:@"AboutView"
                                          bundle:nil] autorelease];
         [self.navigationController pushViewController:aout animated:YES];
     }
+}
+
+- (void)_doBackup
+{
+    BOOL result = NO;
+    
+    if (webServer == nil) {
+        webServer = [[WebServer alloc] init];
+    }
+    NSString *url = [webServer serverUrl];
+    if (url != nil) {
+        result = [webServer startServer];
+    }
+    
+    UIAlertView *v;
+    if (!result) {
+        v = [[UIAlertView alloc]
+             initWithTitle:@"Error"
+             message:NSLocalizedString(@"Cannot start web server.", @"")
+             delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+             otherButtonTitles:nil];
+    } else {
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"WebServerNotation", @""), url];
+        
+        v = [[UIAlertView alloc]
+             initWithTitle:NSLocalizedString(@"Backup and restore", @"")
+             message:message
+             delegate:self cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+             otherButtonTitles:nil];
+    }
+    [v show];
+    [v release];
+}
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [webServer stopServer];
 }
 
 @end
