@@ -1172,7 +1172,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8ACEBB5A-DD2B-4E34-9979-1F5AE3465BC0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9A7AF047-B790-41A8-81A2-CD02E0C00442";
 			};
 			name = "Adhoc Distribution";
 		};
