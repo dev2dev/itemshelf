@@ -37,6 +37,7 @@
 
 #import "WebServer.h"
 #import "Database.h"
+#import "Item.h"
 
 #define PORT_NUMBER		8888
 
@@ -352,6 +353,9 @@
     }
     close(f);
 
+    // Clear all image data
+    [Item deleteAllImageCache];
+    
     // send reply
     [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
     [self send:s string:@"Restore completed. Please restart the application."];

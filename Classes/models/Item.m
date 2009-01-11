@@ -488,6 +488,25 @@ static NSMutableArray *agingArray = nil;
     [fileManager removeItemAtPath:path error:NULL];
 }
 
+/**
+   Delete all image cache
+*/
++ (void)deleteAllImageCache
+{
+    NSString *dataDir = [AppDelegate pathOfDataFile:nil];
+
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSDirectoryEnumerator *de = [fm enumeratorAtPath:dataDir];
+
+    NSString *name;
+    while (name = [de nextObject]) {
+        if ([[name substringToIndex:4] isEqualToString:@"img-"]) {
+            NSString *path = [dataDir stringByAppendingPathComponent:name];
+            [fm removeItemAtPath:path error:NULL];
+        }
+    }
+}
+
 //@}
 
 @end

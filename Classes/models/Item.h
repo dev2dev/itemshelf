@@ -120,5 +120,6 @@
 - (NSString*)_imageFileName;
 - (NSString *)_imagePath; // private
 - (void)_deleteImageFile;
++ (void)deleteAllImageCache;
 
 @end
