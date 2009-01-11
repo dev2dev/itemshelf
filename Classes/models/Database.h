@@ -87,6 +87,7 @@
 - (void)beginTransaction;
 - (void)commitTransaction;
 
+- (NSString *)dbPath;
 - (BOOL)open;
 - (void)checkTables; // private
 

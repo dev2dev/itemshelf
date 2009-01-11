@@ -35,6 +35,8 @@
 #import "WebServer.h"
 #import <arpa/inet.h>
 
+#import <Database.h>
+
 #define PORT_NUMBER		8888
 
 @implementation WebServer
@@ -150,7 +152,7 @@
 
 #define BUFSZ   1024*4
 
-- (char *)recvData:(int)s
+- (char *)recvData:(int)s length:(int *)datalen;
 {
     char *buf = malloc(BUFSZ);
     int buflen = BUFSZ;
@@ -163,7 +165,7 @@
             return NULL; // error
         }
         if (len == 0) {
-            *p = 0; // EOF
+            *p = 0; // fail safe...
             break;
         }
         p += len;
@@ -176,30 +178,38 @@
         }
     }
 
+    *datalen = totallen;
     return buf;
 }
 
 - (void)handleHttpRequest:(int)s
 {
-    char *buf = [self recvData:s];
+    int datalen = 0;
+    char *buf = [self recvData:s length:&datalen];
     if (buf == NULL) return; // error
 
-    NSArray *reqs = [[NSString stringWithCString:buf] componentsSeparatedByString:@"\r\n"];
-    free(buf);
+    // get header and body
+    char *p = strstr(buf, "\r\n\r\n");
+    if (!p) goto error;
+    *p = 0;
+    char *header = buf;
+    char *body = p + 4;
 
     // get request line
-    NSString *reqline = [reqs objectAtIndex:0];
-    NSRange range = [raqline rangeOfString:@" "];
-    if (range.location == NSNotFound) return ; // error
-    
-    NSString *req = [reqline substringToIndex:range.location];
-    reqline = [reqline substringFromIndex:range.location+1];
+    p = strstr(header, "\r\n");
+    if (!p) goto error;
+    *p = 0;
+    char *reqline = header;
+    header = p + 2;
 
-    range = [reqline rangeOfString:@"HTTP/"];
-    if (range.location == NSNotFound) return ; // error
+    // parse request line
+    char *p2 = NULL;
+    p = strtok(header, " ");
+    if (p) p2 = strtok(NULL, " ");
 
-    NSString *filereq = [[getreq substringToIndex:range.location]
-                            stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (!p2) goto error;
+
+    NSString *filereq = [NSString stringWithCString:p2]
 
     // Request to '/' url.
     if ([filereq isEqualToString:@"/"])
@@ -214,8 +224,15 @@
             
     // upload
     else if ([filereq isEqualToString:@"/restore"]) {
-        [self restore:reqs];
+        [self restore:s body:body];
     }
+
+    free(buf);
+    return;
+
+ error:
+    free(buf);
+    return;
 }
 
 - (void)send:(int)s string:(NSString *)string
@@ -241,13 +258,71 @@
 
 - (void)sendBackup:(int)s
 {
+    NSString *path = [[Database instance] dbPath];
+
+    int f = open([path UTF8String], O_RDONLY);
+    if (f < 0) {
+        // file open error...
+        // TBD
+        return;
+    }
+
     [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type:application/octet-stream\r\n\r\n"];
 
-    //write(s, hoge, len);
+    char buf[1024];
+    for (;;) {
+        int len = read(f, buf, sizeof(buf));
+        if (len == 0) break;
+
+        write(s, buf, len);
+    }
+    close(f);
 }
 	
-- (void)restore:(NSArray*)reqs
+- (void)restore:(int)s body:(char *)body bodylen:(int)bodylen
 {
+    // get mimepart delimiter
+    char *p = strstr(body, "\r\n");
+    if (!p) return;
+    *p = 0;
+    char *delimiter = body;
+
+    // find data start pointer
+    p = strstr(p + 2, "\r\n\r\n");
+    if (!p) return;
+    char *start = p + 4;
+
+    // find data end pointer
+    char *end = NULL;
+    for (p = start; p < body + bodylen; p++) {
+        if (strcmp(p, delimiter) == 0) {
+            end = p;
+            break;
+        }
+    }
+    if (!end) return;
+
+    // okay, save data between start and end.
+    NSString *path = [[Database instance] dbPath];
+    int f = open([path UTF8String], O_WRONLY);
+    if (f < 0) {
+        // TBD;
+        return;
+    }
+
+    p = start;
+    while (p < end) {
+        int len = write(f, p, end - p);
+        p += len;
+    }
+    close(f);
+
+    // send reply
+    [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
+    [self send:s string:@"Restore completed. Please restart the application."];
+
+    // terminate application ...
+    [[UIApplication sharedAppliation] terminate];
 }
 
 @end

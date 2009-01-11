@@ -289,6 +289,17 @@ static NSDateFormatter *dateFormatter = nil;
 }
 
 /**
+   Return database file name
+*/
+- (NSString*)dbPath
+{
+    NSString *dbPath = [AppDelegate pathOfDataFile:@"iWantThis.db"];
+    NSLog(@"dbPath = %@", dbPath);
+
+    return dbPath;
+}
+
+/**
    Open database
 
    @return Returns YES if database exists, otherwise create database and returns NO.
@@ -296,15 +307,18 @@ static NSDateFormatter *dateFormatter = nil;
 - (BOOL)open
 {
     // Load from DB
-    NSString *dbPath = [AppDelegate pathOfDataFile:@"iWantThis.db"];
-    NSLog(@"dbPath = %@", dbPath);
+    NSString *dbPath = [self dbPath];
 	
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isExistedDb = [fileManager fileExistsAtPath:dbPath];
 	
     if (sqlite3_open([dbPath UTF8String], &handle) != 0) {
         // ouch!
-        ASSERT(0);
+        // re-create database
+        [fileManager removeItemAtPath:dbPath];
+        sqlite3_open([dbPath UTF8String], &handle);
+
+        isExistDb = NO;
     }
 
     [self checkTables];
