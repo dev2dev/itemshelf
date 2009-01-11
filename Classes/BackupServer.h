@@ -32,17 +32,17 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <UIKit/UIKit.h>
-#import "Common.h"
-#import "GenSelectListViewController.h"
-#import "BackupServer.h"
+#import "WebServer.h"
 
-@interface ConfigViewController : UITableViewController
+/**
+   Web server for backup and restore
+*/
+@interface BackupServer : WebServer
 {
-    BackupServer *backupServer;
 }
 
-- (void)doneAction:(id)sender;
-- (void)_doBackup;
+- (void)sendIndexHtml:(int)s;
+- (void)sendBackup:(int)s;
+- (void)restore:(int)s body:(char*)body bodylen:(int)bodylen;
 
 @end

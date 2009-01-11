@@ -58,8 +58,6 @@
 - (char *)readBody:(int)s contentLength:(int)contentLength;
 - (void)handleHttpRequest:(int)s;
 - (void)send:(int)s string:(NSString *)string;
-- (void)sendIndexHtml:(int)s;
-- (void)sendBackup:(int)s;
-- (void)restore:(int)s body:(char*)body bodylen:(int)bodylen;
+- (void)requestHandler:(int)s filereq:(NSString*)filereq body:(char *)body bodylen:(int)bodylen;
 
 @end

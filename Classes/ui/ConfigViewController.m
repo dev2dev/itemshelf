@@ -164,15 +164,15 @@
 {
     BOOL result = NO;
     
-    webServer = [[WebServer alloc] init];
-    NSString *url = [webServer serverUrl];
+    backupServer = [[BackupServer alloc] init];
+    NSString *url = [backupServer serverUrl];
     if (url != nil) {
-        result = [webServer startServer];
+        result = [backupServer startServer];
     }
     
     UIAlertView *v;
     if (!result) {
-        [webServer release];
+        [backupServer release];
         v = [[UIAlertView alloc]
              initWithTitle:@"Error"
              message:NSLocalizedString(@"Cannot start web server.", @"")
@@ -193,9 +193,9 @@
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [webServer stopServer];
-    [webServer release];
-    webServer = nil;
+    [backupServer stopServer];
+    [backupServer release];
+    backupServer = nil;
 }
 
 @end
