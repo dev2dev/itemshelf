@@ -62,6 +62,9 @@
 "WebExportNotation" = "Access following URL with browser of your PC:\n%@\nAfter download the file, tap Dismiss button.";
 "Cannot start web server." = "Cannot start web server.";
 
+"Backup" = "Backup";
+"Backup and restore" = "Backup and restore";
+
 /* Item view */
 "Name" = "Name";
 "Title" = "Title";
