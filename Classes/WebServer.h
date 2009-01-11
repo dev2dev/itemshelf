@@ -54,7 +54,7 @@
 - (NSString*)serverUrl;
 - (void)threadMain:(id)dummy;
 
-- (BOOL)readLine:(int)s line:(char *)line;
+- (BOOL)readLine:(int)s line:(char *)line size:(int)size;
 - (char *)readBody:(int)s contentLength:(int)contentLength;
 - (void)handleHttpRequest:(int)s;
 - (void)send:(int)s string:(NSString *)string;

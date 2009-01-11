@@ -168,11 +168,11 @@
 /**
    Read http header line
 */
-- (BOOL)readLine:(int)s line:(char *)line
+- (BOOL)readLine:(int)s line:(char *)line size:(int)size
 {
     char *p = line;
 
-    for (;;) {
+    whiel (p < line + size) {
         int len = read(s, p, 1);
         if (len <= 0) {
             return NO;
@@ -227,12 +227,12 @@
 {
     char line[1024];
     int lineno = 0;
-    NSString *filereq;
+    NSString *filereq = @"/";
     int contentLength = -1;
 
     // read headers
     for (;;) {
-        if (![self readLine:s line:line]) {
+        if (![self readLine:s line:line size:(sizeof)line]) {
             return; // error
         }
         NSLog(@"%s", line);
@@ -246,7 +246,7 @@
             char *p, *p2;
             p = strtok(line, " ");
             if (p) p2 = strtok(NULL, " ");
-            filereq = [NSString stringWithCString:p2];
+            if (p2) filereq = [NSString stringWithCString:p2];
         }
 
         else if (strncasecmp(line, "Content-Length:", 15) == 0) {
