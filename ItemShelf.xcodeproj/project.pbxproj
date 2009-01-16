@@ -13,8 +13,8 @@
 		282CCBFE0DB6C98000C4EA27 /* ItemListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282CCBFD0DB6C98000C4EA27 /* ItemListView.xib */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
-		3E12ACFF0F19B3F2009FE300 /* WebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12ACFD0F19B3F2009FE300 /* WebServer.h */; };
-		3E12AD000F19B3F2009FE300 /* WebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E12ACFE0F19B3F2009FE300 /* WebServer.m */; };
+		3E12ACFF0F19B3F2009FE300 /* TmiWebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12ACFD0F19B3F2009FE300 /* TmiWebServer.h */; };
+		3E12AD000F19B3F2009FE300 /* TmiWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */; };
 		3E15190F0EDAB7C100F510E9 /* ItemCellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */; };
 		3E15194D0EDAC11900F510E9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15194C0EDAC11900F510E9 /* Icon.png */; };
 		3E1519690EDAE78100F510E9 /* Icon-rendered.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1519680EDAE78100F510E9 /* Icon-rendered.png */; };
@@ -170,8 +170,8 @@
 		3E03D29B0EF7D6F800F0ECFF /* ItemListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListModel.m; sourceTree = "<group>"; };
 		3E04544D0EE3ED580051CB37 /* Shelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shelf.h; sourceTree = "<group>"; };
 		3E04544E0EE3ED580051CB37 /* Shelf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shelf.m; sourceTree = "<group>"; };
-		3E12ACFD0F19B3F2009FE300 /* WebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServer.h; sourceTree = "<group>"; };
-		3E12ACFE0F19B3F2009FE300 /* WebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServer.m; sourceTree = "<group>"; };
+		3E12ACFD0F19B3F2009FE300 /* TmiWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TmiWebServer.h; sourceTree = "<group>"; };
+		3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TmiWebServer.m; sourceTree = "<group>"; };
 		3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ItemCellBack.png; sourceTree = "<group>"; };
 		3E15194C0EDAC11900F510E9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		3E1519680EDAE78100F510E9 /* Icon-rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-rendered.png"; sourceTree = "<group>"; };
@@ -650,8 +650,8 @@
 				3E22CC840EF90F4F00E8A966 /* HttpClient.m */,
 				3ECD3DAE0ED6C84A0000A9A5 /* URLComponent.h */,
 				3ECD3DAF0ED6C84A0000A9A5 /* URLComponent.m */,
-				3E12ACFD0F19B3F2009FE300 /* WebServer.h */,
-				3E12ACFE0F19B3F2009FE300 /* WebServer.m */,
+				3E12ACFD0F19B3F2009FE300 /* TmiWebServer.h */,
+				3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */,
 				3EDC93B60F19E94C00EA99AB /* BackupServer.h */,
 				3EDC93B70F19E94C00EA99AB /* BackupServer.m */,
 			);
@@ -685,7 +685,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E12ACFF0F19B3F2009FE300 /* WebServer.h in Headers */,
+				3E12ACFF0F19B3F2009FE300 /* TmiWebServer.h in Headers */,
 				3EDC93B80F19E94C00EA99AB /* BackupServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -920,7 +920,7 @@
 				3E22CD4A0EF9142E00E8A966 /* StringArray.m in Sources */,
 				3E5DFA4B0EE14C48000F6998 /* AppDelegate.m in Sources */,
 				3E5DFA4E0EE14C48000F6998 /* BarcodeReader.m in Sources */,
-				3E12AD000F19B3F2009FE300 /* WebServer.m in Sources */,
+				3E12AD000F19B3F2009FE300 /* TmiWebServer.m in Sources */,
 				3EDC93B90F19E94C00EA99AB /* BackupServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
