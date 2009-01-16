@@ -64,6 +64,8 @@
 
 /**
    Select service id for code search
+
+   @note Only amazon supports code search
 */
 - (void)setCodeSearch
 {

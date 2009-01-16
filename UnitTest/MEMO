@@ -12,4 +12,3 @@ http://code.google.com/p/google-toolbox-for-mac/wiki/iPhoneUnitTesting
         URLComponent
 
 ViewController をどうするか？
-今までクラッシュするバグは ViewController に集中していたので、、、
