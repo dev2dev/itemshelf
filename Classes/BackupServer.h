@@ -40,12 +40,15 @@
 @interface BackupServer : WebServer
 {
     NSString *filePath;
+    NSString *dataName;
 }
 
 @property(nonatomic,retain) NSString *filePath;
+@property(nonatomic,retain) NSString *dataName;
 
 - (void)sendIndexHtml;
 - (void)sendBackup;
-- (void)restore:(char*)body bodylen:(int)bodylen;
+- (void)parseBody:(char*)body bodylen:(int)bodylen;
+- (void)restore:(char*)data datalen:(int)datalen;
 
 @end

@@ -76,7 +76,7 @@
             
     // upload
     else if ([path isEqualToString:@"/restore"]) {
-        [self restore body:body bodylen:bodylen];
+        [self parseBody:body bodylen:bodylen];
     }
 
     else {
@@ -133,11 +133,12 @@
 }
 
 /**
-   Restore from backup file
+   Parse body (mime multipart)
 */
-- (void)restore:(char *)body bodylen:(int)bodylen
+- (void)parseBody:(char *)body bodylen:(int)bodylen
 {
-    NSLog(@"%s", body);
+    //NSLog(@"%s", body);
+
     // get mimepart delimiter
     char *p = strstr(body, "\r\n");
     if (!p) return;
@@ -160,8 +161,16 @@
     }
     if (!end) return;
 
+    [self restore:start datalen:end - start];
+}
+
+/**
+   Restore from backup file
+*/
+- (void)restore:(char *)data datalen:(int)datalen
+{
     // Check data format
-    if (strncmp(start, "SQLite format 3", 15) != 0) {
+    if (strncmp(data, "SQLite format 3", 15) != 0) {
         [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
         [self sendString:@"This is not itemshelf database file. Try again."];
         return;
@@ -174,7 +183,8 @@
         return;
     }
 
-    p = start;
+    p = data;
+    char *end = data + datalen;
     while (p < end) {
         int len = write(f, p, end - p);
         p += len;
