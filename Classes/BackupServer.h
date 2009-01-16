@@ -41,8 +41,8 @@
 {
 }
 
-- (void)sendIndexHtml:(int)s;
-- (void)sendBackup:(int)s;
-- (void)restore:(int)s body:(char*)body bodylen:(int)bodylen;
+- (void)sendIndexHtml;
+- (void)sendBackup;
+- (void)restore:(char*)body bodylen:(int)bodylen;
 
 @end

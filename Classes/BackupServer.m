@@ -42,42 +42,46 @@
 
 @implementation BackupServer
 
-- (void)requestHandler:(int)s filereq:(NSString*)filereq body:(char *)body bodylen:(int)bodylen
+- (void)requestHandler:(NSString*)path body:(char *)body bodylen:(int)bodylen
 {
     // Request to '/' url.
-    if ([filereq isEqualToString:@"/"])
+    if ([path isEqualToString:@"/"])
     {
         [self sendIndexHtml:s];
     }
 
     // download
-    else if ([filereq isEqualToString:@"/itemshelf.db"]) {
+    else if ([path isEqualToString:@"/itemshelf.db"]) {
         [self sendBackup:s];
     }
             
     // upload
-    else if ([filereq isEqualToString:@"/restore"]) {
+    else if ([path isEqualToString:@"/restore"]) {
         [self restore:s body:body bodylen:bodylen];
+    }
+
+    else {
+        [super requestHandler:path body:body bodylen:bodylen];
     }
 }
 
 /**
    Send top page
 */
-- (void)sendIndexHtml:(int)s
+- (void)sendIndexHtml
 {
-    [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"];
+    [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"];
 
-    [self send:s string:@"<html><body>"];
-    [self send:s string:@"<h1>Backup</h1>"];
-    [self send:s string:@"<form method=\"get\" action=\"/itemshelf.db\"><input type=submit value=\"Backup\"></form>"];
+    [self sendString:@"<html><body>"];
+    [self sendString:@"<h1>Backup</h1>"];
+    [self sendString:@"<form method=\"get\" action=\"/itemshelf.db\"><input type=submit value=\"Backup\"></form>"];
 
-    [self send:s string:@"<h1>Restore</h1>"];
-    [self send:s string:@"<form method=\"post\" enctype=\"multipart/form-data\"action=\"/restore\">"];
-    [self send:s string:@"Select file to restore : <input type=file name=filename><br>"];
-    [self send:s string:@"<input type=submit value=\"Restore\"></form>"];
+    [self sendString:@"<h1>Restore</h1>"];
+    [self sendString:@"<form method=\"post\" enctype=\"multipart/form-data\"action=\"/restore\">"];
+    [self sendString:@"Select file to restore : <input type=file name=filename><br>"];
+    [self sendString:@"<input type=submit value=\"Restore\"></form>"];
 
-    [self send:s string:@"</body></html>"];
+    [self sendString:@"</body></html>"];
 }
 
 /**
@@ -94,14 +98,14 @@
         return;
     }
 
-    [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type:application/octet-stream\r\n\r\n"];
+    [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type:application/octet-stream\r\n\r\n"];
 
     char buf[1024];
     for (;;) {
         int len = read(f, buf, sizeof(buf));
         if (len == 0) break;
 
-        write(s, buf, len);
+        write(serverSock, buf, len);
     }
     close(f);
 }
@@ -136,8 +140,8 @@
 
     // Check data format
     if (strncmp(start, "SQLite format 3", 15) != 0) {
-        [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
-        [self send:s string:@"This is not itemshelf database file. Try again."];
+        [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
+        [self sendString:@"This is not itemshelf database file. Try again."];
         return;
     }
 
@@ -160,8 +164,8 @@
     [Item deleteAllImageCache];
     
     // send reply
-    [self send:s string:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
-    [self send:s string:@"Restore completed. Please restart the application."];
+    [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
+    [self sendString:@"Restore completed. Please restart the application."];
 
     // terminate application ...
     //[[UIApplication sharedApplication] terminate];
