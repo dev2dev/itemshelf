@@ -1,8 +1,8 @@
 // -*-  Mode:ObjC; c-basic-offset:4; tab-width:8; indent-tabs-mode:nil -*-
 /*
-  ItemShelf for iPhone/iPod touch
+  TmiLibrary for iPhone/iPod touch
 
-  Copyright (c) 2008, ItemShelf Development Team. All rights reserved.
+  Copyright (c) 2008, Takuya Murakami. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -36,21 +36,27 @@
 #import <sys/socket.h>
 #import <netinet/in.h>
 
+// You can change port number of web server
+#define TMI_WEB_SERVER_PORT	8888
+
 /**
-   Simple web server
+   Very Simple web server
 */
-@interface WebServer : NSObject
+@interface TmiWebServer : NSObject
 {
     int listenSock;
     struct sockaddr_in serv_addr;
 
     int serverSock;
-
+	
     NSThread *thread;
 }
 
 - (BOOL)startServer;
 - (void)stopServer;
+
+// You need override this!
+- (void)requestHandler:(NSString*)filereq body:(char *)body bodylen:(int)bodylen;
 
 // private
 - (NSString*)serverUrl;
@@ -60,6 +66,5 @@
 - (char *)readBody:(int)contentLength;
 - (void)handleHttpRequest;
 - (void)sendString:(NSString *)string;
-- (void)requestHandler:(NSString*)filereq body:(char *)body bodylen:(int)bodylen;
 
 @end

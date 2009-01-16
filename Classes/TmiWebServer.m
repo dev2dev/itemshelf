@@ -1,8 +1,8 @@
 // -*-  Mode:ObjC; c-basic-offset:4; tab-width:8; indent-tabs-mode:nil -*-
 /*
-  ItemShelf for iPhone/iPod touch
+  TmiLibrary for iPhone/iPod touch
 
-  Copyright (c) 2008, ItemShelf Development Team. All rights reserved.
+  Copyright (c) 2008, Takuya Murakami. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -35,13 +35,9 @@
 #import <arpa/inet.h>
 #import <fcntl.h>
 
-#import "WebServer.h"
-#import "Database.h"
-#import "Item.h"
+#import "TmiWebServer.h"
 
-#define PORT_NUMBER		8888
-
-@implementation WebServer
+@implementation TmiWebServer
 
 /**
    Start web server
@@ -61,7 +57,7 @@
 
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    addr.sin_port = htons(PORT_NUMBER);
+    addr.sin_port = htons(TMI_WEB_SERVER_PORT);
 
     if (bind(listenSock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
         close(listenSock);
