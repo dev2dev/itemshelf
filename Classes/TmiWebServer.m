@@ -38,6 +38,23 @@
 #import "TmiWebServer.h"
 
 @implementation TmiWebServer
+@synthesize portNumber;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.portNumber = TMI_DEFAULT_SERVER_PORT;
+        serverUrl = nil;
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [serverUrl release];
+    [super dealloc];
+}
 
 /**
    Start web server
@@ -46,6 +63,13 @@
 {
     int on;
     struct sockaddr_in addr;
+
+    // check reachability
+    if (serverUrl == nil) {
+        if ([self serverUrl] == nil) {
+            return NO;
+        }
+    }
 
     listenSock = socket(AF_INET, SOCK_STREAM, 0);
     if (listenSock < 0) {
@@ -57,7 +81,7 @@
 
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    addr.sin_port = htons(TMI_WEB_SERVER_PORT);
+    addr.sin_port = htons(portNumber);
 
     if (bind(listenSock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
         close(listenSock);
@@ -98,6 +122,9 @@
 */
 - (NSString*)serverUrl
 {
+    [release serverUrl];
+    serverUrl = nil;
+
     // connect dummy UDP socket to get local IP address.
     int s = socket(AF_INET, SOCK_DGRAM, 0);
     struct sockaddr_in addr;
@@ -117,13 +144,19 @@
     char addrstr[64];
     inet_ntop(AF_INET, (void*)&addr.sin_addr.s_addr, addrstr, sizeof(addrstr));
 
-    NSString *url;
-    if (PORT_NUMBER == 80) {
-        url = [NSString stringWithFormat:@"http://%s", addrstr];
-    } else {
-        url = [NSString stringWithFormat:@"http://%s:%d", addrstr, PORT_NUMBER];
+    if (strcmp(addrstr, "127.0.0.1") == 0) {
+        // no network connection
+        return nil;
     }
-    return url;
+
+    if (portNumber == 80) {
+        serverUrl = [NSString stringWithFormat:@"http://%s", addrstr];
+    } else {
+        serverUrl = [NSString stringWithFormat:@"http://%s:%d", addrstr, portNumber];
+    }
+    [serverUrl retain];
+
+    return serverUrl;
 }
 
 /**

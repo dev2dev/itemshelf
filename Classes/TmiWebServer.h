@@ -37,20 +37,25 @@
 #import <netinet/in.h>
 
 // You can change port number of web server
-#define TMI_WEB_SERVER_PORT	8888
+#define TMI_DEFAULT_SERVER_PORT	8888
 
 /**
    Very Simple web server
 */
 @interface TmiWebServer : NSObject
 {
+    int portNumber;
+
     int listenSock;
     struct sockaddr_in serv_addr;
+    NSString *serverUrl;
 
     int serverSock;
 	
     NSThread *thread;
 }
+
+@property(nonatmoic,assign) int portNumber;
 
 - (BOOL)startServer;
 - (void)stopServer;
