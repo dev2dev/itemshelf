@@ -35,6 +35,7 @@
 #import "ConfigViewController.h"
 #import "DataModel.h"
 #import "AboutViewController.h"
+#import "WebViewController.h"
 
 @implementation ConfigViewController
 
@@ -152,7 +153,7 @@
         //NSURL *url = [NSURL URLWithString:NSLocalizedString(@"HelpURL", @"")];
         //[[UIApplication sharedApplication] openURL:url];
 
-        WebViewController *wv = [[[WebViewController alloc] initWithNibname:@"WebView" bundle:nil] autorelease];
+        WebViewController *wv = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
         wv.urlString = NSLocalizedString(@"HelpURL", @"");
         [self.navigationController pushViewController:wv animated:YES];
     }
@@ -183,7 +184,7 @@
         v = [[UIAlertView alloc]
              initWithTitle:@"Error"
              message:NSLocalizedString(@"Cannot start web server.", @"")
-             delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+             delegate:nil cancelButtonTitle:NSLocalizedString(@"Close", @"")
              otherButtonTitles:nil];
     } else {
         NSString *message = [NSString stringWithFormat:NSLocalizedString(@"WebServerNotation", @""), url];
@@ -191,7 +192,7 @@
         v = [[UIAlertView alloc]
              initWithTitle:NSLocalizedString(@"Backup and restore", @"")
              message:message
-             delegate:self cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+             delegate:self cancelButtonTitle:NSLocalizedString(@"Close", @"")
              otherButtonTitles:nil];
     }
     [v show];

@@ -35,7 +35,7 @@
 #import <arpa/inet.h>
 #import <fcntl.h>
 
-#import "WebServer.h"
+#import "TmiWebServer.h"
 #import "BackupServer.h"
 #import "Item.h"
 
@@ -54,8 +54,8 @@
 
 - (void)dealloc
 {
-    [release dataName];
-    [release filePath];
+    [dataName release];
+    [filePath release];
     [super dealloc];
 }
 
@@ -70,7 +70,7 @@
     }
 
     // download
-    else if ([path isEqualToString:fileUrlPath]) {
+    else if ([path isEqualToString:dataPath]) {
         [self sendBackup];
     }
             
@@ -95,7 +95,7 @@
     [self sendString:@"<h1>Backup</h1>"];
 
     NSString *formAction =
-        [NSString stringWithFormat::@"<form method=\"get\" action=\"/%@\">", dataName];
+        [NSString stringWithFormat:@"<form method=\"get\" action=\"/%@\">", dataName];
     [self sendString:formAction];
     [self sendString:@"<input type=submit value=\"Backup\">"];
     [self sendString:@"</form>"];
@@ -183,7 +183,7 @@
         return;
     }
 
-    p = data;
+    char *p = data;
     char *end = data + datalen;
     while (p < end) {
         int len = write(f, p, end - p);

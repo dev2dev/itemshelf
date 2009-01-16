@@ -122,7 +122,7 @@
 */
 - (NSString*)serverUrl
 {
-    [release serverUrl];
+    [serverUrl release];
     serverUrl = nil;
 
     // connect dummy UDP socket to get local IP address.

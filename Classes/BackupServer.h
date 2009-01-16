@@ -32,12 +32,12 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "WebServer.h"
+#import "TmiWebServer.h"
 
 /**
    Web server for backup and restore
 */
-@interface BackupServer : WebServer
+@interface BackupServer : TmiWebServer
 {
     NSString *filePath;
     NSString *dataName;

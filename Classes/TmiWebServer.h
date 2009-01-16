@@ -55,7 +55,7 @@
     NSThread *thread;
 }
 
-@property(nonatmoic,assign) int portNumber;
+@property(nonatomic,assign) int portNumber;
 
 - (BOOL)startServer;
 - (void)stopServer;
