@@ -41,9 +41,11 @@
 */
 @interface WebServer : NSObject
 {
-    int listen_sock;
+    int listenSock;
     struct sockaddr_in serv_addr;
-	
+
+    int serverSock;
+
     NSThread *thread;
 }
 
@@ -54,10 +56,10 @@
 - (NSString*)serverUrl;
 - (void)threadMain:(id)dummy;
 
-- (BOOL)readLine:(int)s line:(char *)line size:(int)size;
-- (char *)readBody:(int)s contentLength:(int)contentLength;
-- (void)handleHttpRequest:(int)s;
-- (void)send:(int)s string:(NSString *)string;
-- (void)requestHandler:(int)s filereq:(NSString*)filereq body:(char *)body bodylen:(int)bodylen;
+- (BOOL)readLine:(char *)line size:(int)size;
+- (char *)readBody:(int)contentLength;
+- (void)handleHttpRequest;
+- (void)sendString:(NSString *)string;
+- (void)requestHandler:(NSString*)filereq body:(char *)body bodylen:(int)bodylen;
 
 @end

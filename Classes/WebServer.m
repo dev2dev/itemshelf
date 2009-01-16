@@ -51,31 +51,31 @@
     int on;
     struct sockaddr_in addr;
 
-    listen_sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (listen_sock < 0) {
+    listenSock = socket(AF_INET, SOCK_STREAM, 0);
+    if (listenSock < 0) {
         return NO;
     }
 
     on = 1;
-    setsockopt(listen_sock, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
+    setsockopt(listenSock, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
     addr.sin_port = htons(PORT_NUMBER);
 
-    if (bind(listen_sock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
-        close(listen_sock);
+    if (bind(listenSock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+        close(listenSock);
         return NO;
     }
 	
     socklen_t len = sizeof(serv_addr);
-    if (getsockname(listen_sock, (struct sockaddr *)&serv_addr, &len)  < 0) {
-        close(listen_sock);
+    if (getsockname(listenSock, (struct sockaddr *)&serv_addr, &len)  < 0) {
+        close(listenSock);
         return NO;
     }
 
-    if (listen(listen_sock, 16) < 0) {
-        close(listen_sock);
+    if (listen(listenSock, 16) < 0) {
+        close(listenSock);
         return NO;
     }
 
@@ -91,10 +91,10 @@
 */
 - (void)stopServer
 {
-    if (listen_sock >= 0) {
-        close(listen_sock);
+    if (listenSock >= 0) {
+        close(listenSock);
     }
-    listen_sock = -1;
+    listenSock = -1;
 }
 
 /**
@@ -138,26 +138,25 @@
     NSAutoreleasePool *pool;
     pool = [[NSAutoreleasePool alloc] init];
 	
-    int s;
     socklen_t len;
     struct sockaddr_in caddr;
 	
     for (;;) {
         len = sizeof(caddr);
-        s = accept(listen_sock, (struct sockaddr *)&caddr, &len);
-        if (s < 0) {
+        serverSock = accept(listenSock, (struct sockaddr *)&caddr, &len);
+        if (serverSock < 0) {
             break;
         }
 
-        [self handleHttpRequest:s];
+        [self handleHttpRequest];
 
-        close(s);
+        close(serverSock);
     }
 
-    if (listen_sock >= 0) {
-        close(listen_sock);
+    if (listenSock >= 0) {
+        close(listenSock);
     }
-    listen_sock = -1;
+    listenSock = -1;
 	
     [pool release];
 
@@ -168,12 +167,12 @@
 /**
    Read http header line
 */
-- (BOOL)readLine:(int)s line:(char *)line size:(int)size
+- (BOOL)readLine:(char *)line size:(int)size
 {
     char *p = line;
 
     while (p < line + size) {
-        int len = read(s, p, 1);
+        int len = read(serverSock, p, 1);
         if (len <= 0) {
             return NO;
         }
@@ -189,7 +188,7 @@
 /**
    Recv http body
 */
-- (char *)readBody:(int)s contentLength:(int)contentLength
+- (char *)readBody:(int)contentLength
 {
     char *buf, *p;
     int len, remain;
@@ -205,7 +204,7 @@
     remain = len;
 
     while (remain > 0) {
-        int rlen = read(s, p, remain);
+        int rlen = read(serverSock, p, remain);
         if (rlen < 0) {
             free(buf);
             return NULL;
@@ -223,7 +222,7 @@
 /**
    Handle http request
 */
-- (void)handleHttpRequest:(int)s
+- (void)handleHttpRequest
 {
     char line[1024];
     int lineno = 0;
@@ -232,7 +231,7 @@
 
     // read headers
     for (;;) {
-        if (![self readLine:s line:line size:1024]) {
+        if (![self readLine:line size:1024]) {
             return; // error
         }
         NSLog(@"%s", line);
@@ -259,10 +258,10 @@
     // read body
     char *body = NULL;
     if (contentLength > 0) {
-        body = [self readBody:s contentLength:contentLength];
+        body = [self readBody:contentLength];
     }
 
-    [self requestHandler:(int)s filereq:(NSString*)filereq body:body bodylen:contentLength];
+    [self requestHandler:(NSString*)filereq body:body bodylen:contentLength];
 
     free(body);
 }
@@ -272,17 +271,28 @@
 
    @note You need to override this method
 */
-- (void)requestHandler:(int)s filereq:(NSString*)filereq body:(char *)body bodylen:(int)bodylen
+- (void)requestHandler:(NSString*)filereq body:(char *)body bodylen:(int)bodylen
 {
     // must be override
+
+    [self sendString:@"HTTP/1.0 404 Not Found\r\n"];
+    [self sendString:@"Content-Type: text/html; charset=iso-8859-1;\r\n"];
+    [self sendString:@"\r\n"];
+
+    [self sendString:@"<html><head><title>404 Not Found</title></head>\n"];
+    [self sendString:@"<body><h1>Not Found</h1>\n"];
+    [self sendString:@"<p>The requested URL "];
+    [self sendString:filereq];
+    [self sendString:@" is not found on this server.</p>"];
+    [self sendString:@"</body></html>"];
 }
 
 /**
    Send reply in string
 */
-- (void)send:(int)s string:(NSString *)string
+- (void)sendString:(NSString *)string
 {
-    write(s, [string UTF8String], [string length]);
+    write(serverSock, [string UTF8String], [string length]);
 }
 
 @end
