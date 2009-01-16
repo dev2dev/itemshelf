@@ -39,7 +39,10 @@
 */
 @interface BackupServer : WebServer
 {
+    NSString *filePath;
 }
+
+@property(nonatomic,retain) NSString *filePath;
 
 - (void)sendIndexHtml;
 - (void)sendBackup;

@@ -37,27 +37,46 @@
 
 #import "WebServer.h"
 #import "BackupServer.h"
-#import "Database.h"
 #import "Item.h"
 
 @implementation BackupServer
+@synthesize filePath, dataName;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        filePath = nil;
+        dataName = nil;
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [release dataName];
+    [release filePath];
+    [super dealloc];
+}
 
 - (void)requestHandler:(NSString*)path body:(char *)body bodylen:(int)bodylen
 {
+    NSString *dataPath = [NSString stringWithFormat:@"/%@", dataName];
+
     // Request to '/' url.
     if ([path isEqualToString:@"/"])
     {
-        [self sendIndexHtml:s];
+        [self sendIndexHtml];
     }
 
     // download
-    else if ([path isEqualToString:@"/itemshelf.db"]) {
-        [self sendBackup:s];
+    else if ([path isEqualToString:fileUrlPath]) {
+        [self sendBackup];
     }
             
     // upload
     else if ([path isEqualToString:@"/restore"]) {
-        [self restore:s body:body bodylen:bodylen];
+        [self restore body:body bodylen:bodylen];
     }
 
     else {
@@ -74,7 +93,12 @@
 
     [self sendString:@"<html><body>"];
     [self sendString:@"<h1>Backup</h1>"];
-    [self sendString:@"<form method=\"get\" action=\"/itemshelf.db\"><input type=submit value=\"Backup\"></form>"];
+
+    NSString *formAction =
+        [NSString stringWithFormat::@"<form method=\"get\" action=\"/%@\">", dataName];
+    [self sendString:formAction];
+    [self sendString:@"<input type=submit value=\"Backup\">"];
+    [self sendString:@"</form>"];
 
     [self sendString:@"<h1>Restore</h1>"];
     [self sendString:@"<form method=\"post\" enctype=\"multipart/form-data\"action=\"/restore\">"];
@@ -87,11 +111,9 @@
 /**
    Send backup file
 */
-- (void)sendBackup:(int)s
+- (void)sendBackup
 {
-    NSString *path = [[Database instance] dbPath];
-
-    int f = open([path UTF8String], O_RDONLY);
+    int f = open([filePath UTF8String], O_RDONLY);
     if (f < 0) {
         // file open error...
         // TBD
@@ -113,7 +135,7 @@
 /**
    Restore from backup file
 */
-- (void)restore:(int)s body:(char *)body bodylen:(int)bodylen
+- (void)restore:(char *)body bodylen:(int)bodylen
 {
     NSLog(@"%s", body);
     // get mimepart delimiter
@@ -146,8 +168,7 @@
     }
 
     // okay, save data between start and end.
-    NSString *path = [[Database instance] dbPath];
-    int f = open([path UTF8String], O_WRONLY);
+    int f = open([filePath UTF8String], O_WRONLY);
     if (f < 0) {
         // TBD;
         return;
