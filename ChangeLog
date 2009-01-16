@@ -1,3 +1,7 @@
+2009-01-12 : Takuya Murakami
+	* ヘルプを WebView で開くようにした
+	* リファクタリング
+	
 2009-01-11 : Takuya Murakami
 	* バックアップ／リストア機能を追加
 

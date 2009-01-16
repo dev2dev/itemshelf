@@ -149,8 +149,12 @@
     }
     else if (indexPath.section == 1 && indexPath.row == 0) {
         // show help
-        NSURL *url = [NSURL URLWithString:NSLocalizedString(@"HelpURL", @"")];
-        [[UIApplication sharedApplication] openURL:url];
+        //NSURL *url = [NSURL URLWithString:NSLocalizedString(@"HelpURL", @"")];
+        //[[UIApplication sharedApplication] openURL:url];
+
+        WebViewController *wv = [[[WebViewController alloc] initWithNibname:@"WebView" bundle:nil] autorelease];
+        wv.urlString = NSLocalizedString(@"HelpURL", @"");
+        [self.navigationController pushViewController:wv animated:YES];
     }
     else if (indexPath.section == 1 && indexPath.row == 1) {
         AboutViewController *aout = [[[AboutViewController alloc]
