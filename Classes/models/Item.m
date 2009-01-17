@@ -334,7 +334,7 @@
     const char *sql = "UPDATE Item SET tags = ? WHERE pkey = ?;";
     dbstmt *stmt = [[Database instance] prepare:sql];
 	
-    [stmt bindInt:0 val:tags];
+    [stmt bindString:0 val:tags];
     [stmt bindInt:1 val:pkey];
     [stmt step];
     [stmt release];

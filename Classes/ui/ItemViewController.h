@@ -36,9 +36,11 @@
 #import "Common.h"
 #import "Item.h"
 #import "GenSelectListViewController.h"
+#import "GenEditTextViewController.h"
 
 @interface ItemViewController : UIViewController
-<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, GenSelectListViewDelegate>
+<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, 
+     GenEditTextViewDelegate, GenSelectListViewDelegate>
 {
     IBOutlet UITableView *tableView;
 	
@@ -46,6 +48,7 @@
     NSString *urlString;
 
     UIActionSheet *openActionSheet;
+    Item *currentEditingItem;
 }
 
 @property(nonatomic,retain) NSMutableArray *itemArray;

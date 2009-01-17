@@ -277,9 +277,9 @@
         if (itemCounter < AMAZON_MAX_SEARCH_ITEMS) {
             Item *item = [[Item alloc] init];
 
-            item.idType = serviceId;
+            item.serviceId = serviceId;
             item.idString = searchCode;
-            item.productGroup = xmlState.indexName;
+            item.category = xmlState.indexName;
 
             [itemArray addObject:item];
             [item release];

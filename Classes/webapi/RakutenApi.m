@@ -185,8 +185,8 @@
 
         Item *item = [[Item alloc] init];
 
-        item.idType = serviceId;
-        item.productGroup = @"Other"; // とりあえず
+        item.serviceId = serviceId;
+        item.category = @"Other"; // とりあえず
 
         [itemArray addObject:item];
         [item release];

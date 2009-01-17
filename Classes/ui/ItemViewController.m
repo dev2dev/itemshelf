@@ -284,10 +284,11 @@
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tv deselectRowAtIndexPath:indexPath animated:NO];
-	
+
+    int idx = indexPath.row;
     Item *item = [itemArray objectAtIndex:indexPath.section];
 
-    if (indexPath.row == 1) {
+    if (idx == 1) {
         // 詳細を表示
         NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
         WebViewController *vc = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
@@ -295,7 +296,7 @@
 
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (indexPath.row == 2) {
+    else if (idx == 2) {
         // 再検索
         KeywordViewController *v = [KeywordViewController keywordViewController:NSLocalizedString(@"Title", @"")];
         v.selectedShelf = [[DataModel sharedDataModel] shelf:item.shelfId];
@@ -304,11 +305,35 @@
         //[self.navigationController popViewControllerAnimated:NO];
         [self.navigationController pushViewController:v animated:YES];
     }
-    else if (indexPath.row == 3 && !item.registeredWithShelf) {
-        // 棚に登録
-        [[DataModel sharedDataModel] addItem:item];
-        [tv reloadData];
+    else {
+        idx -= 3;
+        if (!item.registeredWithShelf) {
+            idx--;
+        }
+
+        if (idx == -1) {
+            // 棚に登録
+            [[DataModel sharedDataModel] addItem:item];
+            [tv reloadData];
+        }
+        else if (idx == 0) {
+            // タグ編集
+            currentEditingItem = item;
+            GenEditTextViewController *vc = 
+                [GenEditTextViewController genEditTextViewController:self
+                                           title:NSLocalizedString(@"Tags", @"")
+                                           identifier:0];
+            vc.text = item.tags;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
+}
+
+- (void)genEditTextViewChanged:(GenEditTextViewController *)vc identifier:(int)id
+{
+    currentEditingItem.tags = vc.text;
+    [currentEditingItem updateTags];
+    [tableView reloadData];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
