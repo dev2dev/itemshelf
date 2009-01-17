@@ -113,11 +113,11 @@
         [self checkAndAppendString:item.infoStrings value:item.author withName:@"Author"];
         [self checkAndAppendString:item.infoStrings value:item.manufacturer withName:@"Manufacturer"];
         [self checkAndAppendString:item.infoStrings value:item.price withName:@"Price"];
-        [self checkAndAppendString:item.infoStrings value:NSLocalizedString(item.productGroup, @"") withName:@"Category"];
+        [self checkAndAppendString:item.infoStrings value:NSLocalizedString(item.category, @"") withName:@"Category"];
         [self checkAndAppendString:item.infoStrings value:item.idString withName:@"Code"];
         [self checkAndAppendString:item.infoStrings value:item.asin withName:@"ASIN"];
 		
-        NSLog(@"DEBUG: ProductGroup = %@", item.productGroup);
+        NSLog(@"DEBUG: Category = %@", item.category);
     }
 }
 
@@ -145,8 +145,8 @@
 {
     Item *item = [itemArray objectAtIndex:section];
 	
-    // 画像 + 詳細表示セル + 再検索 + 情報数
-    return 3 + (item.registeredWithShelf ? 0 : 1) + item.infoStrings.count;
+    // 画像 + 詳細表示セル + 再検索 + タグ + 情報数
+    return 3 + (item.registeredWithShelf ? 0 : 1) + 1 + item.infoStrings.count;
 }
 
 // セルの高さを返す
@@ -200,15 +200,28 @@
         if (!item.registeredWithShelf) {
             idx--;
         }
-		
-        if (idx == -1) {
+
+        cell.font = [UIFont boldSystemFontOfSize:14.0];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+
+        switch (idx) {
+        case -1:
             cell.text = NSLocalizedString(@"Add to shelf", @"");
             cell.font = [UIFont boldSystemFontOfSize:16.0];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        } else {
-            cell.text = [infoStrings objectAtIndex:idx];
-            cell.font = [UIFont boldSystemFontOfSize:14.0];
-            cell.accessoryType = UITableViewCellAccessoryNone;
+            break;
+            
+        case 0:
+            // tags
+            cell.text = [NSString stringWithFormat:@"%@: %@",
+                                  NSLocalizedString(@"Tags", @""),
+                                  item.tags];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            break;
+
+        default:
+            cell.text = [infoStrings objectAtIndex:idx-1];
+            break;
         }
     }
 

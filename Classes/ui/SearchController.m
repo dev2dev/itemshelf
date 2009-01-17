@@ -151,6 +151,7 @@
             }
         } else {
             // データ重複 : 置換する
+            [x updateWithNewItem:item];
             [itemArray replaceObjectAtIndex:i withObject:x];
         }
     }
