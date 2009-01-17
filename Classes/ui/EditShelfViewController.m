@@ -70,6 +70,7 @@
     titleField        = [self textInputField:shelf.titleFilter placeholder:@"Title"];
     authorField       = [self textInputField:shelf.authorFilter placeholder:@"Author"];
     manufacturerField = [self textInputField:shelf.manufacturerFilter placeholder:@"Manufacturer"];
+    tagsField         = [self textInputField:shelf.tagsFilter placeholder:@"Tags"];
 }
 
 - (void)dealloc {
@@ -79,6 +80,7 @@
     [titleField release];
     [authorField release];
     [manufacturerField release];
+    [tagsField release];
 
     [super dealloc];
 }
@@ -92,7 +94,8 @@
     shelf.titleFilter = titleField.text;
     shelf.authorFilter = authorField.text;
     shelf.manufacturerFilter = manufacturerField.text;
-
+    shelf.tagsFilter = tagsField.text;
+    
     if (isNew) {
         // 新規追加
         [[DataModel sharedDataModel] addShelf:shelf];
@@ -115,6 +118,7 @@
     [titleField resignFirstResponder];
     [authorField resignFirstResponder];
     [manufacturerField resignFirstResponder];
+    [tagsField resignFirstResponder];
 
     [self.navigationController dismissModalViewControllerAnimated:YES];
 }
@@ -157,7 +161,7 @@
     if (shelf.shelfType == ShelfTypeNormal) {
         return 1; // 棚の名前だけ
     }
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -175,6 +179,9 @@
         break;
     case 3:
         cell = [self textViewCell:@"Manufacturer" view:manufacturerField];
+        break;
+    case 4:
+        cell = [self textViewCell:@"Tags" view:tagsField];
         break;
     }
     return cell;

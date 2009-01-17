@@ -46,6 +46,7 @@
     UITextField *titleField;
     UITextField *authorField;
     UITextField *manufacturerField;
+    UITextField *tagsField;
 }
 
 @property(nonatomic,retain) Shelf *shelf;
