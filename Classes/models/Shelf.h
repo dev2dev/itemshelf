@@ -68,6 +68,7 @@ typedef enum
     NSString *titleFilter;	///< Title filter of smart shelf
     NSString *authorFilter;	///< Author filter of smart shelf
     NSString *manufacturerFilter; ///< Manufacturer filter of smart shelf
+    NSString *tagsFilter;       ///< Tags filter of smart shelf
 }
 
 @property(nonatomic,retain) NSMutableArray *array;
@@ -78,6 +79,7 @@ typedef enum
 @property(nonatomic,retain) NSString *titleFilter;
 @property(nonatomic,retain) NSString *authorFilter;
 @property(nonatomic,retain) NSString *manufacturerFilter;
+@property(nonatomic,retain) NSString *tagsFilter;
 
 - (void)addItem:(Item*)item;
 - (void)removeItem:(Item*)item;

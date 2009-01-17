@@ -151,7 +151,8 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
         NSString *tablesql = [stmt colString:0];
 
         // Ver 1.1 からの upgrade
-        NSRange range = [tablesql rangeOfString:@"titleFilter"];
+        NSRange range;
+        range = [tablesql rangeOfString:@"titleFilter"];
         if (range.location == NSNotFound) {
             [db exec:"ALTER TABLE Shelf ADD COLUMN type INTEGER;"];
             [db exec:"ALTER TABLE Shelf ADD COLUMN titleFilter TEXT;"];
@@ -159,6 +160,12 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
             [db exec:"ALTER TABLE Shelf ADD COLUMN manufacturerFilter TEXT;"];
 
             [db exec:"UPDATE Shelf SET type = 0;"];
+        }
+
+        // Ver 1.3 からの upgrade
+        range = [tablesql rangeOfString:@"tagsFilter"];
+        if (range.location == NSNotFound) {
+            [db exec:"ALTER TABLE Shelf ADD COLUMN tagsFilter TEXT;"];
         }
     }
     [stmt release];
@@ -173,7 +180,8 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
         "type INTEGER,"
         "titleFilter TEXT,"
         "authorFilter TEXT,"
-        "manufacturerFilter TEXT"
+        "manufacturerFilter TEXT,"
+        "tagsFilter TEXT"
         ");"
      ];
 
@@ -192,7 +200,7 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
             break;
         }
 
-        stmt = [db prepare:"INSERT INTO Shelf VALUES(?, ?, ?, 0, NULL, NULL, NULL);"];
+        stmt = [db prepare:"INSERT INTO Shelf VALUES(?, ?, ?, 0, NULL, NULL, NULL, NULL);"];
         [stmt bindInt:0 val:i];
         [stmt bindString:1 val:NSLocalizedString(name, @"")];
         [stmt bindInt:2 val:i];
@@ -213,9 +221,10 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     self.titleFilter        = [stmt colString:4];
     self.authorFilter       = [stmt colString:5];
     self.manufacturerFilter = [stmt colString:6];
+    self.tagsFilter         = [stmt colString:7];
 
-    NSLog(@"%d %@ %d %d %@ %@ %@", self.pkey, self.name, self.sorder,
-          self.shelfType, self.titleFilter, self.authorFilter, self.manufacturerFilter);
+    NSLog(@"%d %@ %d %d %@ %@ %@ %@", self.pkey, self.name, self.sorder,
+          self.shelfType, self.titleFilter, self.authorFilter, self.manufacturerFilter, self.tagsFilter);
 }
 
 /**
@@ -227,12 +236,13 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
 	
     [db beginTransaction];
 	
-    dbstmt *stmt = [db prepare:"INSERT INTO Shelf VALUES(NULL, ?, -1, ?, ?, ?, ?);"];
+    dbstmt *stmt = [db prepare:"INSERT INTO Shelf VALUES(NULL, ?, -1, ?, ?, ?, ?, ?);"];
     [stmt bindString:0 val:name];
     [stmt bindInt:1    val:shelfType];
     [stmt bindString:2 val:titleFilter];
     [stmt bindString:3 val:authorFilter];
     [stmt bindString:4 val:manufacturerFilter];
+    [stmt bindString:5 val:tagsFilter];
 
     [stmt step];
     [stmt release];
@@ -303,13 +313,14 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
 */
 - (void)updateSmartFilters
 {
-    const char *sql = "UPDATE Shelf SET titleFilter = ?, authorFilter = ?, manufacturerFilter = ? WHERE pkey = ?;";
+    const char *sql = "UPDATE Shelf SET titleFilter = ?, authorFilter = ?, manufacturerFilter = ?, tagsFilter = ?  WHERE pkey = ?;";
     dbstmt *stmt = [[Database instance] prepare:sql];
 	
     [stmt bindString:0 val:titleFilter];
     [stmt bindString:1 val:authorFilter];
     [stmt bindString:2 val:manufacturerFilter];
-    [stmt bindInt:3 val:pkey];
+    [stmt bindString:3 val:tagsFilter];
+    [stmt bindInt:4 val:pkey];
     [stmt step];
     [stmt release];
 }
