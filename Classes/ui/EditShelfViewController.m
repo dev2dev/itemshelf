@@ -53,6 +53,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.tableView.rowHeight = 38;
+    
     self.navigationItem.title = NSLocalizedString(@"Edit shelf", @"");
     self.navigationItem.rightBarButtonItem =
         [[[UIBarButtonItem alloc]
@@ -130,7 +132,7 @@
 - (UITextField*)textInputField:(NSString*)value placeholder:(NSString*)placeholder
 {
     UITextField *t = [[UITextField alloc]
-                         initWithFrame:CGRectMake(110, 12, 210, 32)];
+                         initWithFrame:CGRectMake(110, 10, 210, 32)];
 
     t.text = value;
     t.placeholder = NSLocalizedString(placeholder, @"");

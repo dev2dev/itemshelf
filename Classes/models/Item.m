@@ -338,6 +338,8 @@
     [stmt bindInt:1 val:pkey];
     [stmt step];
     [stmt release];
+    
+    [[DataModel sharedDataModel] updateSmartShelves];
 }
 
 //@}
