@@ -39,7 +39,7 @@
 
 
 @implementation Shelf
-@synthesize array, pkey, name, sorder, shelfType, titleFilter, authorFilter, manufacturerFilter;
+@synthesize array, pkey, name, sorder, shelfType, titleFilter, authorFilter, manufacturerFilter, tagsFilter;
 
 - (id)init
 {
@@ -51,6 +51,7 @@
         self.titleFilter = @"";
         self.authorFilter = @"";
         self.manufacturerFilter = @"";
+        self.tagsFilter = @"";
     }
     return self;
 }
@@ -62,6 +63,7 @@
     [titleFilter release];
     [authorFilter release];
     [manufacturerFilter release];
+    [tagsFilter release];
 
     [super dealloc];
 }

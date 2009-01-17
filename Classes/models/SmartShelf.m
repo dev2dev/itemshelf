@@ -42,6 +42,7 @@
 static NSMutableArray *titleFilterStrings = nil;
 static NSMutableArray *authorFilterStrings = nil;
 static NSMutableArray *manufacturerFilterStrings = nil;
+static NSMutableArray *tagsFilterStrings = nil;
 
 /**
    Update all items in smart shelves.
@@ -55,6 +56,7 @@ static NSMutableArray *manufacturerFilterStrings = nil;
     titleFilterStrings = [self _makeFilterStrings:titleFilter];
     authorFilterStrings = [self _makeFilterStrings:authorFilter];
     manufacturerFilterStrings = [self _makeFilterStrings:manufacturerFilter];
+    tagsFilterStrings = [self _makeFilterStrings:tagsFilter];
 
     for (Shelf *shelf in shelves) {
         if (shelf.shelfType != ShelfTypeNormal) continue;
@@ -69,6 +71,7 @@ static NSMutableArray *manufacturerFilterStrings = nil;
     [titleFilterStrings release];
     [authorFilterStrings release];
     [manufacturerFilterStrings release];
+    [tagsFilterStrings release];
 }
 
 /**
@@ -120,6 +123,9 @@ static NSMutableArray *manufacturerFilterStrings = nil;
     if (!result) return NO;
 
     result = [self _isMatchSmartFilter:manufacturerFilterStrings value:item.manufacturer];
+    if (!result) return NO;
+
+    result = [self _isMatchSmartFilter:tagsFilterStrings value:item.tags];
     if (!result) return NO;
 
     return YES;
