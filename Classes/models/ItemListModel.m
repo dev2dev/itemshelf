@@ -140,7 +140,7 @@
     Item *item;
     for (item in shelf) {
         // フィルタチェック
-        if (filter != nil && ![item.productGroup isEqualToString:filter]) {
+        if (filter != nil && ![item.category isEqualToString:filter]) {
             continue;
         }
 		

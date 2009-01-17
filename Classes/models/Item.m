@@ -39,8 +39,8 @@
 @implementation Item
 
 @synthesize pkey, date, shelfId;
-@synthesize idType, idString, asin;
-@synthesize name, author, manufacturer, productGroup, detailURL, price, tags;
+@synthesize serviceId, idString, asin;
+@synthesize name, author, manufacturer, category, detailURL, price, tags;
 @synthesize memo, imageURL, sorder;
 @synthesize imageCache, infoStrings, registeredWithShelf;
 
@@ -51,13 +51,13 @@
         self.pkey = -1; // initial
         self.date = [NSDate date];  // 現在時刻で生成
         self.shelfId = 0; // unclassified shelf
-        self.idType = -1;
+        self.serviceId = -1;
         self.idString = @"";
         self.asin = @"";
         self.name = @"";
         self.author = @"";
         self.manufacturer = @"";
-        self.productGroup = @"";
+        self.category = @"";
         self.detailURL = @"";
         self.price = @"";
         self.tags = @"";
@@ -76,7 +76,7 @@
     [name release];
     [author release];
     [manufacturer release];
-    [productGroup release];
+    [category release];
     [detailURL release];
     [price release];
     [tags release];
@@ -104,6 +104,33 @@
         return YES;
     }
     return NO;
+}
+
+/**
+   Update item
+*/
+- (void)updateWithNewItem:(Item *)item
+{
+    // do not replace local defined variables...
+
+    //self.pkey = item.pkey;
+    self.date = item.date;
+    //self.shelfId = item.shelfId;
+    self.serviceId = item.serviceId;
+    if (item.idString != nil) self.idString = item.idString;
+    self.asin = item.asin;
+    self.name = item.name;
+    self.author = item.author;
+    self.manufacturer = item.manufacturer;
+    self.category = item.category;
+    self.detailURL = item.detailURL;
+    self.price = item.price;
+    //self.tags = item.tags;
+    //self.memo = item.memo;
+    self.imageURL = item.imageURL;
+    //self.sorder = item.sorder;
+
+    [self update];
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -156,13 +183,13 @@
     self.pkey         = [stmt colInt:0];
     self.date         = [stmt colDate:1];
     self.shelfId      = [stmt colInt:2];
-    self.idType       = [stmt colInt:3];
+    self.serviceId    = [stmt colInt:3];
     self.idString     = [stmt colString:4];
     self.asin         = [stmt colString:5];
     self.name         = [stmt colString:6];
     self.author       = [stmt colString:7];
     self.manufacturer = [stmt colString:8];
-    self.productGroup = [stmt colString:9];
+    self.category     = [stmt colString:9];
     self.detailURL    = [stmt colString:10];
     self.price        = [stmt colString:11];
     self.tags         = [stmt colString:12];
@@ -186,13 +213,13 @@
 
     [stmt bindDate:0 val:date];
     [stmt bindInt:1 val:shelfId];
-    [stmt bindInt:2 val:idType];
+    [stmt bindInt:2 val:serviceId];
     [stmt bindString:3 val:idString];
     [stmt bindString:4 val:asin];
     [stmt bindString:5 val:name];
     [stmt bindString:6 val:author];
     [stmt bindString:7 val:manufacturer];
-    [stmt bindString:8 val:productGroup];
+    [stmt bindString:8 val:category];
     [stmt bindString:9 val:detailURL];
     [stmt bindString:10 val:price];
     [stmt bindString:11 val:tags];
@@ -206,6 +233,54 @@
     self.sorder = pkey;  // 初期並び順は Primary Key と同じにしておく(最大値)
     [self updateSorder];
 	
+    [db commitTransaction];
+}
+
+- (void)update
+{
+    Database *db = [Database instance];
+	
+    [db beginTransaction];
+	
+    const char *sql = "UPDATE Item SET "
+        "date = ?,"
+        "itemState = ?,"
+        "idType = ?,"
+        "idString = ?,"
+        "asin = ?,"
+        "name = ?,"
+        "author = ?,"
+        "manufacturer = ?,"
+        "productGroup = ?,"
+        "detailURL = ?,"
+        "price = ?,"
+        "tags = ?,"
+        "memo = ?,"
+        "imageURL = ?,"
+        "sorder = ?"
+        " WHERE pkey = ?;";
+
+    dbstmt *stmt = [db prepare:sql];
+
+    [stmt bindDate:0 val:date];
+    [stmt bindInt:1 val:shelfId];
+    [stmt bindInt:2 val:serviceId];
+    [stmt bindString:3 val:idString];
+    [stmt bindString:4 val:asin];
+    [stmt bindString:5 val:name];
+    [stmt bindString:6 val:author];
+    [stmt bindString:7 val:manufacturer];
+    [stmt bindString:8 val:category];
+    [stmt bindString:9 val:detailURL];
+    [stmt bindString:10 val:price];
+    [stmt bindString:11 val:tags];
+    [stmt bindString:12 val:memo];
+    [stmt bindString:13 val:imageURL];
+    [stmt bindInt:14 val:sorder];
+    [stmt bindInt:15 val:pkey];
+    [stmt step];
+    [stmt release];
+
     [db commitTransaction];
 }
 
@@ -249,6 +324,17 @@
     dbstmt *stmt = [[Database instance] prepare:sql];
 	
     [stmt bindInt:0 val:sorder];
+    [stmt bindInt:1 val:pkey];
+    [stmt step];
+    [stmt release];
+}
+
+- (void)updateTags
+{
+    const char *sql = "UPDATE Item SET tags = ? WHERE pkey = ?;";
+    dbstmt *stmt = [[Database instance] prepare:sql];
+	
+    [stmt bindInt:0 val:tags];
     [stmt bindInt:1 val:pkey];
     [stmt step];
     [stmt release];

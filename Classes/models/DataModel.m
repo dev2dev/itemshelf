@@ -285,8 +285,8 @@ static DataModel *theDataModel = nil; // singleton
 	
     Item *item;
     for (item in shelf) {
-        if ([filters findString:item.productGroup] < 0) {
-            [filters addObject:item.productGroup];
+        if ([filters findString:item.category] < 0) {
+            [filters addObject:item.category];
         }
     }
 

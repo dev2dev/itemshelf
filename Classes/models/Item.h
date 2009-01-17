@@ -55,14 +55,14 @@
     NSDate *date;	///< Registered date
     int shelfId;	///< Shelf ID (SHELF_*)
 
-    int idType;		///< ID type (same as service ID of WebApi)
+    int serviceId;	///< serviceId (same as service ID of WebApi) (old: idType)
     NSString *idString;	///< ID string (Barcode or other uniq item ID of each service)
     NSString *asin;	///< ASIN: Amazon Standard Identification Number
 
     NSString *name;	///< Item name
     NSString *author;	///< Author
     NSString *manufacturer;	///< Manufacturer name
-    NSString *productGroup;	///< Product Group (Category)
+    NSString *category;	///< Category (old:productGroup)
     NSString *detailURL;	///< URL of detail page of the item
     NSString *price;	///< Price info
     NSString *tags;	///< Tag info (reserved)
@@ -86,13 +86,13 @@
 @property(nonatomic,assign) int pkey;
 @property(nonatomic,retain) NSDate *date;
 @property(nonatomic,assign) int shelfId;
-@property(nonatomic,assign) int idType;
+@property(nonatomic,assign) int serviceId;
 @property(nonatomic,retain) NSString *idString;
 @property(nonatomic,retain) NSString *asin;
 @property(nonatomic,retain) NSString *name;
 @property(nonatomic,retain) NSString *author;
 @property(nonatomic,retain) NSString *manufacturer;
-@property(nonatomic,retain) NSString *productGroup;
+@property(nonatomic,retain) NSString *category;
 @property(nonatomic,retain) NSString *detailURL;
 @property(nonatomic,retain) NSString *price;
 @property(nonatomic,retain) NSString *tags;
@@ -104,12 +104,15 @@
 @property(nonatomic,assign) BOOL registeredWithShelf;
 
 - (BOOL)isEqualToItem:(Item*)item;
+- (void)updateWithNewItem:(Item*)item;
 + (void)checkTable;
 - (void)loadRow:(dbstmt *)stmt;
 - (void)insert;
+- (void)update;
 - (void)delete;
 - (void)changeShelf:(int)shelf;
 - (void)updateSorder;
+- (void)updateTags;
 
 + (void)clearAllImageCache;
 - (UIImage *)getImage:(id<ItemDelegate>)delegate;
