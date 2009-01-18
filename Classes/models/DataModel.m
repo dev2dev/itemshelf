@@ -341,14 +341,7 @@ static DataModel *theDataModel = nil; // singleton
 
             // uniq and add
             for (NSString *t1 in tt) {
-                BOOL exist = NO;
-                for (NSString *t2 in tags) {
-                    if ([t1 isEqualToString:t2]) {
-                        exist = YES;
-                        break;
-                    }
-                }
-                if (!exist) {
+                if ([tags findString:t1] < 0) {
                     [tags addObject:t1];
                 }
             }
