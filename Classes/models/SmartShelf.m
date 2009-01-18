@@ -36,6 +36,7 @@
 
 #import "Item.h"
 #import "Shelf.h"
+#import "DataModel.h"
 
 @implementation Shelf(SmartShelf)
 
@@ -79,6 +80,8 @@ static NSMutableArray *tagsFilterStrings = nil;
 */ 
 - (NSMutableArray *)_makeFilterStrings:(NSString *)filter
 {
+    return [DataModel splitString:filter];
+#if 0 /* ### */
     NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:3];
 
     NSString *token;
@@ -104,6 +107,7 @@ static NSMutableArray *tagsFilterStrings = nil;
     }
 
     return ary;
+#endif
 }
 
 /**

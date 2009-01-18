@@ -73,6 +73,8 @@
 
 - (NSMutableArray*)makeFilter:(Shelf *)shelf;
 
++ (NSMutableArray *)splitString:(NSString *)string;
+
 //- (NSArray*)countries;
 //- (NSString*)country;
 //- (void)setCountry:(NSString*)country;

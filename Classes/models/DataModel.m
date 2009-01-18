@@ -320,6 +320,85 @@ static DataModel *theDataModel = nil; // singleton
     return nil;
 }
 
+/**
+   Make all tags from all items
+*/
+- (NSMutableArray *)allTags
+{
+    NSMutableArray *tags = [[NSMutableArray alloc] initWithCapacity:10];
+
+    for (int i = 0; i < shelves.count; i++) {
+        Shelf *shelf = [shelves objectAtIndex:i];
+        if (shelf.shelfType != ShelfTypeNormal) continue;
+
+        for (Item *item in shelf) {
+            if (item.tags == nil || item.tags.length == 0) {
+                continue;
+            }
+
+            // split tags
+            NSMutableArray *tt = [DataModel splitString:item.tags];
+
+            // uniq and add
+            for (NSString *t1 in tt) {
+                BOOL exist = NO;
+                for (NSString *t2 in tags) {
+                    if ([t1 isEqualToString:t2]) {
+                        exist = YES;
+                        break;
+                    }
+                }
+                if (!exist) {
+                    [tags addObject:t1];
+                }
+            }
+
+            [tt release];
+        }
+    }
+
+    // sort
+    [tags sortByString];
+
+    return nil;
+}
+
+/**
+   Returns array of string, which is separated with comma or space delimiter.
+
+   @note You must release returned value!
+*/ 
++ (NSMutableArray *)splitString:(NSString *)string
+{
+    NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:3];
+
+    NSString *token;
+    NSCharacterSet *delimiter = [NSCharacterSet characterSetWithCharactersInString:@" ,"];
+
+    while (string != nil) {
+        NSRange range = [string rangeOfCharacterFromSet:delimiter];
+        if (range.location != NSNotFound) {
+            token = [string substringToIndex:range.location];
+            if (range.location <= string.length - 2) {
+                string = [string substringFromIndex:range.location+1];
+            } else {
+                string = nil;
+            }
+        } else {
+            token = string;
+            string = nil;
+        }
+
+        // trim space
+        token = [token stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if (token.length > 0) {
+            [ary addObject:token];
+        }
+    }
+
+    return ary;
+}
+
 ////////////////////////////////////////////////////////////////
 // Database operation
 
