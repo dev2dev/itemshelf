@@ -319,17 +319,14 @@
         else if (idx == 0) {
             // タグ編集
             currentEditingItem = item;
-            GenEditTextViewController *vc = 
-                [GenEditTextViewController genEditTextViewController:self
-                                           title:NSLocalizedString(@"Tags", @"")
-                                           identifier:0];
+            EditTagsViewController *vc = [EditTagsViewController editTagsViewController:self];
             vc.text = item.tags;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
 
-- (void)genEditTextViewChanged:(GenEditTextViewController *)vc identifier:(int)id
+- (void)editTagsViewChanged:(EditTagsViewController *)vc
 {
     currentEditingItem.tags = vc.text;
     [currentEditingItem updateTags];

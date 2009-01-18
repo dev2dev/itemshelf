@@ -36,11 +36,11 @@
 #import "Common.h"
 #import "Item.h"
 #import "GenSelectListViewController.h"
-#import "GenEditTextViewController.h"
+#import "EditTagsViewController.h"
 
 @interface ItemViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, 
-     GenEditTextViewDelegate, GenSelectListViewDelegate>
+     EditTagsViewDelegate, GenSelectListViewDelegate>
 {
     IBOutlet UITableView *tableView;
 	
