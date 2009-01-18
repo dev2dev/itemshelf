@@ -72,6 +72,7 @@
 - (Item *)findSameItem:(Item*)item;
 
 - (NSMutableArray*)makeFilter:(Shelf *)shelf;
+- (NSMutableArray *)allTags;
 
 + (NSMutableArray *)splitString:(NSString *)string;
 

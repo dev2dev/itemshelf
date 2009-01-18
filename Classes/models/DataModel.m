@@ -360,7 +360,7 @@ static DataModel *theDataModel = nil; // singleton
     // sort
     [tags sortByString];
 
-    return nil;
+    return tags;
 }
 
 /**
