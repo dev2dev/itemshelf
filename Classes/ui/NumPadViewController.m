@@ -65,9 +65,7 @@
     noteLabel.text = NSLocalizedString(@"NumPadNoteText", @"");
 	
     // set service string
-    [serviceIdButton 
-        setTitle:[webApiFactory serviceIdString]
-        forState:UIControlStateNormal];
+    [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
 
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -177,7 +175,7 @@
 {
     webApiFactory.serviceId = vc.selectedIndex;
     [webApiFactory saveDefaults];
-    [serviceIdButton setTitle:[webApiFactory serviceIdString] forState:UIControlStateNormal];
+    [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
 }
 
 - (void)didReceiveMemoryWarning {

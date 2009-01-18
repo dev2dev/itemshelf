@@ -64,3 +64,10 @@ void AssertFailed(const char *filename, int line);
 @interface UIViewController (MyExt)
 - (void)doModalWithNavigationController:(UIViewController *)vc;
 @end
+
+/**
+   Extended UIButton
+*/
+@interface UIButton (MyExt)
+- (void)setTitleForAllState:(NSString*)title;
+@end

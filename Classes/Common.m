@@ -163,3 +163,18 @@ void AssertFailed(const char *filename, int line)
 }
 
 @end
+
+/**
+   Extended UIButton
+*/
+@implementation UIButton (MyExt)
+
+- (void)setTitleForAllState:(NSString*)title
+{
+    [self setTitle:title forState:UIControlStateNormal];
+    [self setTitle:title forState:UIControlStateHighlighted];
+    [self setTitle:title forState:UIControlStateDisabled];
+    [self setTitle:title forState:UIControlStateSelected];
+}
+
+@end

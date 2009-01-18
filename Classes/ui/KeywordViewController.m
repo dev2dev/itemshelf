@@ -67,10 +67,8 @@
     [self _setupCategories];
  
     // set service string
-    [serviceIdButton
-        setTitle:[webApiFactory serviceIdString]
-        forState:UIControlStateNormal];
-    
+    [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
+
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                   target:self
@@ -92,7 +90,7 @@
     searchSelectedIndex = [api defaultCategoryIndex];
 
     NSString *text = [searchIndices objectAtIndex:searchSelectedIndex];
-    [indexButton setTitle:NSLocalizedString(text, @"") forState:UIControlStateNormal];
+    [indexButton setTitleForAllState:NSLocalizedString(text, @"")];
 
     [api release];
 }
@@ -180,13 +178,13 @@
     case 0: // serchIndex
         searchSelectedIndex = vc.selectedIndex;
         NSString *text = [searchIndices objectAtIndex:searchSelectedIndex];
-        [indexButton setTitle:NSLocalizedString(text, @"") forState:UIControlStateNormal];
+        [indexButton setTitleForAllState:NSLocalizedString(text, @"")];
         break;
 
     case 1: // serviceId
         webApiFactory.serviceId = vc.selectedIndex;
         [webApiFactory saveDefaults];
-        [serviceIdButton setTitle:[webApiFactory serviceIdString] forState:UIControlStateNormal];
+        [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
 
         [self _setupCategories];
         break;
