@@ -42,10 +42,8 @@
 {
     self = [super initWithNibName:@"EditTagsView" bundle:nil];
     if (self) {
-        DataModel *dm = [DataModel sharedDataModel];
-
-        tags = [[a_tags splitWithDelimiter:@" ,"] retain];
-        allTags = [[dm allTags] retain];
+        tags = [[a_tags splitWithDelimiter:@","] retain];
+        allTags = [[[DataModel sharedDataModel] allTags] retain];
     }
     return self;
 }
@@ -59,9 +57,9 @@
 
 - (void)viewDidLoad
 {
-    vc.title = NSLocalizedString(@"Tags", @"");
+    self.title = NSLocalizedString(@"Tags", @"");
 
-    vc.navigationItem.rightBarButtonItem = 
+    self.navigationItem.rightBarButtonItem = 
         [[[UIBarButtonItem alloc]
              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
              target:self
@@ -78,7 +76,7 @@
             [a_tags setString:tag];
         }
         else {
-            [a_tags appendString:@" "];
+            [a_tags appendString:@","];
             [a_tags appendString:tag];
         }
     }
@@ -89,12 +87,6 @@
 {
     [delegate editTagsViewControllerChanged:self];
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [[self tableView] reloadData];
 }
 
 /**

@@ -80,7 +80,7 @@ static NSMutableArray *tagsFilterStrings = nil;
 */ 
 - (NSMutableArray *)_makeFilterStrings:(NSString *)filter
 {
-    return [[filter splitWithDelimiter:@" ,"] retain];
+    return [[filter splitWithDelimiter:@","] retain];
 }
 
 /**

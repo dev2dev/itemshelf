@@ -319,8 +319,8 @@
         else if (idx == 0) {
             // タグ編集
             currentEditingItem = item;
-            EditTagsViewController *vc = [EditTagsViewController editTagsViewController:self];
-            vc.text = item.tags;
+            EditTagsViewController *vc =
+                [[EditTagsViewController alloc] initWithTags:item.tags];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
@@ -328,7 +328,7 @@
 
 - (void)editTagsViewChanged:(EditTagsViewController *)vc
 {
-    currentEditingItem.tags = vc.text;
+    currentEditingItem.tags = [vc tags];
     [currentEditingItem updateTags];
     [tableView reloadData];
 }

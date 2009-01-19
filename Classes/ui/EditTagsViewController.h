@@ -66,4 +66,6 @@
 - (id)initWithTags:(NSString *)a_tags;
 - (NSString *)tags;
 
+- (void)_doneAction:(id)sender;
+
 @end

@@ -337,7 +337,7 @@ static DataModel *theDataModel = nil; // singleton
             }
 
             // split tags
-            NSMutableArray *tt = [item.tags splitWithDelimiter:@" ,"];
+            NSMutableArray *tt = [item.tags splitWithDelimiter:@","];
 
             // uniq and add
             for (NSString *t1 in tt) {
