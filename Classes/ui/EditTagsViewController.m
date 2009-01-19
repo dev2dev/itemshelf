@@ -38,10 +38,11 @@
 
 @synthesize delegate;
 
-- (id)initWithTags:(NSString *)a_tags
+- (id)initWithTags:(NSString *)a_tags delegate:(id<EditTagsViewDelegate>)a_delegate;
 {
     self = [super initWithNibName:@"EditTagsView" bundle:nil];
     if (self) {
+        delegate = a_delegate;
         tags = [[a_tags splitWithDelimiter:@","] retain];
         allTags = [[[DataModel sharedDataModel] allTags] retain];
     }
@@ -111,16 +112,17 @@
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
     }
 
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.editingStyle = UITableViewCellEditingStyleNone;
+
     if (indexPath.row == allTags.count) {
-        cell.text = NSLocalizedString(@"New tag...", @"");
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.text = NSLocalizedString(@"New tag", @"");
+        cell.editingStyle = UITableViewCellEditingStyleInsert;
     }
     else {
         cell.text = [allTags objectAtIndex:indexPath.row];
         if ([tags findString:cell.text] >= 0) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        } else {
-            cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }
 

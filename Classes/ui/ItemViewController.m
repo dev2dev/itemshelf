@@ -320,7 +320,7 @@
             // タグ編集
             currentEditingItem = item;
             EditTagsViewController *vc =
-                [[EditTagsViewController alloc] initWithTags:item.tags];
+                [[EditTagsViewController alloc] initWithTags:item.tags delegate:self];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

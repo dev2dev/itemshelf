@@ -63,7 +63,7 @@
 
 @property(nonatomic,assign) id<EditTagsViewDelegate> delegate;
 
-- (id)initWithTags:(NSString *)a_tags;
+- (id)initWithTags:(NSString *)a_tags delegate:(id<EditTagsViewDelegate>)a_delegate;
 - (NSString *)tags;
 
 - (void)_doneAction:(id)sender;

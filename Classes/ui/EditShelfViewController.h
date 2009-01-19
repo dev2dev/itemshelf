@@ -35,9 +35,10 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import "Shelf.h"
+#import "EditTagsViewController.h"
 
 @interface EditShelfViewController : UITableViewController
-<UITextFieldDelegate>
+<UITextFieldDelegate, EditTagsViewDelegate>
 {
     Shelf *shelf;
     BOOL isNew;
@@ -46,7 +47,7 @@
     UITextField *titleField;
     UITextField *authorField;
     UITextField *manufacturerField;
-    UITextField *tagsField;
+    UILabel *tagsField;
 }
 
 @property(nonatomic,retain) Shelf *shelf;
@@ -58,6 +59,7 @@
 - (void)doneAction:(id)sender;
 - (void)closeAction:(id)sender;
 - (UITextField*)textInputField:(NSString*)value placeholder:(NSString*)placeholder;
+- (UILabel*)textLabelField:(NSString*)value;
 - (UITableViewCell *)textViewCell:(NSString *)title view:(UIView *)view;
 
 @end

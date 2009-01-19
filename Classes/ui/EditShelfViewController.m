@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView.rowHeight = 38;
+    self.tableView.rowHeight = 38; // ###
     
     self.navigationItem.title = NSLocalizedString(@"Edit shelf", @"");
     self.navigationItem.rightBarButtonItem =
@@ -72,7 +72,7 @@
     titleField        = [self textInputField:shelf.titleFilter placeholder:@"Title"];
     authorField       = [self textInputField:shelf.authorFilter placeholder:@"Author"];
     manufacturerField = [self textInputField:shelf.manufacturerFilter placeholder:@"Manufacturer"];
-    tagsField         = [self textInputField:shelf.tagsFilter placeholder:@"Tags"];
+    tagsField         = [self textLabelField:shelf.tagsFilter];
 }
 
 - (void)dealloc {
@@ -120,7 +120,7 @@
     [titleField resignFirstResponder];
     [authorField resignFirstResponder];
     [manufacturerField resignFirstResponder];
-    [tagsField resignFirstResponder];
+    //[tagsField resignFirstResponder];
 
     [self.navigationController dismissModalViewControllerAnimated:YES];
 }
@@ -137,13 +137,22 @@
     t.text = value;
     t.placeholder = NSLocalizedString(placeholder, @"");
     t.font = [UIFont systemFontOfSize:14];
-    t.keyboardType = UIKeyboardTypeASCIICapable;
+    t.keyboardType = UIKeyboardTypeDefault;
     t.returnKeyType = UIReturnKeyDone;
     t.autocorrectionType = UITextAutocorrectionTypeNo;
     t.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	
     t.delegate = self;
 
+    return t;
+}
+
+- (UILabel *)textLabelField:(NSString *)value
+{
+    UILabel *lb = [[UILabel alloc]
+                      initWithFrame:CGRectMake(110, 10, 210, 32)];
+    lb.text = value;
+    t.font = [UIFont systemFontOfSize:14];
     return t;
 }
 
@@ -184,6 +193,7 @@
         break;
     case 4:
         cell = [self textViewCell:@"Tags" view:tagsField];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         break;
     }
     return cell;
@@ -213,6 +223,22 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row != 4) return; // tags
+
+    EditTagsViewController *vc =
+        [[EditTagsViewController alloc] initWithTags:tagsField.text delegate:self];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
+}
+
+- (void)editTagsViewChanged:(EditTagsViewController *)vc
+{
+    tagsField.text = vc.tags;
+    [self.tableView reloadData];
 }
 
 @end
