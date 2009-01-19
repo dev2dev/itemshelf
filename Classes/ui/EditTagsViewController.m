@@ -44,7 +44,7 @@
     if (self) {
         DataModel *dm = [DataModel sharedDataModel];
 
-        tags = [dm splitString:a_atgs];
+        tags = [a_tags splitWithDelimiter:@" ,"];
         allTags = [dm allTags];
     }
     return self;

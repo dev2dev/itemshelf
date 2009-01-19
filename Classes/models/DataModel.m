@@ -337,7 +337,7 @@ static DataModel *theDataModel = nil; // singleton
             }
 
             // split tags
-            NSMutableArray *tt = [DataModel splitString:item.tags];
+            NSMutableArray *tt = [item.tags splitWithDelimiter:@" ,"];
 
             // uniq and add
             for (NSString *t1 in tt) {
@@ -345,8 +345,6 @@ static DataModel *theDataModel = nil; // singleton
                     [tags addObject:t1];
                 }
             }
-
-            [tt release];
         }
     }
 
@@ -354,42 +352,6 @@ static DataModel *theDataModel = nil; // singleton
     [tags sortByString];
 
     return tags;
-}
-
-/**
-   Returns array of string, which is separated with comma or space delimiter.
-
-   @note You must release returned value!
-*/ 
-+ (NSMutableArray *)splitString:(NSString *)string
-{
-    NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:3];
-
-    NSString *token;
-    NSCharacterSet *delimiter = [NSCharacterSet characterSetWithCharactersInString:@" ,"];
-
-    while (string != nil) {
-        NSRange range = [string rangeOfCharacterFromSet:delimiter];
-        if (range.location != NSNotFound) {
-            token = [string substringToIndex:range.location];
-            if (range.location <= string.length - 2) {
-                string = [string substringFromIndex:range.location+1];
-            } else {
-                string = nil;
-            }
-        } else {
-            token = string;
-            string = nil;
-        }
-
-        // trim space
-        token = [token stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if (token.length > 0) {
-            [ary addObject:token];
-        }
-    }
-
-    return ary;
 }
 
 ////////////////////////////////////////////////////////////////

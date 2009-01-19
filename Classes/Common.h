@@ -71,3 +71,10 @@ void AssertFailed(const char *filename, int line);
 @interface UIButton (MyExt)
 - (void)setTitleForAllState:(NSString*)title;
 @end
+
+/**
+   Extended string
+*/
+@interface NSString (MyExt)
+- (NSMutableArray *)splitStringWithDelimiter:(NSString*)delimiters;
+@end

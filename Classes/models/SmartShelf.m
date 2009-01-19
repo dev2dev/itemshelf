@@ -80,34 +80,7 @@ static NSMutableArray *tagsFilterStrings = nil;
 */ 
 - (NSMutableArray *)_makeFilterStrings:(NSString *)filter
 {
-    return [DataModel splitString:filter];
-#if 0 /* ### */
-    NSMutableArray *ary = [[NSMutableArray alloc] initWithCapacity:3];
-
-    NSString *token;
-    while (filter != nil) {
-        NSRange range = [filter rangeOfString:@","];
-        if (range.location != NSNotFound) {
-            token = [filter substringToIndex:range.location-1];
-            if (range.location <= filter.length - 2) {
-                filter = [filter substringFromIndex:range.location+1];
-            } else {
-                filter = nil;
-            }
-        } else {
-            token = filter;
-            filter = nil;
-        }
-
-        // trim space
-        token = [token stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if (token.length > 0) {
-            [ary addObject:token];
-        }
-    }
-
-    return ary;
-#endif
+    return [filter splitWithDelimiter:@" ,"];
 }
 
 /**

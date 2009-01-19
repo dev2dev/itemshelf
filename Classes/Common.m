@@ -178,3 +178,40 @@ void AssertFailed(const char *filename, int line)
 }
 
 @end
+
+/**
+   Extended String
+*/
+@implementation NSString (MyExt)
+
+- (NSMutableArray *)splitWithDelimiter:(NSString*)delimiter
+{
+    NSMutableArray *ary = [[[NSMutableArray alloc] initWithCapacity:3] autorelease];
+
+    NSString *token;
+    NSCharacterSet *delimiterSet = [NSCharacterSet characterSetWithCharactersInString:delimiter];
+
+    while (string != nil) {
+        NSRange range = [string rangeOfCharacterFromSet:delimiterSet];
+        if (range.location != NSNotFound) {
+            token = [string substringToIndex:range.location];
+            if (range.location <= string.length - 2) {
+                string = [string substringFromIndex:range.location+1];
+            } else {
+                string = nil;
+            }
+        } else {
+            token = string;
+            string = nil;
+        }
+
+        // trim space
+        token = [token stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if (token.length > 0) {
+            [ary addObject:token];
+        }
+    }
+
+    return ary;
+}
+
