@@ -52,15 +52,18 @@
 /**
    Generic list selection view controller
 */
-@interface EditTagsViewController : UITableViewController
-<GenEditTextViewDelegate>
+@interface EditTagsViewController : UIViewController
+<UITableViewDelegate, UITableViewDataSource, GenEditTextViewDelegate>
 {
     id<EditTagsViewDelegate> delegate;     ///< delegate
+
+    UITableView *tableView;
 
     NSMutableArray *allTags;
     NSMutableArray *tags;
 }
 
+@property(nonatomic,retain) UITableView *tableView;
 @property(nonatomic,assign) id<EditTagsViewDelegate> delegate;
 
 - (id)initWithTags:(NSString *)a_tags delegate:(id<EditTagsViewDelegate>)a_delegate;

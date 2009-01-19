@@ -36,11 +36,14 @@
 
 @implementation EditTagsViewController
 
-@synthesize delegate;
+@synthesize delegate, tableView;
 
 - (id)initWithTags:(NSString *)a_tags delegate:(id<EditTagsViewDelegate>)a_delegate;
 {
+#if 0
     self = [super initWithNibName:@"EditTagsView" bundle:nil];
+#endif
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         delegate = a_delegate;
         tags = [[a_tags splitWithDelimiter:@","] retain];
@@ -56,8 +59,18 @@
     [super dealloc];
 }
 
-- (void)viewDidLoad
+- (void)loadView
 {
+    self.tableView = [[[UITableView alloc]
+                          initWithFrame:[[UIScreen mainScreen] applicationFrame]
+                          style:UITableViewStyleGrouped] autorelease];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    tableView.autoresizingSubviews = YES;
+
+    self.view = tableView;
+
     self.title = NSLocalizedString(@"Tags", @"");
 
     self.navigationItem.rightBarButtonItem = 
