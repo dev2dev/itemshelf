@@ -47,23 +47,23 @@
    @param[in] id User defined identifier
    @return Instance of GenSelectListViewController
 */
-+ (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id
++ (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title
 {
     GenSelectListViewController *vc =
         [[[GenSelectListViewController alloc]
-             init:delegate array:ary title:title identifier:id] autorelease];
+             init:delegate array:ary title:title] autorelease];
 
     return vc;
 }
 
-- (id)init:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id
+- (id)init:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title
 {
     self = [super initWithNibName:@"GenSelectListView" bundle:nil];
     if (self) {
         self.delegate = delegate;
         self.list = ary;
         self.title = title;
-        self.identifier = id;
+        self.identifier = -1;
     }
     return ;
 }    
@@ -147,7 +147,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedIndex = indexPath.row;
-    [delegate genSelectListViewChanged:self identifier:identifier];
+    [delegate genSelectListViewChanged:self];
 
     [self _closeView];
 }

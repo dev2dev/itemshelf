@@ -299,14 +299,13 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         [GenSelectListViewController
             genSelectListViewController:self
             array:services
-            title:NSLocalizedString(@"Select locale", @"")
-            identifier:0];
+            title:NSLocalizedString(@"Select locale", @"")];
     vc.selectedIndex = wf.serviceId;
 	
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
+- (void)genSelectListViewChanged:(GenSelectListViewController*)vc
 {
     int serviceId = [vc selectedIndex];
 

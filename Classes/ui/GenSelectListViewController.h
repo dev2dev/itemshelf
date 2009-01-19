@@ -45,7 +45,7 @@
 /**
    Called when list item is selected.
 */
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id;
+- (void)genSelectListViewChanged:(GenSelectListViewController*)vc;
 @end
 
 /**
@@ -65,8 +65,8 @@
 @property(nonatomic,retain) NSArray *list;
 @property(nonatomic,assign) int selectedIndex;
 
-+ (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id;
-- (id)init:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id;
++ (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title;
+- (id)init:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title;
 - (void)_cancelAction:(id)sender;
 - (NSString *)selectedString;
 

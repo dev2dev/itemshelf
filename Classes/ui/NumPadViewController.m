@@ -164,14 +164,13 @@
         [GenSelectListViewController
             genSelectListViewController:self
             array:[webApiFactory serviceIdStrings]
-            title:NSLocalizedString(@"Select locale", @"")
-            identifier:0];
+            title:NSLocalizedString(@"Select locale", @"")];
     vc.selectedIndex = webApiFactory.serviceId;
 	
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
+- (void)genSelectListViewChanged:(GenSelectListViewController*)vc
 {
     webApiFactory.serviceId = vc.selectedIndex;
     [webApiFactory saveDefaults];

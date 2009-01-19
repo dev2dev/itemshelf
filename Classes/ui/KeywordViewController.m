@@ -152,10 +152,10 @@
         [GenSelectListViewController
             genSelectListViewController:self
             array:searchIndices
-            title:NSLocalizedString(@"Category", @"")
-            identifier:0];
+            title:NSLocalizedString(@"Category", @"")];
     vc.selectedIndex = searchSelectedIndex;
-	
+    vc.identifier = 0;
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -165,16 +165,16 @@
         [GenSelectListViewController
             genSelectListViewController:self
             array:[webApiFactory serviceIdStrings]
-            title:NSLocalizedString(@"Select locale", @"")
-            identifier:1];
+            title:NSLocalizedString(@"Select locale", @"")];
     vc.selectedIndex = webApiFactory.serviceId;
-	
+    vc.identifier = 1;
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
+- (void)genSelectListViewChanged:(GenSelectListViewController*)vc
 {
-    switch (id) {
+    switch (vc.identifier) {
     case 0: // serchIndex
         searchSelectedIndex = vc.selectedIndex;
         NSString *text = [searchIndices objectAtIndex:searchSelectedIndex];

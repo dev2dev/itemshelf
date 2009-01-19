@@ -359,7 +359,6 @@
             genSelectListViewController:self
             array:shelfNames
             title:NSLocalizedString(@"Select shelf", @"")
-            identifier:0
          ];
     vc.selectedIndex = selectedIndex;
     [shelfNames release];
@@ -367,7 +366,7 @@
     [self doModalWithNavigationController:vc];
 }
 
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
+- (void)genSelectListViewChanged:(GenSelectListViewController*)vc
 {
     int selectedIndex = [vc selectedIndex];
 
