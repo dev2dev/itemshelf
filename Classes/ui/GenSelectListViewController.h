@@ -66,6 +66,7 @@
 @property(nonatomic,assign) int selectedIndex;
 
 + (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id;
+- (id)init:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id;
 - (void)_cancelAction:(id)sender;
 - (NSString *)selectedString;
 

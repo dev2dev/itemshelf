@@ -49,25 +49,38 @@
 */
 + (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id
 {
-    GenSelectListViewController *vc = [[[GenSelectListViewController alloc]
-                                           initWithNibName:@"GenSelectListView"
-                                           bundle:[NSBundle mainBundle]] autorelease];
-    vc.delegate = delegate;
-    vc.list = ary;
-    vc.title = title;
-    vc.identifier = id;
+    GenSelectListViewController *vc =
+        [[[GenSelectListViewController alloc]
+             init:delegate array:ary title:title identifier:id] autorelease];
 
-    vc.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
-                                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                               target:vc
-                                               action:@selector(_cancelAction:)] autorelease];
     return vc;
 }
+
+- (id)init:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title identifier:(int)id
+{
+    self = [super initWithNibName:@"GenSelectListView" bundle:nil];
+    if (self) {
+        self.delegate = delegate;
+        self.list = ary;
+        self.title = title;
+        self.identifier = id;
+    }
+    return ;
+}    
 
 - (void)dealloc
 {
     [list release];
     [super dealloc];
+}
+
+- (void)viewDidLoad
+{
+    vc.navigationItem.leftBarButtonItem =
+        [[[UIBarButtonItem alloc]
+             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+             target:vc
+             action:@selector(_cancelAction:)] autorelease];
 }
 
 /**
