@@ -44,8 +44,8 @@
     if (self) {
         DataModel *dm = [DataModel sharedDataModel];
 
-        tags = [a_tags splitWithDelimiter:@" ,"];
-        allTags = [dm allTags];
+        tags = [[a_tags splitWithDelimiter:@" ,"] retain];
+        allTags = [[dm allTags] retain];
     }
     return self;
 }

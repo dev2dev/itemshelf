@@ -325,7 +325,7 @@ static DataModel *theDataModel = nil; // singleton
 */
 - (NSMutableArray *)allTags
 {
-    NSMutableArray *tags = [[NSMutableArray alloc] initWithCapacity:10];
+    NSMutableArray *tags = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
 
     for (int i = 0; i < shelves.count; i++) {
         Shelf *shelf = [shelves objectAtIndex:i];
