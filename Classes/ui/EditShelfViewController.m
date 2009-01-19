@@ -152,8 +152,8 @@
     UILabel *lb = [[UILabel alloc]
                       initWithFrame:CGRectMake(110, 10, 210, 32)];
     lb.text = value;
-    t.font = [UIFont systemFontOfSize:14];
-    return t;
+    lb.font = [UIFont systemFontOfSize:14];
+    return lb;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField*)t
