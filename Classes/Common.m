@@ -220,7 +220,9 @@ void AssertFailed(const char *filename, int line)
     while (![scanner isAtEnd]) {
         // find token;
         if ([scanner scanUpToCharactersFromSet:delimiterSet intoString:&token]) {
-            [ary addObject:token];
+            if (token.length > 0) {
+                [ary addObject:token];
+            }
         }
 
         // skip delimiters
