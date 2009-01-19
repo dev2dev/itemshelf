@@ -54,6 +54,7 @@
 
 - (void)dealloc
 {
+    [tableView release];
     [tags release];
     [allTags release];
     [super dealloc];
