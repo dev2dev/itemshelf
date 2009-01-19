@@ -2,7 +2,7 @@
 /*
   ItemShelf for iPhone/iPod touch
 
-  Copyright (c) 2008, ItemShelf development team, All rights reserved.
+  Copyright (c) 2008, ItemShelf Development Team. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -34,32 +34,36 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "GenSelectListViewCONTroller.h"
+#import "Common.h"
+#import "GenEditTextViewController.h"
 
 @class EditTagsViewController;
 
+/**
+   EditTagsView delegate protocol
+*/
 @protocol EditTagsViewDelegate
-- (void)editTagsViewChanged:(EditTagsViewController *)vc;
+/**
+   Called when list item is selected.
+*/
+- (void)editTagsViewChanged:(EditTagsViewController*)vc;
 @end
 
-@interface EditTagsViewController : UIViewController
-<GenSelectListViewDelegate>
+/**
+   Generic list selection view controller
+*/
+@interface EditTagsViewController : UITableViewController
+<GenEditTextViewDelegate>
 {
-    IBOutlet UITextField *textField;
-    IBOutlet UIButton *historyButton;
-
-    id<EditTagsViewDelegate> listener;
-    NSString *text;
+    id<EditTagsViewDelegate> delegate;     ///< delegate
 
     NSMutableArray *allTags;
+    NSMutableArray *tags;
 }
 
-@property(nonatomic,assign) id<EditTagsViewDelegate> listener;
-@property(nonatomic,retain) NSString *text;
+@property(nonatomic,assign) id<EditTagsViewDelegate> delegate;
 
-- (IBAction)historyButtonTapped:(id)sender;
-
-+ (EditTagsViewController *)editTagsViewController:(id<EditTagsViewDelegate>)listener;
-- (void)doneAction;
+- (id)initWithTags:(NSString *)a_tags;
+- (NSString *)tags;
 
 @end

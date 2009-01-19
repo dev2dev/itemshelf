@@ -2,7 +2,7 @@
 /*
   ItemShelf for iPhone/iPod touch
 
-  Copyright (c) 2008, ItemShelf development team, All rights reserved.
+  Copyright (c) 2008, ItemShelf Development Team. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -32,102 +32,147 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "EditTagsViewController.h"
-#import "AppDelegate.h"
-#import "DataModel.h"
+#import "EditTagsViewController2.h"
 
 @implementation EditTagsViewController
 
-@synthesize listener, text;
+@synthesize delegate;
 
-+ (EditTagsViewController *)editTagsViewController:(id<EditTagsViewDelegate>)listener
+- (id)initWithTags:(NSString *)a_tags
 {
-    EditTagsViewController *vc = [[[EditTagsViewController alloc]
-                                         initWithNibName:@"EditTagsView"
-                                         bundle:[NSBundle mainBundle]] autorelease];
-    vc.listener = listener;
-    vc.title = NSLocalizedString(@"Tags", @"");
+    self = [super initWithNibName:@"EditTagsView" bundle:nil];
+    if (self) {
+        DataModel *dm = [DataModel sharedDataModel];
 
-    return vc;
+        tags = [dm splitString:a_atgs];
+        allTags = [dm allTags];
+    }
+    return self;
 }
 
-- (void)viewDidLoad
+- (void)dealloc
 {
-    [super viewDidLoad];
-
-    textField.placeholder = NSLocalizedString(@"Tags", @"");
-	
-    [historyButton setTitleForAllState:NSLocalizedString(@"Tag list", @"")];
-
-    allTags = nil;
-
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
-                                                  initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                  target:self
-                                                  action:@selector(doneAction)] autorelease];
-}
-
-- (void)dealloc {
-    [text release];
+    [tags release];
     [allTags release];
     [super dealloc];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    textField.text = text;
-    [textField becomeFirstResponder];
-    [super viewWillAppear:animated];
+    vc.title = NSLocalizedString(@"Tags", @"");
+
+    vc.navigationItem.rightBarButtonItem = 
+        [[[UIBarButtonItem alloc]
+             initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+             target:self
+             action:@selector(_doneAction:)] autorelease];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (NSString *)tags
 {
-    [super viewWillDisappear:animated];
+    NSMutableString *a_tags = nil;
+
+    for (NSString *tag in tags) {
+        if (a_tags == nil) {
+            a_tags = [[[NSMutableString alloc] init] autorelease];
+            [a_tags setString:tag];
+        }
+        else {
+            [a_tags appendString:@" "];
+            [a_tags appendString:tag];
+        }
+    }
+    return a_tags;
 }
 
-- (void)doneAction
+- (void)_doneAction:(id)sender
 {
-    self.text = textField.text;
-    [listener editTagsViewChanged:self];
-
+    [delegate editTagsViewControllerChanged:self];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)historyButtonTapped:(id)sender
+- (void)viewWillAppear:(BOOL)animated
 {
-    if (allTags == nil) {
-        allTags = [[DataModel sharedDataModel] allTags];
+    [super viewWillAppear:animated];
+    [[self tableView] reloadData];
+}
+
+/**
+   @name Table view delegate / data source
+*/
+//@{
+- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return allTags.count + 1;
+}
+
+// 行の内容
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    static NSString *MyIdentifier = @"editTagsViewCells";
+	
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
     }
 
-    GenSelectListViewController *vc =
-        [GenSelectListViewController
-            genSelectListViewController:self
-            array:allTags
-            title:NSLocalizedString(@"Tag list", @"")
-            identifier:0];
-    vc.selectedIndex = -1; // none
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.row == allTags.count) {
+        cell.text = NSLocalizedString(@"New tag...", @"");
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else {
+        cell.text = [allTags objectAtIndex:indexPath.row];
+        if ([tags findString:cell.text] >= 0) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    }
+
+    return cell;
 }
 
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *tag = [vc selectedString];
-    
-    if (self.text.length == 0) {
-        self.text = tag;
-    } else {
-        self.text = [NSString stringWithFormat:@"%@ %@", self.text, tag];
+    if (indexPath.row == allTags.count) {
+        // add new tag
+        GenEditTextViewController *vc =
+            [GenEditTextViewController genEditTextViewController:self
+                                       title:NSLocalizedString(@"Tags", @"")
+                                       identifier:0];
+        [self.navigationController pushViewController:vc];
+        [vc release];
+    }
+    else {
+        NSString *tag = [allTags objectAtIndex:indexPath.row];
+        int n = [tags findString:tag];
+        if (n < 0) {
+            // add tag
+            [tags addObject:tag];
+            [tags sortByString];
+        } else {
+            // delete tag
+            [tags deleteObjectAtIndex:n];
+        }
+        [tableView reloadData];
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)genEditTextViewChanged:(GenEditTextViewController *)vc identifier:(int)id
+{
+    if ([allTags findString:vc.text] < 0) {
+        [allTags addObject:vc.text];
+        [allTags sortByString];
+
+        [tags addObject:vc.text];
+        [tags sortByString];
+    }
+    [[self tableView] reloadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-    // Release anything that's not essential, such as cached data
-}
+//@}
 
 @end
