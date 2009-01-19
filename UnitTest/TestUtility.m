@@ -37,6 +37,7 @@
         [stmt bindString:4 val:shelf.titleFilter];
         [stmt bindString:5 val:shelf.authorFilter];
         [stmt bindString:6 val:shelf.manufacturerFilter];
+        [stmt bindString:7 val:shelf.tagsFilter];
         [stmt step];
         [stmt reset];
 
@@ -51,13 +52,13 @@
         [stmt bindInt:0 val:item.pkey];
         [stmt bindDate:1 val:item.date];
         [stmt bindInt:2 val:item.shelfId];
-        [stmt bindInt:3 val:item.idType];
+        [stmt bindInt:3 val:item.serviceId];
         [stmt bindString:4 val:item.idString];
         [stmt bindString:5 val:item.asin];
         [stmt bindString:6 val:item.name];
         [stmt bindString:7 val:item.author];
         [stmt bindString:8 val:item.manufacturer];
-        [stmt bindString:9 val:item.productGroup];
+        [stmt bindString:9 val:item.category];
         [stmt bindString:10 val:item.detailURL];
         [stmt bindString:11 val:item.price];
         [stmt bindString:12 val:item.tags];
@@ -112,7 +113,7 @@
     item.pkey = id;
     item.date = [NSDate dateWithTimeIntervalSince1970:id*10000.0 * 60.0];
     item.shelfId = (id % NUM_TEST_SHELF) + 1;
-    item.idType = -1;
+    item.serviceId = -1;
     item.idString = [NSString stringWithFormat:@"12345%5d", id];
     item.asin = [NSString stringWithFormat:@"ASIN%04d", id];
     item.name = [NSString stringWithFormat:@"アイテムNo.%d", id];
@@ -120,16 +121,16 @@
     item.manufacturer = [NSString stringWithFormat:@"製造者%d", id];
     switch (id % 4) {
     case 0:
-        item.productGroup = @"Books";
+        item.category = @"Books";
         break;
     case 1:
-        item.productGroup = @"Electronics";
+        item.category = @"Electronics";
         break;
     case 2:
-        item.productGroup = @"Music";
+        item.category = @"Music";
         break;
     case 3:
-        item.productGroup = @"VideoGames";
+        item.category = @"VideoGames";
         break;
     }
     item.price = [NSString stringWithFormat:@"￥ %d", id*1000];

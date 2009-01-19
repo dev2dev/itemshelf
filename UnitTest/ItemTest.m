@@ -49,7 +49,7 @@
 {
     STAssertEquals(j.pkey, i.pkey, nil);
     STAssertEquals(j.shelfId, i.shelfId, nil);
-    STAssertEquals(j.idType, i.idType, nil);
+    STAssertEquals(j.serviceId, i.serviceId, nil);
     STAssertEquals(j.sorder, i.sorder, nil);
     STAssertTrue([i.date isEqualToDate:j.date], @"%@ != %@", i.date, j.date);
     STAssertEqualStrings(j.idString, i.idString, nil);
@@ -57,7 +57,7 @@
     STAssertEqualStrings(j.name, i.name, nil);
     STAssertEqualStrings(j.author, i.author, nil);
     STAssertEqualStrings(j.manufacturer, i.manufacturer, nil);
-    STAssertEqualStrings(j.productGroup, i.productGroup, nil);
+    STAssertEqualStrings(j.category, i.category, nil);
     STAssertEqualStrings(j.detailURL, i.detailURL, nil);
     STAssertEqualStrings(j.price, i.price, nil);
     STAssertEqualStrings(j.tags, i.tags, nil);
