@@ -327,8 +327,7 @@ static DataModel *theDataModel = nil; // singleton
 {
     NSMutableArray *tags = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
 
-    for (int i = 0; i < shelves.count; i++) {
-        Shelf *shelf = [shelves objectAtIndex:i];
+    for (Shelf *shelf in shelves) {
         if (shelf.shelfType != ShelfTypeNormal) continue;
 
         for (Item *item in shelf) {
@@ -340,9 +339,9 @@ static DataModel *theDataModel = nil; // singleton
             NSMutableArray *tt = [item.tags splitWithDelimiter:@","];
 
             // uniq and add
-            for (NSString *t1 in tt) {
-                if ([tags findString:t1] < 0) {
-                    [tags addObject:t1];
+            for (NSString *tag in tt) {
+                if ([tags findString:tag] < 0) {
+                    [tags addObject:tag];
                 }
             }
         }
