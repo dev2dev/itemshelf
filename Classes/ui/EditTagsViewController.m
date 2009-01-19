@@ -78,6 +78,8 @@
              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
              target:self
              action:@selector(_doneAction:)] autorelease];
+
+    [tableView reloadData];
 }
 
 - (NSString *)tags
