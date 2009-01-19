@@ -33,6 +33,7 @@
 */
 
 #import "EditTagsViewController.h"
+#import "DataModel.h"
 
 @implementation EditTagsViewController
 
@@ -68,7 +69,7 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    tableView.autoresizingSubviews = YES;
+    tableView.autoresizesSubviews = YES;
 
     self.view = tableView;
 
@@ -102,7 +103,7 @@
 
 - (void)_doneAction:(id)sender
 {
-    [delegate editTagsViewControllerChanged:self];
+    [delegate editTagsViewChanged:self];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -119,7 +120,7 @@
 }
 
 // 行の内容
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+- (UITableViewCell *)tableView:(UITableView *)a_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     static NSString *MyIdentifier = @"editTagsViewCells";
 	
@@ -129,12 +130,11 @@
     }
 
     cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.editingStyle = UITableViewCellEditingStyleNone;
 
     if (indexPath.row == allTags.count) {
         cell.text = NSLocalizedString(@"New tag", @"");
-        cell.editingStyle = UITableViewCellEditingStyleInsert;
-    }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
     else {
         cell.text = [allTags objectAtIndex:indexPath.row];
         if ([tags findString:cell.text] >= 0) {
@@ -145,7 +145,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)a_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == allTags.count) {
         // add new tag
@@ -153,7 +153,7 @@
             [GenEditTextViewController genEditTextViewController:self
                                        title:NSLocalizedString(@"Tags", @"")
                                        identifier:0];
-        [self.navigationController pushViewController:vc];
+        [self.navigationController pushViewController:vc animated:YES];
         [vc release];
     }
     else {
@@ -165,9 +165,9 @@
             [tags sortByString];
         } else {
             // delete tag
-            [tags deleteObjectAtIndex:n];
+            [tags removeObjectAtIndex:n];
         }
-        [tableView reloadData];
+        [a_tableView reloadData];
     }
 }
 

@@ -184,7 +184,7 @@ CGPoint lastTouchLocation;
         filterIndex = 0; // all (no filter)
     }
 	
-    GenSelectListViewController *vc = [GenSelectListViewController genSelectListViewController:self array:filters title:NSLocalizedString(@"Filter", @"") identifier:0];
+    GenSelectListViewController *vc = [GenSelectListViewController genSelectListViewController:self array:filters title:NSLocalizedString(@"Filter", @"")];
     vc.selectedIndex = filterIndex;
 	
     [self doModalWithNavigationController:vc];
@@ -194,7 +194,7 @@ CGPoint lastTouchLocation;
 /**
    Called when filter is selected
 */
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc identifier:(int)id
+- (void)genSelectListViewChanged:(GenSelectListViewController*)vc
 {
     if (vc.selectedIndex == 0) {
         // All (no filter)

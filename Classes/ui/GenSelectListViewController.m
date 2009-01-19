@@ -47,25 +47,25 @@
    @param[in] id User defined identifier
    @return Instance of GenSelectListViewController
 */
-+ (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title
++ (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)a_delegate array:(NSArray*)ary title:(NSString*)title
 {
     GenSelectListViewController *vc =
         [[[GenSelectListViewController alloc]
-             init:delegate array:ary title:title] autorelease];
+             init:a_delegate array:ary title:title] autorelease];
 
     return vc;
 }
 
-- (id)init:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title
+- (id)init:(id<GenSelectListViewDelegate>)a_delegate array:(NSArray*)ary title:(NSString*)a_title
 {
     self = [super initWithNibName:@"GenSelectListView" bundle:nil];
     if (self) {
-        self.delegate = delegate;
+        self.delegate = a_delegate;
         self.list = ary;
-        self.title = title;
+        self.title = a_title;
         self.identifier = -1;
     }
-    return ;
+    return self;
 }    
 
 - (void)dealloc
@@ -76,10 +76,10 @@
 
 - (void)viewDidLoad
 {
-    vc.navigationItem.leftBarButtonItem =
+    self.navigationItem.leftBarButtonItem =
         [[[UIBarButtonItem alloc]
              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-             target:vc
+             target:self
              action:@selector(_cancelAction:)] autorelease];
 }
 

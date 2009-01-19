@@ -76,5 +76,5 @@ void AssertFailed(const char *filename, int line);
    Extended string
 */
 @interface NSString (MyExt)
-- (NSMutableArray *)splitStringWithDelimiter:(NSString*)delimiters;
+- (NSMutableArray *)splitWithDelimiter:(NSString*)delimiters;
 @end
