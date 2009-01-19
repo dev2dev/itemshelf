@@ -41,9 +41,6 @@
 
 - (id)initWithTags:(NSString *)a_tags delegate:(id<EditTagsViewDelegate>)a_delegate;
 {
-#if 0
-    self = [super initWithNibName:@"EditTagsView" bundle:nil];
-#endif
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         delegate = a_delegate;
@@ -127,11 +124,15 @@
 */
 //@{
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return allTags.count + 1;
+    if (section == 0) {
+        return 1;
+    } else {
+        return allTags.count;
+    }
 }
 
 // 行の内容
@@ -147,10 +148,10 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (indexPath.row == allTags.count) {
+    if (indexPath.section == 0) {
         cell.text = NSLocalizedString(@"New tag", @"");
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
+    }
     else {
         cell.text = [allTags objectAtIndex:indexPath.row];
         if ([tags findString:cell.text] >= 0) {
@@ -163,7 +164,7 @@
 
 - (void)tableView:(UITableView *)a_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == allTags.count) {
+    if (indexPath.section == 0) {
         // add new tag
         GenEditTextViewController *vc =
             [GenEditTextViewController genEditTextViewController:self

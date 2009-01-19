@@ -42,7 +42,6 @@
 		3E22CE260EF9153F00E8A966 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E581F240ED1A1C000615FB2 /* libsqlite3.dylib */; };
 		3E22CE270EF9153F00E8A966 /* AudioToolbox in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECBBB4D0EDC4A8200865EF7 /* AudioToolbox */; };
 		3E22CE280EF9153F00E8A966 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */; };
-		3E23E7A00F23617400A6F22E /* EditTagsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E23E79F0F23615E00A6F22E /* EditTagsView.xib */; };
 		3E23E7AB0F23628A00A6F22E /* EditTagsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E7A90F23628A00A6F22E /* EditTagsViewController.h */; };
 		3E23E7AC0F23628A00A6F22E /* EditTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E23E7AA0F23628A00A6F22E /* EditTagsViewController.m */; };
 		3E2C0C550ED9ADDB00867F11 /* GenSelectListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */; };
@@ -224,7 +223,6 @@
 		3E22CCEC0EF911B900E8A966 /* GTMSenTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMSenTestCase.m; sourceTree = "<group>"; };
 		3E22CCF00EF911CD00E8A966 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		3E22CD130EF912B400E8A966 /* ShelfTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfTest.m; sourceTree = "<group>"; };
-		3E23E79F0F23615E00A6F22E /* EditTagsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTagsView.xib; sourceTree = "<group>"; };
 		3E23E7A90F23628A00A6F22E /* EditTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTagsViewController.h; sourceTree = "<group>"; };
 		3E23E7AA0F23628A00A6F22E /* EditTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTagsViewController.m; sourceTree = "<group>"; };
 		3E2C0C460ED9AD1300867F11 /* GenSelectListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenSelectListViewController.h; sourceTree = "<group>"; };
@@ -688,7 +686,6 @@
 				3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */,
 				3E427BC00EDC2A320028E633 /* NumPadView.xib */,
 				3E42210B0EE9529800164EF4 /* KeywordView.xib */,
-				3E23E79F0F23615E00A6F22E /* EditTagsView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -839,7 +836,6 @@
 				3E3AA5AD0EE02EF200339BAB /* AboutView.xib in Resources */,
 				3E7EB2DC0EE422D900D5CE27 /* ShelfListView.xib in Resources */,
 				3EC639D10EE544C30057FAC2 /* WebView.xib in Resources */,
-				3E23E7A00F23617400A6F22E /* EditTagsView.xib in Resources */,
 				3E817E840EE6C1C60015A97E /* NoImage.png in Resources */,
 				3EC727170EE83161008B2CBF /* Locale.png in Resources */,
 				3E42210C0EE9529800164EF4 /* KeywordView.xib in Resources */,
