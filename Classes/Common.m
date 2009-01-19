@@ -188,6 +188,7 @@ void AssertFailed(const char *filename, int line)
 {
     NSMutableArray *ary = [[[NSMutableArray alloc] initWithCapacity:3] autorelease];
 
+#if 0
     NSString *token;
     NSCharacterSet *delimiterSet = [NSCharacterSet characterSetWithCharactersInString:delimiter];
 
@@ -211,7 +212,22 @@ void AssertFailed(const char *filename, int line)
             [ary addObject:token];
         }
     }
+#else
+    NSScanner *scanner = [NSScanner scannerWithString:self];
+    NSCharacterSet *delimiterSet = [NSCharacterSet characterSetWithCharactersInString:delimiter];
+    NSString *token;
 
+    while (![scanner isAtEnd]) {
+        // find token;
+        if ([scanner scanUpToCharactersFromSet:delimiterSet intoString:&token]) {
+            [ary addObject:token];
+        }
+
+        // skip delimiters
+        [scanner scanCharactersFromSet:delimiterSet intoString:nil];
+    }
+
+#endif
     return ary;
 }
 
