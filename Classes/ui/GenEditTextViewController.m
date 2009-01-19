@@ -89,6 +89,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+// UITextViewDelegate
+- (BOOL)textFieldShouldReturn:(UITextView *)v
+{
+    [self doneAction];
+    return YES;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);

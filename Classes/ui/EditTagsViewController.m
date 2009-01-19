@@ -47,8 +47,19 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         delegate = a_delegate;
-        tags = [[a_tags splitWithDelimiter:@","] retain];
+        if (a_tags == nil) {
+            tags = [[NSMutableArray alloc] init];
+        } else {
+            tags = [[a_tags splitWithDelimiter:@","] retain];
+        }
         allTags = [[[DataModel sharedDataModel] allTags] retain];
+        
+        for (NSString *tag in tags) {
+            if ([allTags findString:tag] < 0) {
+                [allTags addObject:tag];
+            }
+        }
+        [allTags sortByString];
     }
     return self;
 }
@@ -98,6 +109,10 @@
             [a_tags appendString:tag];
         }
     }
+    
+    if (a_tags == nil) {
+        a_tags = @"";
+    }
     return a_tags;
 }
 
@@ -130,7 +145,8 @@
     }
 
     cell.accessoryType = UITableViewCellAccessoryNone;
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if (indexPath.row == allTags.count) {
         cell.text = NSLocalizedString(@"New tag", @"");
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -154,7 +170,6 @@
                                        title:NSLocalizedString(@"Tags", @"")
                                        identifier:0];
         [self.navigationController pushViewController:vc animated:YES];
-        [vc release];
     }
     else {
         NSString *tag = [allTags objectAtIndex:indexPath.row];
@@ -173,7 +188,7 @@
 
 - (void)genEditTextViewChanged:(GenEditTextViewController *)vc identifier:(int)id
 {
-    if ([allTags findString:vc.text] < 0) {
+    if (vc.text.length > 0 && [allTags findString:vc.text] < 0) {
         [allTags addObject:vc.text];
         [allTags sortByString];
 

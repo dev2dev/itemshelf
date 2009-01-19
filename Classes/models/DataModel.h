@@ -74,10 +74,4 @@
 - (NSMutableArray*)makeFilter:(Shelf *)shelf;
 - (NSMutableArray *)allTags;
 
-+ (NSMutableArray *)splitString:(NSString *)string;
-
-//- (NSArray*)countries;
-//- (NSString*)country;
-//- (void)setCountry:(NSString*)country;
-
 @end

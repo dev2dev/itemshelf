@@ -41,7 +41,7 @@
 - (void)genEditTextViewChanged:(GenEditTextViewController *)vc identifier:(int)id;
 @end
 
-@interface GenEditTextViewController : UIViewController {
+@interface GenEditTextViewController : UIViewController <UITextViewDelegate> {
     IBOutlet UITextField *textField;
 	
     id<GenEditTextViewDelegate> listener;

@@ -150,7 +150,7 @@
 - (UILabel *)textLabelField:(NSString *)value
 {
     UILabel *lb = [[UILabel alloc]
-                      initWithFrame:CGRectMake(110, 10, 210, 32)];
+                      initWithFrame:CGRectMake(110, 2, 170, 32)];
     lb.text = value;
     lb.font = [UIFont systemFontOfSize:14];
     return lb;
