@@ -220,6 +220,7 @@ void AssertFailed(const char *filename, int line)
     while (![scanner isAtEnd]) {
         // find token;
         if ([scanner scanUpToCharactersFromSet:delimiterSet intoString:&token]) {
+            token = [token stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             if (token.length > 0) {
                 [ary addObject:token];
             }
