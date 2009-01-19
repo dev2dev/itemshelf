@@ -188,31 +188,6 @@ void AssertFailed(const char *filename, int line)
 {
     NSMutableArray *ary = [[[NSMutableArray alloc] initWithCapacity:3] autorelease];
 
-#if 0
-    NSString *token;
-    NSCharacterSet *delimiterSet = [NSCharacterSet characterSetWithCharactersInString:delimiter];
-
-    while (string != nil) {
-        NSRange range = [string rangeOfCharacterFromSet:delimiterSet];
-        if (range.location != NSNotFound) {
-            token = [string substringToIndex:range.location];
-            if (range.location <= string.length - 2) {
-                string = [string substringFromIndex:range.location+1];
-            } else {
-                string = nil;
-            }
-        } else {
-            token = string;
-            string = nil;
-        }
-
-        // trim space
-        token = [token stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if (token.length > 0) {
-            [ary addObject:token];
-        }
-    }
-#else
     NSScanner *scanner = [NSScanner scannerWithString:self];
     NSCharacterSet *delimiterSet = [NSCharacterSet characterSetWithCharactersInString:delimiter];
     NSString *token;
@@ -229,8 +204,6 @@ void AssertFailed(const char *filename, int line)
         // skip delimiters
         [scanner scanCharactersFromSet:delimiterSet intoString:nil];
     }
-
-#endif
     return ary;
 }
 @end

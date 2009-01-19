@@ -61,10 +61,13 @@
 
     NSMutableArray *allTags;
     NSMutableArray *tags;
+
+    BOOL canAddTags;
 }
 
 @property(nonatomic,retain) UITableView *tableView;
 @property(nonatomic,assign) id<EditTagsViewDelegate> delegate;
+@property(nonatomic,assign) BOOL canAddTags;
 
 - (id)initWithTags:(NSString *)a_tags delegate:(id<EditTagsViewDelegate>)a_delegate;
 - (NSString *)tags;

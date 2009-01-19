@@ -231,6 +231,7 @@
 
     EditTagsViewController *vc =
         [[EditTagsViewController alloc] initWithTags:tagsField.text delegate:self];
+    vc.canAddTags = NO;
     [self.navigationController pushViewController:vc animated:YES];
     [vc release];
 }

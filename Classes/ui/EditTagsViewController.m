@@ -37,13 +37,15 @@
 
 @implementation EditTagsViewController
 
-@synthesize delegate, tableView;
+@synthesize delegate, tableView, canAddTags;
 
 - (id)initWithTags:(NSString *)a_tags delegate:(id<EditTagsViewDelegate>)a_delegate;
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         delegate = a_delegate;
+        canAddTags = YES;
+
         if (a_tags == nil) {
             tags = [[NSMutableArray alloc] init];
         } else {
@@ -63,7 +65,8 @@
 
 - (void)dealloc
 {
-    [tableView release];
+    self.tableView = nil;
+    self.view = nil;
     [tags release];
     [allTags release];
     [super dealloc];
@@ -124,11 +127,14 @@
 */
 //@{
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
-    return 2;
+    if (canAddTags) {
+        return 2;
+    }
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (canAddTags && section == 0) {
         return 1;
     } else {
         return allTags.count;
@@ -148,7 +154,7 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (indexPath.section == 0) {
+    if (canAddTags && indexPath.section == 0) {
         cell.text = NSLocalizedString(@"New tag", @"");
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -164,7 +170,7 @@
 
 - (void)tableView:(UITableView *)a_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    if (canAddTags && indexPath.section == 0) {
         // add new tag
         GenEditTextViewController *vc =
             [GenEditTextViewController genEditTextViewController:self
