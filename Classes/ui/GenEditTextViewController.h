@@ -38,22 +38,22 @@
 @class GenEditTextViewController;
 
 @protocol GenEditTextViewDelegate
-- (void)genEditTextViewChanged:(GenEditTextViewController *)vc identifier:(int)id;
+- (void)genEditTextViewChanged:(GenEditTextViewController *)vc;
 @end
 
 @interface GenEditTextViewController : UIViewController <UITextViewDelegate> {
     IBOutlet UITextField *textField;
 	
-    id<GenEditTextViewDelegate> listener;
+    id<GenEditTextViewDelegate> delegate;
     NSString *text;
     int identifier;
 }
 
-@property(nonatomic,assign) id<GenEditTextViewDelegate> listener;
+@property(nonatomic,assign) id<GenEditTextViewDelegate> delegate;
 @property(nonatomic,assign) int identifier;
 @property(nonatomic,retain) NSString *text;
 
-+ (GenEditTextViewController *)genEditTextViewController:(id<GenEditTextViewDelegate>)listener title:(NSString*)title identifier:(int)id;
++ (GenEditTextViewController *)genEditTextViewController:(id<GenEditTextViewDelegate>)delegate title:(NSString*)title;
 - (void)doneAction;
 
 @end

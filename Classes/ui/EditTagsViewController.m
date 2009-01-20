@@ -174,8 +174,7 @@
         // add new tag
         GenEditTextViewController *vc =
             [GenEditTextViewController genEditTextViewController:self
-                                       title:NSLocalizedString(@"Tags", @"")
-                                       identifier:0];
+                                       title:NSLocalizedString(@"Tags", @"")];
         [self.navigationController pushViewController:vc animated:YES];
     }
     else {
@@ -193,7 +192,7 @@
     }
 }
 
-- (void)genEditTextViewChanged:(GenEditTextViewController *)vc identifier:(int)id
+- (void)genEditTextViewChanged:(GenEditTextViewController *)vc
 {
     if (vc.text.length > 0 && [allTags findString:vc.text] < 0) {
         [allTags addObject:vc.text];
