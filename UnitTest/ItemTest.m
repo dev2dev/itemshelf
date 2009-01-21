@@ -38,7 +38,6 @@
 
     // TBD: ここでテーブル定義をチェック
 
-    [stmt release];
 }
 
 // テーブルのアップグレードテスト
@@ -92,7 +91,6 @@
 
         [stmt reset];	
     }
-    [stmt release];
 }
 
 // insert テスト
@@ -138,7 +136,6 @@
 
         [stmt reset];	
     }
-    [stmt release];
 }
 
 // delete テスト
@@ -169,7 +166,6 @@
 
         [stmt reset];
     }
-    [stmt release];
     [db commitTransaction];
 }	
 
@@ -209,7 +205,6 @@
         [item release];
         [stmt reset];
     }
-    [stmt release];
 }
 
 // updateSorder のテスト
@@ -243,7 +238,6 @@
         [item release];
         [stmt reset];
     }
-    [stmt release];
 }
 
 //////////////////////////////////////////////////////////////////

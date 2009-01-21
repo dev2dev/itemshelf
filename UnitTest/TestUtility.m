@@ -43,7 +43,6 @@
 
         [shelf release];
     }
-    [stmt release];
 
     stmt = [db prepare:"INSERT INTO Item VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"];
     for (i = 1; i <= NUM_TEST_ITEM; i++) {
@@ -70,7 +69,6 @@
 
         [item release];
     }
-    [stmt release];
     [db commitTransaction];
 }
 

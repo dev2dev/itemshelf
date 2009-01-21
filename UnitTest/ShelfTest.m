@@ -36,7 +36,6 @@
 
     // TBD: ここでテーブル定義をチェック
     NSLog(@"%@", sql);
-    [stmt release];
 }
 
 // テーブルのアップグレードテスト
@@ -59,8 +58,6 @@
     NSLog(@"%@", sql);
     NSRange range = [sql rangeOfString:@"manufacturerFilter"];
     STAssertTrue(range.location != NSNotFound, @"Bad shelf table");
-
-    [stmt release];
 }	
 
 - (void)assertShelfEquals:(Shelf*)i with:(Shelf*)j
@@ -97,7 +94,6 @@
 
         [stmt reset];	
     }
-    [stmt release];
 }
 
 // insert テスト
