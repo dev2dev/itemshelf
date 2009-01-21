@@ -248,7 +248,7 @@ static NSDateFormatter *dateFormatter = nil;
    Prepare statement
 
    @param[in] sql SQL statement
-   @return Allocated dbstmt instance
+   @return dbstmt instance
 */
 - (dbstmt *)prepare:(const char *)sql
 {
@@ -259,7 +259,7 @@ static NSDateFormatter *dateFormatter = nil;
         ASSERT(0);
     }
 
-    dbstmt *dbs = [[dbstmt alloc] initWithStmt:stmt];
+    dbstmt *dbs = [[[dbstmt alloc] initWithStmt:stmt] autorelease];
     dbs.handle = self.handle;
     return dbs;
 }

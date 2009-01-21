@@ -170,7 +170,6 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
             [db exec:"ALTER TABLE Shelf ADD COLUMN tagsFilter TEXT;"];
         }
     }
-    [stmt release];
 
     if (!isNew) return;
 
@@ -207,7 +206,6 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
         [stmt bindString:1 val:NSLocalizedString(name, @"")];
         [stmt bindInt:2 val:i];
         [stmt step];
-        [stmt release];
     }
 }
 
@@ -247,7 +245,6 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [stmt bindString:5 val:tagsFilter];
 
     [stmt step];
-    [stmt release];
 
     self.pkey = [db	lastInsertRowId];
     self.sorder = pkey;  // 初期並び順は Primary Key と同じにしておく(最大値)
@@ -270,7 +267,6 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
 
     [stmt bindInt:0 val:pkey];
     [stmt step];
-    [stmt release];
 	
     // この棚にあるアイテムも全部消す
     if (shelfType == ShelfTypeNormal) {
@@ -293,7 +289,6 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [stmt bindString:0 val:name];
     [stmt bindInt:1 val:pkey];
     [stmt step];
-    [stmt release];
 }
 
 /**
@@ -307,7 +302,6 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [stmt bindInt:0 val:sorder];
     [stmt bindInt:1 val:pkey];
     [stmt step];
-    [stmt release];
 }
 
 /**
@@ -324,7 +318,6 @@ static int compareBySorder(Item *t1, Item *t2, void *context)
     [stmt bindString:3 val:tagsFilter];
     [stmt bindInt:4 val:pkey];
     [stmt step];
-    [stmt release];
 }
 
 //@}

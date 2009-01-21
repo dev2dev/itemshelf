@@ -175,7 +175,6 @@
 
         // Sqlite では列名は変更できないので注意
     }
-    [stmt release];
 }
 
 - (void)loadRow:(dbstmt *)stmt
@@ -227,7 +226,6 @@
     [stmt bindString:13 val:imageURL];
     [stmt bindInt:14 val:sorder];
     [stmt step];
-    [stmt release];
 
     self.pkey = [db	lastInsertRowId];
     self.sorder = pkey;  // 初期並び順は Primary Key と同じにしておく(最大値)
@@ -279,7 +277,6 @@
     [stmt bindInt:14 val:sorder];
     [stmt bindInt:15 val:pkey];
     [stmt step];
-    [stmt release];
 
     [db commitTransaction];
 }
@@ -295,7 +292,6 @@
 
     [stmt bindInt:0 val:pkey];
     [stmt step];
-    [stmt release];
 }
 
 - (void)changeShelf:(int)shelf
@@ -315,7 +311,6 @@
     [stmt bindInt:0 val:shelfId];
     [stmt bindInt:1 val:pkey];
     [stmt step];
-    [stmt release];
 }
 
 - (void)updateSorder
@@ -326,7 +321,6 @@
     [stmt bindInt:0 val:sorder];
     [stmt bindInt:1 val:pkey];
     [stmt step];
-    [stmt release];
 }
 
 - (void)updateTags
@@ -337,7 +331,6 @@
     [stmt bindString:0 val:tags];
     [stmt bindInt:1 val:pkey];
     [stmt step];
-    [stmt release];
     
     [[DataModel sharedDataModel] updateSmartShelves];
 }

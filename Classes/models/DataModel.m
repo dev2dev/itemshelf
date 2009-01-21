@@ -383,7 +383,6 @@ static DataModel *theDataModel = nil; // singleton
         [shelves addObject:shelf];
         [shelf release];
     }
-    [stmt release];
 
     // load items
     stmt = [db prepare:"SELECT * FROM Item ORDER BY sorder,date;"];
@@ -395,7 +394,6 @@ static DataModel *theDataModel = nil; // singleton
         [shelf addItem:item];
         [item release];
     }
-    [stmt release];
 
     [self updateSmartShelves];
 }
