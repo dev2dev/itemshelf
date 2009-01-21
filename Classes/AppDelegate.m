@@ -112,7 +112,7 @@
     UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:vc];
     [navigationController presentModalViewController:nv animated:NO];
 	
-    SearchController *sc = [SearchController createController];
+    SearchController *sc = [SearchController newController];
     sc.delegate = self;
     sc.viewController = vc;
     sc.selectedShelf = nil;

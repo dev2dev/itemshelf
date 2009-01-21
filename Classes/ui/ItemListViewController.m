@@ -177,7 +177,7 @@ CGPoint lastTouchLocation;
 */
 - (void)filterButtonTapped:(id)sender
 {
-    NSMutableArray *filters = [[DataModel sharedDataModel] makeFilter:model.shelf];
+    NSMutableArray *filters = [[DataModel sharedDataModel] filterArray:model.shelf];
 
     int filterIndex = [filters findString:model.filter];
     if (filterIndex < 0) {
