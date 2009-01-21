@@ -44,7 +44,7 @@
 /**
    Create SearchController instance (factory method)
 */
-+ (SearchController *)createController
++ (SearchController *)newController
 {
     SearchController *c = [[SearchController alloc] init];
     return c;

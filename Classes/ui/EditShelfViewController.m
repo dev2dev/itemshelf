@@ -68,11 +68,11 @@
              target:self
              action:@selector(closeAction:)] autorelease];
 
-    shelfNameField    = [self createTextInputField:shelf.name placeholder:@"Name"];
-    titleField        = [self createTextInputField:shelf.titleFilter placeholder:@"Title"];
-    authorField       = [self createTextInputField:shelf.authorFilter placeholder:@"Author"];
-    manufacturerField = [self createTextInputField:shelf.manufacturerFilter placeholder:@"Manufacturer"];
-    tagsField         = [self createTextLabelField:shelf.tagsFilter];
+    shelfNameField    = [self allocTextInputField:shelf.name placeholder:@"Name"];
+    titleField        = [self allocTextInputField:shelf.titleFilter placeholder:@"Title"];
+    authorField       = [self allocTextInputField:shelf.authorFilter placeholder:@"Author"];
+    manufacturerField = [self allocTextInputField:shelf.manufacturerFilter placeholder:@"Manufacturer"];
+    tagsField         = [self allocTextLabelField:shelf.tagsFilter];
 }
 
 - (void)dealloc {
@@ -129,7 +129,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (UITextField*)createTextInputField:(NSString*)value placeholder:(NSString*)placeholder
+- (UITextField*)allocTextInputField:(NSString*)value placeholder:(NSString*)placeholder
 {
     UITextField *t = [[UITextField alloc]
                          initWithFrame:CGRectMake(110, 10, 210, 32)];
@@ -147,7 +147,7 @@
     return t;
 }
 
-- (UILabel *)createTextLabelField:(NSString *)value
+- (UILabel *)allocTextLabelField:(NSString *)value
 {
     UILabel *lb = [[UILabel alloc]
                       initWithFrame:CGRectMake(110, 2, 170, 32)];

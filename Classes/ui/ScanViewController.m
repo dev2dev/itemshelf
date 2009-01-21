@@ -248,7 +248,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     [wf setCodeSearch];
     WebApi *api = [wf createWebApi];
 
-    SearchController *sc = [SearchController createController];
+    SearchController *sc = [SearchController newController];
     sc.delegate = self;
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;

@@ -48,7 +48,7 @@
   This class execute item search with web API, and show result with ItemView.
   Also execute some UI control (activity indicator etc.)
 
-  To use this, create instance with createController method, set up
+  To use this, create instance with newController method, set up
   properties, then call searchXXX method. 
   Following properties should be set.
 
@@ -75,7 +75,7 @@
 @property(nonatomic,retain) UIViewController *viewController;
 @property(nonatomic,retain) Shelf *selectedShelf;
 
-+ (SearchController *)createController;
++ (SearchController *)newController;
 
 - (void)search:(WebApi *)api withCode:(NSString*)code;
 - (void)search:(WebApi *)api withTitle:(NSString *)title withIndex:(NSString*)searchIndex;

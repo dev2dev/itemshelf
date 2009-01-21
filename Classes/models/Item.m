@@ -71,6 +71,7 @@
 
 - (void)dealloc
 {
+    [date release];
     [asin release];
     [idString release];
     [name release];
