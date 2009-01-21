@@ -188,7 +188,6 @@ CGPoint lastTouchLocation;
     vc.selectedIndex = filterIndex;
 	
     [self doModalWithNavigationController:vc];
-    [filters release];
 }
 
 /**

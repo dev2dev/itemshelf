@@ -71,7 +71,7 @@
 - (void)changeShelf:(Item *)item withShelf:(int)shelf;
 - (Item *)findSameItem:(Item*)item;
 
-- (NSMutableArray*)makeFilter:(Shelf *)shelf;
+- (NSMutableArray*)filterArray:(Shelf *)shelf;
 - (NSMutableArray *)allTags;
 
 @end

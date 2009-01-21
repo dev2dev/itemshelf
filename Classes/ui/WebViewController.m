@@ -87,6 +87,7 @@
     // webView の解放前に delegate をリセットしなければならない
     // (UIWebViewDelegate のリファレンス参照)
     webView.delegate = nil;
+    [webView release];
 
     [urlString release];
     [super dealloc];

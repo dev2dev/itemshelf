@@ -58,8 +58,8 @@
 // private
 - (void)doneAction:(id)sender;
 - (void)closeAction:(id)sender;
-- (UITextField*)textInputField:(NSString*)value placeholder:(NSString*)placeholder;
-- (UILabel*)textLabelField:(NSString*)value;
+- (UITextField*)createTextInputField:(NSString*)value placeholder:(NSString*)placeholder;
+- (UILabel*)createTextLabelField:(NSString*)value;
 - (UITableViewCell *)textViewCell:(NSString *)title view:(UIView *)view;
 
 @end

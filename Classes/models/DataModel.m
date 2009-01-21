@@ -275,13 +275,13 @@ static DataModel *theDataModel = nil; // singleton
 }
 
 /**
-   Make category filter array from all items in the shelf
+   Get category filter array from all items in the shelf
 
    @param[in] shelf Shelf for which to create category list.
 */
-- (NSMutableArray *)makeFilter:(Shelf *)shelf
+- (NSMutableArray *)filterArray:(Shelf *)shelf
 {
-    NSMutableArray *filters = [[NSMutableArray alloc] initWithCapacity:10];
+    NSMutableArray *filters = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
 	
     Item *item;
     for (item in shelf) {

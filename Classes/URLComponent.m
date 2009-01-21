@@ -47,6 +47,14 @@
 
 @implementation URLQuery
 @synthesize name, value;
+
+- (void)dealloc
+{
+    [name release];
+    [value release];
+    [super dealloc];
+}
+
 @end
 
 @implementation URLComponent

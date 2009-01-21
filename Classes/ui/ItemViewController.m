@@ -322,6 +322,7 @@
             EditTagsViewController *vc =
                 [[EditTagsViewController alloc] initWithTags:item.tags delegate:self];
             [self.navigationController pushViewController:vc animated:YES];
+            [vc release];
         }
     }
 }

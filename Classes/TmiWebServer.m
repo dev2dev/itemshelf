@@ -271,7 +271,7 @@
 
         if (lineno == 0) {
             // request line
-            char *p, *p2;
+            char *p, *p2 = NULL;
             p = strtok(line, " ");
             if (p) p2 = strtok(NULL, " ");
             if (p2) filereq = [NSString stringWithCString:p2];

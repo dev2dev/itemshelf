@@ -56,6 +56,7 @@ static void data_handler(zebra_image_t *zimage, const void *userdata);
 - (void)dealloc
 {
     zebra_image_scanner_destroy(scanner);
+    [data release];
     [super dealloc];
 }
 
@@ -131,6 +132,7 @@ static void data_handler(zebra_image_t *zimage, const void *userdata)
     CGContextRef context = CGBitmapContextCreate(bitmap, width, height, 
                                                  bitsPerComponent, bytesPerRow, 
                                                  colorSpace, 0);
+    CGColorSpaceRelease(colorSpace);
     CGContextDrawImage(context, imageRect, image);
 
     // Step 2: Set zebra image.

@@ -60,6 +60,7 @@
     [responseData release];
     [itemArray release];
     [curString release];
+    [searchKeyword release];
 
     [super dealloc];
 }

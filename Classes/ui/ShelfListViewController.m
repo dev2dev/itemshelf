@@ -71,6 +71,7 @@
 - (void)dealloc {
     [normalShelfImage release];
     [smartShelfImage release];
+    [tableView release];
 
     [super dealloc];
 }
