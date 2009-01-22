@@ -17,7 +17,6 @@
 		3E12AD000F19B3F2009FE300 /* TmiWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */; };
 		3E15190F0EDAB7C100F510E9 /* ItemCellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */; };
 		3E15194D0EDAC11900F510E9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15194C0EDAC11900F510E9 /* Icon.png */; };
-		3E1519690EDAE78100F510E9 /* Icon-rendered.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1519680EDAE78100F510E9 /* Icon-rendered.png */; };
 		3E22CCED0EF911B900E8A966 /* GTMIPhoneUnitTestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E22CCE90EF911B900E8A966 /* GTMIPhoneUnitTestDelegate.m */; };
 		3E22CCEE0EF911B900E8A966 /* GTMIPhoneUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E22CCEA0EF911B900E8A966 /* GTMIPhoneUnitTestMain.m */; };
 		3E22CCEF0EF911B900E8A966 /* GTMSenTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E22CCEC0EF911B900E8A966 /* GTMSenTestCase.m */; };
@@ -178,7 +177,6 @@
 		3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TmiWebServer.m; sourceTree = "<group>"; };
 		3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ItemCellBack.png; sourceTree = "<group>"; };
 		3E15194C0EDAC11900F510E9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		3E1519680EDAE78100F510E9 /* Icon-rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-rendered.png"; sourceTree = "<group>"; };
 		3E1FDD230ECEF5FA00915E3E /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		3E1FDD240ECEF60600915E3E /* zebra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zebra.h; sourceTree = "<group>"; };
 		3E1FDD450ECEF78200915E3E /* config.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = config.c; sourceTree = "<group>"; };
@@ -447,7 +445,6 @@
 		3E15194B0EDAC0ED00F510E9 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				3E1519680EDAE78100F510E9 /* Icon-rendered.png */,
 				3E15194C0EDAC11900F510E9 /* Icon.png */,
 				3EDA86A70EFA7DE300C4D226 /* PlusItem.png */,
 				3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */,
@@ -828,7 +825,6 @@
 				3EBC16FC0EDA822B00A35747 /* ScanCamera.png in Resources */,
 				3E15190F0EDAB7C100F510E9 /* ItemCellBack.png in Resources */,
 				3E15194D0EDAC11900F510E9 /* Icon.png in Resources */,
-				3E1519690EDAE78100F510E9 /* Icon-rendered.png in Resources */,
 				3E427BC10EDC2A320028E633 /* NumPadView.xib in Resources */,
 				3E427BDB0EDC2F7B0028E633 /* NumPadButton.png in Resources */,
 				3E427BDE0EDC30B80028E633 /* NumPadSelected.png in Resources */,

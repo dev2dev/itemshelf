@@ -137,7 +137,7 @@
     case 0:
         switch (indexPath.row) {
         case 0:
-            iconImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon-rendered" ofType:@"png"]];
+            iconImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon" ofType:@"png"]];
             cell.image = iconImage;
             aptitle = NSLocalizedString(@"AppName", @"");
             cell.text = aptitle;
