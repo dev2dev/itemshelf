@@ -327,6 +327,7 @@ static DataModel *theDataModel = nil; // singleton
 {
     NSMutableArray *tags = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
 
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     for (Shelf *shelf in shelves) {
         if (shelf.shelfType != ShelfTypeNormal) continue;
 
@@ -346,6 +347,7 @@ static DataModel *theDataModel = nil; // singleton
             }
         }
     }
+    [pool release];
 
     // sort
     [tags sortByString];
