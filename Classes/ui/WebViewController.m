@@ -162,6 +162,8 @@
 {
     [activityIndicator stopAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
+    [Common showAlertDialog:@"Error" message:NSLocalizedString(@"Cannot connect with service", @"")];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
