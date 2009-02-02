@@ -1,3 +1,6 @@
+2009-02-02 : Takuya Murakami
+	* Safari でバックアップが取れないバグを修正
+
 2009-01-28 : Takuya Murakami
 	* ver 1.4 再提出 (r166) 
 	* Webサーバメッセージ翻訳ミスを修正

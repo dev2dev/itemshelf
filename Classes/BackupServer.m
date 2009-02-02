@@ -70,7 +70,7 @@
     }
 
     // download
-    else if ([path isEqualToString:dataPath]) {
+    else if ([path hasPrefix:dataPath]) {
         [self sendBackup];
     }
             
