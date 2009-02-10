@@ -197,6 +197,17 @@ static NSDateFormatter *dateFormatter = nil;
     return theDatabase;
 }
 
++ (void)shutdown
+{
+    [theDatabase release];
+    theDatabase = nil;
+
+    [dateFormatter release];
+    dateFormatter = nil;
+
+    sqlite3_shutdown();
+}
+
 - (id)init
 {
     ASSERT(theDatabase == nil);
