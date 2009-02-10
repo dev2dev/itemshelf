@@ -56,6 +56,8 @@
 
 - (void)dealloc {
     [[DataModel sharedDataModel] release];
+    [Database shutdown];
+
     [navigationController release];
     [window release];
     [super dealloc];
