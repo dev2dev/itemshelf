@@ -3,16 +3,17 @@
 	
 2009-02-02 : Takuya Murakami
 	* Safari でバックアップが取れないバグを修正
+	* ver 1.4 再提出 (r169) → レビュー通過
 
 2009-01-28 : Takuya Murakami
-	* ver 1.4 再提出 (r166) 
 	* Webサーバメッセージ翻訳ミスを修正
 	* Actionボタンをカスタムアイコンに変更
 	* ネットワーク未接続時にヘルプ表示したときのエラーを表示
+	* ver 1.4 再提出 (r166) → リジェクト２回目
 
 2009-01-23 : Takuya Murakami
-	* ver 1.4 (r158) → リジェクトされた
 	* アイコン、スタートアップ画面などを変更
+	* ver 1.4 (r158) → リジェクト１回目
 
 2009-01-22 : Takuya Murakami
 	* Bug fix (using clang)
@@ -32,8 +33,8 @@
 	* バックアップ／リストア機能を追加
 
 2009-01-10 : Takuya Murakami
-	* ver 1.3 (r80)
 	* 楽天、価格.com の価格をフォーマットするようにした。
+	* ver 1.3 (r80)
 	
 2009-01-09 : Takuya Murakami
 	* Add search again feature on keyword view
@@ -56,7 +57,6 @@
 
 2008-12-28 : Takuya Murakami
 	* ver 1.2 (r617)
-
 	* indent をすべてスペースに変更した
 	
 2008-12-27 : Takuya Murakami
@@ -67,8 +67,8 @@
 	* タイトル検索に DVD が入っていなかったのを修正
 
 2008-12-19 : Takuya Murakami
-	* ver 1.1, AppStore 4回目 (r589) ⇒ 正式公開
 	* ISBN入力時にクラッシュしていたバグを修正
+	* ver 1.1, AppStore 4回目 (r589) ⇒ 正式公開
 
 2008-12-18 : Takuya Murakami
 	* ver 1.1, AppStore 3回目 (r571) ⇒キャンセル
