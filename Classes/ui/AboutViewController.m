@@ -139,7 +139,11 @@
         case 0:
             iconImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon" ofType:@"png"]];
             cell.image = iconImage;
+#ifdef FREE_EDITION
+            aptitle = @"ItemShelf Lite";
+#else
             aptitle = NSLocalizedString(@"AppName", @"");
+#endif
             cell.text = aptitle;
             break;
 
