@@ -209,14 +209,37 @@ static DataModel *theDataModel = nil; // singleton
 // Item 操作
 
 /**
+   Item 全数を取得する 
+
+   ただし、SmartShelf はカウントしない
+*/
+- (int)_allItemCount
+{
+    int count = 0;
+
+    for (Shelf *shelf in shelves) {
+        if (shelf.type == ShelfTypeNormal) {
+            count += [shelf itemCount];
+        }
+    }
+    return count;
+}
+
+/**
    Add item to shelf
    
    @param[in] item Item to add to shelf
 
    @note item.shelfId must be set before call this.
 */
-- (void)addItem:(Item *)item
+- (BOOL)addItem:(Item *)item
 {
+#ifdef LITE_EDITION
+    if ([self _allItemCount] >= MAX_ITEM_COUNT_FOR_LITE_EDITION) {
+        return NO;
+    }
+#endif
+
     Shelf *shelf = [self shelf:item.shelfId];
     ASSERT(shelf.shelfType == ShelfTypeNormal);
 	
@@ -226,6 +249,8 @@ static DataModel *theDataModel = nil; // singleton
     item.registeredWithShelf = YES;
 
     [self updateSmartShelves];
+
+    return YES;
 }
 
 /**

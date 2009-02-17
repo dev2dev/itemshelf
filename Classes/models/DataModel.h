@@ -39,6 +39,8 @@
 #import "Item.h"
 #import "Shelf.h"
 
+#define MAX_ITEM_COUNT_FOR_LITE_EDITION	25
+
 /**
    Main data model of itemshelf, contains all shelves, items.
    
@@ -66,6 +68,7 @@
 - (NSMutableArray *)normalShelves;
 - (void)updateSmartShelves;
 
+- (int)_allItemCount;
 - (void)addItem:(Item *)item;
 - (void)removeItem:(Item *)item;
 - (void)changeShelf:(Item *)item withShelf:(int)shelf;

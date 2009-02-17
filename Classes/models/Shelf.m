@@ -101,6 +101,15 @@
 {
     return [array countByEnumeratingWithState:state objects:stackbuf count:len];
 }
+
+/**
+   Returns count of items
+*/
+- (int)itemCount
+{
+    return array.count;
+}
+
  
 /**
    Used from sortBySorder (private)

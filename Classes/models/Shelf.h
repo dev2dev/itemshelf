@@ -85,6 +85,7 @@ typedef enum
 - (void)removeItem:(Item*)item;
 - (BOOL)containsItem:(Item*)item;
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len;
+- (int)itemCount;
 
 - (void)sortBySorder;
 
