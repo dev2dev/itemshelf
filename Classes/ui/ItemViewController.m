@@ -313,7 +313,9 @@
 
         if (idx == -1) {
             // 棚に登録
-            [[DataModel sharedDataModel] addItem:item];
+            if (![[DataModel sharedDataModel] addItem:item]) {
+                [[DataModel sharedDataModel] alertItemCountOver];
+            }
             [tv reloadData];
         }
         else if (idx == 0) {

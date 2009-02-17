@@ -73,6 +73,7 @@
 - (void)removeItem:(Item *)item;
 - (void)changeShelf:(Item *)item withShelf:(int)shelf;
 - (Item *)findSameItem:(Item*)item;
+- (void)alertItemCountOver;
 
 - (NSMutableArray*)filterArray:(Shelf *)shelf;
 - (NSMutableArray *)allTags;

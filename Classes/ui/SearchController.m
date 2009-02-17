@@ -147,7 +147,9 @@
         if (x == nil) {
             // 棚に登録
             if (autoRegisterShelf) {
-                [dm addItem:item];
+                if (![dm addItem:item]) {
+                    [dm alertItemCountOver];
+                }
             }
         } else {
             // データ重複 : 置換する

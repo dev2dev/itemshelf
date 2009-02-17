@@ -380,6 +380,21 @@ static DataModel *theDataModel = nil; // singleton
     return tags;
 }
 
+/**
+   Item カウントオーバ
+*/
+- (void)alertItemCountOver
+{
+    UIAlertView *v;
+    v = [[UIAlertView alloc]
+            initWithTitle:@"Warning"
+            message:NSLocalizedString(@"Number of items excceeded the limit.", @"")
+            delegate:nil cancelButtonTitle:NSLocalizedString(@"Close", @"")
+            otherButtonTitles:nil];
+    [v show];
+    [v release];
+}
+
 ////////////////////////////////////////////////////////////////
 // Database operation
 

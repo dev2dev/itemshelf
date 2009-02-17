@@ -8,6 +8,7 @@
 "Shelves" = "Shelves";
 "Shelf name" = "Shelf name";
 "Item" = "Item";
+"Number of items excceeded the limit." = "Number of items excceeded the limit.";
 
 "Add new shelf" = "Add new shelf...";
 "Add normal shelf" = "Add normal shelf";
