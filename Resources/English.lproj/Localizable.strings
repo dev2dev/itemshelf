@@ -1,6 +1,7 @@
 "AppName" = "ItemShelf";
 "SupportURL" = "http://itemshelf.com/index.html";
 "HelpURL" = "http://itemshelf.com/help.html";
+"MacroLensURL" = "http://itemshelf.com/macrolens.html";
 
 "Cancel" = "Cancel";
 
