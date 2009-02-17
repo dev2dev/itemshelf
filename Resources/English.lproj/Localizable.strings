@@ -65,6 +65,7 @@
 "About" = "About";
 "About this software" = "About this software";
 "Help" = "Help";
+"Macro lens information" = "Macro lens information";
 "WebServerNotation" = "Access following URL with browser of your PC:\n%@\nAfter download the file, tap Dismiss button.";
 "Cannot start web server." = "Cannot start web server.";
 

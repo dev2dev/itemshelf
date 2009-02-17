@@ -96,7 +96,7 @@
         case 0: // backup
             return 1;
         case 1: // about
-            return 2;
+            return 3;
     }
     return 0;
 }
@@ -132,6 +132,10 @@
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     break;
                 case 1:
+                    cell.text = NSLocalizedString(@"Macro lens information", @"");
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    break;
+                case 2:
                     cell.text = NSLocalizedString(@"About this software", @"");
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     break;
@@ -148,20 +152,32 @@
         // backup
         [self _doBackup];
     }
-    else if (indexPath.section == 1 && indexPath.row == 0) {
-        // show help
-        //NSURL *url = [NSURL URLWithString:NSLocalizedString(@"HelpURL", @"")];
-        //[[UIApplication sharedApplication] openURL:url];
+    else if (indexPath.section == 1) {
+        WebViewController *wv;
+        AboutViewController *av;
+        NSString *urlstring = nil;
 
-        WebViewController *wv = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
-        wv.urlString = NSLocalizedString(@"HelpURL", @"");
-        [self.navigationController pushViewController:wv animated:YES];
-    }
-    else if (indexPath.section == 1 && indexPath.row == 1) {
-        AboutViewController *aout = [[[AboutViewController alloc]
-                                         initWithNibName:@"AboutView"
-                                         bundle:nil] autorelease];
-        [self.navigationController pushViewController:aout animated:YES];
+        switch (indexPath.row) {
+        case 0:
+            urlstring = NSLocalizedString(@"HelpURL", @"");
+            // fallthrough
+
+        case 1:
+            if (urlstring == nil) {
+                urlstring = NSLocalizedString(@"MacroLensURL", @"");
+            }
+
+            wv = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
+            wv.urlString = NSLocalizedString(@"HelpURL", @"");
+            [self.navigationController pushViewController:wv animated:YES];
+            break;
+
+        case 2:
+            av = [[[AboutViewController alloc]
+                      initWithNibName:@"AboutView"
+                      bundle:nil] autorelease];
+            [self.navigationController pushViewController:av animated:YES];
+            break;
     }
 }
 
