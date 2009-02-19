@@ -205,7 +205,7 @@ static NSDateFormatter *dateFormatter = nil;
     [dateFormatter release];
     dateFormatter = nil;
 
-    sqlite3_shutdown();
+    //sqlite3_shutdown();
 }
 
 - (id)init

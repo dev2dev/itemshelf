@@ -69,7 +69,7 @@
 - (void)updateSmartShelves;
 
 - (int)_allItemCount;
-- (void)addItem:(Item *)item;
+- (BOOL)addItem:(Item *)item;
 - (void)removeItem:(Item *)item;
 - (void)changeShelf:(Item *)item withShelf:(int)shelf;
 - (Item *)findSameItem:(Item*)item;

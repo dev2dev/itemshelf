@@ -218,7 +218,7 @@ static DataModel *theDataModel = nil; // singleton
     int count = 0;
 
     for (Shelf *shelf in shelves) {
-        if (shelf.type == ShelfTypeNormal) {
+        if (shelf.shelfType == ShelfTypeNormal) {
             count += [shelf itemCount];
         }
     }

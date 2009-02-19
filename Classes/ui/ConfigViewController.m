@@ -178,6 +178,7 @@
                       bundle:nil] autorelease];
             [self.navigationController pushViewController:av animated:YES];
             break;
+        }
     }
 }
 
