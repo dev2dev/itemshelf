@@ -33,6 +33,7 @@
 */
 
 #import "AboutViewController.h"
+#import "Edition.h"
 
 #define COPYRIGHT @"Copyright © 2008-2009, ItemShelf development team. All rights reserved."
 #define COPYRIGHT_ZEBRA @"Zebra barcode library, Copyright 2007-2008 (c) Jeff Brown <spadix@users.sourceforge.net>"
@@ -139,11 +140,11 @@
         case 0:
             iconImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon" ofType:@"png"]];
             cell.image = iconImage;
-#ifdef LITE_EDITION
-            aptitle = @"ItemShelf Lite";
-#else
-            aptitle = NSLocalizedString(@"AppName", @"");
-#endif
+            if ([Edition isLiteEdition]) {
+                aptitle = @"ItemShelf Lite";
+            } else {
+                aptitle = NSLocalizedString(@"AppName", @"");
+            }
             cell.text = aptitle;
             break;
 

@@ -35,6 +35,7 @@
 #import <UIKit/UIKit.h>
 #import "DataModel.h"
 #import "StringArray.h"
+#import "Edition.h"
 
 @implementation DataModel
 
@@ -234,11 +235,11 @@ static DataModel *theDataModel = nil; // singleton
 */
 - (BOOL)addItem:(Item *)item
 {
-#ifdef LITE_EDITION
-    if ([self _allItemCount] >= MAX_ITEM_COUNT_FOR_LITE_EDITION) {
-        return NO;
+    if ([Edition isLiteEdition]) {
+        if ([self _allItemCount] >= MAX_ITEM_COUNT_FOR_LITE_EDITION) {
+            return NO;
+        }
     }
-#endif
 
     Shelf *shelf = [self shelf:item.shelfId];
     ASSERT(shelf.shelfType == ShelfTypeNormal);
