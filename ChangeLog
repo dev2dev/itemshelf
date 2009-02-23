@@ -1,3 +1,6 @@
+2009-02-23 : Takuya Murakami
+	* Keyword 検索機能基本部分作成
+	
 2009-02-17 : Takuya Murakami
 	* Lite Edition 用の処理を追加 (Item数上限チェック)
 	* Macro lens 情報ページへのリンクを追加
