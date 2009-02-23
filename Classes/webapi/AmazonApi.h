@@ -48,7 +48,7 @@
    Amazon API
 
    To search items at Amazon, create the instance of AmazonApi,
-   set delegate, set searchKeyword or searchTitle (optionally searchIndex),
+   set delegate, set searchKey/searchKeyType (optionally searchIndex),
    then call itemSearch.
 
    The result will be passed with AmazonApiDelegate protocol.

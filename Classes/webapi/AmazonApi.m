@@ -188,7 +188,7 @@
 /**
    Execute item search
 
-   @note you must set searchKeyword or searchCode property before call this.
+   @note you must set searchKey / searchKeyType property before call this.
    And you can set searchIndex.
 */
 - (void)itemSearch
@@ -203,10 +203,15 @@
 
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
     [comp setQuery:@"SearchIndex" value:searchIndex];
-    if (searchKeyword) {
-        [comp setQuery:@"Title" value:searchKeyword];
-    } else {
-        [comp setQuery:@"Keywords" value:searchCode];
+    switch (searchKeyType) {
+    case SEARCH_KEY_CODE:
+    case SEARCH_KEY_KEYWORD:
+    default: // Ad hoc
+        [comp setQuery:@"Keywords" value:searchKey];
+        break;
+    case SEARCH_KEY_TITLE:
+        [comp setQuery:@"Title" value:searchKey];
+        break;
     }
     //[comp setQuery:@"Debug" value:@"1"];
     [comp log];
@@ -278,8 +283,12 @@
             Item *item = [[Item alloc] init];
 
             item.serviceId = serviceId;
-            item.idString = searchCode;
             item.category = xmlState.indexName;
+            if (searchKeyType == SEARCH_KEY_CODE) {
+                item.idString = searchKey;
+            } else {
+                item.idString = nil;
+            }
 
             [itemArray addObject:item];
             [item release];

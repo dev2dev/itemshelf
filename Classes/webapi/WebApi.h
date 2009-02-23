@@ -128,14 +128,18 @@ enum {
 
     int serviceId;      	///< serviceId
 
-    NSString *searchCode;       ///< Code to search (barcode, isbn, etc.)
-    NSString *searchKeyword;    ///< Keyword to search (title etc.)
+    NSString *searchKey;        ///< Key for search (barcode / title / any keyword)
+    int searchKeyType;  
     NSString *searchIndex;      ///< Search index (category)
 }
 
+#define SEARCH_KEY_CODE    0
+#define SEARCH_KEY_TITLE   1
+#define SEARCH_KEY_KEYWORD 2
+
 @property(nonatomic, assign) id<WebApiDelegate> delegate;
-@property(nonatomic, retain) NSString *searchCode;
-@property(nonatomic, retain) NSString *searchKeyword;
+@property(nonatomic, retain) NSString *searchKey;
+@property(nonatomic, assign) int searchKeyType;
 @property(nonatomic, retain) NSString *searchIndex;
 
 - (void)itemSearch;

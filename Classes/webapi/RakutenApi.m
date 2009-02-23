@@ -42,7 +42,6 @@
 // Rakuten API
 	
 @implementation RakutenApi
-@synthesize searchKeyword;
 
 - (id)init
 {
@@ -60,7 +59,6 @@
     [responseData release];
     [itemArray release];
     [curString release];
-    [searchKeyword release];
 
     [super dealloc];
 }
@@ -87,12 +85,12 @@
 /**
    Execute item search
 
-   @note you must set searchKeyword or searchCode property before call this.
+   @note you must set searchKey/searchKeyType property before call this.
    And you can set searchIndex.
 */
 - (void)itemSearch
 {
-    if (searchCode != nil) {
+    if (searchKeyType == SEARCH_KEY_CODE) {
         // バーコード検索は対応しない
         if (delegate) {
             [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADPARAM
@@ -108,7 +106,7 @@
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
 
     // タイトル検索のみ
-    [comp setQuery:@"keyword" value:searchKeyword];
+    [comp setQuery:@"keyword" value:searchKey];
 
     // operation を searchIndex から決定する
     NSString *operation = @"ItemSearch";
