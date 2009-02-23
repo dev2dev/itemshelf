@@ -298,7 +298,7 @@
     }
     else if (idx == 2) {
         // 再検索
-        KeywordViewController *v = [KeywordViewController keywordViewController:NSLocalizedString(@"Title", @"")];
+        KeywordViewController *v = [KeywordViewController keywordViewController:NSLocalizedString(@"Keyword", @"")];
         v.selectedShelf = [[DataModel sharedDataModel] shelf:item.shelfId];
         v.initialText = item.name;
 

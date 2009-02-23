@@ -281,7 +281,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 // タイトル入力
 - (void)enterKeyword:(id)sender
 {
-    KeywordViewController *v = [KeywordViewController keywordViewController:NSLocalizedString(@"Title", @"")];
+    KeywordViewController *v = [KeywordViewController keywordViewController:NSLocalizedString(@"Keyword", @"")];
     v.selectedShelf = selectedShelf;
 
     [self.navigationController pushViewController:v animated:YES];
