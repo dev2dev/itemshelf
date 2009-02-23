@@ -65,6 +65,11 @@
     }
 	
     [self _setupCategories];
+    
+    // key type
+    keyType = 0;
+    keyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Keyword", nil];
+    [keyTypeButton setTitleForAllState:NSLocalizedString(@"Title", @"")];
  
     // set service string
     [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
@@ -97,6 +102,7 @@
 
 - (void)dealloc {
     [searchIndices release];
+    [keyTypes release];
     [initialText release];
     [webApiFactory release];
     [super dealloc];
@@ -130,7 +136,17 @@
 
     WebApi *api = [webApiFactory createWebApi];
     NSString *searchIndex = [searchIndices objectAtIndex:searchSelectedIndex];
-    [sc search:api withTitle:textField.text withIndex:searchIndex];
+    switch (keyType) {
+        case 0:
+            // Title search
+            [sc search:api withTitle:textField.text withIndex:searchIndex];
+            break;
+        case 1:
+            // Keyword search
+            [sc search:api key:textField.text keyType:SEARCH_KEY_KEYWORD index:searchIndex];
+            break;
+    }
+        
     [api release];
 }
 
@@ -159,6 +175,19 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (IBAction)keyTypeButtonTapped:(id)sender
+{
+    GenSelectListViewController *vc =
+    [GenSelectListViewController
+     genSelectListViewController:self
+     array:keyTypes
+     title:NSLocalizedString(@"Search type", @"")];
+    vc.selectedIndex = keyType;
+    vc.identifier = 1;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (IBAction)serviceIdButtonTapped:(id)sender
 {
     GenSelectListViewController *vc =
@@ -167,21 +196,29 @@
             array:[webApiFactory serviceIdStrings]
             title:NSLocalizedString(@"Select locale", @"")];
     vc.selectedIndex = webApiFactory.serviceId;
-    vc.identifier = 1;
+    vc.identifier = 2;
 
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc
 {
+    NSString *text;
+    
     switch (vc.identifier) {
     case 0: // serchIndex
         searchSelectedIndex = vc.selectedIndex;
-        NSString *text = [searchIndices objectAtIndex:searchSelectedIndex];
+        text = [searchIndices objectAtIndex:searchSelectedIndex];
         [indexButton setTitleForAllState:NSLocalizedString(text, @"")];
         break;
 
-    case 1: // serviceId
+        case 1: // key type
+            keyType = vc.selectedIndex;
+            text = [keyTypes objectAtIndex:keyType];
+            [keyTypeButton setTitleForAllState:NSLocalizedString(text, @"")];
+            break;
+            
+    case 2: // serviceId
         webApiFactory.serviceId = vc.selectedIndex;
         [webApiFactory saveDefaults];
         [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];

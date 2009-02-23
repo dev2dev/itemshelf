@@ -48,6 +48,7 @@
 {
     IBOutlet UITextField *textField;
     IBOutlet UIButton *indexButton;
+    IBOutlet UIButton *keyTypeButton;
     IBOutlet UIButton *serviceIdButton;
 
     NSString *initialText;
@@ -55,6 +56,9 @@
 
     int searchSelectedIndex;
     NSArray *searchIndices;
+    
+    int keyType;
+    NSArray *keyTypes;
 
     WebApiFactory *webApiFactory;
 }
@@ -67,6 +71,7 @@
 - (IBAction)doneAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)indexButtonTapped:(id)sender;
+- (IBAction)keyTypeButtonTapped:(id)sender;
 - (IBAction)serviceIdButtonTapped:(id)sender;
 
 @end
