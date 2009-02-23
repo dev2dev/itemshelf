@@ -90,7 +90,8 @@
     autoRegisterShelf = YES;
 
     api.delegate = self;
-    api.searchCode = code;
+    api.searchKey = code;
+    api.searchKeyType = SEARCH_KEY_CODE;
 
     [api retain];
     [api itemSearch];
@@ -110,7 +111,9 @@
     autoRegisterShelf = NO;
 
     api.delegate = self;
-    api.searchKeyword = title;
+    api.searchKey = title;
+    api.searchKeyType = SEARCH_KEY_TITLE;
+
     api.searchIndex = searchIndex;
 
     [api retain];
