@@ -29,11 +29,12 @@
 "Scan barcode image from photo library" = "Scan barcode image from photo library";
 "Enter item code" = "Enter item code";
 "EnterCodeDescription" = "Enter item code manually (ISBN, ASIN, UPC, EAN, JAN)";
-"Enter title" = "Enter title";
-"EnterTitleDescription" = "Enter title to search items";
+"Enter title" = "Enter keyword";
+"EnterTitleDescription" = "Enter title or keyword (author, artist etc.) to search items";
 
 "Title" = "Title";
 "Code" = "Code";
+"Keyword" = "Keyword";
 "NumPadNoteText" = "Note: No need to input 'ISBN' nor '-' characters.\nTo enter ASIN, tap the text field to use full keyboard.";
 	
 "Illegal message was received" = "Illegal message was received";
