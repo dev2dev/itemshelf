@@ -56,9 +56,11 @@
 
     webApiFactory = [[WebApiFactory alloc] init];
 
-    textField = [[UITextView alloc] initWithFrame:CGRectMake(90, 6, 210, 32)];
-    textField.font = [UIFont systemFontOfSize: 16.0];
+    textField = [[UITextField alloc] initWithFrame:CGRectMake(110, 13, 190, 22)];
+    //textField.backgroundColor = [UIColor grayColor];
+    textField.font = [UIFont systemFontOfSize: 14.0];
     textField.textColor = [UIColor blackColor];
+    textField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
@@ -191,21 +193,21 @@
 
     case 2:
         text = [keyTypes objectAtIndex:keyType];
-        cell = [self containerCellWithTitle:@"KeyType" text:text];
+        cell = [self containerCellWithTitle:@"Type" text:text];
         break;
 
     case 3: // service id
         text = [webApiFactory serviceIdString];
-        cell = [self containerCellWithTitle:@"Service ID" text:text];
+        cell = [self containerCellWithTitle:@"Service" text:text];
         break;
     }
-    [cell autorelease];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GenSelectListViewController *vc = nil;
+    [tv deselectRowAtIndexPath:indexPath animated:NO];
 
     switch (indexPath.row) {
     case 1: // category (index)
@@ -274,11 +276,11 @@
     KeywordViewCell *cell = [KeywordViewCell allocCell:title tableView:tableView identifier:title];
 
     UILabel *value;
-    value = [[[UILabel alloc] initWithFrame:CGRectMake(90, 6, 210, 32)] autorelease];
-    value.text = text;
-    value.font = [UIFont systemFontOfSize: 16.0];
+    value = [[[UILabel alloc] initWithFrame:CGRectMake(110, 6, 190, 32)] autorelease];
+    value.text = NSLocalizedString(text, @"");
+    value.font = [UIFont systemFontOfSize: 14.0];
     value.textColor = [UIColor blackColor];
-    value.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    value.autoresizingMask = 0;//UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [cell attachView:value];    
     return cell;
 }
@@ -307,12 +309,13 @@
         cell = [[[KeywordViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:identifier] autorelease];
     }
     
-    UILabel *tlabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 6, 110, 32)] autorelease];
+    UILabel *tlabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 6, 90, 32)] autorelease];
     tlabel.text = NSLocalizedString(title, @"");
     tlabel.font = [UIFont systemFontOfSize: 14.0];
+    //tlabel.backgroundColor = [UIColor grayColor];
     tlabel.textColor = [UIColor blueColor];
-    tlabel.textAlignment = UITextAlignmentRight;
-    tlabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    tlabel.textAlignment = UITextAlignmentLeft;
+    tlabel.autoresizingMask = 0;//UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [cell.contentView addSubview:tlabel];
 
     return cell;
