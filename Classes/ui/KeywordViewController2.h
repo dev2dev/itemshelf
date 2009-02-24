@@ -43,7 +43,7 @@
 
 @class KeywordViewController;
 
-@interface KeywordViewController : UIViewController
+@interface KeywordViewController2 : UIViewController
 <GenSelectListViewDelegate, SearchControllerDelegate>
 {
     IBOutlet UITableView *tableView;
@@ -64,13 +64,13 @@
 @property(nonatomic,assign) Shelf *selectedShelf;
 @property(nonatomic,retain) NSString *initialText;
 
-+ (KeywordViewController *)keywordViewController:(NSString*)title;
++ (KeywordViewController2 *)keywordViewController:(NSString*)title;
 - (void)_setupCategories;
 - (IBAction)doneAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
-- (IBAction)indexButtonTapped:(id)sender;
-- (IBAction)keyTypeButtonTapped:(id)sender;
-- (IBAction)serviceIdButtonTapped:(id)sender;
+
+- (UITableViewCell *)containerCellWithTitle:(NSString*)title view:(UIView *)view;
+- (UITableViewCell *)containerCellWithTitle:(NSString*)title text:(NSString *)text;
 
 @end
 
@@ -79,5 +79,6 @@
     UIView *attachedView;
 }
 
++ (KeywordViewCell *)allocCell:(NSString *)title tableView:(UITableView*)tableView identifier:(NSString *)identifier;
 - (void)attachView:(UIView *)view;
 @end

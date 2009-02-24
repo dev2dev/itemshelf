@@ -158,6 +158,10 @@
 		3ECBBB4E0EDC4A8200865EF7 /* AudioToolbox in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECBBB4D0EDC4A8200865EF7 /* AudioToolbox */; };
 		3ECD3DD10ED06434001A775F /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECD3DD00ED06434001A775F /* backward.png */; };
 		3ECFF51C0EEEBAC100CB33D7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */; };
+		3ED069530F545B03006D932B /* KeywordViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED069520F545B03006D932B /* KeywordViewController2.m */; };
+		3ED069540F545B03006D932B /* KeywordViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED069520F545B03006D932B /* KeywordViewController2.m */; };
+		3ED0696A0F545CBA006D932B /* KeywordView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED069690F545CBA006D932B /* KeywordView2.xib */; };
+		3ED0696B0F545CBA006D932B /* KeywordView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED069690F545CBA006D932B /* KeywordView2.xib */; };
 		3ED6BE110ED588CB00F4C7EE /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED6BE100ED588CB00F4C7EE /* whiteButton.png */; };
 		3EDA86A90EFA7DE300C4D226 /* PlusItem.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA86A70EFA7DE300C4D226 /* PlusItem.png */; };
 		3EDA86AA0EFA7DE300C4D226 /* PlusShelf.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */; };
@@ -361,6 +365,9 @@
 		3ECD3DAF0ED6C84A0000A9A5 /* URLComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLComponent.m; sourceTree = "<group>"; };
 		3ECD3DD00ED06434001A775F /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		3ED069510F545B03006D932B /* KeywordViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordViewController2.h; sourceTree = "<group>"; };
+		3ED069520F545B03006D932B /* KeywordViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController2.m; sourceTree = "<group>"; };
+		3ED069690F545CBA006D932B /* KeywordView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordView2.xib; sourceTree = "<group>"; };
 		3ED6BE100ED588CB00F4C7EE /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteButton.png; sourceTree = "<group>"; };
 		3EDA86A70EFA7DE300C4D226 /* PlusItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusItem.png; sourceTree = "<group>"; };
 		3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusShelf.png; sourceTree = "<group>"; };
@@ -676,6 +683,8 @@
 		3E7BD5BA0EDD61B80083CBE5 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				3ED069510F545B03006D932B /* KeywordViewController2.h */,
+				3ED069520F545B03006D932B /* KeywordViewController2.m */,
 				3E7EB3220EE4273B00D5CE27 /* ShelfListViewController.h */,
 				3E7EB3230EE4273B00D5CE27 /* ShelfListViewController.m */,
 				3EB7A9EC0EF665DF009B038F /* EditShelfViewController.h */,
@@ -767,6 +776,7 @@
 				3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */,
 				3E427BC00EDC2A320028E633 /* NumPadView.xib */,
 				3E42210B0EE9529800164EF4 /* KeywordView.xib */,
+				3ED069690F545CBA006D932B /* KeywordView2.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -947,6 +957,7 @@
 				3EDA86A90EFA7DE300C4D226 /* PlusItem.png in Resources */,
 				3EDA86AA0EFA7DE300C4D226 /* PlusShelf.png in Resources */,
 				3E36E1AE0F309A9500AB3C64 /* config.png in Resources */,
+				3ED0696A0F545CBA006D932B /* KeywordView2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,6 +1007,7 @@
 				3E23102B0F4D9ED0006E24AF /* PlusItem.png in Resources */,
 				3E23102C0F4D9ED0006E24AF /* PlusShelf.png in Resources */,
 				3E23102D0F4D9ED0006E24AF /* config.png in Resources */,
+				3ED0696B0F545CBA006D932B /* KeywordView2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,6 +1036,7 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				3E0796090F4DA8FC00456CB3 /* Edition.m in Sources */,
+				3ED069530F545B03006D932B /* KeywordViewController2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,6 +1061,7 @@
 			files = (
 				3E23102F0F4D9ED0006E24AF /* main.m in Sources */,
 				3E0796080F4DA8FC00456CB3 /* Edition.m in Sources */,
+				3ED069540F545B03006D932B /* KeywordViewController2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

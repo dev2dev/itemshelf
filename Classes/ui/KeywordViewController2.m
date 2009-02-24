@@ -32,18 +32,18 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "KeywordViewController.h"
+#import "KeywordViewController2.h"
 #import "AppDelegate.h"
 #import "SearchController.h"
 
-@implementation KeywordViewController
+@implementation KeywordViewController2
 
 @synthesize selectedShelf, initialText;
 
-+ (KeywordViewController *)keywordViewController:(NSString*)title
++ (KeywordViewController2 *)keywordViewController:(NSString*)title
 {
-    KeywordViewController *vc = [[[KeywordViewController alloc]
-                                     initWithNibName:@"KeywordView"
+    KeywordViewController2 *vc = [[[KeywordViewController2 alloc]
+                                     initWithNibName:@"KeywordView2"
                                      bundle:nil] autorelease];
     vc.title = title;
 
@@ -58,7 +58,7 @@
 
     textField = [[UITextView alloc] initWithFrame:CGRectMake(90, 6, 210, 32)];
     textField.font = [UIFont systemFontOfSize: 16.0];
-    textField.textColor = [UIColor balckColor];
+    textField.textColor = [UIColor blackColor];
 
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
@@ -176,9 +176,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    KeywordViewCell *cell = nil;
+    UITableViewCell *cell = nil;
+    NSString *text;
     
-    if (indexPath.row) {
+    switch (indexPath.row) {
     case 0: // text view
         cell = [self containerCellWithTitle:@"Keyword" view:textField];
         break;
@@ -243,8 +244,6 @@
 
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc
 {
-    NSString *text;
-    
     switch (vc.identifier) {
     case 0: // serchIndex
         searchSelectedIndex = vc.selectedIndex;
@@ -260,19 +259,19 @@
         [self _setupCategories];
         break;
     }
-    [self.tableView reloadData];
+    [tableView reloadData];
 }
 
 - (UITableViewCell *)containerCellWithTitle:(NSString*)title view:(UIView *)view
 {
-    KeywordViewCell *cell = [KeywordViewCell allocCell:title tableView:self.tableView identifier:title];
-    [cell attachContainer:view];
+    KeywordViewCell *cell = [KeywordViewCell allocCell:title tableView:tableView identifier:title];
+    [cell attachView:view];
     return cell;
 }
 
 - (UITableViewCell *)containerCellWithTitle:(NSString*)title text:(NSString *)text
 {
-    KeywordViewCell *cell = [KeywordViewCell allocCell:title tableView:self.tableView identifier:title];
+    KeywordViewCell *cell = [KeywordViewCell allocCell:title tableView:tableView identifier:title];
 
     UILabel *value;
     value = [[[UILabel alloc] initWithFrame:CGRectMake(90, 6, 210, 32)] autorelease];
@@ -280,7 +279,7 @@
     value.font = [UIFont systemFontOfSize: 16.0];
     value.textColor = [UIColor blackColor];
     value.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [cell attachContainer:view];    
+    [cell attachView:value];    
     return cell;
 }
 
@@ -331,7 +330,7 @@
 - (void)dealloc
 {
     [attachedView release];
-    [super release];
+    [super dealloc];
 }
 
 @end
