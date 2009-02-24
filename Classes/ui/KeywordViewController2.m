@@ -50,12 +50,15 @@
     return vc;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     webApiFactory = [[WebApiFactory alloc] init];
+
+    textField = [[UITextView alloc] initWithFrame:CGRectMake(90, 6, 210, 32)];
+    textField.font = [UIFont systemFontOfSize: 16.0];
+    textField.textColor = [UIColor balckColor];
 
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
@@ -69,10 +72,6 @@
     // key type
     keyType = 0;
     keyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Keyword", nil];
-    //[keyTypeButton setTitleForAllState:NSLocalizedString(@"Title", @"")];
- 
-    // set service string
-    //[serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
 
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -98,6 +97,7 @@
 }
 
 - (void)dealloc {
+    [textField release];
     [searchIndices release];
     [keyTypes release];
     [initialText release];
@@ -118,11 +118,8 @@
 
 - (IBAction)doneAction:(id)sender
 {
-#if 0
-    // NOT YET!!!
-
     // 検索
-    if (textField.text.length < 3) {
+    if (textField.text.length < 2) {
         [Common showAlertDialog:@"Error" message:@"Title is too short"];
         return;
     }
@@ -148,7 +145,6 @@
     }
         
     [api release];
-#endif
 }
 
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result
@@ -161,16 +157,6 @@
 - (IBAction)cancelAction:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-    // Release anything that's not essential, such as cached data
 }
 
 /////
@@ -194,8 +180,7 @@
     
     if (indexPath.row) {
     case 0: // text view
-        /// TBD:  keywordTextView は最初に作っておくこと
-        cell = [self containerCellWithTitle:@"Keyword" view:keywordTextView];
+        cell = [self containerCellWithTitle:@"Keyword" view:textField];
         break;
 
     case 1: // category (index)
@@ -299,6 +284,15 @@
     return cell;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
+    // Release anything that's not essential, such as cached data
+}
 
 @end
 

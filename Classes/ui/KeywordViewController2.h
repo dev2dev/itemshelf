@@ -46,10 +46,8 @@
 @interface KeywordViewController : UIViewController
 <GenSelectListViewDelegate, SearchControllerDelegate>
 {
-    IBOutlet UITextField *textField;
-    IBOutlet UIButton *indexButton;
-    IBOutlet UIButton *keyTypeButton;
-    IBOutlet UIButton *serviceIdButton;
+    IBOutlet UITableView *tableView;
+    UITextField *textField;
 
     NSString *initialText;
     Shelf *selectedShelf;
