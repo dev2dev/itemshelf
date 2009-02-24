@@ -69,10 +69,10 @@
     // key type
     keyType = 0;
     keyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Keyword", nil];
-    [keyTypeButton setTitleForAllState:NSLocalizedString(@"Title", @"")];
+    //[keyTypeButton setTitleForAllState:NSLocalizedString(@"Title", @"")];
  
     // set service string
-    [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
+    //[serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
 
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -93,9 +93,6 @@
     [searchIndices retain];
 
     searchSelectedIndex = [api defaultCategoryIndex];
-
-    NSString *text = [searchIndices objectAtIndex:searchSelectedIndex];
-    [indexButton setTitleForAllState:NSLocalizedString(text, @"")];
 
     [api release];
 }
@@ -121,6 +118,9 @@
 
 - (IBAction)doneAction:(id)sender
 {
+#if 0
+    // NOT YET!!!
+
     // 検索
     if (textField.text.length < 3) {
         [Common showAlertDialog:@"Error" message:@"Title is too short"];
@@ -148,6 +148,7 @@
     }
         
     [api release];
+#endif
 }
 
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result
@@ -162,72 +163,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)indexButtonTapped:(id)sender
-{
-    GenSelectListViewController *vc =
-        [GenSelectListViewController
-            genSelectListViewController:self
-            array:searchIndices
-            title:NSLocalizedString(@"Category", @"")];
-    vc.selectedIndex = searchSelectedIndex;
-    vc.identifier = 0;
-
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (IBAction)keyTypeButtonTapped:(id)sender
-{
-    GenSelectListViewController *vc =
-    [GenSelectListViewController
-     genSelectListViewController:self
-     array:keyTypes
-     title:NSLocalizedString(@"Search type", @"")];
-    vc.selectedIndex = keyType;
-    vc.identifier = 1;
-    
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (IBAction)serviceIdButtonTapped:(id)sender
-{
-    GenSelectListViewController *vc =
-        [GenSelectListViewController
-            genSelectListViewController:self
-            array:[webApiFactory serviceIdStrings]
-            title:NSLocalizedString(@"Select locale", @"")];
-    vc.selectedIndex = webApiFactory.serviceId;
-    vc.identifier = 2;
-
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)genSelectListViewChanged:(GenSelectListViewController*)vc
-{
-    NSString *text;
-    
-    switch (vc.identifier) {
-    case 0: // serchIndex
-        searchSelectedIndex = vc.selectedIndex;
-        text = [searchIndices objectAtIndex:searchSelectedIndex];
-        [indexButton setTitleForAllState:NSLocalizedString(text, @"")];
-        break;
-
-        case 1: // key type
-            keyType = vc.selectedIndex;
-            text = [keyTypes objectAtIndex:keyType];
-            [keyTypeButton setTitleForAllState:NSLocalizedString(text, @"")];
-            break;
-            
-    case 2: // serviceId
-        webApiFactory.serviceId = vc.selectedIndex;
-        [webApiFactory saveDefaults];
-        [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
-
-        [self _setupCategories];
-        break;
-    }
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -236,6 +171,111 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
     // Release anything that's not essential, such as cached data
+}
+
+/////
+
+
+// セクション数
+- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
+{
+    return 1;
+}
+
+// 行数
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    KeywordViewCell *cell = nil;
+    
+    if (indexPath.row) {
+    case 0: // text view
+        /// TBD:  keywordTextView は最初に作っておくこと
+        cell = [self containerCellWithTitle:@"Keyword" view:keywordTextView];
+        break;
+
+    case 1: // category (index)
+        text = [searchIndices objectAtIndex:searchSelectedIndex];
+        cell = [self containerCellWithTitle:@"Category" text:text];
+        break;
+
+    case 2:
+        text = [keyTypes objectAtIndex:keyType];
+        cell = [self containerCellWithTitle:@"KeyType" text:text];
+        break;
+
+    case 3: // service id
+        text = [webApiFactory serviceIdString];
+        cell = [self containerCellWithTitle:@"Service ID" text:text];
+        break;
+    }
+    [cell autorelease];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GenSelectListViewController *vc = nil;
+
+    switch (indexPath.row) {
+    case 1: // category (index)
+        vc = [GenSelectListViewController
+                 genSelectListViewController:self
+                 array:searchIndices
+                 title:NSLocalizedString(@"Category", @"")];
+        vc.selectedIndex = searchSelectedIndex;
+        vc.identifier = 0;
+        break;
+
+    case 2: // key type
+        vc = [GenSelectListViewController
+                 genSelectListViewController:self
+                 array:keyTypes
+                 title:NSLocalizedString(@"Search type", @"")];
+        vc.selectedIndex = keyType;
+        vc.identifier = 1;
+        break;
+            
+    case 3: // serviceId
+        vc = [GenSelectListViewController
+                 genSelectListViewController:self
+                 array:[webApiFactory serviceIdStrings]
+                 title:NSLocalizedString(@"Select locale", @"")];
+        vc.selectedIndex = webApiFactory.serviceId;
+        vc.identifier = 2;
+        break;
+    }
+
+    if (vc) {
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+       
+
+- (void)genSelectListViewChanged:(GenSelectListViewController*)vc
+{
+    NSString *text;
+    
+    switch (vc.identifier) {
+    case 0: // serchIndex
+        searchSelectedIndex = vc.selectedIndex;
+        break;
+
+    case 1: // key type
+        keyType = vc.selectedIndex;
+        break;
+            
+    case 2: // serviceId
+        webApiFactory.serviceId = vc.selectedIndex;
+        [webApiFactory saveDefaults];
+        [self _setupCategories];
+        break;
+    }
+    [self.tableView reloadData];
 }
 
 - (UITableViewCell *)containerCellWithTitle:(NSString*)title view:(UIView *)view
