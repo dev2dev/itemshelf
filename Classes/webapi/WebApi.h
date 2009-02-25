@@ -67,6 +67,15 @@ enum {
     MaxServiceId
 };
 
+// search key types
+typedef enum {
+    SearchKeyCode = 0,
+    SearchKeyTitle,
+    SearchKeyAuthor,
+    SearchKeyArtist,
+    SearchKeyAll
+} SearchKeyType;
+
 /**
    Web API delegate protocol
 */
@@ -129,17 +138,13 @@ enum {
     int serviceId;      	///< serviceId
 
     NSString *searchKey;        ///< Key for search (barcode / title / any keyword)
-    int searchKeyType;  
+    SearchKeyType searchKeyType;  
     NSString *searchIndex;      ///< Search index (category)
 }
 
-#define SEARCH_KEY_CODE    0
-#define SEARCH_KEY_TITLE   1
-#define SEARCH_KEY_KEYWORD 2
-
 @property(nonatomic, assign) id<WebApiDelegate> delegate;
 @property(nonatomic, retain) NSString *searchKey;
-@property(nonatomic, assign) int searchKeyType;
+@property(nonatomic, assign) SearchKeyType searchKeyType;
 @property(nonatomic, retain) NSString *searchIndex;
 
 - (void)itemSearch;

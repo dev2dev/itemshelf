@@ -84,29 +84,18 @@
 */
 - (void)search:(WebApi *)api withCode:(NSString*)code
 {
-    [self search:api key:code keyType:SEARCH_KEY_CODE index:nil];
-}
-
-/**
-   Search item with title
-
-   @param[in] title Title to search
-   @param[in] searchIndex Search index (category)
-*/
-- (void)search:(WebApi *)api withTitle:(NSString *)title withIndex:(NSString*)searchIndex
-{
-    [self search:api key:title keyType:SEARCH_KEY_TITLE index:searchIndex];
+    [self search:api key:code searchKeyType:SearchKeyCode index:nil];
 }
 
 /**
    Search item
 */
-- (void)search:(WebApi *)api key:(NSString *)key keyType:(int)keyType index:(NSString*)searchIndex
+- (void)search:(WebApi *)api key:(NSString *)key searchKeyType:(SearchKeyType)searchKeyType index:(NSString*)searchIndex
 {
     ASSERT(viewController != nil);
     [self _showActivityIndicator];
 
-    if (keyType == SEARCH_KEY_CODE) {
+    if (searchKeyType == SearchKeyCode) {
         autoRegisterShelf = YES;
     } else {
         autoRegisterShelf = NO;
@@ -114,7 +103,7 @@
 
     api.delegate = self;
     api.searchKey = key;
-    api.searchKeyType = keyType;
+    api.searchKeyType = searchKeyType;
     api.searchIndex = searchIndex;
 
     [api retain];

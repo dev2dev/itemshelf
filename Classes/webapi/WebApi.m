@@ -236,7 +236,7 @@
     if (self) {
         delegate = nil;
         searchKey = nil;
-        searchKeyType = SEARCH_KEY_CODE;
+        searchKeyType = SearchKeyCode;
         searchIndex = nil;
     }
     return self;

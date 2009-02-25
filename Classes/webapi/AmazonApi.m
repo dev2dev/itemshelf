@@ -204,13 +204,18 @@
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
     [comp setQuery:@"SearchIndex" value:searchIndex];
     switch (searchKeyType) {
-    case SEARCH_KEY_CODE:
-    case SEARCH_KEY_KEYWORD:
-    default: // Ad hoc
-        [comp setQuery:@"Keywords" value:searchKey];
-        break;
-    case SEARCH_KEY_TITLE:
+    case SearchKeyTitle:
         [comp setQuery:@"Title" value:searchKey];
+        break;
+    case SearchKeyAuthor:
+        [comp setQuery:@"Author" value:searchKey];
+        break;
+    case SearchKeyArtist:
+        [comp setQuery:@"Artist" value:searchKey];
+        break;
+    case SearchKeyAll:
+    default:
+        [comp setQuery:@"Keywords" value:searchKey];
         break;
     }
     //[comp setQuery:@"Debug" value:@"1"];
@@ -284,7 +289,7 @@
 
             item.serviceId = serviceId;
             item.category = xmlState.indexName;
-            if (searchKeyType == SEARCH_KEY_CODE) {
+            if (searchKeyType == SearchKeyCode) {
                 item.idString = searchKey;
             } else {
                 item.idString = nil;

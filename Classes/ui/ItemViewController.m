@@ -36,7 +36,7 @@
 #import "DataModel.h"
 #import "WebViewController.h"
 #import "WebApi.h"
-#import "KeywordViewController.h"
+#import "KeywordViewController2.h"
 
 @implementation ItemViewController
 
@@ -298,7 +298,7 @@
     }
     else if (idx == 2) {
         // 再検索
-        KeywordViewController *v = [KeywordViewController keywordViewController:NSLocalizedString(@"Keyword", @"")];
+        KeywordViewController2 *v = [KeywordViewController2 keywordViewController:NSLocalizedString(@"Keyword", @"")];
         v.selectedShelf = [[DataModel sharedDataModel] shelf:item.shelfId];
         v.initialText = item.name;
 

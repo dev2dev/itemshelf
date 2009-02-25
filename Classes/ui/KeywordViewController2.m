@@ -72,8 +72,8 @@
     [self _setupCategories];
     
     // key type
-    keyType = 0;
-    keyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Keyword", nil];
+    searchKeyType = SearchKeyTitle;
+    searchKeyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Author", @"Artist", @"All", nil];
 
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -101,7 +101,7 @@
 - (void)dealloc {
     [textField release];
     [searchIndices release];
-    [keyTypes release];
+    [searchKeyTypes release];
     [initialText release];
     [webApiFactory release];
     [super dealloc];
@@ -135,17 +135,9 @@
 
     WebApi *api = [webApiFactory createWebApi];
     NSString *searchIndex = [searchIndices objectAtIndex:searchSelectedIndex];
-    switch (keyType) {
-        case 0:
-            // Title search
-            [sc search:api withTitle:textField.text withIndex:searchIndex];
-            break;
-        case 1:
-            // Keyword search
-            [sc search:api key:textField.text keyType:SEARCH_KEY_KEYWORD index:searchIndex];
-            break;
-    }
-        
+
+    [sc search:api key:textField.text searchKeyType:searchKeyType index:searchIndex];
+
     [api release];
 }
 
@@ -186,14 +178,14 @@
         cell = [self containerCellWithTitle:@"Keyword" view:textField];
         break;
 
-    case 1: // category (index)
-        text = [searchIndices objectAtIndex:searchSelectedIndex];
-        cell = [self containerCellWithTitle:@"Category" text:text];
+    case 1: // search key types
+        text = [searchKeyTypes objectAtIndex:searchKeyType - 1];
+        cell = [self containerCellWithTitle:@"Type" text:text];
         break;
 
-    case 2:
-        text = [keyTypes objectAtIndex:keyType];
-        cell = [self containerCellWithTitle:@"Type" text:text];
+    case 2: // category (index)
+        text = [searchIndices objectAtIndex:searchSelectedIndex];
+        cell = [self containerCellWithTitle:@"Category" text:text];
         break;
 
     case 3: // service id
@@ -222,9 +214,9 @@
     case 2: // key type
         vc = [GenSelectListViewController
                  genSelectListViewController:self
-                 array:keyTypes
+                 array:searchKeyTypes
                  title:NSLocalizedString(@"Search type", @"")];
-        vc.selectedIndex = keyType;
+        vc.selectedIndex = searchKeyType - 1;
         vc.identifier = 1;
         break;
             
@@ -251,8 +243,8 @@
         searchSelectedIndex = vc.selectedIndex;
         break;
 
-    case 1: // key type
-        keyType = vc.selectedIndex;
+    case 1: // search key type
+        searchKeyType = vc.selectedIndex + 1;
         break;
             
     case 2: // serviceId

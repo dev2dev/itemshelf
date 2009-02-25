@@ -74,7 +74,7 @@
 */
 - (void)itemSearch
 {
-    if (searchKeyType == SEARCH_KEY_CODE) {
+    if (searchKeyType == SearchKeyCode) {
         // バーコード検索は対応しない
         if (delegate) {
             [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADPARAM
@@ -89,7 +89,7 @@
     NSString *baseURI = @"http://itemshelf.com/cgi-bin/kakakucomsearch.cgi";
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
 
-    // タイトル検索のみ
+    // すべてキーワード検索
     [comp setQuery:@"keyword" value:searchKey];
     [comp log];
     

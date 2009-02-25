@@ -38,7 +38,8 @@
 #import "Common.h"
 #import "GenSelectListViewController.h"
 #import "NumPadViewController.h"
-#import "KeywordViewController.h"
+//#import "KeywordViewController.h"
+#import "KeywordViewController2.h"
 #import "Shelf.h"
 #import "SearchController.h"
 

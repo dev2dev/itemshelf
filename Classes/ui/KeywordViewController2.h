@@ -55,8 +55,8 @@
     int searchSelectedIndex;
     NSArray *searchIndices;
     
-    int keyType;
-    NSArray *keyTypes;
+    SearchKeyType searchKeyType;
+    NSArray *searchKeyTypes;
 
     WebApiFactory *webApiFactory;
 }

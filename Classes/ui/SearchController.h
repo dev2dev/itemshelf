@@ -78,8 +78,8 @@
 + (SearchController *)newController;
 
 - (void)search:(WebApi *)api withCode:(NSString*)code;
-- (void)search:(WebApi *)api withTitle:(NSString *)title withIndex:(NSString*)searchIndex;
-- (void)search:(WebApi *)api key:(NSString *)key keyType:(int)keyType index:(NSString*)searchIndex;
+//- (void)search:(WebApi *)api withTitle:(NSString *)title withIndex:(NSString*)searchIndex;
+- (void)search:(WebApi *)api key:(NSString *)key searchKeyType:(SearchKeyType)searchKeyType index:(NSString*)searchIndex;
 
 - (void)_showActivityIndicator;
 - (void)_dismissActivityIndicator;
