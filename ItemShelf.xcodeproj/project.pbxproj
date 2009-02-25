@@ -57,7 +57,6 @@
 		3E2310170F4D9ED0006E24AF /* PhotoLibrary.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC16F80EDA822B00A35747 /* PhotoLibrary.png */; };
 		3E2310180F4D9ED0006E24AF /* ScanCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC16F90EDA822B00A35747 /* ScanCamera.png */; };
 		3E2310190F4D9ED0006E24AF /* ItemCellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */; };
-		3E23101A0F4D9ED0006E24AF /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15194C0EDAC11900F510E9 /* Icon.png */; };
 		3E23101B0F4D9ED0006E24AF /* NumPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BC00EDC2A320028E633 /* NumPadView.xib */; };
 		3E23101C0F4D9ED0006E24AF /* NumPadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BDA0EDC2F7B0028E633 /* NumPadButton.png */; };
 		3E23101D0F4D9ED0006E24AF /* NumPadSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BDD0EDC30B80028E633 /* NumPadSelected.png */; };
@@ -127,6 +126,7 @@
 		3EA444770EEB8CBC00CE33EB /* ShelfMode.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA444760EEB8CBC00CE33EB /* ShelfMode.png */; };
 		3EA62C9E0EE9834900A4694B /* NumPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA62C9D0EE9834900A4694B /* NumPad.png */; };
 		3EA62D260EE98F7600A4694B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA62D250EE98F7600A4694B /* Default.png */; };
+		3EA8F0E30F555BF900FE2779 /* Icon-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA8F0E20F555BF900FE2779 /* Icon-lite.png */; };
 		3EB7A9F00EF66601009B038F /* EditShelfView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EB7A9EF0EF66601009B038F /* EditShelfView.xib */; };
 		3EBC16FA0EDA822B00A35747 /* EnterCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC16F70EDA822B00A35747 /* EnterCode.png */; };
 		3EBC16FB0EDA822B00A35747 /* PhotoLibrary.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC16F80EDA822B00A35747 /* PhotoLibrary.png */; };
@@ -340,6 +340,7 @@
 		3EA444760EEB8CBC00CE33EB /* ShelfMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShelfMode.png; sourceTree = "<group>"; };
 		3EA62C9D0EE9834900A4694B /* NumPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NumPad.png; sourceTree = "<group>"; };
 		3EA62D250EE98F7600A4694B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3EA8F0E20F555BF900FE2779 /* Icon-lite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-lite.png"; sourceTree = "<group>"; };
 		3EB7A9EA0EF665CE009B038F /* SmartShelf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartShelf.m; sourceTree = "<group>"; };
 		3EB7A9EC0EF665DF009B038F /* EditShelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditShelfViewController.h; sourceTree = "<group>"; };
 		3EB7A9ED0EF665DF009B038F /* EditShelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditShelfViewController.m; sourceTree = "<group>"; };
@@ -530,6 +531,7 @@
 			isa = PBXGroup;
 			children = (
 				3E15194C0EDAC11900F510E9 /* Icon.png */,
+				3EA8F0E20F555BF900FE2779 /* Icon-lite.png */,
 				3EDA86A70EFA7DE300C4D226 /* PlusItem.png */,
 				3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */,
 				3ECD3DD00ED06434001A775F /* backward.png */,
@@ -977,7 +979,6 @@
 				3E2310170F4D9ED0006E24AF /* PhotoLibrary.png in Resources */,
 				3E2310180F4D9ED0006E24AF /* ScanCamera.png in Resources */,
 				3E2310190F4D9ED0006E24AF /* ItemCellBack.png in Resources */,
-				3E23101A0F4D9ED0006E24AF /* Icon.png in Resources */,
 				3E23101B0F4D9ED0006E24AF /* NumPadView.xib in Resources */,
 				3E23101C0F4D9ED0006E24AF /* NumPadButton.png in Resources */,
 				3E23101D0F4D9ED0006E24AF /* NumPadSelected.png in Resources */,
@@ -997,6 +998,7 @@
 				3E23102C0F4D9ED0006E24AF /* PlusShelf.png in Resources */,
 				3E23102D0F4D9ED0006E24AF /* config.png in Resources */,
 				3ED0696B0F545CBA006D932B /* KeywordView2.xib in Resources */,
+				3EA8F0E30F555BF900FE2779 /* Icon-lite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
