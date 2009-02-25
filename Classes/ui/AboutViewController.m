@@ -138,7 +138,11 @@
     case 0:
         switch (indexPath.row) {
         case 0:
-            iconImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon" ofType:@"png"]];
+            if ([Edition isLiteEdition]) {
+                iconImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon-lite" ofType:@"png"]];
+            } else {
+                iconImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon" ofType:@"png"]];
+            }
             cell.image = iconImage;
             if ([Edition isLiteEdition]) {
                 aptitle = @"ItemShelf Lite";
