@@ -1,7 +1,8 @@
 2009-02-25 : Takuya Murakami
 	* Artist, Author 検索機能を追加
 	* KeywordViewController2 作成、KeywordViewController 削除
-	
+	* Ver 1.5 : Standard + Lite (r207)
+
 2009-02-23 : Takuya Murakami
 	* Keyword 検索機能基本部分作成
 	
