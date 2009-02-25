@@ -100,8 +100,8 @@
     case AmazonUK: suffix = @"co.uk"; break;
     case AmazonFR: suffix = @"fr"; break;
     case AmazonDE: suffix = @"de"; break;
+    default: ASSERT(NO); // fallthrough
     case AmazonJP: suffix = @"jp"; break;
-    default: ASSERT(NO);
     }
 
     baseURI = [[NSString alloc]

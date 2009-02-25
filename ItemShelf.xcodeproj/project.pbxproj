@@ -29,7 +29,6 @@
 		3E22CD410EF9142E00E8A966 /* ShelfListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7EB3230EE4273B00D5CE27 /* ShelfListViewController.m */; };
 		3E22CD420EF9142E00E8A966 /* EditShelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB7A9ED0EF665DF009B038F /* EditShelfViewController.m */; };
 		3E22CD430EF9142E00E8A966 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4406FE0EF7FF7B00EB1C72 /* SearchController.m */; };
-		3E22CD440EF9142E00E8A966 /* KeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4220F80EE9526700164EF4 /* KeywordViewController.m */; };
 		3E22CD450EF9142E00E8A966 /* ItemCell4.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE7514A0EE996ED0018A317 /* ItemCell4.m */; };
 		3E22CD460EF9142E00E8A966 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC639CE0EE5449D0057FAC2 /* WebViewController.m */; };
 		3E22CD470EF9142E00E8A966 /* Shelf.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E04544E0EE3ED580051CB37 /* Shelf.m */; };
@@ -68,7 +67,6 @@
 		3E2310210F4D9ED0006E24AF /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC639D00EE544C30057FAC2 /* WebView.xib */; };
 		3E2310220F4D9ED0006E24AF /* NoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E817E830EE6C1C60015A97E /* NoImage.png */; };
 		3E2310230F4D9ED0006E24AF /* Locale.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC727160EE83161008B2CBF /* Locale.png */; };
-		3E2310240F4D9ED0006E24AF /* KeywordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E42210B0EE9529800164EF4 /* KeywordView.xib */; };
 		3E2310250F4D9ED0006E24AF /* NumPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA62C9D0EE9834900A4694B /* NumPad.png */; };
 		3E2310260F4D9ED0006E24AF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA62D250EE98F7600A4694B /* Default.png */; };
 		3E2310270F4D9ED0006E24AF /* ShelfMode.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA444760EEB8CBC00CE33EB /* ShelfMode.png */; };
@@ -95,7 +93,6 @@
 		3E37D19E0F1395AB005B6B90 /* WebApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37D1980F139573005B6B90 /* WebApi.m */; };
 		3E3AA5AD0EE02EF200339BAB /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3AA5AC0EE02EF200339BAB /* AboutView.xib */; };
 		3E3EA1510ED9A072006892E9 /* ConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3EA1500ED9A072006892E9 /* ConfigView.xib */; };
-		3E42210C0EE9529800164EF4 /* KeywordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E42210B0EE9529800164EF4 /* KeywordView.xib */; };
 		3E427BC10EDC2A320028E633 /* NumPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BC00EDC2A320028E633 /* NumPadView.xib */; };
 		3E427BDB0EDC2F7B0028E633 /* NumPadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BDA0EDC2F7B0028E633 /* NumPadButton.png */; };
 		3E427BDE0EDC30B80028E633 /* NumPadSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BDD0EDC30B80028E633 /* NumPadSelected.png */; };
@@ -307,9 +304,6 @@
 		3E3EA14D0ED9A05E006892E9 /* ConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigViewController.h; sourceTree = "<group>"; };
 		3E3EA14E0ED9A05E006892E9 /* ConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigViewController.m; sourceTree = "<group>"; };
 		3E3EA1500ED9A072006892E9 /* ConfigView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfigView.xib; sourceTree = "<group>"; };
-		3E4220F70EE9526700164EF4 /* KeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordViewController.h; sourceTree = "<group>"; };
-		3E4220F80EE9526700164EF4 /* KeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController.m; sourceTree = "<group>"; };
-		3E42210B0EE9529800164EF4 /* KeywordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordView.xib; sourceTree = "<group>"; };
 		3E427BC00EDC2A320028E633 /* NumPadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumPadView.xib; sourceTree = "<group>"; };
 		3E427BDA0EDC2F7B0028E633 /* NumPadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NumPadButton.png; sourceTree = "<group>"; };
 		3E427BDD0EDC30B80028E633 /* NumPadSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NumPadSelected.png; sourceTree = "<group>"; };
@@ -683,8 +677,6 @@
 		3E7BD5BA0EDD61B80083CBE5 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				3ED069510F545B03006D932B /* KeywordViewController2.h */,
-				3ED069520F545B03006D932B /* KeywordViewController2.m */,
 				3E7EB3220EE4273B00D5CE27 /* ShelfListViewController.h */,
 				3E7EB3230EE4273B00D5CE27 /* ShelfListViewController.m */,
 				3EB7A9EC0EF665DF009B038F /* EditShelfViewController.h */,
@@ -697,8 +689,8 @@
 				3E4406FE0EF7FF7B00EB1C72 /* SearchController.m */,
 				3ECBBA950EDC432F00865EF7 /* NumPadViewController.h */,
 				3ECBBA960EDC432F00865EF7 /* NumPadViewController.m */,
-				3E4220F70EE9526700164EF4 /* KeywordViewController.h */,
-				3E4220F80EE9526700164EF4 /* KeywordViewController.m */,
+				3ED069510F545B03006D932B /* KeywordViewController2.h */,
+				3ED069520F545B03006D932B /* KeywordViewController2.m */,
 				3EE8D9440ED19812003D9852 /* ItemCell.h */,
 				3EE8D9450ED19812003D9852 /* ItemCell.m */,
 				3EE751490EE996ED0018A317 /* ItemCell4.h */,
@@ -775,7 +767,6 @@
 				3E9E4DC00ED0339C00A7DCF2 /* GenEditTextView.xib */,
 				3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */,
 				3E427BC00EDC2A320028E633 /* NumPadView.xib */,
-				3E42210B0EE9529800164EF4 /* KeywordView.xib */,
 				3ED069690F545CBA006D932B /* KeywordView2.xib */,
 			);
 			name = View;
@@ -947,7 +938,6 @@
 				3EC639D10EE544C30057FAC2 /* WebView.xib in Resources */,
 				3E817E840EE6C1C60015A97E /* NoImage.png in Resources */,
 				3EC727170EE83161008B2CBF /* Locale.png in Resources */,
-				3E42210C0EE9529800164EF4 /* KeywordView.xib in Resources */,
 				3EA62C9E0EE9834900A4694B /* NumPad.png in Resources */,
 				3EA62D260EE98F7600A4694B /* Default.png in Resources */,
 				3EA444770EEB8CBC00CE33EB /* ShelfMode.png in Resources */,
@@ -997,7 +987,6 @@
 				3E2310210F4D9ED0006E24AF /* WebView.xib in Resources */,
 				3E2310220F4D9ED0006E24AF /* NoImage.png in Resources */,
 				3E2310230F4D9ED0006E24AF /* Locale.png in Resources */,
-				3E2310240F4D9ED0006E24AF /* KeywordView.xib in Resources */,
 				3E2310250F4D9ED0006E24AF /* NumPad.png in Resources */,
 				3E2310260F4D9ED0006E24AF /* Default.png in Resources */,
 				3E2310270F4D9ED0006E24AF /* ShelfMode.png in Resources */,
@@ -1082,7 +1071,6 @@
 				3E5DFA4C0EE14C48000F6998 /* ScanViewController.m in Sources */,
 				3E22CD430EF9142E00E8A966 /* SearchController.m in Sources */,
 				3E5DFA590EE14C48000F6998 /* NumPadViewController.m in Sources */,
-				3E22CD440EF9142E00E8A966 /* KeywordViewController.m in Sources */,
 				3E5DFA520EE14C48000F6998 /* ItemCell.m in Sources */,
 				3E22CD450EF9142E00E8A966 /* ItemCell4.m in Sources */,
 				3E5DFA4F0EE14C48000F6998 /* ItemViewController.m in Sources */,

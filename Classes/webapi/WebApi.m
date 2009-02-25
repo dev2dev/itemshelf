@@ -141,7 +141,7 @@
 */
 - (WebApi*)createWebApi
 {
-    WebApi *api;
+    WebApi *api = nil;
 
     switch (serviceId) {
         case AmazonUS:
