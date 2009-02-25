@@ -35,6 +35,9 @@
 "Title" = "Title";
 "Code" = "Code";
 "Keyword" = "Keyword";
+"Type" = "Type";
+"Service" = "Service";
+
 "NumPadNoteText" = "Note: No need to input 'ISBN' nor '-' characters.\nTo enter ASIN, tap the text field to use full keyboard.";
 	
 "Illegal message was received" = "Illegal message was received";
