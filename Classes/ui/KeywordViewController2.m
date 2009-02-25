@@ -56,8 +56,9 @@
 
     webApiFactory = [[WebApiFactory alloc] init];
 
-    textField = [[UITextField alloc] initWithFrame:CGRectMake(110, 13, 190, 22)];
+    textField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 190, 28)];
     //textField.backgroundColor = [UIColor grayColor];
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textField.font = [UIFont systemFontOfSize: 14.0];
     textField.textColor = [UIColor blackColor];
     textField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -202,24 +203,24 @@
     [tv deselectRowAtIndexPath:indexPath animated:NO];
 
     switch (indexPath.row) {
-    case 1: // category (index)
+    case 1: // key type
+        vc = [GenSelectListViewController
+                 genSelectListViewController:self
+                 array:searchKeyTypes
+                 title:NSLocalizedString(@"Type", @"")];
+        vc.selectedIndex = searchKeyType - 1;
+        vc.identifier = 0;
+        break;
+            
+    case 2: // category (index)
         vc = [GenSelectListViewController
                  genSelectListViewController:self
                  array:searchIndices
                  title:NSLocalizedString(@"Category", @"")];
         vc.selectedIndex = searchSelectedIndex;
-        vc.identifier = 0;
-        break;
-
-    case 2: // key type
-        vc = [GenSelectListViewController
-                 genSelectListViewController:self
-                 array:searchKeyTypes
-                 title:NSLocalizedString(@"Search type", @"")];
-        vc.selectedIndex = searchKeyType - 1;
         vc.identifier = 1;
         break;
-            
+
     case 3: // serviceId
         vc = [GenSelectListViewController
                  genSelectListViewController:self
@@ -239,14 +240,14 @@
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc
 {
     switch (vc.identifier) {
-    case 0: // serchIndex
-        searchSelectedIndex = vc.selectedIndex;
-        break;
-
-    case 1: // search key type
+    case 0: // search key type
         searchKeyType = vc.selectedIndex + 1;
         break;
             
+    case 1: // serchIndex
+        searchSelectedIndex = vc.selectedIndex;
+        break;
+
     case 2: // serviceId
         webApiFactory.serviceId = vc.selectedIndex;
         [webApiFactory saveDefaults];

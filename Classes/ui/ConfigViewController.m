@@ -168,7 +168,7 @@
             }
 
             wv = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
-            wv.urlString = NSLocalizedString(@"HelpURL", @"");
+            wv.urlString = urlstring;
             [self.navigationController pushViewController:wv animated:YES];
             break;
 
