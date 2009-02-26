@@ -99,7 +99,7 @@
 
 - (void)didReceiveMemoryWarning {
     [Item clearAllImageCache];
-    [super didReceiveMemoryWarning];
+    // do not release view
 }
 
 - (IBAction)goForward:(id)sender

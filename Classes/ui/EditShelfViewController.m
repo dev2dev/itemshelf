@@ -126,7 +126,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    // do not release view
 }
 
 - (UITextField*)allocTextInputField:(NSString*)value placeholder:(NSString*)placeholder
