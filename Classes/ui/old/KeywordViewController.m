@@ -68,7 +68,7 @@
     
     // key type
     keyType = 0;
-    keyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Author", @"Artist", @"All", nil];
+    keyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Keyword", nil];
     [keyTypeButton setTitleForAllState:NSLocalizedString(@"Title", @"")];
  
     // set service string
@@ -136,7 +136,16 @@
 
     WebApi *api = [webApiFactory createWebApi];
     NSString *searchIndex = [searchIndices objectAtIndex:searchSelectedIndex];
-    [sc search:api key:textField.text SearchKeyType:keyType index:searchIndex];
+    switch (keyType) {
+        case 0:
+            // Title search
+            [sc search:api withTitle:textField.text withIndex:searchIndex];
+            break;
+        case 1:
+            // Keyword search
+            [sc search:api key:textField.text keyType:SEARCH_KEY_KEYWORD index:searchIndex];
+            break;
+    }
         
     [api release];
 }
@@ -172,8 +181,8 @@
     [GenSelectListViewController
      genSelectListViewController:self
      array:keyTypes
-     title:NSLocalizedString(@"Type", @"")];
-    vc.selectedIndex = keyType - 1;
+     title:NSLocalizedString(@"Search type", @"")];
+    vc.selectedIndex = keyType;
     vc.identifier = 1;
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -204,8 +213,8 @@
         break;
 
         case 1: // key type
-            keyType = vc.selectedIndex + 1;
-            text = [keyTypes objectAtIndex:keyType - 1];
+            keyType = vc.selectedIndex;
+            text = [keyTypes objectAtIndex:keyType];
             [keyTypeButton setTitleForAllState:NSLocalizedString(text, @"")];
             break;
             
