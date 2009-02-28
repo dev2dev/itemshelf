@@ -75,7 +75,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 }
 
 - (void)didReceiveMemoryWarning {
-    // do not release view
+    [super didReceiveMemoryWarning];
 }
 
 

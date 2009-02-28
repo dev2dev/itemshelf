@@ -51,13 +51,19 @@
     return vc;
 }
 
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
+{
+    self = [super initWithNibName:nibName bundle:bundle];
+    if (self) {
+        webApiFactory = [[WebApiFactory alloc] init];
+        [webApiFactory setCodeSearch];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    webApiFactory = [[WebApiFactory alloc] init];
-    [webApiFactory setCodeSearch];
 
     textField.placeholder = self.title;
     textField.clearButtonMode = UITextFieldViewModeAlways;
@@ -75,6 +81,10 @@
                                                  initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                  target:self
                                                  action:@selector(cancelAction:)] autorelease];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 - (void)dealloc {
@@ -177,8 +187,6 @@
     [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
 }
 
-- (void)didReceiveMemoryWarning {
-    // do not release view
-}
+
 
 @end

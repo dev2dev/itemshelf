@@ -81,6 +81,21 @@ CGPoint lastTouchLocation;
 
 @implementation ItemListViewController
 
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
+{
+    self = [super initWithNibName:nibName bundle:bundle];
+    if (self) {
+        searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        searchBar.hidden = YES;
+        searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+        searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        searchBar.showsCancelButton = NO;
+        searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        searchBar.delegate = self;
+    }
+    return self;
+}
+
 - (void)setShelf:(Shelf *)shelf
 {
     // Generate ItemListModel
@@ -119,17 +134,13 @@ CGPoint lastTouchLocation;
     [self.view addSubview:tableView];
     [tableView release];
 	
-    // Create SearchBar
-    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    searchBar.hidden = YES;
-    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    searchBar.showsCancelButton = NO;
-    searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    searchBar.delegate = self;
-
     // Initiate filter button title
     filterButton.title = NSLocalizedString(@"All", @"");
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    [Item clearAllImageCache];
 }
 
 - (void)dealloc {
@@ -501,11 +512,5 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [vc release];
 }
 //@}
-
-- (void)didReceiveMemoryWarning {
-    [Item clearAllImageCache];
-
-    // do not release view
-}
 
 @end

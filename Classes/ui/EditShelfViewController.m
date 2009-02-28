@@ -75,6 +75,10 @@
     tagsField         = [self allocTextLabelField:shelf.tagsFilter];
 }
 
+- (void)didReceiveMemoryWarning {
+    //[super didReceiveMemoryWarning];
+}
+
 - (void)dealloc {
     [shelf release];
 
@@ -123,10 +127,6 @@
     //[tagsField resignFirstResponder];
 
     [self.navigationController dismissModalViewControllerAnimated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    // do not release view
 }
 
 - (UITextField*)allocTextInputField:(NSString*)value placeholder:(NSString*)placeholder

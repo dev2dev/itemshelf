@@ -64,8 +64,16 @@
     self.navigationItem.rightBarButtonItem = [self editButtonItem];
 	
     // イメージロード
-    normalShelfImage = [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ShelfNormal" ofType:@"png"]] retain];
-    smartShelfImage = [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ShelfSmart" ofType:@"png"]] retain];
+    if (normalShelfImage == nil) {
+        normalShelfImage = [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ShelfNormal" ofType:@"png"]] retain];
+    }
+    if (smartShelfImage == nil) {
+        smartShelfImage = [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ShelfSmart" ofType:@"png"]] retain];
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 - (void)dealloc {
@@ -216,7 +224,7 @@
     [super setEditing:editing animated:animated];
 
     // 編集モードの変更
-    [self.tableView setEditing:editing animated:animated];
+    [tableView setEditing:editing animated:animated];
 	
     // 「新規追加」行の追加／削除処理
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[DataModel sharedDataModel] shelvesCount]
@@ -325,11 +333,6 @@
 	
     [UIView commitAnimations];
 #endif
-}
-
-
-- (void)didReceiveMemoryWarning {
-    // do not release view
 }
 
 @end
