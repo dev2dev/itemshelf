@@ -107,7 +107,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];aaa
+    [super didReceiveMemoryWarning];
 }
 
 - (void)dealloc {

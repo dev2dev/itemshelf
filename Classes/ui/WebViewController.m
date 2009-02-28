@@ -38,6 +38,15 @@
 @implementation WebViewController
 @synthesize webView, urlString;
 
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
+{
+    self = [super initWithNibName:nibName bundle:bundle];
+    if (self) {
+    }
+    return self;
+}
+
+
 // Implement viewDidLoad to do additional setup after loading the view.
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,6 +75,21 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
+- (void)didReceiveMemoryWarning {
+    [Item clearAllImageCache];
+    //[super didReceiveMemoryWarning];
+}
+
+- (void)dealloc {
+    // webView の解放前に delegate をリセットしなければならない
+    // (UIWebViewDelegate のリファレンス参照)
+    webView.delegate = nil;
+    [webView release];
+    
+    [urlString release];
+    [super dealloc];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     // メモリを空けておく
@@ -82,24 +106,9 @@
     [webView stopLoading];
     [super viewWillDisappear:animated];
 }
-	
-- (void)dealloc {
-    // webView の解放前に delegate をリセットしなければならない
-    // (UIWebViewDelegate のリファレンス参照)
-    webView.delegate = nil;
-    [webView release];
-
-    [urlString release];
-    [super dealloc];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [Item clearAllImageCache];
-    // do not release view
 }
 
 - (IBAction)goForward:(id)sender

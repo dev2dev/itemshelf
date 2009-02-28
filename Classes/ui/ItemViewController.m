@@ -66,6 +66,11 @@
             autorelease];
 }
 
+- (void)didReceiveMemoryWarning {
+    [Item clearAllImageCache];
+    [super didReceiveMemoryWarning];
+}
+
 - (void)dealloc {
     for (Item *item in itemArray) {
         [item cancelDownload];
@@ -96,11 +101,6 @@
     if (value != nil && value.length > 0) {
         [infoStrings addObject:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(name, @""), value]];
     }
-}
-
-- (void)didReceiveMemoryWarning {
-    [Item clearAllImageCache];
-    [super didReceiveMemoryWarning];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////// InfoString 処理
