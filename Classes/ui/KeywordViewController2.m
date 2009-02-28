@@ -50,31 +50,38 @@
     return vc;
 }
 
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
+{
+    self = [super initWithNibName:nibName bundle:bundle];
+    if (self) {
+        webApiFactory = [[WebApiFactory alloc] init];
+
+        textField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 190, 28)];
+        //textField.backgroundColor = [UIColor grayColor];
+        textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        textField.font = [UIFont systemFontOfSize: 14.0];
+        textField.textColor = [UIColor blackColor];
+        textField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+
+        textField.placeholder = self.title;
+        textField.clearButtonMode = UITextFieldViewModeAlways;
+
+        if (initialText != nil) {
+            textField.text = initialText;
+        }
+	
+        [self _setupCategories];
+    
+        // key type
+        searchKeyType = SearchKeyTitle;
+        searchKeyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Author", @"Artist", @"All", nil];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    webApiFactory = [[WebApiFactory alloc] init];
-
-    textField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 190, 28)];
-    //textField.backgroundColor = [UIColor grayColor];
-    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    textField.font = [UIFont systemFontOfSize: 14.0];
-    textField.textColor = [UIColor blackColor];
-    textField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-
-    textField.placeholder = self.title;
-    textField.clearButtonMode = UITextFieldViewModeAlways;
-
-    if (initialText != nil) {
-        textField.text = initialText;
-    }
-	
-    [self _setupCategories];
-    
-    // key type
-    searchKeyType = SearchKeyTitle;
-    searchKeyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Author", @"Artist", @"All", nil];
 
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -97,6 +104,10 @@
     searchSelectedIndex = [api defaultCategoryIndex];
 
     [api release];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];aaa
 }
 
 - (void)dealloc {
@@ -281,10 +292,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)didReceiveMemoryWarning {
-    // do not release view
 }
 
 @end
