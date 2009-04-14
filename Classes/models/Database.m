@@ -36,6 +36,7 @@
 #import "AppDelegate.h"
 #import "Item.h"
 #import "Shelf.h"
+#import "DateFormatter2.h"
 
 @implementation dbstmt
 
@@ -183,7 +184,7 @@
 
 static Database *theDatabase = nil;
 
-static NSDateFormatter *dateFormatter = nil;
+static DateFormatter2 *dateFormatter = nil;
 
 /**
    Return the database instance (singleton)
@@ -216,7 +217,7 @@ static NSDateFormatter *dateFormatter = nil;
         handle = 0;
 
         if (dateFormatter == nil) {
-            dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter = [[DateFormatter2 alloc] init];
             [dateFormatter setTimeZone: [NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
             [dateFormatter setDateFormat: @"yyyyMMddHHmm"];
         }
