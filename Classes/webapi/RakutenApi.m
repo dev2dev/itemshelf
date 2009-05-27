@@ -102,23 +102,28 @@
     [itemArray removeAllObjects];
     [responseData setLength:0];
 
-    NSString *baseURI = @"http://itemshelf.com/cgi-bin/rakutensearch.cgi?";
+    //NSString *baseURI = @"http://itemshelf.com/cgi-bin/rakutensearch.cgi?";
+    NSString *baseURI = @"http://itemshelf.com/cgi-bin/rakutensearch2.cgi?";
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
 
     // キーワード検索のみ
     [comp setQuery:@"keyword" value:searchKey];
 
     // operation を searchIndex から決定する
-    NSString *operation = @"ItemSearch";
+    //NSString *operation = @"ItemSearch";
+    NSString *operation = @"BooksTotalSearch";
     if ([searchIndex isEqualToString:@"Books"]) {
-        operation = @"BookSearch";
+        //operation = @"BookSearch";
+        operation = @"BooksBookSearch";
     }
     else if ([searchIndex isEqualToString:@"DVD"]) {
-        operation = @"DVDSearch";
+        //operation = @"DVDSearch";
+        operation = @"BooksDVDSearch";
     }
     else if ([searchIndex isEqualToString:@"Music"] ||
              [searchIndex isEqualToString:@"Classical"]) {
-        operation = @"CDSearch";
+        //operation = @"CDSearch";
+        operation = @"BooksCDSearch";
     }
     [comp setQuery:@"operation" value:operation];
 
@@ -208,22 +213,37 @@
         return;
     }
     Item *item = [itemArray objectAtIndex:itemCounter];
-	
+
+    if ([elem isEqualToString:@"jan"]) {
+        item.idString = [NSString stringWithString:curString]; // とりあえず
+    }
+    else if ([elem isEqualToString:@"title"]) {
+        item.name = [NSString stringWithString:curString];
+    }
+#if 0
+    // old
     if ([elem isEqualToString:@"itemCode"]) {
         item.idString = [NSString stringWithString:curString]; // とりあえず
     } else if ([elem isEqualToString:@"itemName"]) {
         item.name = [NSString stringWithString:curString];
-    } else if ([elem isEqualToString:@"itemUrl"]) {
+    }
+#endif
+    else if ([elem isEqualToString:@"itemUrl"]) {
         item.detailURL = [NSString stringWithString:curString];
-    } else if ([elem isEqualToString:@"mediumImageUrl"]) {
+    }
+    else if ([elem isEqualToString:@"mediumImageUrl"]) {
         item.imageURL = [NSString stringWithString:curString];
     }
     else if ([elem isEqualToString:@"itemPrice"]) {
         double price = [[NSString stringWithString:curString] doubleValue];
         item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
     }
-
-    // Author, Manufacturer に該当するフィールドはなし
+    else if ([elem isEqualToString:@"author"]) {
+        item.author = [NSString stringWithString:curString];
+    }
+    else if ([elem isEqualToString:@"publisherName"]) {
+        item.manufacturer = [NSString stringWithString:curString];
+    }
 
     // カテゴリはどうするか？
     // 一応、genreId はあるけど、Amazon とのマッピングは面倒
