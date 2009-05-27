@@ -214,11 +214,22 @@
     }
     Item *item = [itemArray objectAtIndex:itemCounter];
 
-    if ([elem isEqualToString:@"jan"]) {
-        item.idString = [NSString stringWithString:curString]; // とりあえず
+    if ([elem isEqualToString:@"isbn"]) {
+        item.idString = [NSString stringWithString:curString];
+    }
+    else if ([elem isEqualToString:@"jan"]) {
+        if (item.idString == nil) {
+            item.idString = [NSString stringWithString:curString];
+        }
     }
     else if ([elem isEqualToString:@"title"]) {
         item.name = [NSString stringWithString:curString];
+    }
+    else if ([elem isEqualToString:@"author"]) {
+        item.author = [NSString stringWithString:curString];
+    }
+    else if ([elem isEqualToString:@"publisherName"]) {
+        item.manufacturer = [NSString stringWithString:curString];
     }
 #if 0
     // old
@@ -237,12 +248,6 @@
     else if ([elem isEqualToString:@"itemPrice"]) {
         double price = [[NSString stringWithString:curString] doubleValue];
         item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
-    }
-    else if ([elem isEqualToString:@"author"]) {
-        item.author = [NSString stringWithString:curString];
-    }
-    else if ([elem isEqualToString:@"publisherName"]) {
-        item.manufacturer = [NSString stringWithString:curString];
     }
 
     // カテゴリはどうするか？
