@@ -228,8 +228,18 @@
     else if ([elem isEqualToString:@"author"]) {
         item.author = [NSString stringWithString:curString];
     }
+    else if ([elem isEqualToString:@"artistName"]) {
+        if (item.author != nil) {
+            item.author = [NSString stringWithString:curString];
+        }
+    }
     else if ([elem isEqualToString:@"publisherName"]) {
         item.manufacturer = [NSString stringWithString:curString];
+    }
+    else if ([elem isEqualToString:@"label"]) {
+        if (item.manufacturer != nil) {
+            item.manufacturer = [NSString stringWithString:curString];
+        }
     }
 #if 0
     // old
