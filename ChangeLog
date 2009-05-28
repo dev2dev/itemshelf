@@ -1,3 +1,6 @@
+2009-05-28 : Takuya Murakami
+	* 楽天API仕様変更に対応
+	
 2009-02-25 : Takuya Murakami
 	* Artist, Author 検索機能を追加
 	* KeywordViewController2 作成、KeywordViewController 削除
