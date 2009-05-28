@@ -71,7 +71,7 @@
         NSRange hrange = range;
         hrange.location += range.length;
         hrange.length = 2;
-        int hour = [[string substringWithRange] intValue];
+        int hour = [[string substringWithRange:hrange] intValue];
 
         // 時刻を調整
         if (hour == 12) {

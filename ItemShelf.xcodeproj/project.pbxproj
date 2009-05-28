@@ -116,6 +116,8 @@
 		3E5DFA5B0EE14C48000F6998 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EED26050EDEE16500C04A84 /* Common.m */; };
 		3E5DFA5D0EE14C48000F6998 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AA5950EE02E8300339BAB /* AboutViewController.m */; };
 		3E675FCC0EF93B8D006722DE /* DataModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E675FCB0EF93B8D006722DE /* DataModelTest.m */; };
+		3E6BC6480FCEC8B500D07D4E /* DateFormatter2.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E6BC6460FCEC8B500D07D4E /* DateFormatter2.h */; };
+		3E6BC6490FCEC8B500D07D4E /* DateFormatter2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6BC6470FCEC8B500D07D4E /* DateFormatter2.m */; };
 		3E6F53100ECFBE7D00E68A4B /* ItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */; };
 		3E7EB2DC0EE422D900D5CE27 /* ShelfListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7EB2DB0EE422D900D5CE27 /* ShelfListView.xib */; };
 		3E7FFEBC0ECC487B000164D4 /* ScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7FFEBB0ECC487B000164D4 /* ScanView.xib */; };
@@ -322,6 +324,8 @@
 		3E581F240ED1A1C000615FB2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3E5DFA390EE14BE6000F6998 /* libItemShelfLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libItemShelfLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E675FCB0EF93B8D006722DE /* DataModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModelTest.m; sourceTree = "<group>"; };
+		3E6BC6460FCEC8B500D07D4E /* DateFormatter2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatter2.h; sourceTree = "<group>"; };
+		3E6BC6470FCEC8B500D07D4E /* DateFormatter2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatter2.m; sourceTree = "<group>"; };
 		3E6EE52E0ECFE3C100274073 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		3E6EE52F0ECFE3CB00274073 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemView.xib; sourceTree = "<group>"; };
@@ -731,6 +735,8 @@
 				3E03D29B0EF7D6F800F0ECFF /* ItemListModel.m */,
 				3E22CC800EF90F2000E8A966 /* StringArray.h */,
 				3E22CC810EF90F2000E8A966 /* StringArray.m */,
+				3E6BC6460FCEC8B500D07D4E /* DateFormatter2.h */,
+				3E6BC6470FCEC8B500D07D4E /* DateFormatter2.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -785,6 +791,7 @@
 				3EDC93B80F19E94C00EA99AB /* BackupServer.h in Headers */,
 				3EE468EB0F222781005A03DA /* GenEditTextViewController.h in Headers */,
 				3E23E7AB0F23628A00A6F22E /* EditTagsViewController.h in Headers */,
+				3E6BC6480FCEC8B500D07D4E /* DateFormatter2.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1093,6 +1100,7 @@
 				3EDC93B90F19E94C00EA99AB /* BackupServer.m in Sources */,
 				3EE468EC0F222781005A03DA /* GenEditTextViewController.m in Sources */,
 				3E23E7AC0F23628A00A6F22E /* EditTagsViewController.m in Sources */,
+				3E6BC6490FCEC8B500D07D4E /* DateFormatter2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
