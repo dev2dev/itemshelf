@@ -1,3 +1,7 @@
+2009-07-11 : Takuya Murakami
+	* 楽天APIでのバーコード検索に対応
+	* 細かいバグ修正など
+
 2009-05-28 : Takuya Murakami
 	* 楽天API仕様変更に対応
 	
