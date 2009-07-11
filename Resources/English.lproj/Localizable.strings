@@ -24,7 +24,7 @@
 "Config" = "Config";
 
 "Camera scan" = "Camera Scan";
-"Scan barcode with iPhone's camera" = "Scan barcode with iPhone's camera (macro lens needed)";
+"Scan barcode with iPhone's camera" = "Scan barcode with iPhone's camera (macro lens needed for iPhone 3G)";
 "Photo library scan" = "Photo library scan";
 "Scan barcode image from photo library" = "Scan barcode image from photo library";
 "Enter item code" = "Enter item code";
