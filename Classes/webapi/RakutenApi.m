@@ -68,7 +68,7 @@
 
 - (NSArray *)categoryStrings
 {
-    return [NSArray arrayWithObjects:@"All", @"Books", @"DVD", @"Music", nil];
+    return [NSArray arrayWithObjects:@"All", @"Books", @"DVD", @"Music", @"Game", @"Software", nil];
 }
 
 /**
@@ -106,26 +106,60 @@
     NSString *baseURI = @"http://itemshelf.com/cgi-bin/rakutensearch2.cgi?";
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
 
-    // キーワード検索のみ
-    [comp setQuery:@"keyword" value:searchKey];
+    NSString *operation = nil;
+    NSString *param = nil;
 
-    // operation を searchIndex から決定する
-    //NSString *operation = @"ItemSearch";
-    NSString *operation = @"BooksTotalSearch";
-    if ([searchIndex isEqualToString:@"Books"]) {
-        //operation = @"BookSearch";
+    if (searchKeyType == SearchKeyCode) {
+        // バーコード検索
+        // ここでは書籍のみを検索する (カテゴリが不明なので
         operation = @"BooksBookSearch";
-    }
-    else if ([searchIndex isEqualToString:@"DVD"]) {
-        //operation = @"DVDSearch";
-        operation = @"BooksDVDSearch";
-    }
-    else if ([searchIndex isEqualToString:@"Music"] ||
-             [searchIndex isEqualToString:@"Classical"]) {
-        //operation = @"CDSearch";
-        operation = @"BooksCDSearch";
+        param = @"isbn";
+    } else {
+        // キーワード検索
+
+        // カテゴリ別に operation を決定
+        if ([searchIndex isEqualToString:@"Books"]) {
+            operation = @"BooksBookSearch";
+        }
+        else if ([searchIndex isEqualToString:@"DVD"]) {
+            operation = @"BooksDVDSearch";
+        }
+        else if ([searchIndex isEqualToString:@"Music"]) {
+            operation = @"BooksCDSearch";
+        }
+        else if ([searchIndex isEqualToString:@"Game"]) {
+            operation = @"BooksGameSearch";
+        }
+        else if ([searchIndex isEqualToString:@"Software"]) {
+            operation = @"BooksSoftwareSearch";
+        } else {
+            operation = @"BooksTotalSearch";
+            param = @"keyword"; // keyword 固定
+        }
+
+        // パラメータを設定
+        if (param != nil) {
+            switch (searchKeyType) {
+            case SearchKeyAuthor:
+            case SearchKeyArtist:
+                if ([searchIndex isEqualToString:@"CD"] ||
+                    [searchIndex isEqualToString:@"DVD"]) {
+                    param = @"artistName";
+                } else {
+                    param = @"author";
+                }
+                break;
+
+            case SearchKeyAll:
+            case SearchKeyTitle:
+            default:
+                param = @"title";
+                break;
+            }
+        }
     }
     [comp setQuery:@"operation" value:operation];
+    [comp setQuery:param value:searchKey];
 
     [comp log];
     

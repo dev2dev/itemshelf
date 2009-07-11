@@ -65,7 +65,7 @@
 /**
    Select service id for code search
 
-   @note Only amazon supports code search
+   @note Only amazon, rakuten supports code search
 */
 - (void)setCodeSearch
 {
@@ -78,6 +78,7 @@
     case AmazonFR:
     case AmazonDE:
     case AmazonJP:
+    case Rakuten:
         /* ok */
         break;
 
