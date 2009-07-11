@@ -50,6 +50,16 @@
     return vc;
 }
 
+- (void)setInitialText:(NSString*)s
+{
+	if (s != initialText) {
+		[initialText release];
+		initialText = s;
+		[initialText retain];
+	}
+	textField.text = initialText;
+}
+
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
     self = [super initWithNibName:nibName bundle:bundle];
@@ -66,10 +76,6 @@
         textField.placeholder = self.title;
         textField.clearButtonMode = UITextFieldViewModeAlways;
 
-        if (initialText != nil) {
-            textField.text = initialText;
-        }
-	
         [self _setupCategories];
     
         // key type

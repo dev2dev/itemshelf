@@ -90,6 +90,7 @@
 */
 - (void)itemSearch
 {
+#if 0
     if (searchKeyType == SearchKeyCode) {
         // バーコード検索は対応しない
         if (delegate) {
@@ -98,7 +99,8 @@
         }
         return;
     }
-
+#endif
+	
     [itemArray removeAllObjects];
     [responseData setLength:0];
 
@@ -138,7 +140,7 @@
         }
 
         // パラメータを設定
-        if (param != nil) {
+        if (param == nil) {
             switch (searchKeyType) {
             case SearchKeyAuthor:
             case SearchKeyArtist:

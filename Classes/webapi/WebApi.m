@@ -185,12 +185,12 @@
     [ary addObject:@"Amazon (FR)"];
     [ary addObject:@"Amazon (DE)"];
     [ary addObject:@"Amazon (JP)"];
-
+#if ENABLE_RAKUTEN
+    [ary addObject:@"楽天 (JP)"];
+#endif
+	
     if (!isCodeSearch) {
         // title search
-#if ENABLE_RAKUTEN
-        [ary addObject:@"楽天 (JP)"];
-#endif
 #if ENABLE_KAKAKUCOM
         [ary addObject:@"価格.com (JP)"];
 #endif

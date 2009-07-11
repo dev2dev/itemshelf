@@ -300,7 +300,7 @@
         // 再検索
         KeywordViewController2 *v = [KeywordViewController2 keywordViewController:NSLocalizedString(@"Keyword", @"")];
         v.selectedShelf = [[DataModel sharedDataModel] shelf:item.shelfId];
-        v.initialText = item.name;
+		v.initialText = item.name;
 
         //[self.navigationController popViewControllerAnimated:NO];
         [self.navigationController pushViewController:v animated:YES];
