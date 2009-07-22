@@ -68,5 +68,6 @@
 - (void)updateFilter;
 - (void)removeObject:(Item *)item;
 - (void)moveRowAtIndex:(int)fromIndex toIndex:(int)toIndex;
+- (void)sort:(int)kind;
 
 @end

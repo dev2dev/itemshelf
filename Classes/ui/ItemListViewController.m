@@ -392,6 +392,41 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 //@}
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// Sort
+/**
+ @name Sort
+ */
+//@{
+
+/**
+ Sort
+ */
+- (IBAction)sortButtonTapped:(id)sender
+{
+	NSString *label1 = NSLocalizedString(@"Title", @"");
+	NSString *label2 = NSLocalizedString(@"Author", @"");
+	NSString *label3 = NSLocalizedString(@"Manufacturer", @"");
+	
+	UIActionSheet *as = [[UIActionSheet alloc]
+						 initWithTitle:NSLocalizedString(@"Sort", @"")
+						 delegate:self 
+						 cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+						 destructiveButtonTitle:nil
+						 otherButtonTitles:label1, label2, label3, nil];
+	as.actionSheetStyle = UIActionSheetStyleDefault;
+	[as showInView:self.view];
+	[as release];
+}
+
+- (void)actionSheet:(UIActionSheet *)as clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	[model sort:buttonIndex];
+	[tableView reloadData];
+}
+
+//@}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 // SearchBar processing
 
 /**

@@ -54,7 +54,7 @@
 
 @interface ItemListViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, 
-     ItemDelegate, GenSelectListViewDelegate>
+     ItemDelegate, GenSelectListViewDelegate, UIActionSheetDelegate>
 {
     UITableViewWithTouchEvent *tableView;
     UISearchBar *searchBar;
@@ -74,5 +74,6 @@
 - (IBAction)toggleCellView:(id)sender;
 - (IBAction)scanButtonTapped:(id)sender;
 - (IBAction)filterButtonTapped:(id)sender;
+- (IBAction)sortButtonTapped:(id)sender;
 
 @end

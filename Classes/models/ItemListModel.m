@@ -237,4 +237,71 @@
     }
 }
 
+/*
+	ソート用比較関数
+	逆順に並べていることに注意。画面上では、上のほうが後に並んでいるデータなので。
+ */
+static int compByTitle(Item *a, Item *b, void *ctx)
+{
+    return -[a.name compare:b.name];
+}
+static int compByAuthor(Item *a, Item *b, void *ctx)
+{
+    return -[a.author compare:b.author];
+}
+static int compByManufacturer(Item *a, Item *b, void *ctx)
+{
+    return -[a.manufacturer compare:b.manufacturer];
+}
+
+/**
+   @brief ソート
+*/
+- (void)sort:(int)kind
+{
+    // データをソートする
+    switch (kind) {
+    case 0:
+    default:
+        [filteredList sortUsingFunction:compByTitle context:0];
+        break;
+    case 1:
+        [filteredList sortUsingFunction:compByAuthor context:0];
+        break;
+    case 2:
+        [filteredList sortUsingFunction:compByManufacturer context:0];
+        break;
+    }
+
+    // sorder を取り出す
+    int count = [filteredList count];
+    NSMutableArray *sorders = [[[NSMutableArray alloc] initWithCapacity:count] autorelease];
+
+    for (Item *item in filteredList) {
+        [sorders addObject:[NSNumber numberWithInteger:item.sorder]];
+    }
+
+    // sorder をソート
+    [sorders sortUsingSelector:@selector(compare:)];
+
+    // sorder を item に戻す
+    [[Database instance] beginTransaction];
+    int i = 0;
+    for (Item *item in filteredList) {
+        NSNumber *sorder = [sorders objectAtIndex:i++];
+        if (item.sorder != sorder.intValue) {
+            item.sorder = sorder.intValue;
+            [item updateSorder];
+        }
+    }
+    [[Database instance] commitTransaction];
+	
+    // Filter されたデータだけでなく、元データをソートしておく必要がある。
+    // TBD : SmartShelf の場合、元データがどこにあるのかわからないので、
+    // 全部の棚をソートしなければならない。
+    for (Shelf *s in [[DataModel sharedDataModel] shelves]) {
+        [s sortBySorder];
+    }
+}
+
 @end
