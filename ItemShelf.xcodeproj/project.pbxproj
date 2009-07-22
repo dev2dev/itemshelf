@@ -116,6 +116,8 @@
 		3E5DFA5B0EE14C48000F6998 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EED26050EDEE16500C04A84 /* Common.m */; };
 		3E5DFA5D0EE14C48000F6998 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3AA5950EE02E8300339BAB /* AboutViewController.m */; };
 		3E675FCC0EF93B8D006722DE /* DataModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E675FCB0EF93B8D006722DE /* DataModelTest.m */; };
+		3E6A1C57101770E800767CC0 /* Sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E6A1C56101770E800767CC0 /* Sort.png */; };
+		3E6A1C58101770E800767CC0 /* Sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E6A1C56101770E800767CC0 /* Sort.png */; };
 		3E6BC6480FCEC8B500D07D4E /* DateFormatter2.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E6BC6460FCEC8B500D07D4E /* DateFormatter2.h */; };
 		3E6BC6490FCEC8B500D07D4E /* DateFormatter2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6BC6470FCEC8B500D07D4E /* DateFormatter2.m */; };
 		3E6F53100ECFBE7D00E68A4B /* ItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */; };
@@ -324,6 +326,7 @@
 		3E581F240ED1A1C000615FB2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3E5DFA390EE14BE6000F6998 /* libItemShelfLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libItemShelfLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E675FCB0EF93B8D006722DE /* DataModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModelTest.m; sourceTree = "<group>"; };
+		3E6A1C56101770E800767CC0 /* Sort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sort.png; sourceTree = "<group>"; };
 		3E6BC6460FCEC8B500D07D4E /* DateFormatter2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatter2.h; sourceTree = "<group>"; };
 		3E6BC6470FCEC8B500D07D4E /* DateFormatter2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatter2.m; sourceTree = "<group>"; };
 		3E6EE52E0ECFE3C100274073 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
@@ -538,6 +541,7 @@
 				3EA8F0E20F555BF900FE2779 /* Icon-lite.png */,
 				3EDA86A70EFA7DE300C4D226 /* PlusItem.png */,
 				3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */,
+				3E6A1C56101770E800767CC0 /* Sort.png */,
 				3ECD3DD00ED06434001A775F /* backward.png */,
 				3ED6BE100ED588CB00F4C7EE /* whiteButton.png */,
 				3E817E830EE6C1C60015A97E /* NoImage.png */,
@@ -957,6 +961,7 @@
 				3EDA86AA0EFA7DE300C4D226 /* PlusShelf.png in Resources */,
 				3E36E1AE0F309A9500AB3C64 /* config.png in Resources */,
 				3ED0696A0F545CBA006D932B /* KeywordView2.xib in Resources */,
+				3E6A1C57101770E800767CC0 /* Sort.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,6 +1011,7 @@
 				3E23102D0F4D9ED0006E24AF /* config.png in Resources */,
 				3ED0696B0F545CBA006D932B /* KeywordView2.xib in Resources */,
 				3EA8F0E30F555BF900FE2779 /* Icon-lite.png in Resources */,
+				3E6A1C58101770E800767CC0 /* Sort.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
