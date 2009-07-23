@@ -68,6 +68,7 @@ static NSMutableArray *tagsFilterStrings = nil;
             }
         }
     }
+    [self sortBySorder];
 
     [titleFilterStrings release];
     [authorFilterStrings release];
