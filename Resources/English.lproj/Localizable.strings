@@ -76,6 +76,8 @@
 "Backup" = "Backup";
 "Backup and restore" = "Backup and restore";
 
+"Sort" = "Sort";
+
 /* Item view */
 "Name" = "Name";
 "Title" = "Title";
