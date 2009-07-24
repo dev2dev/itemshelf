@@ -448,11 +448,6 @@ static NSMutableArray *agingArray = nil;
 */
 - (UIImage *)getImage:(id<ItemDelegate>)delegate
 {
-    // Returns "NoImage" if no image URL.
-    if (imageURL == nil || imageURL.length == 0) {
-        return [self _getNoImage];
-    }
-
     // Returns image on memory cache
     if (imageCache != nil) {
         [self _refreshImageCache];
@@ -485,9 +480,13 @@ static NSMutableArray *agingArray = nil;
 #endif
     }
 
-    if (delegate == nil) return nil;
-	
+    // Returns "NoImage" if no image URL.
+    if (imageURL == nil || imageURL.length == 0) {
+        return [self _getNoImage];
+    }
+
     // No cache. Start download image from network.
+    if (delegate == nil) return nil;
     itemDelegate = delegate;
 	
     NSURLRequest *req =
