@@ -555,11 +555,12 @@ static NSMutableArray *agingArray = nil;
     if (image == nil) {
         image = [UIImage imageWithData:data];
     }
+    image = [Common resizeImageWithin:image width:180 height:180];
     self.imageCache = image;
 
     // Write cache file
     if (data == nil) {
-        data = UIImageJPEGRepresentation(image, 0.5);
+        data = UIImageJPEGRepresentation(image, 0.8);
     }
     NSString *imagePath = [self _imagePath];
     if (imagePath) {
