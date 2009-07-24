@@ -527,14 +527,7 @@ static NSMutableArray *agingArray = nil;
 {
     LOG(@"Loading image done");
 	
-    self.imageCache = [UIImage imageWithData:buffer];
-	
-    // Write cache file
-    NSString *imagePath = [self _imagePath];
-    if (imagePath) {
-        [buffer writeToFile:imagePath atomically:NO];
-    }
-	
+    [self saveImageCache:nil data:buffer];
     [buffer release];
     buffer = nil;
 	
@@ -551,6 +544,27 @@ static NSMutableArray *agingArray = nil;
     LOG(@"Connection failed. Error - %@ %@",
         [error localizedDescription],
         [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+}
+
+/**
+   Save image cache file
+*/
+- (void)saveImageCache:(UIImage *)image data:(NSData *)data
+{
+    // set image cache to Item
+    if (image == nil) {
+        image = [UIImage imageWithData:data];
+    }
+    self.imageCache = image;
+
+    // Write cache file
+    if (data == nil) {
+        data = UIImageJPEGRepresentation(image, 0.5);
+    }
+    NSString *imagePath = [self _imagePath];
+    if (imagePath) {
+        [data writeToFile:imagePath atomically:NO];
+    }
 }
 
 /**
