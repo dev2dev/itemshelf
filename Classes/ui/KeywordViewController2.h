@@ -44,7 +44,7 @@
 @class KeywordViewController;
 
 @interface KeywordViewController2 : UIViewController
-<GenSelectListViewDelegate, SearchControllerDelegate>
+<GenSelectListViewDelegate, SearchControllerDelegate, UITextFieldDelegate>
 {
     IBOutlet UITableView *tableView;
     UITextField *textField;

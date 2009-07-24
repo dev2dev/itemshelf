@@ -72,11 +72,13 @@
         textField.font = [UIFont systemFontOfSize: 14.0];
         textField.textColor = [UIColor blackColor];
         textField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-		textField.returnKeyType = UIReturnKeySearch;
-		
+	
         textField.placeholder = self.title;
         textField.clearButtonMode = UITextFieldViewModeAlways;
 
+		textField.returnKeyType = UIReturnKeySearch;
+		textField.delegate = self;
+		
         [self _setupCategories];
     
         // key type
@@ -84,6 +86,12 @@
         searchKeyTypes = [[NSArray alloc] initWithObjects:@"Title", @"Author", @"Artist", @"All", nil];
     }
     return self;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[self doneAction:nil];
+	return YES;
 }
 
 - (void)viewDidLoad

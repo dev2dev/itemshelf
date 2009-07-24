@@ -84,6 +84,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateInfoStringsDict];
+
+	// keyword 検索の場合は、アイテム編集させない
+	Item *item0 = [itemArray objectAtIndex:0];
+	BOOL editable = false;
+	if (itemArray.count == 1 && item0.registeredWithShelf) {
+		editable = true;
+	}
+	cameraButton.enabled = editable;
+	self.navigationItem.rightBarButtonItem.enabled = editable;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -131,11 +140,6 @@
 #pragma mark TableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	if (itemArray.count == 1) {
-		cameraButton.enabled = true;
-	} else {
-		cameraButton.enabled = false;
-	}
     return itemArray.count;
 }
 

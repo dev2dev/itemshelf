@@ -179,7 +179,7 @@
 
         // Sqlite では列名は変更できないので注意
 
-        // Ver 1.6 からの upgrade
+        // Ver 1.6 -> 2.0 upgrade
         NSRange range;
         range = [tablesql rangeOfString:@"star"];
         if (range.location == NSNotFound) {
@@ -320,50 +320,45 @@
     if (self.pkey < 0) {
         return;	 // fail safe
     }
-
-    const char *sql = "UPDATE Item SET itemState = ? WHERE pkey = ?;";
-    dbstmt *stmt = [[Database instance] prepare:sql];
-
-    [stmt bindInt:0 val:shelfId];
-    [stmt bindInt:1 val:pkey];
-    [stmt step];
+	
+	[self _updateIntKey:"itemState" value:shelfId];
 }
 
 - (void)updateSorder
 {
-    [self _updateIntKey:@"sorder" value:sorder];
+    [self _updateIntKey:"sorder" value:sorder];
 }
 
 - (void)updateStar
 {
-    [self _updateIntKey:@"star" value:star];
+    [self _updateIntKey:"star" value:star];
 }
 
 - (void)updateTags
 {
-    [self _updateStringKey:@"tags" value:tags];
+    [self _updateStringKey:"tags" value:tags];
     [[DataModel sharedDataModel] updateSmartShelves];
 }
 
-- (void)_updateIntKey:(NSString *)key value:(int)value
+- (void)_updateIntKey:(const char *)key value:(int)value
 {
-    const char *sql = "UPDATE Item SET ? = ? WHERE pkey = ?;";
+	char sql[256];
+	sprintf(sql, "UPDATE Item SET %s = ? WHERE pkey = ?;", key);
     dbstmt *stmt = [[Database instance] prepare:sql];
 	
-    [stmt bindString:0 val:key];
-    [stmt bindInt:1 val:value];
-    [stmt bindInt:2 val:pkey];
+    [stmt bindInt:0 val:value];
+    [stmt bindInt:1 val:pkey];
     [stmt step];
 }
 
-- (void)_updateStringKey:(NSString *)key value:(NSString *)value
+- (void)_updateStringKey:(const char *)key value:(NSString *)value
 {
-    const char *sql = "UPDATE Item SET ? = ? WHERE pkey = ?;";
+	char sql[256];
+	sprintf(sql, "UPDATE Item SET %s = ? WHERE pkey = ?;", key);
     dbstmt *stmt = [[Database instance] prepare:sql];
 	
-    [stmt bindString:0 val:key];
-    [stmt bindString:1 val:value];
-    [stmt bindInt:2 val:pkey];
+    [stmt bindString:0 val:value];
+    [stmt bindInt:1 val:pkey];
     [stmt step];
 }
 
