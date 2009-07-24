@@ -41,7 +41,7 @@
 @synthesize pkey, date, shelfId;
 @synthesize serviceId, idString, asin;
 @synthesize name, author, manufacturer, category, detailURL, price, tags;
-@synthesize memo, imageURL, sorder;
+@synthesize memo, imageURL, sorder, star;
 @synthesize imageCache, infoStrings, registeredWithShelf;
 
 - (id)init
@@ -64,6 +64,7 @@
         self.memo = @"";
         self.imageURL = @"";
         self.sorder = -1;
+        self.star = 0;
         self.registeredWithShelf = NO;
     }
     return self;
@@ -130,6 +131,7 @@
     //self.memo = item.memo;
     self.imageURL = item.imageURL;
     //self.sorder = item.sorder;
+    self.star = item.star;
 
     [self update];
 }
@@ -167,14 +169,23 @@
             "tags TEXT,"
             "memo TEXT,"
             "imageURL TEXT,"
-            "sorder INTEGER"
+            "sorder INTEGER,"
+            "star INTEGER"
             ");"
          ];
     } else {
         // スキーマをチェック
-        // TBD
+        NSString *tablesql = [stmt colString:0];
 
         // Sqlite では列名は変更できないので注意
+
+        // Ver 1.6 からの upgrade
+        NSRange range;
+        range = [tablesql rangeOfString:@"star"];
+        if (range.location == NSNotFound) {
+            [db exec:"ALTER TABLE Item ADD COLUMN star INTEGER;"];
+            [db exec:"UPDATE Item SET star = 0;"];
+        }
     }
 }
 
@@ -196,6 +207,7 @@
     self.memo         = [stmt colString:13];
     self.imageURL     = [stmt colString:14];
     self.sorder       = [stmt colInt:15];
+    self.star         = [stmt colInt:16];
 
     self.registeredWithShelf = YES;
 
@@ -208,7 +220,7 @@
 	
     [db beginTransaction];
 	
-    const char *sql = "INSERT INTO Item VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    const char *sql = "INSERT INTO Item VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     dbstmt *stmt = [db prepare:sql];
 
     [stmt bindDate:0 val:date];
@@ -226,6 +238,7 @@
     [stmt bindString:12 val:memo];
     [stmt bindString:13 val:imageURL];
     [stmt bindInt:14 val:sorder];
+    [stmt bindInt:15 val:star];
     [stmt step];
 
     self.pkey = [db	lastInsertRowId];
@@ -256,7 +269,8 @@
         "tags = ?,"
         "memo = ?,"
         "imageURL = ?,"
-        "sorder = ?"
+        "sorder = ?,"
+        "star = ?"
         " WHERE pkey = ?;";
 
     dbstmt *stmt = [db prepare:sql];
@@ -276,7 +290,8 @@
     [stmt bindString:12 val:memo];
     [stmt bindString:13 val:imageURL];
     [stmt bindInt:14 val:sorder];
-    [stmt bindInt:15 val:pkey];
+    [stmt bindInt:15 val:star];
+    [stmt bindInt:16 val:pkey];
     [stmt step];
 
     [db commitTransaction];
@@ -320,6 +335,16 @@
     dbstmt *stmt = [[Database instance] prepare:sql];
 	
     [stmt bindInt:0 val:sorder];
+    [stmt bindInt:1 val:pkey];
+    [stmt step];
+}
+
+- (void)updateStar
+{
+    const char *sql = "UPDATE Item SET star = ? WHERE pkey = ?;";
+    dbstmt *stmt = [[Database instance] prepare:sql];
+	
+    [stmt bindInt:0 val:star];
     [stmt bindInt:1 val:pkey];
     [stmt step];
 }

@@ -73,7 +73,8 @@
     UIImage *imageCache; ///< Image cache
 	
     int sorder;		///< Sort order
-	
+    int star;           ///< Star
+
     // image download 用
     NSMutableData *buffer;  ///< Temporary buffer to download image
     id<ItemDelegate> itemDelegate; ///< Delegate of ItemDelegate protocol
@@ -100,6 +101,7 @@
 @property(nonatomic,retain) NSString *imageURL;
 @property(nonatomic,retain) UIImage *imageCache;
 @property(nonatomic,assign) int sorder;
+@property(nonatomic,assign) int star;
 @property(nonatomic,retain) NSMutableArray *infoStrings;
 @property(nonatomic,assign) BOOL registeredWithShelf;
 
@@ -112,6 +114,7 @@
 - (void)delete;
 - (void)changeShelf:(int)shelf;
 - (void)updateSorder;
+- (void)updateStar;
 - (void)updateTags;
 
 + (void)clearAllImageCache;
