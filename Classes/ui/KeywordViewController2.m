@@ -72,7 +72,8 @@
         textField.font = [UIFont systemFontOfSize: 14.0];
         textField.textColor = [UIColor blackColor];
         textField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-
+		textField.returnKeyType = UIReturnKeySearch;
+		
         textField.placeholder = self.title;
         textField.clearButtonMode = UITextFieldViewModeAlways;
 
@@ -90,9 +91,8 @@
     [super viewDidLoad];
 
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
-                                                  initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                  target:self
-                                                  action:@selector(doneAction:)] autorelease];
+												 initWithTitle:@"Search" style:UIBarButtonItemStyleDone
+											     target:self action:@selector(doneAction:)] autorelease];
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]
                                                  initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                  target:self

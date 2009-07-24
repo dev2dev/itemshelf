@@ -116,6 +116,8 @@
 - (void)updateSorder;
 - (void)updateStar;
 - (void)updateTags;
+- (void)_updateIntKey:(NSString *)key value:(int)value;
+- (void)_updateStringKey:(NSString *)key value:(NSString *)value;
 
 + (void)clearAllImageCache;
 - (UIImage *)getImage:(id<ItemDelegate>)delegate;

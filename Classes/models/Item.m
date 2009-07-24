@@ -331,34 +331,40 @@
 
 - (void)updateSorder
 {
-    const char *sql = "UPDATE Item SET sorder = ? WHERE pkey = ?;";
-    dbstmt *stmt = [[Database instance] prepare:sql];
-	
-    [stmt bindInt:0 val:sorder];
-    [stmt bindInt:1 val:pkey];
-    [stmt step];
+    [self _updateIntKey:@"sorder" value:sorder];
 }
 
 - (void)updateStar
 {
-    const char *sql = "UPDATE Item SET star = ? WHERE pkey = ?;";
-    dbstmt *stmt = [[Database instance] prepare:sql];
-	
-    [stmt bindInt:0 val:star];
-    [stmt bindInt:1 val:pkey];
-    [stmt step];
+    [self _updateIntKey:@"star" value:star];
 }
 
 - (void)updateTags
 {
-    const char *sql = "UPDATE Item SET tags = ? WHERE pkey = ?;";
+    [self _updateStringKey:@"tags" value:tags];
+    [[DataModel sharedDataModel] updateSmartShelves];
+}
+
+- (void)_updateIntKey:(NSString *)key value:(int)value
+{
+    const char *sql = "UPDATE Item SET ? = ? WHERE pkey = ?;";
     dbstmt *stmt = [[Database instance] prepare:sql];
 	
-    [stmt bindString:0 val:tags];
-    [stmt bindInt:1 val:pkey];
+    [stmt bindString:0 val:key];
+    [stmt bindInt:1 val:value];
+    [stmt bindInt:2 val:pkey];
     [stmt step];
-    
-    [[DataModel sharedDataModel] updateSmartShelves];
+}
+
+- (void)_updateStringKey:(NSString *)key value:(NSString *)value
+{
+    const char *sql = "UPDATE Item SET ? = ? WHERE pkey = ?;";
+    dbstmt *stmt = [[Database instance] prepare:sql];
+	
+    [stmt bindString:0 val:key];
+    [stmt bindString:1 val:value];
+    [stmt bindInt:2 val:pkey];
+    [stmt step];
 }
 
 //@}
