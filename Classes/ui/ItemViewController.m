@@ -131,6 +131,11 @@
 #pragma mark TableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	if (itemArray.count == 1) {
+		cameraButton.enabled = true;
+	} else {
+		cameraButton.enabled = false;
+	}
     return itemArray.count;
 }
 
@@ -288,7 +293,10 @@
     int idx = indexPath.row;
     Item *item = [itemArray objectAtIndex:indexPath.section];
 
-    if (idx == 1) {
+	if (idx == 0) {
+		[self cameraButtonTapped:nil];
+	}
+    else if (idx == 1) {
         // 詳細を表示
         NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
         WebViewController *vc = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
@@ -334,6 +342,53 @@
     currentEditingItem.tags = [vc tags];
     [currentEditingItem updateTags];
     [tableView reloadData];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// 写真撮影/選択処理
+
+- (void)cameraButtonTapped:(id)sender
+{
+	Item *item = [itemArray objectAtIndex:0];
+	if (!item.registeredWithShelf) return; // do nothing
+	
+	currentEditingItem = item;
+	
+    cameraActionSheet = [[UIActionSheet alloc]
+                            initWithTitle:NSLocalizedString(@"Set image for this item.", @"")
+                            delegate:self
+                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+                            destructiveButtonTitle:nil
+                            otherButtonTitles:NSLocalizedString(@"Camera", @""),
+                              NSLocalizedString(@"Photo library", @""), nil];
+    cameraActionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    [cameraActionSheet showInView:self.view];
+    [cameraActionSheet release];
+}
+
+- (void)execImagePicker:(UIImagePickerControllerSourceType)sourceType
+{
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = sourceType;
+        picker.delegate = self;
+        picker.allowsImageEditing = YES;
+        [self presentModalViewController:picker animated:YES];
+        [picker release];
+    }
+}
+
+// 写真撮影完了
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+	[[picker parentViewController] dismissModalViewControllerAnimated:YES];
+	[currentEditingItem saveImageCache:image data:nil];
+	[tableView reloadData];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+	[[picker parentViewController] dismissModalViewControllerAnimated:YES];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -400,7 +455,6 @@
 
 - (void)actionSheet:(UIActionSheet*)as clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-
     if (as == openActionSheet) {
         openActionSheet = nil;
 
@@ -412,6 +466,17 @@
         case 1:
             // open with safari
             [self openSafari];
+            break;
+        }
+    }
+    else if (as == cameraActionSheet) {
+        cameraActionSheet = nil;
+        switch (buttonIndex) {
+        case 0:
+            [self execImagePicker:UIImagePickerControllerSourceTypeCamera];
+            break;
+        case 1:
+            [self execImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
             break;
         }
     }

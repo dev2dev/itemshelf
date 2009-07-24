@@ -32,6 +32,9 @@
 "Enter title" = "Enter keyword";
 "EnterTitleDescription" = "Enter title or keyword (author, artist etc.) to search items";
 
+"Camera" = "Camera";
+"Photo library" = "Photo library";
+
 "Title" = "Title";
 "Code" = "Code";
 "Keyword" = "Keyword";

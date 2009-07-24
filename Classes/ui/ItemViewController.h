@@ -40,20 +40,24 @@
 
 @interface ItemViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, 
-     EditTagsViewDelegate, GenSelectListViewDelegate>
+     EditTagsViewDelegate, GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     IBOutlet UITableView *tableView;
+	IBOutlet UIBarButtonItem *cameraButton;
 	
     NSMutableArray *itemArray;
     NSString *urlString;
 
     UIActionSheet *openActionSheet;
+    UIActionSheet *cameraActionSheet;
+
     Item *currentEditingItem;
 }
 
 @property(nonatomic,retain) NSMutableArray *itemArray;
 @property(nonatomic,retain) NSString *urlString;
 
+- (IBAction)cameraButtonTapped:(id)sender;
 //- (IBAction)moveActionButtonTapped:(id)sender;
 - (IBAction)openActionButtonTapped:(id)sender;
 - (void)sendMail;
