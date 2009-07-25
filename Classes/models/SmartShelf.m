@@ -106,6 +106,8 @@ static NSMutableArray *tagsFilterStrings = nil;
     result = [self _isMatchSmartFilter:tagsFilterStrings value:item.tags];
     if (!result) return NO;
 
+    if (item.star < starFilter) return NO;
+
     return YES;
 }
 

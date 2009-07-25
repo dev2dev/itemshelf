@@ -332,6 +332,7 @@
 - (void)updateStar
 {
     [self _updateIntKey:"star" value:star];
+    [[DataModel sharedDataModel] updateSmartShelves];
 }
 
 - (void)updateTags
