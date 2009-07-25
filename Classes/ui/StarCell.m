@@ -38,10 +38,10 @@
 
 #define REUSE_CELL_ID @"StarCellId"
 
-#define CELL_HEIGHT 32
+#define CELL_HEIGHT 42
 #define CELL_WIDTH 280
-#define STAR_IMAGE_WIDTH 100
-#define STAR_IMAGE_HEIGHT 20
+#define STAR_IMAGE_WIDTH 120
+#define STAR_IMAGE_HEIGHT 22
 
 + (StarCell *)getCell:(UITableView *)tableView star:(int)star
 {
@@ -59,15 +59,15 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     // スター画像領域
-    UIImageView *imgView =
+    imageView =
         [[[UIImageView alloc]
           initWithFrame:CGRectMake((CELL_WIDTH - STAR_IMAGE_WIDTH) / 2, (CELL_HEIGHT - STAR_IMAGE_HEIGHT) / 2,
                                    STAR_IMAGE_WIDTH, STAR_IMAGE_HEIGHT)] autorelease];
-    imgView.tag = 0;
-    imgView.autoresizingMask = 0;
-    imgView.contentMode = UIViewContentModeScaleAspectFit; // 画像のアスペクト比を変えないようにする。
-    imgView.backgroundColor = [UIColor clearColor];
-    [self.contentView addSubview:imgView];
+    imageView.tag = 0;
+    imageView.autoresizingMask = 0;
+    imageView.contentMode = UIViewContentModeScaleAspectFit; // 画像のアスペクト比を変えないようにする。
+    imageView.backgroundColor = [UIColor clearColor];
+    [self.contentView addSubview:imageView];
 
     return self;
 }
@@ -85,10 +85,11 @@
     }
 
     ASSERT(0 <= star && star <= 5);
+    ASSERT(starImages[star] != nil);
     if (star < 0 || star > 5) star = 0; // safety
 
-    UIImageView *imgView = (UIImageView *)[self.contentView viewWithTag:0];
-    imgView.image = starImages[star];
+    UIImage *img = starImages[star];
+    imageView.image = img;
 }
 
 @end

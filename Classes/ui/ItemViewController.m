@@ -37,6 +37,7 @@
 #import "WebViewController.h"
 #import "WebApi.h"
 #import "KeywordViewController2.h"
+#import "StarCell.h"
 
 @implementation ItemViewController
 
@@ -155,8 +156,8 @@
 {
     Item *item = [itemArray objectAtIndex:section];
 	
-    // (画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + メモ) + 情報数
-    return 3 + (item.registeredWithShelf ? 0 : 1) + 2 + item.infoStrings.count;
+    // (画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + スター + メモ) + 情報数
+    return 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
 }
 
 // セルの高さを返す
@@ -180,7 +181,8 @@
 #define ROW_SEARCH_AGAIN -3
 #define ROW_ADD_TO_SHELF -4
 #define ROW_TAGS -5
-#define ROW_MEMO -6
+#define ROW_STAR -6
+#define ROW_MEMO -7
 
 - (int)_calcRowKind:(NSIndexPath *)indexPath item:(Item *)item
 {
@@ -205,11 +207,13 @@
 
     switch (n) {
     case 3:
-        return ROW_TAGS;
+        return ROW_STAR;
     case 4:
+        return ROW_TAGS;
+    case 5:
         return ROW_MEMO;
     }
-    return n - 5;
+    return n - 6;
 }
 
 // セルを返す
@@ -223,6 +227,14 @@
     // 画像セル
     if (rowKind == ROW_IMAGE) {
         return [self getImageCell:tv item:item];
+    }
+
+
+    // スターセル
+    if (rowKind == ROW_STAR) {
+        StarCell *cell = [StarCell getCell:tv star:item.star];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
     }
 
     // テキストセル
@@ -255,7 +267,7 @@
         cell.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         break;
-            
+
     case ROW_TAGS:
         cell.text = [NSString stringWithFormat:@"%@: %@",
                               NSLocalizedString(@"Tags", @""),
@@ -366,6 +378,14 @@
         }
         [tv reloadData];
     }
+    else if (rowKind == ROW_STAR) {
+        // スター編集
+        currentEditingItem = item;
+        EditStarViewController *vc =
+            [[EditStarViewController alloc] initWithStar:item.star delegate:self];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    }
     else if (rowKind == ROW_TAGS) {
         // タグ編集
         currentEditingItem = item;
@@ -383,6 +403,13 @@
         vc.text = item.memo;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)editStarViewChanged:(EditStarViewController *)vc
+{
+    currentEditingItem.star = [vc star];
+    [currentEditingItem updateStar];
+    [tableView reloadData];
 }
 
 - (void)editTagsViewChanged:(EditTagsViewController *)vc

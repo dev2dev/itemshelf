@@ -39,6 +39,7 @@
 
 @interface StarCell : UITableViewCell
 {
+    UIImageView *imageView;
 }
 
 + (StarCell *)getCell:(UITableView *)tableView star:(int)star;

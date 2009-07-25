@@ -38,10 +38,11 @@
 #import "GenSelectListViewController.h"
 #import "EditTagsViewController.h"
 #import "EditMemoVC.h"
+#import "EditStarViewController.h"
 
 @interface ItemViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, 
-     EditTagsViewDelegate, EditMemoViewDelegate,
+     EditTagsViewDelegate, EditMemoViewDelegate, EditStarViewDelegate,
      GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     IBOutlet UITableView *tableView;
