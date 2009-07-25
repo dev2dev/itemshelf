@@ -20,6 +20,10 @@
 		3E0C0CC5101ABC1F00F18D86 /* EditMemoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E0C0CC3101ABC1F00F18D86 /* EditMemoView.xib */; };
 		3E0C0CC8101ABC3400F18D86 /* EditMemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C0CC7101ABC3400F18D86 /* EditMemoVC.m */; };
 		3E0C0CC9101ABC3400F18D86 /* EditMemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C0CC7101ABC3400F18D86 /* EditMemoVC.m */; };
+		3E0C0D2A101ACD3000F18D86 /* EditStarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C0D27101ACD3000F18D86 /* EditStarViewController.m */; };
+		3E0C0D2B101ACD3000F18D86 /* StarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C0D29101ACD3000F18D86 /* StarCell.m */; };
+		3E0C0D2C101ACD3000F18D86 /* EditStarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C0D27101ACD3000F18D86 /* EditStarViewController.m */; };
+		3E0C0D2D101ACD3000F18D86 /* StarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C0D29101ACD3000F18D86 /* StarCell.m */; };
 		3E12ACFF0F19B3F2009FE300 /* TmiWebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12ACFD0F19B3F2009FE300 /* TmiWebServer.h */; };
 		3E12AD000F19B3F2009FE300 /* TmiWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */; };
 		3E15190F0EDAB7C100F510E9 /* ItemCellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */; };
@@ -248,6 +252,10 @@
 		3E0C0CC3101ABC1F00F18D86 /* EditMemoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditMemoView.xib; sourceTree = "<group>"; };
 		3E0C0CC6101ABC3400F18D86 /* EditMemoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMemoVC.h; sourceTree = "<group>"; };
 		3E0C0CC7101ABC3400F18D86 /* EditMemoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMemoVC.m; sourceTree = "<group>"; };
+		3E0C0D26101ACD3000F18D86 /* EditStarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditStarViewController.h; sourceTree = "<group>"; };
+		3E0C0D27101ACD3000F18D86 /* EditStarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditStarViewController.m; sourceTree = "<group>"; };
+		3E0C0D28101ACD3000F18D86 /* StarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarCell.h; sourceTree = "<group>"; };
+		3E0C0D29101ACD3000F18D86 /* StarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarCell.m; sourceTree = "<group>"; };
 		3E12ACFD0F19B3F2009FE300 /* TmiWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TmiWebServer.h; sourceTree = "<group>"; };
 		3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TmiWebServer.m; sourceTree = "<group>"; };
 		3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ItemCellBack.png; sourceTree = "<group>"; };
@@ -714,6 +722,8 @@
 				3EE7514A0EE996ED0018A317 /* ItemCell4.m */,
 				3E6F53120ECFBFFB00E68A4B /* ItemViewController.h */,
 				3E6F53130ECFBFFB00E68A4B /* ItemViewController.m */,
+				3E0C0D28101ACD3000F18D86 /* StarCell.h */,
+				3E0C0D29101ACD3000F18D86 /* StarCell.m */,
 				3E23E7A90F23628A00A6F22E /* EditTagsViewController.h */,
 				3E23E7AA0F23628A00A6F22E /* EditTagsViewController.m */,
 				3EC639CD0EE5449D0057FAC2 /* WebViewController.h */,
@@ -728,6 +738,8 @@
 				3E2C0C470ED9AD1300867F11 /* GenSelectListViewController.m */,
 				3E0C0CC6101ABC3400F18D86 /* EditMemoVC.h */,
 				3E0C0CC7101ABC3400F18D86 /* EditMemoVC.m */,
+				3E0C0D26101ACD3000F18D86 /* EditStarViewController.h */,
+				3E0C0D27101ACD3000F18D86 /* EditStarViewController.m */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -1054,6 +1066,8 @@
 				3E0796090F4DA8FC00456CB3 /* Edition.m in Sources */,
 				3ED069530F545B03006D932B /* KeywordViewController2.m in Sources */,
 				3E0C0CC8101ABC3400F18D86 /* EditMemoVC.m in Sources */,
+				3E0C0D2A101ACD3000F18D86 /* EditStarViewController.m in Sources */,
+				3E0C0D2B101ACD3000F18D86 /* StarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,6 +1094,8 @@
 				3E0796080F4DA8FC00456CB3 /* Edition.m in Sources */,
 				3ED069540F545B03006D932B /* KeywordViewController2.m in Sources */,
 				3E0C0CC9101ABC3400F18D86 /* EditMemoVC.m in Sources */,
+				3E0C0D2C101ACD3000F18D86 /* EditStarViewController.m in Sources */,
+				3E0C0D2D101ACD3000F18D86 /* StarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
