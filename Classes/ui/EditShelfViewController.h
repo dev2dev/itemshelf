@@ -36,9 +36,10 @@
 #import "Common.h"
 #import "Shelf.h"
 #import "EditTagsViewController.h"
+#import "EditStarViewController.h"
 
 @interface EditShelfViewController : UITableViewController
-<UITextFieldDelegate, EditTagsViewDelegate>
+<UITextFieldDelegate, EditTagsViewDelegate, EditStarViewDelegate>
 {
     Shelf *shelf;
     BOOL isNew;
@@ -48,6 +49,8 @@
     UITextField *authorField;
     UITextField *manufacturerField;
     UILabel *tagsField;
+    UILabel *starField;
+    int starFilter;
 }
 
 @property(nonatomic,retain) Shelf *shelf;
@@ -61,5 +64,6 @@
 - (UITextField*)allocTextInputField:(NSString*)value placeholder:(NSString*)placeholder;
 - (UILabel*)allocTextLabelField:(NSString*)value;
 - (UITableViewCell *)textViewCell:(NSString *)title view:(UIView *)view;
+- (NSString *)_starFilterString:(int)starFilter;
 
 @end

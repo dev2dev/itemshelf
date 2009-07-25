@@ -73,6 +73,7 @@
     authorField       = [self allocTextInputField:shelf.authorFilter placeholder:@"Author"];
     manufacturerField = [self allocTextInputField:shelf.manufacturerFilter placeholder:@"Manufacturer"];
     tagsField         = [self allocTextLabelField:shelf.tagsFilter];
+    starField         = [self allocTextLabelField:[self _starFilterString:shelf.starFilter]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,6 +88,7 @@
     [authorField release];
     [manufacturerField release];
     [tagsField release];
+    [starField release];
 
     [super dealloc];
 }
@@ -101,7 +103,8 @@
     shelf.authorFilter = authorField.text;
     shelf.manufacturerFilter = manufacturerField.text;
     shelf.tagsFilter = tagsField.text;
-    
+    shelf.starFilter = starFilter;
+
     if (isNew) {
         // 新規追加
         [[DataModel sharedDataModel] addShelf:shelf];
@@ -172,7 +175,7 @@
     if (shelf.shelfType == ShelfTypeNormal) {
         return 1; // 棚の名前だけ
     }
-    return 5;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -193,6 +196,10 @@
         break;
     case 4:
         cell = [self textViewCell:@"Tags" view:tagsField];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        break;
+    case 5:
+        cell = [self textViewCell:@"Star" view:starField];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         break;
     }
@@ -228,19 +235,54 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row != 4) return; // tags
-
-    EditTagsViewController *vc =
-        [[EditTagsViewController alloc] initWithTags:tagsField.text delegate:self];
-    vc.canAddTags = NO;
-    [self.navigationController pushViewController:vc animated:YES];
-    [vc release];
+    if (indexPath.row == 4)  {
+        // tags
+        EditTagsViewController *vc =
+            [[EditTagsViewController alloc] initWithTags:tagsField.text delegate:self];
+        vc.canAddTags = NO;
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    }
+    else if (indexPath.row == 5) {
+        // star
+        EditStarViewController *vc =
+            [[EditStarViewController alloc] initWithStar:shelf.starFilter delegate:self];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    }
 }
 
 - (void)editTagsViewChanged:(EditTagsViewController *)vc
 {
     tagsField.text = vc.tags;
     [self.tableView reloadData];
+}
+
+- (void)editStarViewChanged:(EditStarViewController *)vc
+{
+    starFilter = vc.star;
+    starField.text = [self _starFilterString:starFilter];
+    [self.tableView reloadData];
+}
+
+- (NSString *)_starFilterString:(int)n
+{
+    NSString *andAbove = NSLocalizedString(@"and above", @"");
+    NSString *starString;
+
+    switch (n) {
+    default: starString = @"☆☆☆☆☆"; break;
+    case 1: starString = @"★☆☆☆☆"; break;
+    case 2: starString = @"★★☆☆☆"; break;
+    case 3: starString = @"★★★☆☆"; break;
+    case 4: starString = @"★★★★☆"; break;
+    case 5: starString = @"★★★★★"; break;
+    }
+    
+    if (n == 5) {
+        return starString;
+    }
+    return [NSString stringWithFormat:@"%@ %@", starString, andAbove];
 }
 
 @end
