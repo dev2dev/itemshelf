@@ -116,6 +116,7 @@
 - (void)updateSorder;
 - (void)updateStar;
 - (void)updateTags;
+- (void)updateMemo;
 - (void)_updateIntKey:(const char *)key value:(int)value;
 - (void)_updateStringKey:(const char *)key value:(NSString *)value;
 

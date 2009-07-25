@@ -37,13 +37,15 @@
 #import "Item.h"
 #import "GenSelectListViewController.h"
 #import "EditTagsViewController.h"
+#import "EditMemoVC.h"
 
 @interface ItemViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, 
-     EditTagsViewDelegate, GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+     EditTagsViewDelegate, EditMemoViewDelegate,
+     GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     IBOutlet UITableView *tableView;
-	IBOutlet UIBarButtonItem *cameraButton;
+    IBOutlet UIBarButtonItem *cameraButton;
 	
     NSMutableArray *itemArray;
     NSString *urlString;
@@ -57,6 +59,7 @@
 @property(nonatomic,retain) NSMutableArray *itemArray;
 @property(nonatomic,retain) NSString *urlString;
 
+
 - (IBAction)cameraButtonTapped:(id)sender;
 //- (IBAction)moveActionButtonTapped:(id)sender;
 - (IBAction)openActionButtonTapped:(id)sender;
@@ -66,6 +69,7 @@
 // private method
 - (void)updateInfoStringsDict;
 - (NSMutableArray *)infoStrings:(int)index;
+- (int)_calcRowKind:(NSIndexPath *)indexPath item:(Item *)item;
 
 - (void)checkAndAppendString:(NSMutableArray*)infoStrings value:(NSString *)value withName:(NSString *)name;
 - (UITableViewCell *)getImageCell:(UITableView *)tv item:(Item*)item;

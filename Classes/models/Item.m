@@ -340,6 +340,11 @@
     [[DataModel sharedDataModel] updateSmartShelves];
 }
 
+- (void)updateMemo
+{
+    [self _updateStringKey:"memo" value:memo];
+}
+
 - (void)_updateIntKey:(const char *)key value:(int)value
 {
 	char sql[256];

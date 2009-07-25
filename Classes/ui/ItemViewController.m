@@ -112,7 +112,8 @@
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////// InfoString 処理
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// InfoString 処理
 
 - (void)updateInfoStringsDict
 {
@@ -154,8 +155,8 @@
 {
     Item *item = [itemArray objectAtIndex:section];
 	
-    // 画像 + 詳細表示セル + 再検索 + タグ + 情報数
-    return 3 + (item.registeredWithShelf ? 0 : 1) + 1 + item.infoStrings.count;
+    // (画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + メモ) + 情報数
+    return 3 + (item.registeredWithShelf ? 0 : 1) + 2 + item.infoStrings.count;
 }
 
 // セルの高さを返す
@@ -173,14 +174,54 @@
     return tv.rowHeight; // default
 }
 
+// セルの種別を返す
+#define ROW_IMAGE -1
+#define ROW_SHOW_DETAIL -2
+#define ROW_SEARCH_AGAIN -3
+#define ROW_ADD_TO_SHELF -4
+#define ROW_TAGS -5
+#define ROW_MEMO -6
+
+- (int)_calcRowKind:(NSIndexPath *)indexPath item:(Item *)item
+{
+    int n;
+
+    switch (indexPath.row) {
+    case 0:
+        return ROW_IMAGE;
+    case 1:
+        return ROW_SHOW_DETAIL;
+    case 2:
+        return ROW_SEARCH_AGAIN;
+    }
+
+    n = indexPath.row;
+    if (!item.registeredWithShelf) {
+        if (indexPath.row == 3) {
+            return ROW_ADD_TO_SHELF;
+        }
+        n--;
+    }
+
+    switch (n) {
+    case 3:
+        return ROW_TAGS;
+    case 4:
+        return ROW_MEMO;
+    }
+    return n - 5;
+}
+
 // セルを返す
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Item *item = [itemArray objectAtIndex:indexPath.section];
     NSMutableArray *infoStrings = [self infoStrings:indexPath.section];
 
+    int rowKind = [self _calcRowKind:indexPath item:item];
+
     // 画像セル
-    if (indexPath.row == 0) {
+    if (rowKind == ROW_IMAGE) {
         return [self getImageCell:tv item:item];
     }
 
@@ -193,45 +234,45 @@
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellid] autorelease];
     }
 	
-    if (indexPath.row == 1) {
+    cell.font = [UIFont boldSystemFontOfSize:14.0];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+
+    switch (rowKind) {
+    case ROW_SHOW_DETAIL:
         cell.text = NSLocalizedString(@"Show detail", @"");
         cell.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    else if (indexPath.row == 2) {
+        break;
+
+    case ROW_SEARCH_AGAIN:
         cell.text = NSLocalizedString(@"Search again with title", @"");
         cell.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
-    }
-    else {
-        int idx = indexPath.row - 3;
-		
-        if (!item.registeredWithShelf) {
-            idx--;
-        }
+        break;
 
-        cell.font = [UIFont boldSystemFontOfSize:14.0];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-
-        switch (idx) {
-        case -1:
-            cell.text = NSLocalizedString(@"Add to shelf", @"");
-            cell.font = [UIFont boldSystemFontOfSize:16.0];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            break;
+    case ROW_ADD_TO_SHELF:
+        cell.text = NSLocalizedString(@"Add to shelf", @"");
+        cell.font = [UIFont boldSystemFontOfSize:16.0];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        break;
             
-        case 0:
-            // tags
-            cell.text = [NSString stringWithFormat:@"%@: %@",
-                                  NSLocalizedString(@"Tags", @""),
-                                  item.tags];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            break;
+    case ROW_TAGS:
+        cell.text = [NSString stringWithFormat:@"%@: %@",
+                              NSLocalizedString(@"Tags", @""),
+                              item.tags];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        break;
 
-        default:
-            cell.text = [infoStrings objectAtIndex:idx-1];
-            break;
-        }
+    case ROW_MEMO:
+        cell.text = [NSString stringWithFormat:@"%@: %@",
+                              NSLocalizedString(@"Memo", @""),
+                              item.memo];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        break;
+				
+    default:
+        cell.text = [infoStrings objectAtIndex:rowKind];
+        break;
     }
 
     return cell;
@@ -294,21 +335,22 @@
 {
     [tv deselectRowAtIndexPath:indexPath animated:NO];
 
-    int idx = indexPath.row;
     Item *item = [itemArray objectAtIndex:indexPath.section];
-
-	if (idx == 0) {
-		[self cameraButtonTapped:nil];
-	}
-    else if (idx == 1) {
+    int rowKind = [self _calcRowKind:indexPath item:item];
+	
+    if (rowKind == ROW_IMAGE) {
+        [self cameraButtonTapped:nil];
+    }
+    else if (rowKind == ROW_SHOW_DETAIL) {
         // 詳細を表示
         NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
         WebViewController *vc = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
         vc.urlString = detailURL;
 
         [self.navigationController pushViewController:vc animated:YES];
+
     }
-    else if (idx == 2) {
+    else if (rowKind == ROW_SEARCH_AGAIN) {
         // 再検索
         KeywordViewController2 *v = [KeywordViewController2 keywordViewController:NSLocalizedString(@"Keyword", @"")];
         v.selectedShelf = [[DataModel sharedDataModel] shelf:item.shelfId];
@@ -317,27 +359,29 @@
         //[self.navigationController popViewControllerAnimated:NO];
         [self.navigationController pushViewController:v animated:YES];
     }
-    else {
-        idx -= 3;
-        if (!item.registeredWithShelf) {
-            idx--;
+    else if (rowKind == ROW_ADD_TO_SHELF) {
+        // 棚に登録
+        if (![[DataModel sharedDataModel] addItem:item]) {
+            [[DataModel sharedDataModel] alertItemCountOver];
         }
-
-        if (idx == -1) {
-            // 棚に登録
-            if (![[DataModel sharedDataModel] addItem:item]) {
-                [[DataModel sharedDataModel] alertItemCountOver];
-            }
-            [tv reloadData];
-        }
-        else if (idx == 0) {
-            // タグ編集
-            currentEditingItem = item;
-            EditTagsViewController *vc =
-                [[EditTagsViewController alloc] initWithTags:item.tags delegate:self];
-            [self.navigationController pushViewController:vc animated:YES];
-            [vc release];
-        }
+        [tv reloadData];
+    }
+    else if (rowKind == ROW_TAGS) {
+        // タグ編集
+        currentEditingItem = item;
+        EditTagsViewController *vc =
+            [[EditTagsViewController alloc] initWithTags:item.tags delegate:self];
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc release];
+    }
+    else if (rowKind == ROW_MEMO) {
+        currentEditingItem = item;
+        EditMemoViewController *vc = 
+            [EditMemoViewController editMemoViewController:self
+                                    title:NSLocalizedString(@"Memo", @"")
+                                    identifier:0];
+        vc.text = item.memo;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -345,6 +389,13 @@
 {
     currentEditingItem.tags = [vc tags];
     [currentEditingItem updateTags];
+    [tableView reloadData];
+}
+
+- (void)editMemoViewChanged:(EditMemoViewController *)vc identifier:(int)id
+{
+    currentEditingItem.memo = vc.text;
+    [currentEditingItem updateMemo];
     [tableView reloadData];
 }
 
