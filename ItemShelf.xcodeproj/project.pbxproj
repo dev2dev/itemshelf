@@ -16,6 +16,10 @@
 		3E0796080F4DA8FC00456CB3 /* Edition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0796070F4DA8FC00456CB3 /* Edition.m */; };
 		3E0796090F4DA8FC00456CB3 /* Edition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0796070F4DA8FC00456CB3 /* Edition.m */; };
 		3E0796130F4DA9B400456CB3 /* libItemShelfLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5DFA390EE14BE6000F6998 /* libItemShelfLib.a */; };
+		3E0C0CC4101ABC1F00F18D86 /* EditMemoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E0C0CC3101ABC1F00F18D86 /* EditMemoView.xib */; };
+		3E0C0CC5101ABC1F00F18D86 /* EditMemoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E0C0CC3101ABC1F00F18D86 /* EditMemoView.xib */; };
+		3E0C0CC8101ABC3400F18D86 /* EditMemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C0CC7101ABC3400F18D86 /* EditMemoVC.m */; };
+		3E0C0CC9101ABC3400F18D86 /* EditMemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0C0CC7101ABC3400F18D86 /* EditMemoVC.m */; };
 		3E12ACFF0F19B3F2009FE300 /* TmiWebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E12ACFD0F19B3F2009FE300 /* TmiWebServer.h */; };
 		3E12AD000F19B3F2009FE300 /* TmiWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */; };
 		3E15190F0EDAB7C100F510E9 /* ItemCellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */; };
@@ -241,6 +245,9 @@
 		3E0796070F4DA8FC00456CB3 /* Edition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Edition.m; sourceTree = "<group>"; };
 		3E0796200F4DAA1F00456CB3 /* ItemShelfLite.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = ItemShelfLite.app; path = "build/Debug-iphonesimulator/ItemShelfLite.app"; sourceTree = "<group>"; };
 		3E0796370F4DAAD200456CB3 /* ItemShelfLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ItemShelfLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E0C0CC3101ABC1F00F18D86 /* EditMemoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditMemoView.xib; sourceTree = "<group>"; };
+		3E0C0CC6101ABC3400F18D86 /* EditMemoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMemoVC.h; sourceTree = "<group>"; };
+		3E0C0CC7101ABC3400F18D86 /* EditMemoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMemoVC.m; sourceTree = "<group>"; };
 		3E12ACFD0F19B3F2009FE300 /* TmiWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TmiWebServer.h; sourceTree = "<group>"; };
 		3E12ACFE0F19B3F2009FE300 /* TmiWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TmiWebServer.m; sourceTree = "<group>"; };
 		3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ItemCellBack.png; sourceTree = "<group>"; };
@@ -719,6 +726,8 @@
 				3EE468EA0F222781005A03DA /* GenEditTextViewController.m */,
 				3E2C0C460ED9AD1300867F11 /* GenSelectListViewController.h */,
 				3E2C0C470ED9AD1300867F11 /* GenSelectListViewController.m */,
+				3E0C0CC6101ABC3400F18D86 /* EditMemoVC.h */,
+				3E0C0CC7101ABC3400F18D86 /* EditMemoVC.m */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -780,6 +789,7 @@
 				3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */,
 				3E427BC00EDC2A320028E633 /* NumPadView.xib */,
 				3ED069690F545CBA006D932B /* KeywordView2.xib */,
+				3E0C0CC3101ABC1F00F18D86 /* EditMemoView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -962,6 +972,7 @@
 				3E36E1AE0F309A9500AB3C64 /* config.png in Resources */,
 				3ED0696A0F545CBA006D932B /* KeywordView2.xib in Resources */,
 				3E6A1C57101770E800767CC0 /* Sort.png in Resources */,
+				3E0C0CC4101ABC1F00F18D86 /* EditMemoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,6 +1023,7 @@
 				3ED0696B0F545CBA006D932B /* KeywordView2.xib in Resources */,
 				3EA8F0E30F555BF900FE2779 /* Icon-lite.png in Resources */,
 				3E6A1C58101770E800767CC0 /* Sort.png in Resources */,
+				3E0C0CC5101ABC1F00F18D86 /* EditMemoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,6 +1053,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				3E0796090F4DA8FC00456CB3 /* Edition.m in Sources */,
 				3ED069530F545B03006D932B /* KeywordViewController2.m in Sources */,
+				3E0C0CC8101ABC3400F18D86 /* EditMemoVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,6 +1079,7 @@
 				3E23102F0F4D9ED0006E24AF /* main.m in Sources */,
 				3E0796080F4DA8FC00456CB3 /* Edition.m in Sources */,
 				3ED069540F545B03006D932B /* KeywordViewController2.m in Sources */,
+				3E0C0CC9101ABC3400F18D86 /* EditMemoVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
