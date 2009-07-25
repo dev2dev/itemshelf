@@ -1,3 +1,4 @@
+
 // -*-  Mode:ObjC; c-basic-offset:4; tab-width:8; indent-tabs-mode:nil -*-
 /*
   ItemShelf for iPhone/iPod touch
@@ -239,7 +240,7 @@
 
 /*
 	ソート用比較関数
-	逆順に並べていることに注意。画面上では、上のほうが後に並んでいるデータなので。
+	逆順に並べていることに注意。画面上では、上のほうが後に並んでいるデータなので。
  */
 static int compByTitle(Item *a, Item *b, void *ctx)
 {
@@ -252,6 +253,10 @@ static int compByAuthor(Item *a, Item *b, void *ctx)
 static int compByManufacturer(Item *a, Item *b, void *ctx)
 {
     return -[a.manufacturer compare:b.manufacturer];
+}
+static int compByStar(Item *a, Item *b, void *ctx)
+{
+    return a.star - b.star;
 }
 
 /**
@@ -270,6 +275,9 @@ static int compByManufacturer(Item *a, Item *b, void *ctx)
         break;
     case 2:
         [filteredList sortUsingFunction:compByManufacturer context:0];
+        break;
+    case 3:
+        [filteredList sortUsingFunction:compByStar context:0];
         break;
     }
 

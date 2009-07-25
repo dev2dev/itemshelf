@@ -406,13 +406,14 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 	NSString *label1 = NSLocalizedString(@"Title", @"");
 	NSString *label2 = NSLocalizedString(@"Author", @"");
 	NSString *label3 = NSLocalizedString(@"Manufacturer", @"");
+	NSString *label4 = NSLocalizedString(@"Star", @"");
 	
 	UIActionSheet *as = [[UIActionSheet alloc]
 						 initWithTitle:NSLocalizedString(@"Sort", @"")
 						 delegate:self 
 						 cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
 						 destructiveButtonTitle:nil
-						 otherButtonTitles:label1, label2, label3, nil];
+                                otherButtonTitles:label1, label2, label3, label4, nil];
 	as.actionSheetStyle = UIActionSheetStyleDefault;
 	[as showInView:self.view];
 	[as release];
