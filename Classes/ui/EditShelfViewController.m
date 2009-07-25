@@ -213,14 +213,15 @@
         [oldView removeFromSuperview];
     }
 
-    view.tag = 1;
-    [cell.contentView addSubview:view];
-
     cell.text = NSLocalizedString(title, @"");
     cell.font = [UIFont boldSystemFontOfSize:14];
 
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    view.tag = 1;
+    [cell.contentView addSubview:view];
+    [cell.contentView bringSubviewToFront:view];
 
     return cell;
 }
