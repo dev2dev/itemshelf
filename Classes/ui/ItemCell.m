@@ -51,6 +51,7 @@
 #define TAG_IMAGE   1
 #define TAG_DESC    2
 #define TAG_DATE    3
+#define TAG_STAR    4
 
 - (id)init
 {
@@ -100,7 +101,7 @@
     [self.contentView addSubview:descLabel];
 	
     // 日付
-    UILabel *dateLabel = [[[UILabel alloc] initWithFrame:CGRectMake(label_x, 65, label_width, 18)] autorelease];
+    UILabel *dateLabel = [[[UILabel alloc] initWithFrame:CGRectMake(label_x, 65, label_width - 100, 18)] autorelease];
     dateLabel.tag = TAG_DATE;
     dateLabel.font = [UIFont systemFontOfSize:12.0];
     dateLabel.textColor = [UIColor darkGrayColor];
@@ -108,6 +109,15 @@
     dateLabel.backgroundColor = [UIColor clearColor];
     dateLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.contentView addSubview:dateLabel];
+    
+    // スター
+    UILabel *starLabel = [[[UILabel alloc] initWithFrame:CGRectMake(320 - 70, 65, 70, 18)] autorelease];
+    starLabel.tag = TAG_STAR;
+    starLabel.font = [UIFont systemFontOfSize:16.0];
+    starLabel.textColor = [UIColor orangeColor];
+    starLabel.backgroundColor = [UIColor clearColor];
+    starLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.contentView addSubview:starLabel];
 	
     return self;
 }
@@ -124,10 +134,21 @@
 
     UILabel *descLabel = (UILabel *)[self.contentView viewWithTag:TAG_DESC];
     UILabel *dateLabel = (UILabel *)[self.contentView viewWithTag:TAG_DATE];
+    UILabel *starLabel = (UILabel *)[self.contentView viewWithTag:TAG_STAR];
     UIImageView *imgView = (UIImageView *)[self.contentView viewWithTag:TAG_IMAGE];
 
     descLabel.text = item.name;
     dateLabel.text = [df stringFromDate:item.date];
+
+    NSString *starText = @"☆☆☆☆☆";
+    switch (item.star) {
+    case 1: starText = @"★☆☆☆☆"; break;
+    case 2: starText = @"★★☆☆☆"; break;
+    case 3: starText = @"★★★☆☆"; break;
+    case 4: starText = @"★★★★☆"; break;
+    case 5: starText = @"★★★★★"; break;
+    }
+    starLabel.text = starText;
 
     // resize image
     UIImage *image = [item getImage:nil];
