@@ -13,6 +13,7 @@
 		282CCBFE0DB6C98000C4EA27 /* ItemListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282CCBFD0DB6C98000C4EA27 /* ItemListView.xib */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
+		3E044377101AED5800D2797A /* Edition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0796070F4DA8FC00456CB3 /* Edition.m */; };
 		3E0796080F4DA8FC00456CB3 /* Edition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0796070F4DA8FC00456CB3 /* Edition.m */; };
 		3E0796090F4DA8FC00456CB3 /* Edition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0796070F4DA8FC00456CB3 /* Edition.m */; };
 		3E0796130F4DA9B400456CB3 /* libItemShelfLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5DFA390EE14BE6000F6998 /* libItemShelfLib.a */; };
@@ -1104,6 +1105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E22CD180EF9132300E8A966 /* Shelf.m in Sources */,
+				3E044377101AED5800D2797A /* Edition.m in Sources */,
 				3E22CCED0EF911B900E8A966 /* GTMIPhoneUnitTestDelegate.m in Sources */,
 				3E22CCEE0EF911B900E8A966 /* GTMIPhoneUnitTestMain.m in Sources */,
 				3E22CCEF0EF911B900E8A966 /* GTMSenTestCase.m in Sources */,

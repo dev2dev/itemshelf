@@ -26,7 +26,7 @@
     int i;
     dbstmt *stmt;
 
-    stmt = [db prepare:"INSERT INTO Shelf VALUES(?, ?, ?, ?, ?, ?, ?);"];
+    stmt = [db prepare:"INSERT INTO Shelf VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);"];
     for (i = 1; i <= NUM_TEST_SHELF; i++) {
         Shelf *shelf = [TestUtility createTestShelf:i];
 
@@ -38,13 +38,14 @@
         [stmt bindString:5 val:shelf.authorFilter];
         [stmt bindString:6 val:shelf.manufacturerFilter];
         [stmt bindString:7 val:shelf.tagsFilter];
+        [stmt bindInt:8 val:shelf.starFilter];
         [stmt step];
         [stmt reset];
 
         [shelf release];
     }
 
-    stmt = [db prepare:"INSERT INTO Item VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"];
+    stmt = [db prepare:"INSERT INTO Item VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"];
     for (i = 1; i <= NUM_TEST_ITEM; i++) {
         Item *item = [TestUtility createTestItem:i];
 
@@ -64,6 +65,7 @@
         [stmt bindString:13 val:item.memo];
         [stmt bindString:14 val:item.imageURL];
         [stmt bindInt:15 val:item.sorder];
+        [stmt bindInt:16 val:item.star];
         [stmt step];
         [stmt reset];
 
@@ -135,6 +137,7 @@
     item.detailURL = [NSString stringWithFormat:@"http://itemshelf.com/dummyDetail?id=%d", id];
     item.imageURL = [NSString stringWithFormat:@"http://itemshelf.com/dummyImage%d.jpg", id];
     item.sorder = id;
+    item.star = 0;
 
     return item;
 }
