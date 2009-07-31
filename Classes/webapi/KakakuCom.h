@@ -56,7 +56,12 @@
     int itemCounter;		///< Item counter (for XML parser)
     NSMutableData *responseData;///< response data (for XML parser)        
     NSMutableString *curString;	///< current string in XML element (for XML parser)
+
+    BOOL inError;
+    NSString *errorMessage;
 }
+
+@property(nonatomic,retain) NSString *errorMessage;
 
 - (void)itemSearch;
 

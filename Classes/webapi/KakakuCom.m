@@ -50,6 +50,7 @@
         itemArray = [[NSMutableArray alloc] initWithCapacity:10];
         curString = [[NSMutableString alloc] initWithCapacity:20];
         responseData = [[NSMutableData alloc] initWithCapacity:256];
+        errorMessage = nil;
     }
     return self;
 }
@@ -59,6 +60,7 @@
     [responseData release];
     [itemArray release];
     [curString release];
+    [errorMessage release];
 
     [super dealloc];
 }
@@ -113,6 +115,7 @@
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:client.receivedData];
 	
     itemCounter = -1;
+    inError = NO;
 	
     [parser setDelegate:self];
     [parser setShouldResolveExternalEntities:YES];
@@ -122,7 +125,7 @@
     if (delegate) {
         if (!result) {
             // XML error
-            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:nil];
+            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:errorMessage];
         } else if (itemArray.count > 0) {
             // success
             [delegate webApiDidFinish:self items:itemArray];
@@ -159,6 +162,9 @@
         [itemArray addObject:item];
         [item release];
     }
+    else if ([elem isEqualToString:@"Error"]) {
+        inError = YES;
+    }
 }
 
 // 文字列処理
@@ -171,6 +177,14 @@
 - (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elem namespaceURI:(NSString *)nspace qualifiedName:(NSString *)qname
 {
     LOG(@"%@ = %@", elem, curString);
+
+    if ([elem isEqualToString:@"Error"]) {
+        inError = NO;
+        return;
+    }
+    if (inError && [elem isEqualToString:@"Message"]) {
+        self.errorMessage = [NSString stringWithString:curString];
+    }
 
     if (itemCounter < 0) {
         [curString setString:@""];
