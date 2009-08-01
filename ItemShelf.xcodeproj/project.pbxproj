@@ -186,6 +186,8 @@
 		3EDC93B80F19E94C00EA99AB /* BackupServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDC93B60F19E94C00EA99AB /* BackupServer.h */; };
 		3EDC93B90F19E94C00EA99AB /* BackupServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC93B70F19E94C00EA99AB /* BackupServer.m */; };
 		3EDD10C40F14C3430034709E /* RakutenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD10C20F14C3270034709E /* RakutenApi.m */; };
+		3EE3EFC11023EC7800DE147D /* Yahoo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE3EFBF1023EC7800DE147D /* Yahoo.h */; };
+		3EE3EFC21023EC7800DE147D /* Yahoo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE3EFC01023EC7800DE147D /* Yahoo.m */; };
 		3EE468EB0F222781005A03DA /* GenEditTextViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE468E90F222781005A03DA /* GenEditTextViewController.h */; };
 		3EE468EC0F222781005A03DA /* GenEditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE468EA0F222781005A03DA /* GenEditTextViewController.m */; };
 		3EE6F10A0EFA9C3600E689A4 /* ItemTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6F1090EFA9C3600E689A4 /* ItemTest.m */; };
@@ -407,6 +409,8 @@
 		3EDC93B70F19E94C00EA99AB /* BackupServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackupServer.m; sourceTree = "<group>"; };
 		3EDD10C10F14C3270034709E /* RakutenApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RakutenApi.h; sourceTree = "<group>"; };
 		3EDD10C20F14C3270034709E /* RakutenApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RakutenApi.m; sourceTree = "<group>"; };
+		3EE3EFBF1023EC7800DE147D /* Yahoo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yahoo.h; sourceTree = "<group>"; };
+		3EE3EFC01023EC7800DE147D /* Yahoo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yahoo.m; sourceTree = "<group>"; };
 		3EE468E90F222781005A03DA /* GenEditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenEditTextViewController.h; sourceTree = "<group>"; };
 		3EE468EA0F222781005A03DA /* GenEditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenEditTextViewController.m; sourceTree = "<group>"; };
 		3EE6F1090EFA9C3600E689A4 /* ItemTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTest.m; sourceTree = "<group>"; };
@@ -714,6 +718,8 @@
 				3E37D1940F139573005B6B90 /* AmazonApi.m */,
 				3EDD10C10F14C3270034709E /* RakutenApi.h */,
 				3EDD10C20F14C3270034709E /* RakutenApi.m */,
+				3EE3EFBF1023EC7800DE147D /* Yahoo.h */,
+				3EE3EFC01023EC7800DE147D /* Yahoo.m */,
 				3E37D1950F139573005B6B90 /* KakakuCom.h */,
 				3E37D1960F139573005B6B90 /* KakakuCom.m */,
 			);
@@ -839,6 +845,7 @@
 				3EE468EB0F222781005A03DA /* GenEditTextViewController.h in Headers */,
 				3E23E7AB0F23628A00A6F22E /* EditTagsViewController.h in Headers */,
 				3E6BC6480FCEC8B500D07D4E /* DateFormatter2.h in Headers */,
+				3EE3EFC11023EC7800DE147D /* Yahoo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,6 +1174,7 @@
 				3EE468EC0F222781005A03DA /* GenEditTextViewController.m in Sources */,
 				3E23E7AC0F23628A00A6F22E /* EditTagsViewController.m in Sources */,
 				3E6BC6490FCEC8B500D07D4E /* DateFormatter2.m in Sources */,
+				3EE3EFC21023EC7800DE147D /* Yahoo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

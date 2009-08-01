@@ -95,7 +95,6 @@
     NSString *baseURI = @"http://itemshelf.com/cgi-bin/yahoojp.cgi?";
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
 
-    NSString *operation = nil;
     NSString *param = nil;
 
     if (searchKeyType == SearchKeyCode) {
@@ -103,7 +102,7 @@
         param = @"jan";
     } else {
         // キーワード検索
-        param = @"query";
+        param = @"keyword";
     }
     [comp setQuery:param value:searchKey];
 
@@ -201,20 +200,20 @@
         item.idString = [NSString stringWithString:curString];
     }
     else if ([elem isEqualToString:@"JanCode"]) {
-        if (item.idString == nil) {
+        if (item.idString == nil || item.idString.length == 0) {
             item.idString = [NSString stringWithString:curString];
         }
     }
-    else if ([elem isEqualToString:@"Name"]) {
+    else if (item.name.length == 0 && [elem isEqualToString:@"Name"]) {
         item.name = [NSString stringWithString:curString];
     }
-    else if ([elem isEqualToString:@"Url"]) {
+    else if (item.detailURL.length == 0 && [elem isEqualToString:@"Url"]) {
         item.detailURL = [NSString stringWithString:curString];
     }
-    else if ([elem isEqualToString:@"Medium"]) {
+    else if (item.imageURL.length == 0 && [elem isEqualToString:@"Medium"]) {
         item.imageURL = [NSString stringWithString:curString];
     }
-    else if ([elem isEqualToString:@"Price"]) {
+    else if (item.price.length == 0 && [elem isEqualToString:@"Price"]) {
         double price = [[NSString stringWithString:curString] doubleValue];
         item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
     }
