@@ -61,9 +61,11 @@ enum {
 #if ENABLE_RAKUTEN
     Rakuten,
 #endif
+    Yahoo,
 #if ENABLE_KAKAKUCOM
     KakakuCom,
 #endif
+
     MaxServiceId
 };
 
