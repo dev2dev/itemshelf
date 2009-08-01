@@ -164,15 +164,19 @@
     [curString setString:@""];
 	
     if ([elem isEqualToString:@"Hit"]) {
-        itemCounter++;
+        // check index attriute
+        NSString *hitIndex = [attributes objectForKey:@"index"];
+        if (hitIndex != nil && ![hitIndex isEqualToString:@"0"]) {
+            itemCounter++;
 
-        Item *item = [[Item alloc] init];
+            Item *item = [[Item alloc] init];
 
-        item.serviceId = serviceId;
-        item.category = @"Other"; // とりあえず
+            item.serviceId = serviceId;
+            item.category = @"Other"; // とりあえず
 
-        [itemArray addObject:item];
-        [item release];
+            [itemArray addObject:item];
+            [item release];
+        }
     }
 }
 
