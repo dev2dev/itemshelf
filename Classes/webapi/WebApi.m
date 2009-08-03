@@ -40,6 +40,7 @@
 #import "AmazonApi.h"
 #import "RakutenApi.h"
 #import "KakakuCom.h"
+#import "Yahoo.h"
 
 @implementation WebApiFactory
 @synthesize serviceId;
@@ -65,7 +66,7 @@
 /**
    Select service id for code search
 
-   @note Only amazon, rakuten supports code search
+   @note Only amazon, rakuten, yahoo supports code search
 */
 - (void)setCodeSearch
 {
@@ -163,6 +164,10 @@
             api = [[KakakuComApi alloc] init];
             break;
 #endif
+        case Yahoo:
+            api = [[YahooApi alloc] init];
+            break;
+
         default:
             ASSERT(NO);
     }
@@ -188,7 +193,8 @@
 #if ENABLE_RAKUTEN
     [ary addObject:@"楽天 (JP)"];
 #endif
-	
+    [ary addObject:@"Yahoo Shopping (JP)"];
+
     if (!isCodeSearch) {
         // title search
 #if ENABLE_KAKAKUCOM
