@@ -36,6 +36,7 @@
 #import "URLComponent.h"
 #import "WebApi.h"
 #import "Yahoo.h"
+#import "dom.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Yahoo shopping api
@@ -124,6 +125,58 @@
 {
     [super httpClientDidFinish:client];
 
+    // Parse XML
+    DomParser *domParser = [[[DomParser alloc] init] autorelease];
+    XmlNode *root = [domParser parse:client.receivedData];
+    //[root dump];
+
+    if (!root) {
+        // XML error
+        [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:nil];
+    }
+
+    XmlNode *hit;
+    for (hit = [root findNode:@"Hit"]; hit; hit = [hit findSibling]) {
+        NSString *hitIndex = [hit.attributes objectForKey:@"index"];
+        if (hitIndex == nil || [hitIndex isEqualToString:@"0"]) {
+            continue;
+        }
+
+        Item *item = [[Item alloc] init];
+        [itemArray addObject:item];
+        [item release];
+
+        item.serviceId = serviceId;
+        item.category = @"Other"; // とりあえず
+
+        XmlNode *n;
+        n = [hit findNode:@"IsbnCode"];
+        if (n) {
+            item.idString = n.text;
+        } else {
+            n = [hit findNode:@"JanCode"];
+            if (n) item.idString = [NSString stringWithString:n.text];
+        }
+    
+        item.name = [hit findNode:@"Name"].text;
+        item.detailURL = [hit findNode:@"Url"].text;
+        item.imageURL = [hit findNode:@"Medium"].text;
+        n = [hit findNode:@"Price"];
+        if (n) {
+            double price = [n.text doubleValue];
+            item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
+        }
+    }
+
+    if (itemArray.count > 0) {
+        // success
+        [delegate webApiDidFinish:self items:itemArray];
+    } else {
+        // no data
+        [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:@"No items"]; //###
+    }
+
+#if 0
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:client.receivedData];
 	
     itemCounter = -1;
@@ -145,6 +198,7 @@
             [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:@"No items"]; //###
         }
     }
+#endif
 }
 
 //@}

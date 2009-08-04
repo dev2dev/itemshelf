@@ -90,7 +90,7 @@
     [parser setDelegate:self];
     [parser setShouldResolveExternalEntities:YES];
 
-    XmlNode *rootNode = [[XmlNode alloc] init];
+    XmlNode *rootNode = [[[XmlNode alloc] init] autorelease];
     curNode = rootNode;
 
     BOOL result = [parser parse];
