@@ -3,7 +3,7 @@
 #import "dom.h"
 
 @implementation XmlNode
-@synthesize name, parent, attributes, children;
+@synthesize name, parent, attributes, children, text;
 
 - (id)init
 {
@@ -23,6 +23,50 @@
     [super dealloc];
 }
 
+- (XmlNode*)findNode:(NSString *)a_name
+{
+    for (XmlNode *n in children) {
+        if ([n.name isEqualToString:a_name]) {
+            return n;
+        }
+        XmlNode *found = [n findNode:a_name];
+        if (found) {
+            return found;
+        }
+    }
+    return nil;
+}
+
+- (XmlNode*)findSibling
+{
+    if (parent == nil) return nil;
+
+    bool foundme = NO;
+    for (XmlNode *n in parent.children) {
+        if (n == self) {
+            foundme = YES;
+        }
+        else if (foundme && [n.name isEqualToString:name]) {
+            return n;
+        }
+    }
+    return nil;
+}
+
+// debug
+- (void)dump
+{
+    [self dumpsub:0];
+}
+
+- (void)dumpsub:(int)depth
+{
+    NSLog(@"%d:%@", depth, name);
+    for (XmlNode *n in children) {
+        [n dumpsub:depth + 1];
+    }
+}
+
 @end
 
 @implementation DomParser
@@ -40,7 +84,7 @@
     [super dealloc];
 }
 
-- (XmlNode *)parse:(NSData *data)
+- (XmlNode *)parse:(NSData *)data
 {
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
     [parser setDelegate:self];
@@ -52,6 +96,11 @@
     BOOL result = [parser parse];
     [parser release];
 
+    if (!result) {
+        [curNode release];
+        return nil;
+    }
+        
     return curNode;
 }
 

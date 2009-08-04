@@ -36,6 +36,7 @@
 #import "DataModel.h"
 #import "URLComponent.h"
 #import "HttpClient.h"
+#import "dom.h"
 
 // XML State
 
@@ -237,7 +238,15 @@
 - (void)httpClientDidFinish:(HttpClient*)client
 {
     [super httpClientDidFinish:client];
-
+    
+#if 0
+    // DOM TEST
+    DomParser *domParser = [[[DomParser alloc] init] autorelease];
+    XmlNode *root = [domParser parse:client.receivedData];
+    [root dump];
+    [root release];
+#endif
+    
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:client.receivedData];
 	
     itemCounter = -1;

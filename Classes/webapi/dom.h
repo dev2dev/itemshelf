@@ -18,13 +18,19 @@
 @property(nonatomic, retain) NSDictionary *attributes;
 @property(nonatomic, retain) NSMutableArray *children;
 
+- (XmlNode *)findNode:(NSString *)name;
+- (XmlNode *)findSibling;
+
+- (void)dump;
+- (void)dumpsub:(int)depth;
+
 @end
 
-@interface DomParser : NSObject <NSXMLParserDelegate> {
+@interface DomParser : NSObject {
     NSMutableString *curString;
     XmlNode *curNode;
 }
 
-- (XmlNode*)parse:(NSData *data);
+- (XmlNode*)parse:(NSData *)data;
 
 @end

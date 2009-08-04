@@ -104,6 +104,8 @@
 		3E2310380F4D9ED0006E24AF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */; };
 		3E23E7AB0F23628A00A6F22E /* EditTagsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E7A90F23628A00A6F22E /* EditTagsViewController.h */; };
 		3E23E7AC0F23628A00A6F22E /* EditTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E23E7AA0F23628A00A6F22E /* EditTagsViewController.m */; };
+		3E24567D1028813500F8C78A /* dom.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E24567B1028813500F8C78A /* dom.h */; };
+		3E24567E1028813500F8C78A /* dom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E24567C1028813500F8C78A /* dom.m */; };
 		3E2C0C550ED9ADDB00867F11 /* GenSelectListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */; };
 		3E36E1AE0F309A9500AB3C64 /* config.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E36E1AD0F309A9500AB3C64 /* config.png */; };
 		3E37D19C0F1395AB005B6B90 /* AmazonApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E37D1940F139573005B6B90 /* AmazonApi.m */; };
@@ -323,6 +325,8 @@
 		3E22CD130EF912B400E8A966 /* ShelfTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfTest.m; sourceTree = "<group>"; };
 		3E23E7A90F23628A00A6F22E /* EditTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTagsViewController.h; sourceTree = "<group>"; };
 		3E23E7AA0F23628A00A6F22E /* EditTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTagsViewController.m; sourceTree = "<group>"; };
+		3E24567B1028813500F8C78A /* dom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dom.h; sourceTree = "<group>"; };
+		3E24567C1028813500F8C78A /* dom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dom.m; sourceTree = "<group>"; };
 		3E2C0C460ED9AD1300867F11 /* GenSelectListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenSelectListViewController.h; sourceTree = "<group>"; };
 		3E2C0C470ED9AD1300867F11 /* GenSelectListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenSelectListViewController.m; sourceTree = "<group>"; };
 		3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenSelectListView.xib; sourceTree = "<group>"; };
@@ -712,6 +716,8 @@
 		3E37D1900F13953B005B6B90 /* webapi */ = {
 			isa = PBXGroup;
 			children = (
+				3E24567B1028813500F8C78A /* dom.h */,
+				3E24567C1028813500F8C78A /* dom.m */,
 				3E37D1970F139573005B6B90 /* WebApi.h */,
 				3E37D1980F139573005B6B90 /* WebApi.m */,
 				3E37D1930F139573005B6B90 /* AmazonApi.h */,
@@ -846,6 +852,7 @@
 				3E23E7AB0F23628A00A6F22E /* EditTagsViewController.h in Headers */,
 				3E6BC6480FCEC8B500D07D4E /* DateFormatter2.h in Headers */,
 				3EE3EFC11023EC7800DE147D /* Yahoo.h in Headers */,
+				3E24567D1028813500F8C78A /* dom.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1175,6 +1182,7 @@
 				3E23E7AC0F23628A00A6F22E /* EditTagsViewController.m in Sources */,
 				3E6BC6490FCEC8B500D07D4E /* DateFormatter2.m in Sources */,
 				3EE3EFC21023EC7800DE147D /* Yahoo.m in Sources */,
+				3E24567E1028813500F8C78A /* dom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
