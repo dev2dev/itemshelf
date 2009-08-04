@@ -468,6 +468,15 @@
 	[tableView reloadData];
 }
 
+#if 0
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+	[[picker parentViewController] dismissModalViewControllerAnimated:YES];
+	[currentEditingItem saveImageCache:image data:nil];
+	[tableView reloadData];
+}
+#endif
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
 	[[picker parentViewController] dismissModalViewControllerAnimated:YES];
