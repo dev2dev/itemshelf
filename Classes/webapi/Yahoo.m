@@ -133,6 +133,7 @@
     if (!root) {
         // XML error
         [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:nil];
+        return;
     }
 
     XmlNode *hit;
