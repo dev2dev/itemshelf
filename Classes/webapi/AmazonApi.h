@@ -71,20 +71,3 @@
 //- (void)setCountry:(NSString*)country;
 
 @end
-
-/**
-   XML parser state for AmazonApi
-*/
-@interface AmazonXmlState : NSObject {
-    BOOL isLargeImage, isMediumImage, isOffers, isError;
-    NSString *errorMessage;
-    NSString *indexName; 
-};
-
-@property(nonatomic, assign) BOOL isLargeImage;
-@property(nonatomic, assign) BOOL isMediumImage;
-@property(nonatomic, assign) BOOL isOffers;
-@property(nonatomic, assign) BOOL isError;
-@property(nonatomic, retain) NSString *errorMessage;
-@property(nonatomic, retain) NSString *indexName;
-@end

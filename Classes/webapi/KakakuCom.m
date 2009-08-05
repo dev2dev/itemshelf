@@ -43,6 +43,8 @@
 	
 @implementation KakakuComApi
 
+@synthesize errorMessage;
+
 - (id)init
 {
     self = [super init];
