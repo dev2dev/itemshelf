@@ -55,14 +55,6 @@
 */
 @interface AmazonApi : WebApi {
     NSString *baseURI;		///< base URI to call amazon API
-	
-    NSMutableArray *itemArray;  ///< Searched items array
-
-    // For XML parser
-    int itemCounter;		///< Item counter (for XML parser)
-    NSMutableData *responseData;///< response data (for XML parser)        
-    NSMutableString *curString;	///< current string in XML element (for XML parser)
-    AmazonXmlState *xmlState;   ///< XML parser state
 }
 
 + (NSString *)detailUrl:(Item *)item isMobile:(BOOL)isMobile;

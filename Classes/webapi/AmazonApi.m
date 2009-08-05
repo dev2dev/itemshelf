@@ -49,9 +49,6 @@
 {
     self = [super init];
     if (self) {
-        itemArray = [[NSMutableArray alloc] initWithCapacity:10];
-        curString = [[NSMutableString alloc] initWithCapacity:20];
-        responseData = [[NSMutableData alloc] initWithCapacity:256];
         baseURI = nil;
     }
     return self;
@@ -85,12 +82,7 @@
 
 - (void)dealloc
 {
-    [responseData release];
-    [itemArray release];
-
     [baseURI release];
-    [curString release];
-    [xmlState release];
 
     [super dealloc];
 }
@@ -167,10 +159,6 @@
 */
 - (void)itemSearch
 {
-    [itemArray removeAllObjects];
-
-    [responseData setLength:0];
-
     if (searchIndex == nil) {
         searchIndex = @"Blended";
     }
@@ -235,8 +223,9 @@
     //
     // Item Node
     //
+    NSMutableArray *itemArray = [[[NSMutableArray alloc] init] autorelease];
     XmlNode *itemNode;
-    itemCounter = 0;
+    int itemCounter = 0;
     for (itemNode = [root findNode:@"Item"]; itemNode; itemNode = [itemNode findSibling]) {
         itemCounter++;
         if (itemCounter >= AMAZON_MAX_SEARCH_ITEMS) break;
