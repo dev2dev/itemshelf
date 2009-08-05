@@ -97,7 +97,6 @@
     [parser release];
 
     if (!result) {
-        [curNode release];
         return nil;
     }
         

@@ -37,33 +37,21 @@
 #import "URLComponent.h"
 #import "WebApi.h"
 #import "KakakuCom.h"
+#import "dom.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // KakakuCom API
 	
 @implementation KakakuComApi
 
-@synthesize errorMessage;
-
 - (id)init
 {
     self = [super init];
-    if (self) {
-        itemArray = [[NSMutableArray alloc] initWithCapacity:10];
-        curString = [[NSMutableString alloc] initWithCapacity:20];
-        responseData = [[NSMutableData alloc] initWithCapacity:256];
-        errorMessage = nil;
-    }
     return self;
 }
 
 - (void)dealloc
 {
-    [responseData release];
-    [itemArray release];
-    [curString release];
-    [errorMessage release];
-
     [super dealloc];
 }
 
@@ -86,9 +74,6 @@
         }
         return;
     }
-
-    [itemArray removeAllObjects];
-    [responseData setLength:0];
 
     NSString *baseURI = @"http://itemshelf.com/cgi-bin/kakakucomsearch.cgi";
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
@@ -114,107 +99,51 @@
 {
     [super httpClientDidFinish:client];
 
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:client.receivedData];
-	
-    itemCounter = -1;
-    inError = NO;
-	
-    [parser setDelegate:self];
-    [parser setShouldResolveExternalEntities:YES];
-    BOOL result = [parser parse];
-    [parser release];
-	
-    if (delegate) {
-        if (!result) {
-            // XML error
-            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:errorMessage];
-        } else if (itemArray.count > 0) {
-            // success
-            [delegate webApiDidFinish:self items:itemArray];
-        } else {
-            // no data
-            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:@"No items"]; //###
-        }
+    // Parse XML
+    DomParser *domParser = [[[DomParser alloc] init] autorelease];
+    XmlNode *root = [domParser parse:client.receivedData];
+    //[root dump];
+
+    if (!root) {
+        // XML error
+        [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:nil];
+        return;
     }
-}
 
-//@}
-
-/////////////////////////////////////////////////////////////////////////////////////
-// パーサ delegate
-
-/**
-   @name NXSMLParser delegate
-*/
-//@{
-
-// 開始タグの処理
-- (void)parser:(NSXMLParser*)parser didStartElement:(NSString*)elem namespaceURI:(NSString *)nspace qualifiedName:(NSString *)qname attributes:(NSDictionary *)attributes
-{
-    [curString setString:@""];
-	
-    if ([elem isEqualToString:@"Item"]) {
-        itemCounter++;
-
+    NSMutableArray *itemArray = [[[NSMutableArray alloc] init] autorelease];
+    XmlNode *itemNode;
+    for (itemNode = [root findNode:@"Item"]; itemNode; itemNode = [itemNode findSibling]) {
         Item *item = [[Item alloc] init];
+        [itemArray addObject:item];
+        [item release];
 
         item.serviceId = serviceId;
         item.category = @"Other"; // とりあえず
 
-        [itemArray addObject:item];
-        [item release];
-    }
-    else if ([elem isEqualToString:@"Error"]) {
-        inError = YES;
-    }
-}
-
-// 文字列処理
-- (void)parser:(NSXMLParser*)parser foundCharacters:(NSString*)string
-{
-    [curString appendString:string];
-}
-
-// 終了タグの処理
-- (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elem namespaceURI:(NSString *)nspace qualifiedName:(NSString *)qname
-{
-    LOG(@"%@ = %@", elem, curString);
-
-    if ([elem isEqualToString:@"Error"]) {
-        inError = NO;
-        return;
-    }
-    if (inError && [elem isEqualToString:@"Message"]) {
-        self.errorMessage = [NSString stringWithString:curString];
+        item.idString = [itemNode findNode:@"ProductID"].text;
+        item.name = [itemNode findNode:@"ProductName"].text;
+        //item.author = [itemNode findNode:@"author"].text;
+        item.manufacturer = [itemNode findNode:@"MakerName"].text;
+        item.detailURL = [itemNode findNode:@"ItemPageUrl"].text;
+        item.imageURL = [itemNode findNode:@"ImageUrl"].text;
+        item.price = [itemNode findNode:@"LowestPrice"].text;
     }
 
-    if (itemCounter < 0) {
-        [curString setString:@""];
-        return;
+    if (itemArray.count > 0) {
+        // success
+        [delegate webApiDidFinish:self items:itemArray];
+    } else {
+        // no data
+        NSString *message = nil;
+        XmlNode *err = [root findNode:@"Error"];
+        if (err) {
+            message = [err findNode:@"Message"].text;
+        }
+        if (message == nil) {
+            message = @"No items";
+        }
+        [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:message]; //###
     }
-    Item *item = [itemArray objectAtIndex:itemCounter];
-	
-    if ([elem isEqualToString:@"ProductID"]) {
-        item.idString = [NSString stringWithString:curString];
-    } else if ([elem isEqualToString:@"ProductName"]) {
-        item.name = [NSString stringWithString:curString];
-//    } else if ([elem isEqualToString:@"Author"]) {
-//        item.author = [NSString stringWithString:curString];
-    } else if ([elem isEqualToString:@"MakerName"]) {
-        item.manufacturer = [NSString stringWithString:curString];
-    } else if ([elem isEqualToString:@"ItemPageUrl"]) {
-        item.detailURL = [NSString stringWithString:curString];
-    } else if ([elem isEqualToString:@"LowestPrice"]) {
-        double price = [[NSString stringWithString:curString] doubleValue];
-        item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
-    } else if ([elem isEqualToString:@"ImageUrl"]) {
-        item.imageURL = [NSString stringWithString:curString];
-    }
-
-    // カテゴリはどうするか？
-    // 一応、CategoryName はあるけど、Amazon とのマッピングは面倒
-
-    [curString setString:@""];
 }
 
 //@}

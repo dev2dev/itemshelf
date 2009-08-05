@@ -50,18 +50,7 @@
    The result will be passed with WebApiDelegate protocol.
 */
 @interface KakakuComApi : WebApi {
-    NSMutableArray *itemArray;  ///< Searched items array
-
-    // For XML parser
-    int itemCounter;		///< Item counter (for XML parser)
-    NSMutableData *responseData;///< response data (for XML parser)        
-    NSMutableString *curString;	///< current string in XML element (for XML parser)
-
-    BOOL inError;
-    NSString *errorMessage;
 }
-
-@property(nonatomic,retain) NSString *errorMessage;
 
 - (void)itemSearch;
 
