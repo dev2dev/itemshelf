@@ -37,6 +37,7 @@
 #import "URLComponent.h"
 #import "WebApi.h"
 #import "RakutenApi.h"
+#import "dom.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Rakuten API
@@ -182,124 +183,63 @@
 {
     [super httpClientDidFinish:client];
 
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:client.receivedData];
-	
-    itemCounter = -1;
-	
-    [parser setDelegate:self];
-    [parser setShouldResolveExternalEntities:YES];
-    BOOL result = [parser parse];
-    [parser release];
-	
-    if (delegate) {
-        if (!result) {
-            // XML error
-            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:nil];
-        } else if (itemArray.count > 0) {
-            // success
-            [delegate webApiDidFinish:self items:itemArray];
-        } else {
-            // no data
-            [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:@"No items"]; //###
-        }
+    // Parse XML
+    DomParser *domParser = [[[DomParser alloc] init] autorelease];
+    XmlNode *root = [domParser parse:client.receivedData];
+    //[root dump];
+
+    if (!root) {
+        // XML error
+        [delegate webApiDidFailed:self reason:WEBAPI_ERROR_BADREPLY message:nil];
     }
-}
 
-//@}
-
-/////////////////////////////////////////////////////////////////////////////////////
-// パーサ delegate
-
-/**
-   @name NXSMLParser delegate
-*/
-//@{
-
-// 開始タグの処理
-- (void)parser:(NSXMLParser*)parser didStartElement:(NSString*)elem namespaceURI:(NSString *)nspace qualifiedName:(NSString *)qname attributes:(NSDictionary *)attributes
-{
-    [curString setString:@""];
-	
-    if ([elem isEqualToString:@"Item"]) {
-        itemCounter++;
-
+    XmlNode *itemNode;
+    for (itemNode = [root findNode:@"Item"]; itemNode; itemNode = [itemNode findSibling]) {
         Item *item = [[Item alloc] init];
+        [itemArray addObject:item];
+        [item release];
 
         item.serviceId = serviceId;
         item.category = @"Other"; // とりあえず
 
-        [itemArray addObject:item];
-        [item release];
-    }
-}
-
-// 文字列処理
-- (void)parser:(NSXMLParser*)parser foundCharacters:(NSString*)string
-{
-    [curString appendString:string];
-}
-
-// 終了タグの処理
-- (void)parser:(NSXMLParser*)parser didEndElement:(NSString*)elem namespaceURI:(NSString *)nspace qualifiedName:(NSString *)qname
-{
-    LOG(@"%@ = %@", elem, curString);
-
-    if (itemCounter < 0) {
-        [curString setString:@""];
-        return;
-    }
-    Item *item = [itemArray objectAtIndex:itemCounter];
-
-    if ([elem isEqualToString:@"isbn"]) {
-        item.idString = [NSString stringWithString:curString];
-    }
-    else if ([elem isEqualToString:@"jan"]) {
-        if (item.idString == nil) {
-            item.idString = [NSString stringWithString:curString];
+        XmlNode *n;
+        n = [itemNode findNode:@"isbn"];
+        if (n) {
+            item.idString = n.text;
+        } else {
+            n = [itemNode findNode:@"jan"];
+            if (n) item.idString = n.text;
+        }
+    
+        item.name = [itemNode findNode:@"title"].text;
+        item.author = [itemNode findNode:@"author"].text;
+        if (item.author == nil) {
+            item.author = [itemNode findNode:@"artistName"].text;
+        }
+        item.manufacturer = [itemNode findNode:@"publisherName"].text;
+        if (item.manufacturer == nil) {
+            item.manufacturer = [itemNode findNode:@"label"].text;
+        }
+        item.detailURL = [itemNode findNode:@"itemUrl"].text;
+        item.imageURL = [itemNode findNode:@"mediumImageUrl"].text;
+        n = [itemNode findNode:@"itemPrice"];
+        if (n) {
+            double price = [n.text doubleValue];
+            item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
         }
     }
-    else if ([elem isEqualToString:@"title"]) {
-        item.name = [NSString stringWithString:curString];
-    }
-    else if ([elem isEqualToString:@"author"]) {
-        item.author = [NSString stringWithString:curString];
-    }
-    else if ([elem isEqualToString:@"artistName"]) {
-        if (item.author != nil) {
-            item.author = [NSString stringWithString:curString];
-        }
-    }
-    else if ([elem isEqualToString:@"publisherName"]) {
-        item.manufacturer = [NSString stringWithString:curString];
-    }
-    else if ([elem isEqualToString:@"label"]) {
-        if (item.manufacturer != nil) {
-            item.manufacturer = [NSString stringWithString:curString];
-        }
-    }
-#if 0
-    // old
-    if ([elem isEqualToString:@"itemCode"]) {
-        item.idString = [NSString stringWithString:curString]; // とりあえず
-    } else if ([elem isEqualToString:@"itemName"]) {
-        item.name = [NSString stringWithString:curString];
-    }
-#endif
-    else if ([elem isEqualToString:@"itemUrl"]) {
-        item.detailURL = [NSString stringWithString:curString];
-    }
-    else if ([elem isEqualToString:@"mediumImageUrl"]) {
-        item.imageURL = [NSString stringWithString:curString];
-    }
-    else if ([elem isEqualToString:@"itemPrice"]) {
-        double price = [[NSString stringWithString:curString] doubleValue];
-        item.price = [Common currencyString:price withLocaleString:@"ja_JP"];
-    }
 
-    // カテゴリはどうするか？
-    // 一応、genreId はあるけど、Amazon とのマッピングは面倒
-
-    [curString setString:@""];
+    if (itemArray.count > 0) {
+        // success
+        [delegate webApiDidFinish:self items:itemArray];
+    } else {
+        // no data
+        NSString *message = [root findNode:@"Status"].text;
+        if (message == nil) {
+            message = @"No items";
+        }
+        [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:message]; //###
+    }
 }
 
 //@}

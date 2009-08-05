@@ -173,7 +173,8 @@
         [delegate webApiDidFinish:self items:itemArray];
     } else {
         // no data
-        [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:@"No items"]; //###
+        NSString *message = @"No items";
+        [delegate webApiDidFailed:self reason:WEBAPI_ERROR_NOTFOUND message:message]; //###
     }
 }
 
