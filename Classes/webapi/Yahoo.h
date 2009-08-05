@@ -40,12 +40,6 @@
 #import "WebApi.h"
 
 @interface YahooApi : WebApi {
-    NSMutableArray *itemArray;  ///< Searched items array
-
-    // For XML parser
-    int itemCounter;		///< Item counter (for XML parser)
-    NSMutableData *responseData;///< response data (for XML parser)        
-    NSMutableString *curString;	///< current string in XML element (for XML parser)
 }
 
 - (void)itemSearch;

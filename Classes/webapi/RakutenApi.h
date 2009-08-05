@@ -50,12 +50,6 @@
    The result will be passed with WebApiDelegate protocol.
 */
 @interface RakutenApi : WebApi {
-    NSMutableArray *itemArray;  ///< Searched items array
-
-    // For XML parser
-    int itemCounter;		///< Item counter (for XML parser)
-    NSMutableData *responseData;///< response data (for XML parser)        
-    NSMutableString *curString;	///< current string in XML element (for XML parser)
 }
 
 - (void)itemSearch;

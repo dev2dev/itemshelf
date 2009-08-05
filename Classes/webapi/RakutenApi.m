@@ -47,20 +47,11 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
-        itemArray = [[NSMutableArray alloc] initWithCapacity:10];
-        curString = [[NSMutableString alloc] initWithCapacity:20];
-        responseData = [[NSMutableData alloc] initWithCapacity:256];
-    }
     return self;
 }
 
 - (void)dealloc
 {
-    [responseData release];
-    [itemArray release];
-    [curString release];
-
     [super dealloc];
 }
 
@@ -102,9 +93,6 @@
     }
 #endif
 	
-    [itemArray removeAllObjects];
-    [responseData setLength:0];
-
     //NSString *baseURI = @"http://itemshelf.com/cgi-bin/rakutensearch.cgi?";
     NSString *baseURI = @"http://itemshelf.com/cgi-bin/rakutensearch2.cgi?";
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
@@ -194,6 +182,7 @@
         return;
     }
 
+    NSMutableArray *itemArray = [[[NSMutableArray alloc] init] autorelease];
     XmlNode *itemNode;
     for (itemNode = [root findNode:@"Item"]; itemNode; itemNode = [itemNode findSibling]) {
         Item *item = [[Item alloc] init];

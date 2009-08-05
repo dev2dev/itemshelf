@@ -46,20 +46,11 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
-        itemArray = [[NSMutableArray alloc] initWithCapacity:10];
-        curString = [[NSMutableString alloc] initWithCapacity:20];
-        responseData = [[NSMutableData alloc] initWithCapacity:256];
-    }
     return self;
 }
 
 - (void)dealloc
 {
-    [responseData release];
-    [itemArray release];
-    [curString release];
-
     [super dealloc];
 }
 
@@ -90,9 +81,6 @@
 */
 - (void)itemSearch
 {
-    [itemArray removeAllObjects];
-    [responseData setLength:0];
-
     NSString *baseURI = @"http://itemshelf.com/cgi-bin/yahoojp.cgi?";
     URLComponent *comp = [[[URLComponent alloc] initWithURLString:baseURI] autorelease];
 
@@ -136,6 +124,7 @@
         return;
     }
 
+    NSMutableArray *itemArray = [[[NSMutableArray alloc] init] autorelease];
     XmlNode *hit;
     for (hit = [root findNode:@"Hit"]; hit; hit = [hit findSibling]) {
         NSString *hitIndex = [hit.attributes objectForKey:@"index"];
