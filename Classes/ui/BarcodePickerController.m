@@ -143,6 +143,7 @@ extern CGImageRef UIGetScreenImage(); // undocumented
         int x = x1 + x2;
 
         int cd = 10 - (x % 10);
+        cd = cd % 10;
 
         if (n[12] == cd) {
             return YES;
