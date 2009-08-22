@@ -51,5 +51,6 @@
 
 - (void)_stopTimer;
 - (void)timerHandler:(NSTimer*)timer;
+- (BOOL)isValidBarcode:(NSString *)code;
 @end
 

@@ -99,10 +99,52 @@ extern CGImageRef UIGetScreenImage(); // undocumented
         NSString *code = reader.data;
         NSLog(@"Code = %@", code);
 
-        [self.delegate barcodePickerController:(BarcodePickerController*)self didRecognizeBarcode:(NSString*)code];
+        if ([self isValidBarcode:code]) {
+            [self.delegate barcodePickerController:(BarcodePickerController*)self didRecognizeBarcode:(NSString*)code];
+        } else {
+            NSLog(@"Invalid code");
+        }
     } else {
         NSLog(@"No code");
     }
+}
+
+- (BOOL)isValidBarcode:(NSString *)code
+{
+    int n[13];
+    
+    if ([code length] == 13) {
+        // EAN, JAN
+        @try {
+            for (int i = 0; i < 13; i++) {
+                NSString *c = [code substringWithRange:NSMakeRange(i, 1)];
+                if ([c isEqualToString:@"X"]) {
+                    n[i] = 10;
+                } else {
+                    n[i] = [c intValue];
+                }
+            }
+        }
+        @catch (NSException *exception) {
+            return NO;
+        }
+
+        int x1 = n[1] + n[3] + n[5] + n[7] + n[9] + n[11];
+        x1 *= 3;
+
+        int x2 = n[0] + n[2] + n[4] + n[6] + n[8] + n[10];
+        int x = x1 + x2;
+
+        int cd = 10 - (x % 10);
+
+        if (n[12] == cd) {
+            return YES;
+        }
+        return NO;
+    }
+    
+    // UPC or other code...
+    return YES;
 }
 
 @end
