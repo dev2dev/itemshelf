@@ -36,6 +36,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
+#import "BarcodePickerController.h"
 #import "GenSelectListViewController.h"
 #import "NumPadViewController.h"
 //#import "KeywordViewController.h"
@@ -44,8 +45,7 @@
 #import "SearchController.h"
 
 @interface ScanViewController : UITableViewController 
-<UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-     GenSelectListViewDelegate, SearchControllerDelegate>
+<BarcodePickerControllerDelegate, GenSelectListViewDelegate, SearchControllerDelegate>
 {
     UIActivityIndicatorView *activityIndicator;
     Shelf *selectedShelf;
@@ -64,5 +64,7 @@
 
 - (BOOL)execScan:(UIImagePickerControllerSourceType)type;
 - (void)selectService;
+
+- (void)_didRecognizeBarcode:(NSString*)code;
 
 @end

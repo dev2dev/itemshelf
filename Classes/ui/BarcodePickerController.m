@@ -33,28 +33,76 @@
 */
 
 #import "BarcodePickerController.h"
+#import "BarcodeReader.h"
 
 @implementation BarcodePickerController
 
 - (id)init
 {
     self = [super init];
+    reader = [[BarcodeReader alloc] init];
     return self;
 }
 
 - (void)dealloc
 {
+    [self _stopTimer];
+    [reader release];
+
     [super dealloc];
+}
+
+- (void)setDelegate:(id<BarcodePickerControllerDelegate>)delegate
+{
+    [super setDelegate:delegate];
+}
+
+- (id<BarcodePickerControllerDelegate>)delegate
+{
+    return (id<BarcodePickerControllerDelegate>)[super delegate];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    NSLog(@"BarcodePickerController: viewDidAppear");
     [super viewDidAppear:animated];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerHandler:) userInfo:nil repeats:YES];
+    [timer retain];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    NSLog(@"BarcodePickerController: viewDidDisappear");
     [super viewDidDisappear:animated];
+ 
+    [self _stopTimer];
+}
+
+- (void)_stopTimer
+{
+    if (timer) {
+        [timer invalidate];
+        [timer release];
+        timer = nil;
+    }
+}
+
+extern CGImageRef UIGetScreenImage(); // undocumented
+
+- (void)timerHandler:(NSTimer*)timer
+{
+    //NSLog(@"timer");
+
+    UIImage *image = [UIImage imageWithCGImage:UIGetScreenImage()];
+    if ([reader recognize:image]) {
+        NSString *code = reader.data;
+        NSLog(@"Code = %@", code);
+
+        [self.delegate barcodePickerController:(BarcodePickerController*)self didRecognizeBarcode:(NSString*)code];
+    } else {
+        NSLog(@"No code");
+    }
 }
 
 @end

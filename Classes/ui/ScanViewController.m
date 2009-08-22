@@ -35,6 +35,7 @@
 #import "ScanViewController.h"
 #import "ItemViewController.h"
 #import "BarcodeReader.h"
+#import "BarcodePickerController.h"
 #import "NumPadViewController.h"
 #import "DataModel.h"
 #import "SearchController.h"
@@ -221,7 +222,8 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         return NO;
     }
 	
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    //UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    BarcodePickerController *picker = [[BarcodePickerController alloc] init];
     picker.sourceType = type;
     picker.delegate = self;
     picker.allowsImageEditing = YES;
@@ -229,6 +231,12 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     [self presentModalViewController:picker animated:YES];
     [picker release];
     return YES;
+}
+
+- (void)barcodePickerController:(BarcodePickerController*)picker didRecognizeBarcode:(NSString*)code
+{
+    [[picker parentViewController] dismissModalViewControllerAnimated:YES];
+    [self _didRecognizeBarcode:code];
 }
 
 // 画像取得完了
@@ -243,17 +251,23 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         return;
     }
 
+    [self _didRecognizeBarcode:reader.data];
+}
+
+- (void)_didRecognizeBarcode:(NSString*)code
+{
     WebApiFactory *wf = [WebApiFactory webApiFactory];
     [wf setCodeSearch];
     WebApi *api = [wf createWebApi];
-
+    
     SearchController *sc = [SearchController newController];
     sc.delegate = self;
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
-    [sc search:api withCode:reader.data];
+    [sc search:api withCode:code];
     [api release];
 }
+
 
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result
 {

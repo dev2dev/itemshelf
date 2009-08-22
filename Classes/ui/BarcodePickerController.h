@@ -33,9 +33,23 @@
 */
 
 #import <UIKit/UIKit.h>
+#import "BarcodeReader.h"
+
+@class BarcodePickerController;
+
+@protocol BarcodePickerControllerDelegate <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+- (void)barcodePickerController:(BarcodePickerController*)self didRecognizeBarcode:(NSString*)code;
+@end
 
 @interface BarcodePickerController : UIImagePickerController
 {
+    BarcodeReader *reader;
+    NSTimer *timer;
 }
 
+@property(nonatomic,assign) id<BarcodePickerControllerDelegate> delegate;
+
+- (void)_stopTimer;
+- (void)timerHandler:(NSTimer*)timer;
 @end
+

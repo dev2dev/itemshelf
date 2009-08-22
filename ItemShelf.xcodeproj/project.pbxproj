@@ -142,6 +142,8 @@
 		3E6BC6480FCEC8B500D07D4E /* DateFormatter2.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E6BC6460FCEC8B500D07D4E /* DateFormatter2.h */; };
 		3E6BC6490FCEC8B500D07D4E /* DateFormatter2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6BC6470FCEC8B500D07D4E /* DateFormatter2.m */; };
 		3E6F53100ECFBE7D00E68A4B /* ItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */; };
+		3E74DDE610405282002B3E85 /* BarcodePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E74DDE410405282002B3E85 /* BarcodePickerController.h */; };
+		3E74DDE710405282002B3E85 /* BarcodePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E74DDE510405282002B3E85 /* BarcodePickerController.m */; };
 		3E7EB2DC0EE422D900D5CE27 /* ShelfListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7EB2DB0EE422D900D5CE27 /* ShelfListView.xib */; };
 		3E7FFEBC0ECC487B000164D4 /* ScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7FFEBB0ECC487B000164D4 /* ScanView.xib */; };
 		3E817E840EE6C1C60015A97E /* NoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E817E830EE6C1C60015A97E /* NoImage.png */; };
@@ -370,6 +372,8 @@
 		3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemView.xib; sourceTree = "<group>"; };
 		3E6F53120ECFBFFB00E68A4B /* ItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewController.h; sourceTree = "<group>"; };
 		3E6F53130ECFBFFB00E68A4B /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewController.m; sourceTree = "<group>"; };
+		3E74DDE410405282002B3E85 /* BarcodePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarcodePickerController.h; sourceTree = "<group>"; };
+		3E74DDE510405282002B3E85 /* BarcodePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarcodePickerController.m; sourceTree = "<group>"; };
 		3E7D4B120ECF00B30026EA36 /* BarcodeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarcodeReader.h; sourceTree = "<group>"; };
 		3E7D4B130ECF00B30026EA36 /* BarcodeReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarcodeReader.m; sourceTree = "<group>"; };
 		3E7EB2DB0EE422D900D5CE27 /* ShelfListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShelfListView.xib; sourceTree = "<group>"; };
@@ -743,6 +747,8 @@
 				3EE8D9470ED19812003D9852 /* ItemListViewController.m */,
 				28216C950DB411BC00E5133A /* ScanViewController.h */,
 				28216C960DB411BC00E5133A /* ScanViewController.m */,
+				3E74DDE410405282002B3E85 /* BarcodePickerController.h */,
+				3E74DDE510405282002B3E85 /* BarcodePickerController.m */,
 				3E4406FD0EF7FF7B00EB1C72 /* SearchController.h */,
 				3E4406FE0EF7FF7B00EB1C72 /* SearchController.m */,
 				3ECBBA950EDC432F00865EF7 /* NumPadViewController.h */,
@@ -853,6 +859,7 @@
 				3E6BC6480FCEC8B500D07D4E /* DateFormatter2.h in Headers */,
 				3EE3EFC11023EC7800DE147D /* Yahoo.h in Headers */,
 				3E24567D1028813500F8C78A /* dom.h in Headers */,
+				3E74DDE610405282002B3E85 /* BarcodePickerController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,6 +1190,7 @@
 				3E6BC6490FCEC8B500D07D4E /* DateFormatter2.m in Sources */,
 				3EE3EFC21023EC7800DE147D /* Yahoo.m in Sources */,
 				3E24567E1028813500F8C78A /* dom.m in Sources */,
+				3E74DDE710405282002B3E85 /* BarcodePickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
