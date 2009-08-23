@@ -97,11 +97,22 @@
 
 extern CGImageRef UIGetScreenImage(); // undocumented
 
+/**
+ Timer Handler
+ */
 - (void)timerHandler:(NSTimer*)timer
 {
     //NSLog(@"timer");
 
-    UIImage *image = [UIImage imageWithCGImage:UIGetScreenImage()];
+    // バーコードキャプチャ
+    CGImageRef capture = UIGetScreenImage();
+    CGImageRef clipped = CGImageCreateWithImageInRect(capture, CGRectMake(0, 240-30, 320, 60));
+    
+    UIImage *image = [UIImage imageWithCGImage:clipped];
+    
+    CGImageRelease(capture);
+    CGImageRelease(clipped);
+    
     if ([reader recognize:image]) {
         NSString *code = reader.data;
         NSLog(@"Code = %@", code);
