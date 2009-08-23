@@ -68,7 +68,7 @@
     [super viewDidAppear:animated];
     
     UIImage *overlay = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BarcodeReader" ofType:@"png"]];
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 427)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
     imgView.image = overlay;
     [self.view addSubview:imgView];
     [self.view bringSubviewToFront:imgView];
