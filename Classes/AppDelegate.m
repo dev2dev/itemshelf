@@ -36,6 +36,7 @@
 #import "DataModel.h"
 #import "ScanViewController.h"
 #import "SearchController.h"
+#import "Edition.h"
 
 @implementation AppDelegate
 
@@ -52,6 +53,9 @@
 	
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
+
+    // AdMob
+    [self performSelectorInBackground:@selector(reportAppOpenToAdMob) withObject:nil];
 }
 
 - (void)dealloc {
@@ -132,6 +136,36 @@
 - (void)searchControllerFinish:(SearchController*)controller result:(BOOL)result
 {
     // TBD エラーチェック
+}
+
+// AdMob
+- (void)reportAppOpenToAdMob {
+    NSString *appId;
+    if ([Edition isLiteEdition]) {
+        appId = @"306480147";
+    } else {
+        appId = @"298454705";
+    }
+
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // we're in a new thread here, so we need our own autorelease pool
+    // Have we already reported an app open?
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                        NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *appOpenPath = [documentsDirectory stringByAppendingPathComponent:@"admob_app_open"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if(![fileManager fileExistsAtPath:appOpenPath]) {
+        // Not yet reported -- report now
+        NSString *appOpenEndpoint = [NSString stringWithFormat:@"http://a.admob.com/f0?isu=%@&app_id=%@",
+                                              [[UIDevice currentDevice] uniqueIdentifier], appId];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:appOpenEndpoint]];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if((!error) && ([(NSHTTPURLResponse *)response statusCode] == 200) && ([responseData length] > 0)) {
+            [fileManager createFileAtPath:appOpenPath contents:nil attributes:nil]; // successful report, mark it as such
+        }
+    }
+    [pool release];
 }
 
 @end

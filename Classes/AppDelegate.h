@@ -52,4 +52,6 @@
 
 + (NSString*)pathOfDataFile:(NSString*)filename;
 
+- (void)reportAppOpenToAdMob;
+
 @end
