@@ -222,20 +222,19 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         return NO;
     }
 	
-    //UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    BarcodeScannerController *picker = [[BarcodeScannerController alloc] init];
-    picker.sourceType = type;
-    picker.delegate = self;
-    picker.allowsImageEditing = YES;
+    BarcodeScannerController *scanner = [[BarcodeScannerController alloc] init];
+    scanner.sourceType = type;
+    scanner.delegate = self;
+    scanner.allowsImageEditing = YES;
 	
-    [self presentModalViewController:picker animated:YES];
-    [picker release];
+    [self presentModalViewController:scanner animated:YES];
+    [scanner release];
     return YES;
 }
 
-- (void)barcodeScannerController:(BarcodeScannerController*)picker didRecognizeBarcode:(NSString*)code
+- (void)barcodeScannerController:(BarcodeScannerController*)scanner didRecognizeBarcode:(NSString*)code
 {
-    [[picker parentViewController] dismissModalViewControllerAnimated:YES];
+    [[scanner parentViewController] dismissModalViewControllerAnimated:YES];
     [self _didRecognizeBarcode:code];
 }
 
@@ -254,6 +253,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     [self _didRecognizeBarcode:reader.data];
 }
 
+// バーコード解析完了 → 検索開始
 - (void)_didRecognizeBarcode:(NSString*)code
 {
     WebApiFactory *wf = [WebApiFactory webApiFactory];
