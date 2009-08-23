@@ -36,7 +36,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
-#import "BarcodePickerController.h"
+#import "BarcodeScannerController.h"
 #import "GenSelectListViewController.h"
 #import "NumPadViewController.h"
 //#import "KeywordViewController.h"
@@ -45,7 +45,7 @@
 #import "SearchController.h"
 
 @interface ScanViewController : UITableViewController 
-<BarcodePickerControllerDelegate, GenSelectListViewDelegate, SearchControllerDelegate>
+<BarcodeScannerControllerDelegate, GenSelectListViewDelegate, SearchControllerDelegate>
 {
     UIActivityIndicatorView *activityIndicator;
     Shelf *selectedShelf;

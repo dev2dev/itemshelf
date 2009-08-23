@@ -35,7 +35,7 @@
 #import "ScanViewController.h"
 #import "ItemViewController.h"
 #import "BarcodeReader.h"
-#import "BarcodePickerController.h"
+#import "BarcodeScannerController.h"
 #import "NumPadViewController.h"
 #import "DataModel.h"
 #import "SearchController.h"
@@ -223,7 +223,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     }
 	
     //UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    BarcodePickerController *picker = [[BarcodePickerController alloc] init];
+    BarcodeScannerController *picker = [[BarcodeScannerController alloc] init];
     picker.sourceType = type;
     picker.delegate = self;
     picker.allowsImageEditing = YES;
@@ -233,7 +233,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     return YES;
 }
 
-- (void)barcodePickerController:(BarcodePickerController*)picker didRecognizeBarcode:(NSString*)code
+- (void)barcodeScannerController:(BarcodeScannerController*)picker didRecognizeBarcode:(NSString*)code
 {
     [[picker parentViewController] dismissModalViewControllerAnimated:YES];
     [self _didRecognizeBarcode:code];

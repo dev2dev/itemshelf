@@ -2,7 +2,7 @@
 /*
   ItemShelf for iPhone/iPod touch
 
-  Copyright (c) 2008, ItemShelf Development Team. All rights reserved.
+  Copyright (c) 2008-2009, ItemShelf Development Team. All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
@@ -32,10 +32,10 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "BarcodePickerController.h"
+#import "BarcodeScannerController.h"
 #import "BarcodeReader.h"
 
-@implementation BarcodePickerController
+@implementation BarcodeScannerController
 
 - (id)init
 {
@@ -52,19 +52,19 @@
     [super dealloc];
 }
 
-- (void)setDelegate:(id<BarcodePickerControllerDelegate>)delegate
+- (void)setDelegate:(id<BarcodeScannerControllerDelegate>)delegate
 {
     [super setDelegate:delegate];
 }
 
-- (id<BarcodePickerControllerDelegate>)delegate
+- (id<BarcodeScannerControllerDelegate>)delegate
 {
-    return (id<BarcodePickerControllerDelegate>)[super delegate];
+    return (id<BarcodeScannerControllerDelegate>)[super delegate];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"BarcodePickerController: viewDidAppear");
+    NSLog(@"BarcodeScannerController: viewDidAppear");
     [super viewDidAppear:animated];
     
     UIImage *overlay = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BarcodeReader" ofType:@"png"]];
@@ -80,7 +80,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    NSLog(@"BarcodePickerController: viewDidDisappear");
+    NSLog(@"BarcodeScannerController: viewDidDisappear");
     [super viewDidDisappear:animated];
  
     [self _stopTimer];
@@ -118,7 +118,7 @@ extern CGImageRef UIGetScreenImage(); // undocumented
         NSLog(@"Code = %@", code);
 
         if ([self isValidBarcode:code]) {
-            [self.delegate barcodePickerController:(BarcodePickerController*)self didRecognizeBarcode:(NSString*)code];
+            [self.delegate barcodeScannerController:(BarcodeScannerController*)self didRecognizeBarcode:(NSString*)code];
         } else {
             NSLog(@"Invalid code");
         }
