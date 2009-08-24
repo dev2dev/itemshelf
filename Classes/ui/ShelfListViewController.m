@@ -37,6 +37,7 @@
 #import "ItemListViewController.h"
 #import "ScanViewController.h"
 #import "ConfigViewController.h"
+#import "Edition.h"
 #import "AdCell.h"
 
 @implementation ShelfListViewController
@@ -316,7 +317,7 @@
 - (BOOL)tableView:(UITableView *)tv canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int row = [self getRow:indexPath];
-    if (row < 0) return;
+    if (row < 0) return NO;
 
     DataModel *dm = [DataModel sharedDataModel];
     if (row >= [dm shelvesCount]) {
@@ -336,7 +337,7 @@
     int toRow = [self getRow:to];
 
     if (fromRow < 0 || toRow < 0 ||
-        fromRow >= shelvesCount || toRow >= shlvesCount) return;
+        fromRow >= shelvesCount || toRow >= shelvesCount) return;
 
     [[DataModel sharedDataModel] reorderShelf:fromRow to:toRow];
 }

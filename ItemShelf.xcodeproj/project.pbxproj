@@ -183,6 +183,18 @@
 		3EC9C7580EE14B8A0026396A /* libZebla.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC9C6EF0EE147210026396A /* libZebla.a */; };
 		3ECBBB4E0EDC4A8200865EF7 /* AudioToolbox in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECBBB4D0EDC4A8200865EF7 /* AudioToolbox */; };
 		3ECD3DD10ED06434001A775F /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECD3DD00ED06434001A775F /* backward.png */; };
+		3ECD9E901042A27D00CFC9E4 /* libAdMobDevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9E8E1042A27D00CFC9E4 /* libAdMobDevice.a */; };
+		3ECD9E911042A27D00CFC9E4 /* libAdMobSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9E8F1042A27D00CFC9E4 /* libAdMobSimulator.a */; };
+		3ECD9E921042A27D00CFC9E4 /* libAdMobDevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9E8E1042A27D00CFC9E4 /* libAdMobDevice.a */; };
+		3ECD9E931042A27D00CFC9E4 /* libAdMobSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9E8F1042A27D00CFC9E4 /* libAdMobSimulator.a */; };
+		3ECD9E961042A28900CFC9E4 /* AdMobDelegateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECD9E941042A28900CFC9E4 /* AdMobDelegateProtocol.h */; };
+		3ECD9E971042A28900CFC9E4 /* AdMobView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECD9E951042A28900CFC9E4 /* AdMobView.h */; };
+		3ECD9EAA1042A2D200CFC9E4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9EA91042A2D200CFC9E4 /* AddressBook.framework */; };
+		3ECD9EAB1042A2D200CFC9E4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9EA91042A2D200CFC9E4 /* AddressBook.framework */; };
+		3ECD9EE81042A39300CFC9E4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9EE71042A39300CFC9E4 /* CoreLocation.framework */; };
+		3ECD9EE91042A39300CFC9E4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9EE71042A39300CFC9E4 /* CoreLocation.framework */; };
+		3ECD9EED1042A3B300CFC9E4 /* AdCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECD9EEB1042A3B300CFC9E4 /* AdCell.h */; };
+		3ECD9EEE1042A3B300CFC9E4 /* AdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD9EEC1042A3B300CFC9E4 /* AdCell.m */; };
 		3ECFF51C0EEEBAC100CB33D7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */; };
 		3ED0696A0F545CBA006D932B /* KeywordView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED069690F545CBA006D932B /* KeywordView2.xib */; };
 		3ED0696B0F545CBA006D932B /* KeywordView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED069690F545CBA006D932B /* KeywordView2.xib */; };
@@ -409,6 +421,14 @@
 		3ECD3DAE0ED6C84A0000A9A5 /* URLComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLComponent.h; sourceTree = "<group>"; };
 		3ECD3DAF0ED6C84A0000A9A5 /* URLComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLComponent.m; sourceTree = "<group>"; };
 		3ECD3DD00ED06434001A775F /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
+		3ECD9E8E1042A27D00CFC9E4 /* libAdMobDevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMobDevice.a; sourceTree = "<group>"; };
+		3ECD9E8F1042A27D00CFC9E4 /* libAdMobSimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMobSimulator.a; sourceTree = "<group>"; };
+		3ECD9E941042A28900CFC9E4 /* AdMobDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobDelegateProtocol.h; sourceTree = "<group>"; };
+		3ECD9E951042A28900CFC9E4 /* AdMobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobView.h; sourceTree = "<group>"; };
+		3ECD9EA91042A2D200CFC9E4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
+		3ECD9EE71042A39300CFC9E4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3ECD9EEB1042A3B300CFC9E4 /* AdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdCell.h; sourceTree = "<group>"; };
+		3ECD9EEC1042A3B300CFC9E4 /* AdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdCell.m; sourceTree = "<group>"; };
 		3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		3ED069510F545B03006D932B /* KeywordViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordViewController2.h; sourceTree = "<group>"; };
 		3ED069520F545B03006D932B /* KeywordViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController2.m; sourceTree = "<group>"; };
@@ -451,6 +471,10 @@
 				3E581F250ED1A1C000615FB2 /* libsqlite3.dylib in Frameworks */,
 				3ECBBB4E0EDC4A8200865EF7 /* AudioToolbox in Frameworks */,
 				3ECFF51C0EEEBAC100CB33D7 /* QuartzCore.framework in Frameworks */,
+				3ECD9E901042A27D00CFC9E4 /* libAdMobDevice.a in Frameworks */,
+				3ECD9E911042A27D00CFC9E4 /* libAdMobSimulator.a in Frameworks */,
+				3ECD9EAB1042A2D200CFC9E4 /* AddressBook.framework in Frameworks */,
+				3ECD9EE91042A39300CFC9E4 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +505,10 @@
 				3E2310370F4D9ED0006E24AF /* AudioToolbox in Frameworks */,
 				3E2310380F4D9ED0006E24AF /* QuartzCore.framework in Frameworks */,
 				3E0796130F4DA9B400456CB3 /* libItemShelfLib.a in Frameworks */,
+				3ECD9E921042A27D00CFC9E4 /* libAdMobDevice.a in Frameworks */,
+				3ECD9E931042A27D00CFC9E4 /* libAdMobSimulator.a in Frameworks */,
+				3ECD9EAA1042A2D200CFC9E4 /* AddressBook.framework in Frameworks */,
+				3ECD9EE81042A39300CFC9E4 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +564,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				3ECD9E8D1042A25500CFC9E4 /* AdMob */,
 				3E22CCE60EF9117F00E8A966 /* UnitTest */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -569,6 +598,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3ECD9EE71042A39300CFC9E4 /* CoreLocation.framework */,
+				3ECD9EA91042A2D200CFC9E4 /* AddressBook.framework */,
 				3ECFF51B0EEEBAC100CB33D7 /* QuartzCore.framework */,
 				3ECBBB4D0EDC4A8200865EF7 /* AudioToolbox */,
 				3E581F240ED1A1C000615FB2 /* libsqlite3.dylib */,
@@ -745,6 +776,8 @@
 			children = (
 				3E7EB3220EE4273B00D5CE27 /* ShelfListViewController.h */,
 				3E7EB3230EE4273B00D5CE27 /* ShelfListViewController.m */,
+				3ECD9EEB1042A3B300CFC9E4 /* AdCell.h */,
+				3ECD9EEC1042A3B300CFC9E4 /* AdCell.m */,
 				3EB7A9EC0EF665DF009B038F /* EditShelfViewController.h */,
 				3EB7A9ED0EF665DF009B038F /* EditShelfViewController.m */,
 				3EE8D9460ED19812003D9852 /* ItemListViewController.h */,
@@ -849,6 +882,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		3ECD9E8D1042A25500CFC9E4 /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				3ECD9E941042A28900CFC9E4 /* AdMobDelegateProtocol.h */,
+				3ECD9E951042A28900CFC9E4 /* AdMobView.h */,
+				3ECD9E8E1042A27D00CFC9E4 /* libAdMobDevice.a */,
+				3ECD9E8F1042A27D00CFC9E4 /* libAdMobSimulator.a */,
+			);
+			path = AdMob;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -864,6 +908,9 @@
 				3EE3EFC11023EC7800DE147D /* Yahoo.h in Headers */,
 				3E24567D1028813500F8C78A /* dom.h in Headers */,
 				3E74DDE610405282002B3E85 /* BarcodeScannerController.h in Headers */,
+				3ECD9E961042A28900CFC9E4 /* AdMobDelegateProtocol.h in Headers */,
+				3ECD9E971042A28900CFC9E4 /* AdMobView.h in Headers */,
+				3ECD9EED1042A3B300CFC9E4 /* AdCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1197,6 +1244,7 @@
 				3EE3EFC21023EC7800DE147D /* Yahoo.m in Sources */,
 				3E24567E1028813500F8C78A /* dom.m in Sources */,
 				3E9397F3104159A0001E2C9D /* BarcodeScannerController.m in Sources */,
+				3ECD9EEE1042A3B300CFC9E4 /* AdCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,6 +1340,7 @@
 					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
 					"\"$(SRCROOT)/build/Debug (tmurakam)-iphonesimulator\"",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/AdMob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
@@ -1314,6 +1363,7 @@
 					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
 					"\"$(SRCROOT)/build/Debug (tmurakam)-iphonesimulator\"",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/AdMob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
@@ -1442,6 +1492,7 @@
 					"$(inherited)",
 					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
 					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
+					"\"$(SRCROOT)/AdMob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
@@ -1464,6 +1515,7 @@
 					"$(inherited)",
 					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
 					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
+					"\"$(SRCROOT)/AdMob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
@@ -1486,6 +1538,7 @@
 					"$(inherited)",
 					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
 					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
+					"\"$(SRCROOT)/AdMob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
@@ -1509,6 +1562,7 @@
 					"$(inherited)",
 					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
 					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
+					"\"$(SRCROOT)/AdMob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
@@ -1551,6 +1605,7 @@
 					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
 					"\"$(SRCROOT)/build/Debug (tmurakam)-iphonesimulator\"",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/AdMob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
@@ -1636,6 +1691,7 @@
 					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
 					"\"$(SRCROOT)/build/Debug (tmurakam)-iphonesimulator\"",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/AdMob\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
