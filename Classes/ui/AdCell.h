@@ -15,9 +15,13 @@
 @end
 
 @interface AdCell : UITableViewCell {
+    AdMobView *adMobView;
 }
+
+@property(nonatomic,retain) AdMobView *adMobView;
 
 + (AdCell *)adCell:(UITableView *)tableView;
 + (CGFloat)adCellHeight;
+- (void)refreshAd;
 
 @end

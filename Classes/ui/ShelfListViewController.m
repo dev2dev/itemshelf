@@ -72,6 +72,8 @@
     if (smartShelfImage == nil) {
         smartShelfImage = [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ShelfSmart" ofType:@"png"]] retain];
     }
+    
+    needRefreshAd = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,6 +91,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [tableView reloadData];
     [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    needRefreshAd = YES;
 }
 
 #pragma mark TableViewDataSource
@@ -109,7 +115,16 @@
     if ([Edition isLiteEdition]) {
         return indexPath.row - 1; // ad
     }
-    return indexPath.row;
+    return 44.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tv heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int row = [self getRow:indexPath];
+    if (row == -1) {
+        return [AdCell adCellHeight];
+    }
+    return tv.rowHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,7 +133,12 @@
 
     int row = [self getRow:indexPath];
     if (row == -1) {
-        return [AdCell adCell:tv]; // AdMob
+        AdCell *ac = [AdCell adCell:tv]; // AdMob
+        if (needRefreshAd) {
+            [ac refreshAd];
+            needRefreshAd = NO;
+        }
+        return ac;
     }
 
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:cellid];

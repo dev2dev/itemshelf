@@ -43,6 +43,8 @@
 	
     UIImage *normalShelfImage;
     UIImage *smartShelfImage;
+    
+    BOOL needRefreshAd;
 }
 
 @property(nonatomic,retain) UITableView *tableView;

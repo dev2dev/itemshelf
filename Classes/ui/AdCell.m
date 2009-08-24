@@ -45,6 +45,8 @@
 
 @implementation AdCell
 
+@synthesize adMobView;
+
 + (CGFloat)adCellHeight
 {
     return 48; // admob
@@ -64,17 +66,28 @@
 - (UITableViewCell *)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)identifier
 {
     self = [super initWithFrame:frame reuseIdentifier:identifier];
-
-    // AdMob
-    AdMobDelegate *amd = [AdMobDelegate getInstance];
-    AdMobView *admob = [AdMobView requestAdWithDelegate:amd];
-    [self.contentView addSubview:admob];
+    if (self) {
+        self.text = @"Advertisement space";
+        self.textAlignment = UITextAlignmentCenter;
+        self.textColor = [UIColor grayColor];
     
+        // AdMob
+        AdMobDelegate *amd = [AdMobDelegate getInstance];
+        self.adMobView = [AdMobView requestAdWithDelegate:amd];
+        [self.contentView addSubview:self.adMobView];
+    }
+
     return self;
 }
 
 - (void)dealloc {
+    self.adMobView = nil;
     [super dealloc];
+}
+
+- (void)refreshAd
+{
+    [self.adMobView requestFreshAd];
 }
 
 @end
