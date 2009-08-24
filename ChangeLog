@@ -1,3 +1,7 @@
+2009-08-24 : Takuya Murakami
+	* Lite edition のアイテム数上限を 25 から 100 に引き上げ
+	* Lite edition に広告を追加
+
 2009-08-23 : Takuya Murakami
 	* リアルタイムバーコードスキャン対応
 	* AdMob 対応
