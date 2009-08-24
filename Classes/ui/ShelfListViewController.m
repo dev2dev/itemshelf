@@ -98,12 +98,26 @@
 - (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section {
     int count = [[DataModel sharedDataModel] shelvesCount];
     if (tv.editing) count++; // new cell
+    if ([Edition isLiteEdition]) count++; // ad
     return count;
+}
+
+- (int)getRow:(NSIndexPath *)indexPath
+{
+    if ([Edition isLiteEdition]) {
+        return indexPath.row - 1; // ad
+    }
+    return indexPath.row;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cellid = @"ShelfCell";
+
+    int row = [self getRow:indexPath];
+    if (row == -1) {
+        return [AdCell adCell:tv]; // AdMob
+    }
 
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:cellid];
 
@@ -112,13 +126,13 @@
     }
 
     DataModel *dm = [DataModel sharedDataModel];
-    if (indexPath.row >= [dm shelvesCount]) {
+    if (row >= [dm shelvesCount]) {
         // 新規追加セル
         cell.text = NSLocalizedString(@"Add new shelf", @"");
         cell.image = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
-        Shelf *shelf = [dm shelfAtIndex:indexPath.row];
+        Shelf *shelf = [dm shelfAtIndex:row];
         cell.text = [NSString stringWithFormat:@"%@ (%d)", shelf.name, shelf.array.count];
 
         if (shelf.pkey == SHELF_ALL_PKEY) {
@@ -143,13 +157,15 @@
 {
     [tv deselectRowAtIndexPath:indexPath animated:NO];
 
+    int row = [self getRow:indexPath];
+
     DataModel *dm = [DataModel sharedDataModel];
-    if (indexPath.row >= [dm shelvesCount]) {
+    if (row >= [dm shelvesCount]) {
         // 新規追加
         [self addShelf];
     } else {
         // 棚表示
-        Shelf *shelf = [dm shelfAtIndex:indexPath.row];
+        Shelf *shelf = [dm shelfAtIndex:row];
 
         // ItemListView を表示する
         ItemListViewController *vc = [[[ItemListViewController alloc]
@@ -167,7 +183,10 @@
 // 変更
 - (void)tableView:(UITableView *)tv accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:indexPath.row];
+    int row = [self getRow:indexPath];
+    if (row < 0) return;
+
+    Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:row];
 
     EditShelfViewController *vc = [EditShelfViewController
                                       editShelfViewController:shelf
@@ -227,8 +246,10 @@
     [tableView setEditing:editing animated:animated];
 	
     // 「新規追加」行の追加／削除処理
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[DataModel sharedDataModel] shelvesCount]
-                                          inSection:0];
+    int newRow = [[DataModel sharedDataModel] shelvesCount];
+    if ([Edition isLiteEdition]) newRow++;
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRow inSection:0];
     if (editing) {
         // 行追加
         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
@@ -250,12 +271,17 @@
 
 // 編集スタイルを返す
 - (UITableViewCellEditingStyle)tableView:(UITableView*)tv editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{       
+    int row = [self getRow:indexPath];
+    if (row < 0) {
+        return UITableViewCellEditingStyleNone;
+    }
+
     DataModel *dm = [DataModel sharedDataModel];
-    if (indexPath.row >= [dm shelvesCount]) {
+    if (row >= [dm shelvesCount]) {
         return UITableViewCellEditingStyleInsert;
     }
-    Shelf *shelf = [dm shelfAtIndex:indexPath.row];
+    Shelf *shelf = [dm shelfAtIndex:row];
     if (shelf.pkey == SHELF_ALL_PKEY || shelf.pkey == 0) {
         // All棚と未分類棚(pkey==0)は消さない
         return UITableViewCellEditingStyleNone;
@@ -266,14 +292,16 @@
 // 削除処理/追加処理など
 - (void)tableView:(UITableView *)tv commitEditingStyle:(UITableViewCellEditingStyle)style forRowAtIndexPath:(NSIndexPath*)indexPath
 {
+    int row = [self getRow:indexPath];
+
     DataModel *dm = [DataModel sharedDataModel];
-    if (indexPath.row >= [dm shelvesCount]) {
+    if (row >= [dm shelvesCount]) {
         // 追加
         [self addShelf];
     }
     else if (style == UITableViewCellEditingStyleDelete) {
         // 削除
-        Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:indexPath.row];
+        Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:row];
         [[DataModel sharedDataModel] removeShelf:shelf];
 	
         [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -284,11 +312,13 @@
 // 並べ替え処理
 - (BOOL)tableView:(UITableView *)tv canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    int row = [self getRow:indexPath];
+
     DataModel *dm = [DataModel sharedDataModel];
-    if (indexPath.row >= [dm shelvesCount]) {
+    if (row >= [dm shelvesCount]) {
         return NO; // 新規追加行
     }
-    Shelf *shelf = [dm shelfAtIndex:indexPath.row];
+    Shelf *shelf = [dm shelfAtIndex:row];
     if (shelf.pkey == SHELF_ALL_PKEY) {
         return NO;	// All 棚は移動させない
     }
@@ -297,7 +327,9 @@
 
 - (void)tableView:(UITableView *)tv moveRowAtIndexPath:(NSIndexPath*)from toIndexPath:(NSIndexPath*)to
 {
-    [[DataModel sharedDataModel] reorderShelf:from.row to:to.row];
+    int fromRow = [self getRow:from];
+    int toRow = [self getRow:to];
+    [[DataModel sharedDataModel] reorderShelf:fromRow to:toRow];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
