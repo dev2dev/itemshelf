@@ -52,5 +52,6 @@
 - (IBAction)actionButtonTapped:(id)sender;
 
 - (void)addShelf;
+- (int)getRow:(NSIndexPath *)indexPath;
 
 @end

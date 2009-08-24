@@ -37,6 +37,7 @@
 #import "ItemListViewController.h"
 #import "ScanViewController.h"
 #import "ConfigViewController.h"
+#import "AdCell.h"
 
 @implementation ShelfListViewController
 
@@ -158,6 +159,7 @@
     [tv deselectRowAtIndexPath:indexPath animated:NO];
 
     int row = [self getRow:indexPath];
+    if (row < 0) return;
 
     DataModel *dm = [DataModel sharedDataModel];
     if (row >= [dm shelvesCount]) {
@@ -293,6 +295,7 @@
 - (void)tableView:(UITableView *)tv commitEditingStyle:(UITableViewCellEditingStyle)style forRowAtIndexPath:(NSIndexPath*)indexPath
 {
     int row = [self getRow:indexPath];
+    if (row < 0) return;
 
     DataModel *dm = [DataModel sharedDataModel];
     if (row >= [dm shelvesCount]) {
@@ -313,6 +316,7 @@
 - (BOOL)tableView:(UITableView *)tv canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int row = [self getRow:indexPath];
+    if (row < 0) return;
 
     DataModel *dm = [DataModel sharedDataModel];
     if (row >= [dm shelvesCount]) {
@@ -327,8 +331,13 @@
 
 - (void)tableView:(UITableView *)tv moveRowAtIndexPath:(NSIndexPath*)from toIndexPath:(NSIndexPath*)to
 {
+    int shelvesCount = [[DataModel sharedDataModel] shelvesCount];
     int fromRow = [self getRow:from];
     int toRow = [self getRow:to];
+
+    if (fromRow < 0 || toRow < 0 ||
+        fromRow >= shelvesCount || toRow >= shlvesCount) return;
+
     [[DataModel sharedDataModel] reorderShelf:fromRow to:toRow];
 }
 
