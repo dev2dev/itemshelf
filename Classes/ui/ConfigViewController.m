@@ -114,29 +114,29 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;	
 	
     switch (indexPath.section) {
         case 0: // backup
-            cell.text = NSLocalizedString(@"Backup and restore", @"");
+            cell.textLabel.text = NSLocalizedString(@"Backup and restore", @"");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
         case 1: // about
             switch (indexPath.row) {
                 case 0:
-                    cell.text = NSLocalizedString(@"Help", @"");
+                    cell.textLabel.text = NSLocalizedString(@"Help", @"");
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     break;
                 case 1:
-                    cell.text = NSLocalizedString(@"Macro lens information", @"");
+                    cell.textLabel.text = NSLocalizedString(@"Macro lens information", @"");
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     break;
                 case 2:
-                    cell.text = NSLocalizedString(@"About this software", @"");
+                    cell.textLabel.text = NSLocalizedString(@"About this software", @"");
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     break;
             }

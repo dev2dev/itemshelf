@@ -55,7 +55,7 @@
 
 - (id)init
 {
-    self = [super initWithFrame:CGRectZero reuseIdentifier:REUSE_CELL_ID];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:REUSE_CELL_ID];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     // スター画像領域

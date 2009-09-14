@@ -111,7 +111,7 @@
     }
     
     if (a_tags == nil) {
-        a_tags = @"";
+        [a_tags setString:@""];
     }
     return a_tags;
 }
@@ -148,19 +148,19 @@
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
     }
 
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (canAddTags && indexPath.section == 0) {
-        cell.text = NSLocalizedString(@"New tag", @"");
+        cell.textLabel.text = NSLocalizedString(@"New tag", @"");
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
-        cell.text = [allTags objectAtIndex:indexPath.row];
-        if ([tags findString:cell.text] >= 0) {
+        cell.textLabel.text = [allTags objectAtIndex:indexPath.row];
+        if ([tags findString:cell.textLabel.text] >= 0) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }

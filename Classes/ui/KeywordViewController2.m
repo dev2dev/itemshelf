@@ -319,7 +319,7 @@
 {
     KeywordViewCell *cell = (KeywordViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[[KeywordViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:identifier] autorelease];
+        cell = [[[KeywordViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
     }
     
     UILabel *tlabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 6, 90, 32)] autorelease];

@@ -243,47 +243,47 @@
 
     cell = [tv dequeueReusableCellWithIdentifier:cellid];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellid] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid] autorelease];
     }
 	
-    cell.font = [UIFont boldSystemFontOfSize:14.0];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
     cell.accessoryType = UITableViewCellAccessoryNone;
 
     switch (rowKind) {
     case ROW_SHOW_DETAIL:
-        cell.text = NSLocalizedString(@"Show detail", @"");
-        cell.font = [UIFont boldSystemFontOfSize:16.0];
+        cell.textLabel.text = NSLocalizedString(@"Show detail", @"");
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         break;
 
     case ROW_SEARCH_AGAIN:
-        cell.text = NSLocalizedString(@"Search again with title", @"");
-        cell.font = [UIFont boldSystemFontOfSize:16.0];
+        cell.textLabel.text = NSLocalizedString(@"Search again with title", @"");
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
         break;
 
     case ROW_ADD_TO_SHELF:
-        cell.text = NSLocalizedString(@"Add to shelf", @"");
-        cell.font = [UIFont boldSystemFontOfSize:16.0];
+        cell.textLabel.text = NSLocalizedString(@"Add to shelf", @"");
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         break;
 
     case ROW_TAGS:
-        cell.text = [NSString stringWithFormat:@"%@: %@",
+        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
                               NSLocalizedString(@"Tags", @""),
                               item.tags];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         break;
 
     case ROW_MEMO:
-        cell.text = [NSString stringWithFormat:@"%@: %@",
+        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
                               NSLocalizedString(@"Memo", @""),
                               item.memo];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         break;
 				
     default:
-        cell.text = [infoStrings objectAtIndex:rowKind];
+        cell.textLabel.text = [infoStrings objectAtIndex:rowKind];
         break;
     }
 
@@ -304,7 +304,7 @@
 
     cell = [tv dequeueReusableCellWithIdentifier:cellid];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                          reuseIdentifier:cellid] autorelease];
     } else {
         // 古い image view があれば捨てる
@@ -454,7 +454,7 @@
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.sourceType = sourceType;
         picker.delegate = self;
-        picker.allowsImageEditing = YES;
+        picker.allowsEditing = YES;
         [self presentModalViewController:picker animated:YES];
         [picker release];
     }

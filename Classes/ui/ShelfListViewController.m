@@ -144,18 +144,18 @@
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:cellid];
 
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellid] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid] autorelease];
     }
 
     DataModel *dm = [DataModel sharedDataModel];
     if (row >= [dm shelvesCount]) {
         // 新規追加セル
-        cell.text = NSLocalizedString(@"Add new shelf", @"");
-        cell.image = nil;
+        cell.textLabel.text = NSLocalizedString(@"Add new shelf", @"");
+        cell.imageView.image = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
         Shelf *shelf = [dm shelfAtIndex:row];
-        cell.text = [NSString stringWithFormat:@"%@ (%d)", shelf.name, shelf.array.count];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ (%d)", shelf.name, shelf.array.count];
 
         if (shelf.pkey == SHELF_ALL_PKEY) {
             // All 棚は名称変更しない
@@ -165,9 +165,9 @@
         }
 	
         if (shelf.shelfType == ShelfTypeNormal) {
-            cell.image = normalShelfImage;
+            cell.imageView.image = normalShelfImage;
         } else {
-            cell.image = smartShelfImage;
+            cell.imageView.image = smartShelfImage;
         }
     }
 	

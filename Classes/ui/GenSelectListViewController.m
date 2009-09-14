@@ -130,7 +130,7 @@
 	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
     }
     if (indexPath.row == self.selectedIndex) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -139,7 +139,7 @@
     }
 
     NSString *text = [list objectAtIndex:indexPath.row];
-    cell.text = NSLocalizedString(text, @"");
+    cell.textLabel.text = NSLocalizedString(text, @"");
 
     return cell;
 }

@@ -123,7 +123,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Set up the cell...
@@ -143,22 +143,22 @@
             } else {
                 iconImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Icon" ofType:@"png"]];
             }
-            cell.image = iconImage;
+            cell.imageView.image = iconImage;
             if ([Edition isLiteEdition]) {
                 aptitle = @"ItemShelf Lite";
             } else {
                 aptitle = NSLocalizedString(@"AppName", @"");
             }
-            cell.text = aptitle;
+            cell.textLabel.text = aptitle;
             break;
 
         case 1:
             version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
-            cell.text = [NSString stringWithFormat:@"Version %@", version];
+            cell.textLabel.text = [NSString stringWithFormat:@"Version %@", version];
             break;
 					
         case 2:
-            cell.text = NSLocalizedString(@"Support site", @"");
+            cell.textLabel.text = NSLocalizedString(@"Support site", @"");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         }

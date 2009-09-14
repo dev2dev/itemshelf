@@ -58,18 +58,18 @@
 
     AdCell *cell = (AdCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[[AdCell alloc] initWithFrame:CGRectZero reuseIdentifier:identifier] autorelease];
+        cell = [[[AdCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
     }
     return cell;
 }
 
-- (UITableViewCell *)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)identifier
+- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)identifier
 {
-    self = [super initWithFrame:frame reuseIdentifier:identifier];
+    self = [super initWithStyle:style reuseIdentifier:identifier];
     if (self) {
-        self.text = @"Advertisement space";
-        self.textAlignment = UITextAlignmentCenter;
-        self.textColor = [UIColor grayColor];
+        self.textLabel.text = @"Advertisement space";
+        self.textLabel.textAlignment = UITextAlignmentCenter;
+        self.textLabel.textColor = [UIColor grayColor];
     
         // AdMob
         AdMobDelegate *amd = [AdMobDelegate getInstance];

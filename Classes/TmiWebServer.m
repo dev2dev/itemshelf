@@ -274,7 +274,7 @@
             char *p, *p2 = NULL;
             p = strtok(line, " ");
             if (p) p2 = strtok(NULL, " ");
-            if (p2) filereq = [NSString stringWithCString:p2];
+            if (p2) filereq = [NSString stringWithCString:p2 encoding:NSUTF8StringEncoding];
         }
 
         else if (strncasecmp(line, "Content-Length:", 15) == 0) {
