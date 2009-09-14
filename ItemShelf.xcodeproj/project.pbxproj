@@ -162,6 +162,11 @@
 		3EBC16FC0EDA822B00A35747 /* ScanCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC16F90EDA822B00A35747 /* ScanCamera.png */; };
 		3EC639D10EE544C30057FAC2 /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC639D00EE544C30057FAC2 /* WebView.xib */; };
 		3EC727170EE83161008B2CBF /* Locale.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC727160EE83161008B2CBF /* Locale.png */; };
+		3EC9AA04105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC9AA02105E4DF50096AB90 /* libAdMobDevice3_0.a */; };
+		3EC9AA05105E4DF50096AB90 /* libAdMobSimulator3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC9AA03105E4DF50096AB90 /* libAdMobSimulator3_0.a */; };
+		3EC9AA06105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC9AA02105E4DF50096AB90 /* libAdMobDevice3_0.a */; };
+		3EC9AA07105E4DF50096AB90 /* libAdMobSimulator3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC9AA03105E4DF50096AB90 /* libAdMobSimulator3_0.a */; };
+		3EC9AA58105E51230096AB90 /* SmartShelf.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB7A9EA0EF665CE009B038F /* SmartShelf.m */; };
 		3EC9C6F70EE147530026396A /* config.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E1FDD450ECEF78200915E3E /* config.c */; };
 		3EC9C6F80EE147530026396A /* convert.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E1FDD460ECEF78200915E3E /* convert.c */; };
 		3EC9C6FA0EE147530026396A /* decoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E1FDD480ECEF78200915E3E /* decoder.c */; };
@@ -183,10 +188,6 @@
 		3EC9C7580EE14B8A0026396A /* libZebla.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC9C6EF0EE147210026396A /* libZebla.a */; };
 		3ECBBB4E0EDC4A8200865EF7 /* AudioToolbox in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECBBB4D0EDC4A8200865EF7 /* AudioToolbox */; };
 		3ECD3DD10ED06434001A775F /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECD3DD00ED06434001A775F /* backward.png */; };
-		3ECD9E901042A27D00CFC9E4 /* libAdMobDevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9E8E1042A27D00CFC9E4 /* libAdMobDevice.a */; };
-		3ECD9E911042A27D00CFC9E4 /* libAdMobSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9E8F1042A27D00CFC9E4 /* libAdMobSimulator.a */; };
-		3ECD9E921042A27D00CFC9E4 /* libAdMobDevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9E8E1042A27D00CFC9E4 /* libAdMobDevice.a */; };
-		3ECD9E931042A27D00CFC9E4 /* libAdMobSimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9E8F1042A27D00CFC9E4 /* libAdMobSimulator.a */; };
 		3ECD9E961042A28900CFC9E4 /* AdMobDelegateProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECD9E941042A28900CFC9E4 /* AdMobDelegateProtocol.h */; };
 		3ECD9E971042A28900CFC9E4 /* AdMobView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECD9E951042A28900CFC9E4 /* AdMobView.h */; };
 		3ECD9EAA1042A2D200CFC9E4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECD9EA91042A2D200CFC9E4 /* AddressBook.framework */; };
@@ -414,6 +415,8 @@
 		3EC639CE0EE5449D0057FAC2 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		3EC639D00EE544C30057FAC2 /* WebView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebView.xib; sourceTree = "<group>"; };
 		3EC727160EE83161008B2CBF /* Locale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Locale.png; sourceTree = "<group>"; };
+		3EC9AA02105E4DF50096AB90 /* libAdMobDevice3_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMobDevice3_0.a; sourceTree = "<group>"; };
+		3EC9AA03105E4DF50096AB90 /* libAdMobSimulator3_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMobSimulator3_0.a; sourceTree = "<group>"; };
 		3EC9C6EF0EE147210026396A /* libZebla.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZebla.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ECBBA950EDC432F00865EF7 /* NumPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumPadViewController.h; sourceTree = "<group>"; };
 		3ECBBA960EDC432F00865EF7 /* NumPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumPadViewController.m; sourceTree = "<group>"; };
@@ -421,8 +424,6 @@
 		3ECD3DAE0ED6C84A0000A9A5 /* URLComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLComponent.h; sourceTree = "<group>"; };
 		3ECD3DAF0ED6C84A0000A9A5 /* URLComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLComponent.m; sourceTree = "<group>"; };
 		3ECD3DD00ED06434001A775F /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
-		3ECD9E8E1042A27D00CFC9E4 /* libAdMobDevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMobDevice.a; sourceTree = "<group>"; };
-		3ECD9E8F1042A27D00CFC9E4 /* libAdMobSimulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMobSimulator.a; sourceTree = "<group>"; };
 		3ECD9E941042A28900CFC9E4 /* AdMobDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobDelegateProtocol.h; sourceTree = "<group>"; };
 		3ECD9E951042A28900CFC9E4 /* AdMobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobView.h; sourceTree = "<group>"; };
 		3ECD9EA91042A2D200CFC9E4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
@@ -471,10 +472,10 @@
 				3E581F250ED1A1C000615FB2 /* libsqlite3.dylib in Frameworks */,
 				3ECBBB4E0EDC4A8200865EF7 /* AudioToolbox in Frameworks */,
 				3ECFF51C0EEEBAC100CB33D7 /* QuartzCore.framework in Frameworks */,
-				3ECD9E901042A27D00CFC9E4 /* libAdMobDevice.a in Frameworks */,
-				3ECD9E911042A27D00CFC9E4 /* libAdMobSimulator.a in Frameworks */,
 				3ECD9EAB1042A2D200CFC9E4 /* AddressBook.framework in Frameworks */,
 				3ECD9EE91042A39300CFC9E4 /* CoreLocation.framework in Frameworks */,
+				3EC9AA06105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */,
+				3EC9AA07105E4DF50096AB90 /* libAdMobSimulator3_0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,10 +506,10 @@
 				3E2310370F4D9ED0006E24AF /* AudioToolbox in Frameworks */,
 				3E2310380F4D9ED0006E24AF /* QuartzCore.framework in Frameworks */,
 				3E0796130F4DA9B400456CB3 /* libItemShelfLib.a in Frameworks */,
-				3ECD9E921042A27D00CFC9E4 /* libAdMobDevice.a in Frameworks */,
-				3ECD9E931042A27D00CFC9E4 /* libAdMobSimulator.a in Frameworks */,
 				3ECD9EAA1042A2D200CFC9E4 /* AddressBook.framework in Frameworks */,
 				3ECD9EE81042A39300CFC9E4 /* CoreLocation.framework in Frameworks */,
+				3EC9AA04105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */,
+				3EC9AA05105E4DF50096AB90 /* libAdMobSimulator3_0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,8 +888,8 @@
 			children = (
 				3ECD9E941042A28900CFC9E4 /* AdMobDelegateProtocol.h */,
 				3ECD9E951042A28900CFC9E4 /* AdMobView.h */,
-				3ECD9E8E1042A27D00CFC9E4 /* libAdMobDevice.a */,
-				3ECD9E8F1042A27D00CFC9E4 /* libAdMobSimulator.a */,
+				3EC9AA02105E4DF50096AB90 /* libAdMobDevice3_0.a */,
+				3EC9AA03105E4DF50096AB90 /* libAdMobSimulator3_0.a */,
 			);
 			path = AdMob;
 			sourceTree = "<group>";
@@ -1170,6 +1171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				3EC9AA58105E51230096AB90 /* SmartShelf.m in Sources */,
 				3E0796090F4DA8FC00456CB3 /* Edition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1345,6 +1347,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = Debug;
 		};
@@ -1368,6 +1371,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = Release;
 		};
@@ -1393,7 +1397,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = UnitTest;
-				SDKROOT = iphoneos2.2;
+				SDKROOT = iphoneos3.1;
 			};
 			name = Debug;
 		};
@@ -1418,7 +1422,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = UnitTest;
-				SDKROOT = iphoneos2.2;
+				SDKROOT = iphoneos3.1;
 			};
 			name = Release;
 		};
@@ -1443,7 +1447,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = UnitTest;
-				SDKROOT = iphoneos2.2;
+				SDKROOT = iphoneos3.1;
 			};
 			name = "AppStore Distribution";
 		};
@@ -1468,7 +1472,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = UnitTest;
-				SDKROOT = iphoneos2.2;
+				SDKROOT = iphoneos3.1;
 			};
 			name = "Adhoc Distribution";
 		};
@@ -1497,6 +1501,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = Debug;
 		};
@@ -1520,6 +1525,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = Release;
 		};
@@ -1543,6 +1549,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = "AppStore Distribution";
 		};
@@ -1567,6 +1574,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = "Adhoc Distribution";
 		};
@@ -1610,6 +1618,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = "Adhoc Distribution";
 		};
@@ -1622,6 +1631,7 @@
 				GCC_PREFIX_HEADER = ItemShelf_Prefix.pch;
 				PREBINDING = NO;
 				PRODUCT_NAME = ItemShelfLib;
+				SDKROOT = iphoneos3.1;
 			};
 			name = Debug;
 		};
@@ -1633,6 +1643,7 @@
 				GCC_PREFIX_HEADER = ItemShelf_Prefix.pch;
 				PREBINDING = NO;
 				PRODUCT_NAME = ItemShelfLib;
+				SDKROOT = iphoneos3.1;
 			};
 			name = Release;
 		};
@@ -1644,6 +1655,7 @@
 				GCC_PREFIX_HEADER = ItemShelf_Prefix.pch;
 				PREBINDING = NO;
 				PRODUCT_NAME = ItemShelfLib;
+				SDKROOT = iphoneos3.1;
 			};
 			name = "AppStore Distribution";
 		};
@@ -1655,6 +1667,7 @@
 				GCC_PREFIX_HEADER = ItemShelf_Prefix.pch;
 				PREBINDING = NO;
 				PRODUCT_NAME = ItemShelfLib;
+				SDKROOT = iphoneos3.1;
 			};
 			name = "Adhoc Distribution";
 		};
@@ -1696,6 +1709,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.1;
 			};
 			name = "AppStore Distribution";
 		};
@@ -1706,6 +1720,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PREBINDING = NO;
 				PRODUCT_NAME = Zebla;
+				SDKROOT = iphoneos3.1;
 			};
 			name = Debug;
 		};
@@ -1715,6 +1730,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = Zebla;
+				SDKROOT = iphoneos3.1;
 			};
 			name = Release;
 		};
@@ -1724,6 +1740,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = Zebla;
+				SDKROOT = iphoneos3.1;
 			};
 			name = "AppStore Distribution";
 		};
@@ -1733,6 +1750,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = Zebla;
+				SDKROOT = iphoneos3.1;
 			};
 			name = "Adhoc Distribution";
 		};

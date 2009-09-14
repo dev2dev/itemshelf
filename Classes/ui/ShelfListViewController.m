@@ -115,7 +115,7 @@
     if ([Edition isLiteEdition]) {
         return indexPath.row - 1; // ad
     }
-    return 44.0;
+    return indexPath.row;
 }
 
 - (CGFloat)tableView:(UITableView *)tv heightForRowAtIndexPath:(NSIndexPath *)indexPath
