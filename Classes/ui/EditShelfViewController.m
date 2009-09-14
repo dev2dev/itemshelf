@@ -214,14 +214,14 @@
     UITableView *tv = (UITableView *)self.view;
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     } else {
         UIView *oldView = [cell.contentView viewWithTag:1];
         [oldView removeFromSuperview];
     }
 
-    cell.text = NSLocalizedString(title, @"");
-    cell.font = [UIFont boldSystemFontOfSize:14];
+    cell.textLabel.text = NSLocalizedString(title, @"");
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
 
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -254,7 +254,7 @@
 
 - (void)editTagsViewChanged:(EditTagsViewController *)vc
 {
-    tagsField.text = vc.tags;
+    tagsField.text = [vc tags];
     [self.tableView reloadData];
 }
 

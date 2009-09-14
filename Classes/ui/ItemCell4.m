@@ -51,7 +51,7 @@
 {
     static UIImage *backgroundImage = nil;
 
-    self = [super initWithFrame:CGRectZero reuseIdentifier:REUSE_CELL_ID];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:REUSE_CELL_ID];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     if (backgroundImage == nil) {

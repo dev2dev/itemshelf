@@ -111,7 +111,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 	
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:SCAN_CELL_ID];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:SCAN_CELL_ID] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SCAN_CELL_ID] autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone; // TBD
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
@@ -225,7 +225,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     BarcodeScannerController *scanner = [[BarcodeScannerController alloc] init];
     scanner.sourceType = type;
     scanner.delegate = self;
-    scanner.allowsImageEditing = YES;
+    scanner.allowsEditing = YES;
 	
     [self presentModalViewController:scanner animated:YES];
     [scanner release];

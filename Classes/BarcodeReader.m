@@ -97,7 +97,7 @@ static void data_handler(zebra_image_t *zimage, const void *userdata)
     // 最初に見つかったほうのバーコードを使う
     if (reader.type < 0) {
         reader.type = type;
-        reader.data = [NSString stringWithCString:data];
+        reader.data = [NSString stringWithCString:data encoding:NSUTF8StringEncoding];
     }
 }
 
