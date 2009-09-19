@@ -3,7 +3,7 @@
 #import "TestUtility.h"
 #import "DataModel.h"
 
-@interface DataModelTest : SenTestCase {
+@interface DataModelTest : IUTTest {
     Database *db;
     DataModel *dm;
 }
@@ -25,14 +25,12 @@
 
 - (void)testLoadDB
 {
-#if 0
     [dm loadDB];
 
     // 先頭に All Shelf があることを確認する
-    STAssertTrue([dm shelvesCount] >= 1, nil); // TBD
+    ASSERT([dm shelvesCount] >= 1); // TBD
     Shelf *shelf = [dm shelfAtIndex:0];
-    STAssertNotNil(shelf, nil);
-#endif
+    ASSERT(shelf != nil);
 }
 
 @end
