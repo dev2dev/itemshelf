@@ -1,3 +1,8 @@
+2009-09-19 : Takuya Murakami
+	* iPhone OS 3.1 専用に修正
+	* UIImagePickerController の overlay を使用
+	* ver 2.1a
+	
 2009-08-24 : Takuya Murakami
 	* Lite edition のアイテム数上限を 25 から 100 に引き上げ
 	* Lite edition に広告を追加
