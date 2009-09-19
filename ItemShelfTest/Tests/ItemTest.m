@@ -2,7 +2,7 @@
 
 #import "TestUtility.h"
 
-@interface ItemTest : SenTestCase {
+@interface ItemTest : IUTTest {
     Database *db;
 }
 
@@ -46,22 +46,22 @@
 // Utility : Item の同一性確認
 - (void)assertItemEquals:(Item *)i with:(Item *)j
 {
-    STAssertEquals(j.pkey, i.pkey, nil);
-    STAssertEquals(j.shelfId, i.shelfId, nil);
-    STAssertEquals(j.serviceId, i.serviceId, nil);
-    STAssertEquals(j.sorder, i.sorder, nil);
-    STAssertTrue([i.date isEqualToDate:j.date], @"%@ != %@", i.date, j.date);
-    STAssertEqualStrings(j.idString, i.idString, nil);
-    STAssertEqualStrings(j.asin, i.asin, nil);
-    STAssertEqualStrings(j.name, i.name, nil);
-    STAssertEqualStrings(j.author, i.author, nil);
-    STAssertEqualStrings(j.manufacturer, i.manufacturer, nil);
-    STAssertEqualStrings(j.category, i.category, nil);
-    STAssertEqualStrings(j.detailURL, i.detailURL, nil);
-    STAssertEqualStrings(j.price, i.price, nil);
-    STAssertEqualStrings(j.tags, i.tags, nil);
-    STAssertEqualStrings(j.memo, i.memo, nil);
-    STAssertEqualStrings(j.imageURL, i.imageURL, nil);
+    ASSERT_EQUAL_INT(j.pkey, i.pkey);
+    ASSERT_EQUAL_INT(j.shelfId, i.shelfId);
+    ASSERT_EQUAL_INT(j.serviceId, i.serviceId);
+    ASSERT_EQUAL_INT(j.sorder, i.sorder);
+    ASSERT([i.date isEqualToDate:j.date]);
+    ASSERT_EQUAL(j.idString, i.idString);
+    ASSERT_EQUAL(j.asin, i.asin);
+    ASSERT_EQUAL(j.name, i.name);
+    ASSERT_EQUAL(j.author, i.author);
+    ASSERT_EQUAL(j.manufacturer, i.manufacturer);
+    ASSERT_EQUAL(j.category, i.category);
+    ASSERT_EQUAL(j.detailURL, i.detailURL);
+    ASSERT_EQUAL(j.price, i.price);
+    ASSERT_EQUAL(j.tags, i.tags);
+    ASSERT_EQUAL(j.memo, i.memo);
+    ASSERT_EQUAL(j.imageURL, i.imageURL);
 }
 
 // loadRow テスト
@@ -72,10 +72,10 @@
     dbstmt *stmt = [db prepare:"SELECT * FROM Item WHERE pkey = ?;"];
     for (int i = 1; i <= NUM_TEST_ITEM; i++) {
         [stmt bindInt:0 val:i];
-        STAssertTrue(SQLITE_ROW == [stmt step], nil);
+        ASSERT(SQLITE_ROW == [stmt step]);
 
         Item *item = [[Item alloc] init];
-        STAssertTrue(!item.registeredWithShelf, nil);
+        ASSERT(!item.registeredWithShelf);
         [item loadRow:stmt];
 
         // 比較対象データ
@@ -83,8 +83,8 @@
 
         [self assertItemEquals:item with:testItem];
 
-        STAssertEquals(YES, item.registeredWithShelf, nil);
-        STAssertTrue(item.imageCache == nil, nil);
+        ASSERT(item.registeredWithShelf);
+        ASSERT_EQUAL(item.imageCache, nil);
 
         [item release];
         [testItem release];
@@ -260,8 +260,8 @@
 	
     // 空文字列でテスト
     item.imageURL = @"";
-    STAssertEquals(noImage, [item getImage:nil], nil);
-    STAssertNil(item.imageCache, nil);
+    ASSERT_EQUAL(noImage, [item getImage:nil]);
+    ASSERT_EQUAL(item.imageCache, nil);
 
     [item release];
 }
@@ -279,7 +279,7 @@
     // テスト
     //   image cache の refresh の確認をこめて回数回す
     for (int i = 0; i < 100; i++) {
-        STAssertEquals(cached, [item getImage:nil], nil);
+        ASSERT_EQUAL(cached, [item getImage:nil]);
     }
 
     [Item clearAllImageCache];
@@ -322,7 +322,7 @@
     }
     for (i = MAX_IMAGE_CACHE_AGE + 1; i <= MAX_IMAGE_CACHE_AGE * 2; i++) {
         Item *item = [items objectAtIndex:i-1];
-        STAssertEquals(testImage, item.imageCache, nil);
+        ASSERT_EQUAL(testImage, item.imageCache);
     }
 
     // キャッシュ全クリア
@@ -330,7 +330,7 @@
 
     // testImage のリファレンスカウンタが 1 に戻っていることを確認
     r = [testImage retainCount];
-    STAssertEquals(1, r, nil);
+    ASSERT_EQUAL_INT(1, r);
 
     [items release];
     [testImage release];

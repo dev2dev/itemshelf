@@ -33,6 +33,9 @@
 		3EA99DFF10648FAE003C7F18 /* RakutenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA99DF710648FAE003C7F18 /* RakutenApi.m */; };
 		3EA99E0010648FAE003C7F18 /* WebApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA99DF910648FAE003C7F18 /* WebApi.m */; };
 		3EA99E0110648FAE003C7F18 /* Yahoo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA99DFB10648FAE003C7F18 /* Yahoo.m */; };
+		3EA99E0E1064904F003C7F18 /* ItemTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA99E0C1064904F003C7F18 /* ItemTest.m */; };
+		3EA99E0F1064904F003C7F18 /* TestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA99E0D1064904F003C7F18 /* TestUtility.m */; };
+		3EA99E27106490FB003C7F18 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA99E26106490FB003C7F18 /* test.m */; };
 		40EA8DF90FEB63FC00BB1F8D /* UITableViewBasedTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 40EA8DF60FEB63FC00BB1F8D /* UITableViewBasedTest.m */; };
 		40EA8DFA0FEB63FC00BB1F8D /* UIViewBasedTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 40EA8DF80FEB63FC00BB1F8D /* UIViewBasedTest.m */; };
 		460633950F55AC9000A33C8B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 460633940F55AC9000A33C8B /* Settings.bundle */; };
@@ -108,6 +111,11 @@
 		3EA99DF910648FAE003C7F18 /* WebApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebApi.m; sourceTree = "<group>"; };
 		3EA99DFA10648FAE003C7F18 /* Yahoo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yahoo.h; sourceTree = "<group>"; };
 		3EA99DFB10648FAE003C7F18 /* Yahoo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yahoo.m; sourceTree = "<group>"; };
+		3EA99E0C1064904F003C7F18 /* ItemTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTest.m; sourceTree = "<group>"; };
+		3EA99E0D1064904F003C7F18 /* TestUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUtility.m; sourceTree = "<group>"; };
+		3EA99E1210649076003C7F18 /* TestUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUtility.h; sourceTree = "<group>"; };
+		3EA99E25106490FB003C7F18 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		3EA99E26106490FB003C7F18 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		40EA8DF50FEB63FC00BB1F8D /* UITableViewBasedTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewBasedTest.h; sourceTree = "<group>"; };
 		40EA8DF60FEB63FC00BB1F8D /* UITableViewBasedTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewBasedTest.m; sourceTree = "<group>"; };
 		40EA8DF70FEB63FC00BB1F8D /* UIViewBasedTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewBasedTest.h; sourceTree = "<group>"; };
@@ -303,6 +311,11 @@
 		46C20FD60F256E610053F9B9 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3EA99E0C1064904F003C7F18 /* ItemTest.m */,
+				3EA99E1210649076003C7F18 /* TestUtility.h */,
+				3EA99E0D1064904F003C7F18 /* TestUtility.m */,
+				3EA99E25106490FB003C7F18 /* test.h */,
+				3EA99E26106490FB003C7F18 /* test.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -474,6 +487,9 @@
 				3EA99DFF10648FAE003C7F18 /* RakutenApi.m in Sources */,
 				3EA99E0010648FAE003C7F18 /* WebApi.m in Sources */,
 				3EA99E0110648FAE003C7F18 /* Yahoo.m in Sources */,
+				3EA99E0E1064904F003C7F18 /* ItemTest.m in Sources */,
+				3EA99E0F1064904F003C7F18 /* TestUtility.m in Sources */,
+				3EA99E27106490FB003C7F18 /* test.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
