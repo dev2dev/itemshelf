@@ -2,7 +2,7 @@
 
 #import "TestUtility.h"
 
-@interface ShelfTest : SenTestCase {
+@interface ShelfTest : IUTTest {
     Database *db;
 }
 @end
@@ -31,7 +31,7 @@
     // テーブル定義確認
     dbstmt *stmt = [db prepare:"SELECT sql FROM sqlite_master WHERE type='table' AND name='Shelf';"];
     int result = [stmt step];
-    STAssertEquals(SQLITE_ROW, result, @"No shelf table");
+    ASSERT_EQUAL_INT(SQLITE_ROW, result);
     NSString *sql = [stmt colString:0];
 
     // TBD: ここでテーブル定義をチェック
@@ -51,24 +51,24 @@
 
     // テーブル定義確認
     dbstmt *stmt = [db prepare:"SELECT sql FROM sqlite_master WHERE type='table' AND name='Shelf';"];
-    STAssertEquals(SQLITE_ROW, [stmt step], @"No shelf table");
+    ASSERT(SQLITE_ROW == [stmt step]);
     NSString *sql = [stmt colString:0];
 
     // ここでテーブル定義をチェック
     NSLog(@"%@", sql);
     NSRange range = [sql rangeOfString:@"manufacturerFilter"];
-    STAssertTrue(range.location != NSNotFound, @"Bad shelf table");
+    ASSERT(range.location != NSNotFound);
 }	
 
 - (void)assertShelfEquals:(Shelf*)i with:(Shelf*)j
 {
-    STAssertEquals(j.pkey, i.pkey, nil);
-    STAssertEquals(j.shelfType, i.shelfType, nil);
-    STAssertEquals(j.sorder, i.sorder, nil);
-    STAssertEqualStrings(j.name, i.name, nil);
-    STAssertEqualStrings(j.titleFilter, i.titleFilter, nil);
-    STAssertEqualStrings(j.authorFilter, i.authorFilter, nil);
-    STAssertEqualStrings(j.manufacturerFilter, i.manufacturerFilter, nil);
+    ASSERT_EQUAL_INT(j.pkey, i.pkey);
+    ASSERT_EQUAL_INT(j.shelfType, i.shelfType);
+    ASSERT_EQUAL_INT(j.sorder, i.sorder);
+    ASSERT_EQUAL(j.name, i.name);
+    ASSERT_EQUAL(j.titleFilter, i.titleFilter);
+    ASSERT_EQUAL(j.authorFilter, i.authorFilter);
+    ASSERT_EQUAL(j.manufacturerFilter, i.manufacturerFilter);
 }
 
 // loadRow テスト
@@ -79,7 +79,7 @@
     dbstmt *stmt = [db prepare:"SELECT * FROM Shelf WHERE pkey = ?;"];
     for (int i = 1; i <= NUM_TEST_SHELF; i++) {
         [stmt bindInt:0 val:i];
-        STAssertTrue(SQLITE_ROW == [stmt step], nil);
+        ASSERT(SQLITE_ROW == [stmt step]);
 
         Shelf *shelf = [[Shelf alloc] init];
         [shelf loadRow:stmt];
