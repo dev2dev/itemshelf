@@ -125,6 +125,7 @@ extern CGImageRef UIGetScreenImage(); // undocumented
         NSLog(@"Code = %@", code);
 
         if ([self isValidBarcode:code]) {
+            [self _stopTimer];
             [self.delegate barcodeScannerController:(BarcodeScannerController*)self didRecognizeBarcode:(NSString*)code];
         } else {
             NSLog(@"Invalid code");
