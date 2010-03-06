@@ -4,55 +4,23 @@
 //
 
 // Note:
-//   AdMob : size = 320x48
-//   TG ad : size = 320x60
+//   AdSense : size = 320x50
 
 #import "AdCell.h"
-
-@implementation AdMobDelegate
-
-+ (AdMobDelegate*)getInstance
-{
-    static AdMobDelegate *theInstance = nil;
-    if (theInstance == nil) {
-        theInstance = [[AdMobDelegate alloc] init];
-    }
-    return theInstance;
-}
-
-- (NSString*)publisherId
-{
-    return ADMOB_ID;
-}
-
-- (BOOL)useTestAd {
-    return NO;
-    //return YES;
-}
-
-- (void)didReceiveAd:(AdMobView *)adView {
-    NSLog(@"AdMob:didReceiveAd");
-}
-
-- (void)didFailToReceiveAd:(AdMobView *)adView {
-    NSLog(@"AdMob:didFailToReceiveAd");
-}
-
-@end
 
 /////////////////////////////////////////////////////////////////////
 // AdCell
 
 @implementation AdCell
 
-@synthesize adMobView;
+@synthesize parentViewController;
 
 + (CGFloat)adCellHeight
 {
-    return 48; // admob
+    return 51; // AdSense
 }
 
-+ (AdCell *)adCell:(UITableView *)tableView
++ (AdCell *)adCell:(UITableView *)tableView parentViewController:(UIViewController *)parentViewController
 {
     NSString *identifier = @"AdCell";
 
@@ -60,34 +28,75 @@
     if (cell == nil) {
         cell = [[[AdCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
     }
+    cell.parentViewController = parentViewController;
+
     return cell;
+}
+
++ (NSDictionary *)adAttributes
+{
+    NSDictionary *attributes = 
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         AFMA_CLIENT_ID, kGADAdSenseClientID,
+         @"Takuya Murakami", kGADAdSenseCompanyName,
+         @"CashFlow Free", kGADAdSenseAppName,
+         AFMA_KEYWORDS, kGADAdSenseKeywords,
+         [NSArray arrayWithObjects:AFMA_CHANNEL_IDS, nil], kGADAdSenseChannelIDs,
+         [NSNumber numberWithInt:AFMA_IS_TEST], kGADAdSenseIsTestAdRequest,
+
+         [UIColor whiteColor], kGADAdSenseAdBackgroundColor,
+         //[UIColor colorWithRed:153/255.0 green:169/255.0 blue:190/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
+         //[UIColor colorWithRed:129/255.0 green:149/255.0 blue:175/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
+         //[UIColor darkGrayColor], kGADAdSenseAdBackgroundColor,
+
+         [UIColor lightGrayColor], kGADAdSenseAdBorderColor,
+         
+         //[UIColor blackColor], kGADAdSenseAdTextColor,
+         //[UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0], kGADAdSenseAdTextColor,
+          
+         //[UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0], kGADAdSenseAdLinkColor,
+         //[UIColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:0], kGADAdSenseAdURLColor,
+         nil];
+    return attributes;
 }
 
 - (UITableViewCell *)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)identifier
 {
     self = [super initWithStyle:style reuseIdentifier:identifier];
-    if (self) {
-        self.textLabel.text = @"Advertisement space";
-        self.textLabel.textAlignment = UITextAlignmentCenter;
-        self.textLabel.textColor = [UIColor grayColor];
+
+    // 広告を作成する
+    adViewController= [[GADAdViewController alloc] initWithDelegate:self];
+    adViewController.adSize = kGADAdSize320x50;
     
-        // AdMob
-        AdMobDelegate *amd = [AdMobDelegate getInstance];
-        self.adMobView = [AdMobView requestAdWithDelegate:amd];
-        [self.contentView addSubview:self.adMobView];
-    }
+    NSDictionary *attributes = [AdCell adAttributes];
+    [adViewController loadGoogleAd:attributes];
+    
+    UIView *v = adViewController.view;
+    CGRect frame = v.frame;
+    frame.origin.x = 0;
+    frame.origin.y = 0;
+    v.frame = frame;
+    [self.contentView addSubview:v];
 
     return self;
 }
 
 - (void)dealloc {
-    self.adMobView = nil;
+    [adViewController release];
     [super dealloc];
 }
 
-- (void)refreshAd
+
+#pragma mark GADAdViewControllerDelegate
+
+- (UIViewController *)viewControllerForModalPresentation:(GADAdViewController *)adController
 {
-    [self.adMobView requestFreshAd];
+    return self.parentViewController;
+}
+
+- (GADAdClickAction)adControllerActionModelForAdClick:(GADAdViewController *)adController
+{
+    return GAD_ACTION_DISPLAY_INTERNAL_WEBSITE_VIEW;
 }
 
 @end

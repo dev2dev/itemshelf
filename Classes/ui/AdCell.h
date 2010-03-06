@@ -5,23 +5,24 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AdMobDelegateProtocol.h"
-#import "AdMobView.h"
+#import "GADAdViewController.h"
+#import "GADAdSenseParameters.h"
 
-#define ADMOB_ID @"a14a925cd4c5c5f" // ItemShelf Lite
+#define AFMA_CLIENT_ID  @"ca-mb-app-pub-4621925249922081"
+#define AFMA_CHANNEL_IDS @"6284604915"
+#define AFMA_KEYWORDS  @"本,書籍,通販,ショッピング,book,shopping"
+#define AFMA_IS_TEST 1
 
-@interface AdMobDelegate : NSObject <AdMobDelegate> {
+@interface AdCell : UITableViewCell <GADAdViewControllerDelegate> {
+    GADAdViewController *adViewController;
+    UIViewController *parentViewController;
 }
-@end
 
-@interface AdCell : UITableViewCell {
-    AdMobView *adMobView;
-}
+@property(nonatomic,assign) UIViewController *parentViewController;
 
-@property(nonatomic,retain) AdMobView *adMobView;
-
-+ (AdCell *)adCell:(UITableView *)tableView;
++ (AdCell *)adCell:(UITableView *)tableView parentViewController:(UIViewController *)parentViewController;
 + (CGFloat)adCellHeight;
-- (void)refreshAd;
+
++ (NSDictionary *)adAttributes;
 
 @end
