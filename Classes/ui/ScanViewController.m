@@ -68,6 +68,8 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
                                                  initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                  target:self
                                                  action:@selector(doneAction:)] autorelease];
+    
+    isCameraAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
 
 - (void)doneAction:(id)sender
@@ -95,6 +97,9 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (!isCameraAvailable) {
+        return 4;
+    }
     return 5;
 }
 
@@ -146,7 +151,10 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         descLabel = (UILabel *)[cell.contentView viewWithTag:TAG_DESC];
     }		
 
-    switch (indexPath.row) {
+    int row = indexPath.row;
+    if (!isCameraAvailable) row++;
+    
+    switch (row) {
     case 0:
         imgView.image = cameraIcon;
         nameLabel.text = NSLocalizedString(@"Camera scan", @"");
@@ -182,7 +190,10 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 {
     [tv deselectRowAtIndexPath:indexPath animated:NO];
 	
-    switch (indexPath.row) {
+    int row = indexPath.row;
+    if (!isCameraAvailable) row++;
+    
+    switch (row) {
     case 0:
         [self scanWithCamera:nil];
         break;

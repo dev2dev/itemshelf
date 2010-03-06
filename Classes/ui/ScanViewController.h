@@ -51,6 +51,7 @@
     Shelf *selectedShelf;
 	
     BOOL autoRegisterShelf;
+    BOOL isCameraAvailable;
 }
 
 @property(nonatomic,retain) Shelf *selectedShelf;
