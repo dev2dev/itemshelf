@@ -259,33 +259,33 @@ CGPoint lastTouchLocation;
 #pragma mark TableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        if ([Edition isLiteEdition]) return 1;
+        return 0;
+    }
+    
     int n;
     if (itemsPerLine == 1) {
         n = [model count];
     } else {
         n = ([model count] + itemsPerLine - 1) / itemsPerLine; // multi items per line
     }
-    if ([Edition isLiteEdition]) n++; // ad
 
     return n;
 }
 
 - (int)getRow:(NSIndexPath *)indexPath
 {
-    if ([Edition isLiteEdition]) {
-        return indexPath.row - 1; // ad
-    }
     return indexPath.row;
 }
 
 - (CGFloat)tableView:(UITableView *)tv heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int row = [self getRow:indexPath];
-    if (row == -1) {
+    if (indexPath.section == 0) {
         return [AdCell adCellHeight];
     }
     return tv.rowHeight;
@@ -295,7 +295,7 @@ CGPoint lastTouchLocation;
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int row = [self getRow:indexPath];
-    if (row == -1) {
+    if (indexPath.section == 0) {
         // Ad
         AdCell *ac = [AdCell adCell:tv parentViewController:self.navigationController];
         return ac;
@@ -340,6 +340,7 @@ CGPoint lastTouchLocation;
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tv deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.section == 0) return; // ad
 
     ItemViewController *vc = [[[ItemViewController alloc]
                                   initWithNibName:@"ItemView"
@@ -348,7 +349,6 @@ CGPoint lastTouchLocation;
 
     // クリックされたアイテムの index を計算
     int idx = indexPath.row;
-    if ([Edition isLiteEdition]) idx--;
     if (itemsPerLine == 1) {
         //
     } else {
@@ -389,12 +389,8 @@ CGPoint lastTouchLocation;
 - (UITableViewCellEditingStyle)tableView:(UITableView*)tv
            editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    // 削除可能
-    if (itemsPerLine == 1) {
-        int row = [self getRow:indexPath];
-        if (row >= 0) {
-            return UITableViewCellEditingStyleDelete;
-        }
+    if (indexPath.section == 1 && itemsPerLine == 1) {
+        return UITableViewCellEditingStyleDelete;
     }
     return UITableViewCellEditingStyleNone;
 }
@@ -416,23 +412,30 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 // Reorder: can move?
 - (BOOL)tableView:(UITableView *)tv canMoveRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    int row = [self getRow:indexPath];
-    if (row < 0) {
+    if (indexPath.section == 0) {
         return NO; // Ad
     }
     return YES; // 移動可能
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tv
+    targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)fromIndexPath 
+    toProposedIndexPath:(NSIndexPath *)proposedIndexPath
+{
+    // 広告の場所(section:0)には移動させない
+    NSIndexPath *idx = [NSIndexPath indexPathForRow:proposedIndexPath.row inSection:1];
+    return idx;
+}
+
+
 // Reorder cell
 - (void)tableView:(UITableView *)tv moveRowAtIndexPath:(NSIndexPath*)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath
 {
-    int from = [self getRow:fromIndexPath];
-    int to = [self getRow:toIndexPath];
-    if (from < 0 || to < 0 || from == to) {
+    if (fromIndexPath.section == 0 || toIndexPath.section == 0) {
         // can't move!
         return;
     } else {
-        [model moveRowAtIndex:from toIndex:to];
+        [model moveRowAtIndex:fromIndexPath.row toIndex:toIndexPath.row];
     }
 }
 
