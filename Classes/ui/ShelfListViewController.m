@@ -106,15 +106,15 @@
 - (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section {
     int count = [[DataModel sharedDataModel] shelvesCount];
     if (tv.editing) count++; // new cell
-    if ([Edition isLiteEdition]) count++; // ad
+//    if ([Edition isLiteEdition]) count++; // ad
     return count;
 }
 
 - (int)getRow:(NSIndexPath *)indexPath
 {
-    if ([Edition isLiteEdition]) {
-        return indexPath.row - 1; // ad
-    }
+//    if ([Edition isLiteEdition]) {
+//        return indexPath.row - 1; // ad
+//    }
     return indexPath.row;
 }
 

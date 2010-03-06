@@ -39,6 +39,8 @@
 #import "ItemViewController.h"
 #import "ScanViewController.h"
 #import "DataModel.h"
+#import "Edition.h"
+#import "AdCell.h"
 
 static int itemsPerLine = 1;
 
@@ -261,17 +263,46 @@ CGPoint lastTouchLocation;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    int n;
     if (itemsPerLine == 1) {
-        return [model count];
+        n = [model count];
+    } else {
+        n = ([model count] + itemsPerLine - 1) / itemsPerLine; // multi items per line
     }
-    return ([model count] + itemsPerLine - 1) / itemsPerLine;
+    if ([Edition isLiteEdition]) n++; // ad
+
+    return n;
+}
+
+- (int)getRow:(NSIndexPath *)indexPath
+{
+    if ([Edition isLiteEdition]) {
+        return indexPath.row - 1; // ad
+    }
+    return indexPath.row;
+}
+
+- (CGFloat)tableView:(UITableView *)tv heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int row = [self getRow:indexPath];
+    if (row == -1) {
+        return [AdCell adCellHeight];
+    }
+    return tv.rowHeight;
 }
 
 // セルを返す
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    int row = [self getRow:indexPath];
+    if (row == -1) {
+        // Ad
+        AdCell *ac = [AdCell adCell:tv];
+        return ac;
+    }
+    
     if (itemsPerLine == 1) {
-        Item *item = [model itemAtIndex:indexPath.row];
+        Item *item = [model itemAtIndex:row];
         ItemCell *cell = [ItemCell getCell:tv];
 
         // 画像をダウンロードしておく
@@ -282,7 +313,7 @@ CGPoint lastTouchLocation;
     } else {
         ItemCell4 *cell = [ItemCell4 getCell:tv];
         for (int i = 0;  i < 4; i++) {
-            int idx = indexPath.row * 4 + i;
+            int idx = row * 4 + i;
 
             Item *item;
             if (idx < model.count) {
