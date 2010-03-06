@@ -428,7 +428,12 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 {
     int from = [self getRow:fromIndexPath];
     int to = [self getRow:toIndexPath];
-    [model moveRowAtIndex:from toIndex:to];
+    if (from < 0 || to < 0 || from == to) {
+        // can't move!
+        return;
+    } else {
+        [model moveRowAtIndex:from toIndex:to];
+    }
 }
 
 //@}
