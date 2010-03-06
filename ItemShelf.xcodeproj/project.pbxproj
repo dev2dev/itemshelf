@@ -66,6 +66,7 @@
 		3E28EB9510649C6C006F9FF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9410649C6C006F9FF7 /* UIKit.framework */; };
 		3E28EB9810649CD2006F9FF7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9710649CD2006F9FF7 /* QuartzCore.framework */; };
 		3E2C0C550ED9ADDB00867F11 /* GenSelectListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */; };
+		3E368D3411428ED4001B2805 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7F60171084CABA0040A615 /* CoreLocation.framework */; };
 		3E36E1AE0F309A9500AB3C64 /* config.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E36E1AD0F309A9500AB3C64 /* config.png */; };
 		3E3AA5AD0EE02EF200339BAB /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3AA5AC0EE02EF200339BAB /* AboutView.xib */; };
 		3E3EA1510ED9A072006892E9 /* ConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3EA1500ED9A072006892E9 /* ConfigView.xib */; };
@@ -450,6 +451,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E368D3411428ED4001B2805 /* CoreLocation.framework in Frameworks */,
 				3E2310310F4D9ED0006E24AF /* libZebla.a in Frameworks */,
 				3E2310370F4D9ED0006E24AF /* AudioToolbox in Frameworks */,
 				3EC9AA04105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */,
