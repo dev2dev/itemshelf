@@ -88,8 +88,6 @@
 		3E7F60CC1084CD440040A615 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EAE110649BAC006F9FF7 /* AddressBook.framework */; };
 		3E7F610B1084CD4A0040A615 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9410649C6C006F9FF7 /* UIKit.framework */; };
 		3E7F611F1084CD4F0040A615 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9710649CD2006F9FF7 /* QuartzCore.framework */; };
-		3E7F61231084CD6A0040A615 /* libAdMobSimulator3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7F61221084CD6A0040A615 /* libAdMobSimulator3_0.a */; };
-		3E7F61241084CD6A0040A615 /* libAdMobSimulator3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7F61221084CD6A0040A615 /* libAdMobSimulator3_0.a */; };
 		3E7FFEBC0ECC487B000164D4 /* ScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7FFEBB0ECC487B000164D4 /* ScanView.xib */; };
 		3E817E840EE6C1C60015A97E /* NoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E817E830EE6C1C60015A97E /* NoImage.png */; };
 		3E89CB490EF559C400286564 /* ShelfNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E89CB470EF559C400286564 /* ShelfNormal.png */; };
@@ -99,14 +97,16 @@
 		3EA62C9E0EE9834900A4694B /* NumPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA62C9D0EE9834900A4694B /* NumPad.png */; };
 		3EA62D260EE98F7600A4694B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA62D250EE98F7600A4694B /* Default.png */; };
 		3EA8F0E30F555BF900FE2779 /* Icon-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA8F0E20F555BF900FE2779 /* Icon-lite.png */; };
+		3EB779C911429491001C3F1F /* libGoogleAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB779C811429491001C3F1F /* libGoogleAds.a */; };
+		3EB779CA11429491001C3F1F /* libGoogleAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB779C811429491001C3F1F /* libGoogleAds.a */; };
+		3EB779D311429519001C3F1F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB779D211429519001C3F1F /* AVFoundation.framework */; };
+		3EB779EC114295A1001C3F1F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB779D211429519001C3F1F /* AVFoundation.framework */; };
 		3EB7A9F00EF66601009B038F /* EditShelfView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EB7A9EF0EF66601009B038F /* EditShelfView.xib */; };
 		3EBC16FA0EDA822B00A35747 /* EnterCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC16F70EDA822B00A35747 /* EnterCode.png */; };
 		3EBC16FB0EDA822B00A35747 /* PhotoLibrary.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC16F80EDA822B00A35747 /* PhotoLibrary.png */; };
 		3EBC16FC0EDA822B00A35747 /* ScanCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBC16F90EDA822B00A35747 /* ScanCamera.png */; };
 		3EC639D10EE544C30057FAC2 /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC639D00EE544C30057FAC2 /* WebView.xib */; };
 		3EC727170EE83161008B2CBF /* Locale.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC727160EE83161008B2CBF /* Locale.png */; };
-		3EC9AA04105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC9AA02105E4DF50096AB90 /* libAdMobDevice3_0.a */; };
-		3EC9AA06105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC9AA02105E4DF50096AB90 /* libAdMobDevice3_0.a */; };
 		3EC9AB15105E57B30096AB90 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9AB07105E57B30096AB90 /* Database.m */; };
 		3EC9AB16105E57B30096AB90 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9AB09105E57B30096AB90 /* DataModel.m */; };
 		3EC9AB17105E57B30096AB90 /* DateFormatter2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9AB0B105E57B30096AB90 /* DateFormatter2.m */; };
@@ -313,7 +313,6 @@
 		3E71A6A810406A04006266C7 /* BarcodeReader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarcodeReader.png; sourceTree = "<group>"; };
 		3E7EB2DB0EE422D900D5CE27 /* ShelfListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShelfListView.xib; sourceTree = "<group>"; };
 		3E7F60171084CABA0040A615 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = /System/Library/Frameworks/CoreLocation.framework; sourceTree = "<absolute>"; };
-		3E7F61221084CD6A0040A615 /* libAdMobSimulator3_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMobSimulator3_0.a; sourceTree = "<group>"; };
 		3E7FFEBB0ECC487B000164D4 /* ScanView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScanView.xib; sourceTree = "<group>"; };
 		3E817E830EE6C1C60015A97E /* NoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoImage.png; sourceTree = "<group>"; };
 		3E89CB470EF559C400286564 /* ShelfNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShelfNormal.png; sourceTree = "<group>"; };
@@ -323,13 +322,16 @@
 		3EA62C9D0EE9834900A4694B /* NumPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NumPad.png; sourceTree = "<group>"; };
 		3EA62D250EE98F7600A4694B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3EA8F0E20F555BF900FE2779 /* Icon-lite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-lite.png"; sourceTree = "<group>"; };
+		3EB779C61142947E001C3F1F /* GADAdSenseParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSenseParameters.h; sourceTree = "<group>"; };
+		3EB779C711429488001C3F1F /* GADAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdViewController.h; sourceTree = "<group>"; };
+		3EB779C811429491001C3F1F /* libGoogleAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAds.a; sourceTree = "<group>"; };
+		3EB779D211429519001C3F1F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3EB7A9EF0EF66601009B038F /* EditShelfView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditShelfView.xib; sourceTree = "<group>"; };
 		3EBC16F70EDA822B00A35747 /* EnterCode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EnterCode.png; sourceTree = "<group>"; };
 		3EBC16F80EDA822B00A35747 /* PhotoLibrary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoLibrary.png; sourceTree = "<group>"; };
 		3EBC16F90EDA822B00A35747 /* ScanCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScanCamera.png; sourceTree = "<group>"; };
 		3EC639D00EE544C30057FAC2 /* WebView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebView.xib; sourceTree = "<group>"; };
 		3EC727160EE83161008B2CBF /* Locale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Locale.png; sourceTree = "<group>"; };
-		3EC9AA02105E4DF50096AB90 /* libAdMobDevice3_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMobDevice3_0.a; sourceTree = "<group>"; };
 		3EC9AB06105E57B30096AB90 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		3EC9AB07105E57B30096AB90 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		3EC9AB08105E57B30096AB90 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
@@ -419,8 +421,6 @@
 		3EC9C6EF0EE147210026396A /* libZebla.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZebla.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ECBBB4D0EDC4A8200865EF7 /* AudioToolbox */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = AudioToolbox; path = System/Library/Frameworks/AudioToolbox.framework/AudioToolbox; sourceTree = SDKROOT; };
 		3ECD3DD00ED06434001A775F /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
-		3ECD9E941042A28900CFC9E4 /* AdMobDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobDelegateProtocol.h; sourceTree = "<group>"; };
-		3ECD9E951042A28900CFC9E4 /* AdMobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobView.h; sourceTree = "<group>"; };
 		3ED069690F545CBA006D932B /* KeywordView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordView2.xib; sourceTree = "<group>"; };
 		3ED6BE100ED588CB00F4C7EE /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteButton.png; sourceTree = "<group>"; };
 		3EDA86A70EFA7DE300C4D226 /* PlusItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusItem.png; sourceTree = "<group>"; };
@@ -434,16 +434,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EC9C7580EE14B8A0026396A /* libZebla.a in Frameworks */,
+				3EB779D311429519001C3F1F /* AVFoundation.framework in Frameworks */,
 				3ECBBB4E0EDC4A8200865EF7 /* AudioToolbox in Frameworks */,
 				3E7F610B1084CD4A0040A615 /* UIKit.framework in Frameworks */,
-				3EC9AA06105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */,
 				3E7F611F1084CD4F0040A615 /* QuartzCore.framework in Frameworks */,
 				3E7F605D1084CD080040A615 /* libsqlite3.dylib in Frameworks */,
 				3E7F60CC1084CD440040A615 /* AddressBook.framework in Frameworks */,
 				3E7F60AC1084CD2E0040A615 /* CoreGraphics.framework in Frameworks */,
 				3E7F605E1084CD210040A615 /* Foundation.framework in Frameworks */,
 				3E7F60181084CABA0040A615 /* CoreLocation.framework in Frameworks */,
-				3E7F61241084CD6A0040A615 /* libAdMobSimulator3_0.a in Frameworks */,
+				3EB779C911429491001C3F1F /* libGoogleAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,14 +454,14 @@
 				3E368D3411428ED4001B2805 /* CoreLocation.framework in Frameworks */,
 				3E2310310F4D9ED0006E24AF /* libZebla.a in Frameworks */,
 				3E2310370F4D9ED0006E24AF /* AudioToolbox in Frameworks */,
-				3EC9AA04105E4DF50096AB90 /* libAdMobDevice3_0.a in Frameworks */,
 				3E28EABB10649A7A006F9FF7 /* libsqlite3.dylib in Frameworks */,
 				3E28EABD10649A87006F9FF7 /* Foundation.framework in Frameworks */,
 				3E28EACA10649B87006F9FF7 /* CoreGraphics.framework in Frameworks */,
 				3E28EAE210649BAC006F9FF7 /* AddressBook.framework in Frameworks */,
 				3E28EB9510649C6C006F9FF7 /* UIKit.framework in Frameworks */,
 				3E28EB9810649CD2006F9FF7 /* QuartzCore.framework in Frameworks */,
-				3E7F61231084CD6A0040A615 /* libAdMobSimulator3_0.a in Frameworks */,
+				3EB779CA11429491001C3F1F /* libGoogleAds.a in Frameworks */,
+				3EB779EC114295A1001C3F1F /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,9 +502,9 @@
 			children = (
 				3E1FDD170ECEF55B00915E3E /* zebra */,
 				080E96DDFE201D6D7F000001 /* Classes */,
+				3EB779C51142945F001C3F1F /* GoogleAds */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				3ECD9E8D1042A25500CFC9E4 /* AdMob */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -545,6 +545,7 @@
 				3E28EB9410649C6C006F9FF7 /* UIKit.framework */,
 				3E28EB9710649CD2006F9FF7 /* QuartzCore.framework */,
 				3E7F60171084CABA0040A615 /* CoreLocation.framework */,
+				3EB779D211429519001C3F1F /* AVFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -799,15 +800,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		3ECD9E8D1042A25500CFC9E4 /* AdMob */ = {
+		3EB779C51142945F001C3F1F /* GoogleAds */ = {
 			isa = PBXGroup;
 			children = (
-				3ECD9E941042A28900CFC9E4 /* AdMobDelegateProtocol.h */,
-				3ECD9E951042A28900CFC9E4 /* AdMobView.h */,
-				3E7F61221084CD6A0040A615 /* libAdMobSimulator3_0.a */,
-				3EC9AA02105E4DF50096AB90 /* libAdMobDevice3_0.a */,
+				3EB779C811429491001C3F1F /* libGoogleAds.a */,
+				3EB779C711429488001C3F1F /* GADAdViewController.h */,
+				3EB779C61142947E001C3F1F /* GADAdSenseParameters.h */,
 			);
-			path = AdMob;
+			path = GoogleAds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1174,8 +1174,8 @@
 					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
 					"\"$(SRCROOT)/build/Debug (tmurakam)-iphonesimulator\"",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
-					"\"$(SRCROOT)/AdMob\"",
 					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
@@ -1199,8 +1199,8 @@
 					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
 					"\"$(SRCROOT)/build/Debug (tmurakam)-iphonesimulator\"",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
-					"\"$(SRCROOT)/AdMob\"",
 					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
@@ -1229,7 +1229,7 @@
 					"$(inherited)",
 					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
 					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
-					"\"$(SRCROOT)/AdMob\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
@@ -1253,7 +1253,7 @@
 					"$(inherited)",
 					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
 					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
-					"\"$(SRCROOT)/AdMob\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
@@ -1277,7 +1277,7 @@
 					"$(inherited)",
 					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
 					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
-					"\"$(SRCROOT)/AdMob\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
@@ -1302,7 +1302,7 @@
 					"$(inherited)",
 					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
 					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
-					"\"$(SRCROOT)/AdMob\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelfLite;
@@ -1346,8 +1346,8 @@
 					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
 					"\"$(SRCROOT)/build/Debug (tmurakam)-iphonesimulator\"",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
-					"\"$(SRCROOT)/AdMob\"",
 					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;
@@ -1389,8 +1389,8 @@
 					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
 					"\"$(SRCROOT)/build/Debug (tmurakam)-iphonesimulator\"",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
-					"\"$(SRCROOT)/AdMob\"",
 					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ItemShelf;

@@ -133,11 +133,7 @@
 
     int row = [self getRow:indexPath];
     if (row == -1) {
-        AdCell *ac = [AdCell adCell:tv]; // AdMob
-        if (needRefreshAd) {
-            [ac refreshAd];
-            needRefreshAd = NO;
-        }
+        AdCell *ac = [AdCell adCell:tv parentViewController:self.navigationController]; // Ad
         return ac;
     }
 

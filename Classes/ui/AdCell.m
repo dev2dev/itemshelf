@@ -17,7 +17,7 @@
 
 + (CGFloat)adCellHeight
 {
-    return 51; // AdSense
+    return 50; // AdSense
 }
 
 + (AdCell *)adCell:(UITableView *)tableView parentViewController:(UIViewController *)parentViewController
@@ -44,12 +44,13 @@
          [NSArray arrayWithObjects:AFMA_CHANNEL_IDS, nil], kGADAdSenseChannelIDs,
          [NSNumber numberWithInt:AFMA_IS_TEST], kGADAdSenseIsTestAdRequest,
 
-         [UIColor whiteColor], kGADAdSenseAdBackgroundColor,
+         [UIColor brownColor], kGADAdSenseAdBackgroundColor,
+         //[UIColor whiteColor], kGADAdSenseAdBackgroundColor,
          //[UIColor colorWithRed:153/255.0 green:169/255.0 blue:190/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
          //[UIColor colorWithRed:129/255.0 green:149/255.0 blue:175/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
          //[UIColor darkGrayColor], kGADAdSenseAdBackgroundColor,
 
-         [UIColor lightGrayColor], kGADAdSenseAdBorderColor,
+         //[UIColor lightGrayColor], kGADAdSenseAdBorderColor,
          
          //[UIColor blackColor], kGADAdSenseAdTextColor,
          //[UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0], kGADAdSenseAdTextColor,

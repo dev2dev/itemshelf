@@ -297,7 +297,7 @@ CGPoint lastTouchLocation;
     int row = [self getRow:indexPath];
     if (row == -1) {
         // Ad
-        AdCell *ac = [AdCell adCell:tv];
+        AdCell *ac = [AdCell adCell:tv parentViewController:self.navigationController];
         return ac;
     }
     
