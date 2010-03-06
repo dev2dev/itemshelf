@@ -347,12 +347,13 @@ CGPoint lastTouchLocation;
                                  autorelease];
 
     // クリックされたアイテムの index を計算
-    int idx;
+    int idx = indexPath.row;
+    if ([Edition isLiteEdition]) idx--;
     if (itemsPerLine == 1) {
-        idx = indexPath.row;
+        //
     } else {
         int x = lastTouchLocation.x * 4 / 320;
-        idx = indexPath.row * 4 + x;
+        idx = idx * 4 + x;
     }
     if (idx >= [model count]) {
         return;
@@ -390,7 +391,10 @@ CGPoint lastTouchLocation;
 {
     // 削除可能
     if (itemsPerLine == 1) {
-        return UITableViewCellEditingStyleDelete;
+        int row = [self getRow:indexPath];
+        if (row >= 0) {
+            return UITableViewCellEditingStyleDelete;
+        }
     }
     return UITableViewCellEditingStyleNone;
 }
@@ -400,7 +404,8 @@ CGPoint lastTouchLocation;
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
     if (style == UITableViewCellEditingStyleDelete) {
-        Item *item = [model itemAtIndex:indexPath.row];
+        int row = [self getRow:indexPath];
+        Item *item = [model itemAtIndex:row];
         [model removeObject:item];
 
         [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -411,13 +416,19 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 // Reorder: can move?
 - (BOOL)tableView:(UITableView *)tv canMoveRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return YES; // 全セル移動可能
+    int row = [self getRow:indexPath];
+    if (row < 0) {
+        return NO; // Ad
+    }
+    return YES; // 移動可能
 }
 
 // Reorder cell
 - (void)tableView:(UITableView *)tv moveRowAtIndexPath:(NSIndexPath*)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath
 {
-    [model moveRowAtIndex:fromIndexPath.row toIndex:toIndexPath.row];
+    int from = [self getRow:fromIndexPath];
+    int to = [self getRow:toIndexPath];
+    [model moveRowAtIndex:from toIndex:to];
 }
 
 //@}

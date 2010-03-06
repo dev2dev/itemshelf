@@ -45,8 +45,9 @@
          [NSNumber numberWithInt:AFMA_IS_TEST], kGADAdSenseIsTestAdRequest,
 
          [UIColor brownColor], kGADAdSenseAdBackgroundColor,
-         //[UIColor whiteColor], kGADAdSenseAdBackgroundColor,
-         //[UIColor colorWithRed:153/255.0 green:169/255.0 blue:190/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
+         //[UIColor colorWithRed:235/255.0 green:205/255.0 blue:180/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
+         //[UIColor colorWithRed:185/255.0 green:145/255.0 blue:113/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
+
          //[UIColor colorWithRed:129/255.0 green:149/255.0 blue:175/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
          //[UIColor darkGrayColor], kGADAdSenseAdBackgroundColor,
 
