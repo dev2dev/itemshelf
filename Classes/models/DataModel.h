@@ -39,7 +39,7 @@
 #import "Item.h"
 #import "Shelf.h"
 
-#define MAX_ITEM_COUNT_FOR_LITE_EDITION	100
+//#define MAX_ITEM_COUNT_FOR_LITE_EDITION	100
 
 /**
    Main data model of itemshelf, contains all shelves, items.
