@@ -39,16 +39,16 @@
         [NSDictionary dictionaryWithObjectsAndKeys:
          AFMA_CLIENT_ID, kGADAdSenseClientID,
          @"Takuya Murakami", kGADAdSenseCompanyName,
-         @"CashFlow Free", kGADAdSenseAppName,
+         @"ItemShelf Lite", kGADAdSenseAppName,
          AFMA_KEYWORDS, kGADAdSenseKeywords,
          [NSArray arrayWithObjects:AFMA_CHANNEL_IDS, nil], kGADAdSenseChannelIDs,
          [NSNumber numberWithInt:AFMA_IS_TEST], kGADAdSenseIsTestAdRequest,
 
-         [UIColor brownColor], kGADAdSenseAdBackgroundColor,
+         //[UIColor brownColor], kGADAdSenseAdBackgroundColor,
          //[UIColor colorWithRed:235/255.0 green:205/255.0 blue:180/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
          //[UIColor colorWithRed:185/255.0 green:145/255.0 blue:113/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
+         [UIColor colorWithRed:175/255.0 green:140/255.0 blue:105/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
 
-         //[UIColor colorWithRed:129/255.0 green:149/255.0 blue:175/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
          //[UIColor darkGrayColor], kGADAdSenseAdBackgroundColor,
 
          //[UIColor lightGrayColor], kGADAdSenseAdBorderColor,
@@ -74,6 +74,7 @@
     [adViewController loadGoogleAd:attributes];
     
     UIView *v = adViewController.view;
+    
     CGRect frame = v.frame;
     frame.origin.x = 0;
     frame.origin.y = 0;

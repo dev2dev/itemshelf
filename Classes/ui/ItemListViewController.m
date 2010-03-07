@@ -133,6 +133,9 @@ CGPoint lastTouchLocation;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.dataSource = self;
     tableView.delegate = self;
+//    tableView.backgroundColor = 
+//        [UIColor colorWithRed:235/255.0 green:205/255.0 blue:180/255.0 alpha:1.0];
+    
     [self.view addSubview:tableView];
     [tableView release];
 	
