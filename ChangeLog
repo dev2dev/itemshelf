@@ -1,6 +1,7 @@
 2010-03-07 : Takuya Murakami
 	* カメラがない(iPod touchなど)に、カメラスキャンメニューを出さない
 	* AdSense for Mobile Applications(AFMA)対応
+	* Lite edition のアイテム数上限を撤廃
 	
 2009-09-19 : Takuya Murakami
 	* iPhone OS 3.1 専用に修正
