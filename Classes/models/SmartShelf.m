@@ -69,11 +69,6 @@ static NSMutableArray *tagsFilterStrings = nil;
         }
     }
     [self sortBySorder];
-
-    [titleFilterStrings release];
-    [authorFilterStrings release];
-    [manufacturerFilterStrings release];
-    [tagsFilterStrings release];
 }
 
 /**
@@ -81,7 +76,7 @@ static NSMutableArray *tagsFilterStrings = nil;
 */ 
 - (NSMutableArray *)_makeFilterStrings:(NSString *)filter
 {
-    return [[filter splitWithDelimiter:@","] retain];
+    return [filter splitWithDelimiter:@","];
 }
 
 /**

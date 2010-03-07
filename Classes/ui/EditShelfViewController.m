@@ -180,7 +180,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
+    UITableViewCell *cell = nil;
     switch (indexPath.row) {
     case 0:
         cell = [self textViewCell:@"Name" view:shelfNameField];

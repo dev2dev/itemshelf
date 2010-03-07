@@ -116,7 +116,7 @@ typedef enum {
 - (void)saveDefaults;
 - (int)_fallbackServiceId;
 - (int)serviceIdFromCountryCode:(NSString*)country;
-- (WebApi*)createWebApi;
+- (WebApi*)allocWebApi;
 - (NSArray*)serviceIdStrings;
 - (NSString*)serviceIdString;
 
