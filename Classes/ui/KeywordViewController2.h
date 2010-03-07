@@ -79,6 +79,6 @@
     UIView *attachedView;
 }
 
-+ (KeywordViewCell *)allocCell:(NSString *)title tableView:(UITableView*)tableView identifier:(NSString *)identifier;
++ (KeywordViewCell *)getCell:(NSString *)title tableView:(UITableView*)tableView identifier:(NSString *)identifier;
 - (void)attachView:(UIView *)view;
 @end

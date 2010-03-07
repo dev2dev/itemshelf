@@ -62,7 +62,7 @@
 
 - (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *ret;
+    NSString *ret = nil;
     switch (section) {
     case 0:
         ret = @"About";
@@ -76,7 +76,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int ret;
+    int ret = 0;
     switch (section) {
     case 0:
         ret = 3;

@@ -110,7 +110,7 @@
 - (void)_setupCategories
 {
     [searchIndices release];
-    WebApi *api = [webApiFactory createWebApi];
+    WebApi *api = [webApiFactory allocWebApi];
 
     searchIndices = [api categoryStrings];
     [searchIndices retain];
@@ -159,7 +159,7 @@
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
 
-    WebApi *api = [webApiFactory createWebApi];
+    WebApi *api = [webApiFactory allocWebApi];
     NSString *searchIndex = [searchIndices objectAtIndex:searchSelectedIndex];
 
     [sc search:api key:textField.text searchKeyType:searchKeyType index:searchIndex];
@@ -284,14 +284,14 @@
 
 - (UITableViewCell *)containerCellWithTitle:(NSString*)title view:(UIView *)view
 {
-    KeywordViewCell *cell = [KeywordViewCell allocCell:title tableView:tableView identifier:title];
+    KeywordViewCell *cell = [KeywordViewCell getCell:title tableView:tableView identifier:title];
     [cell attachView:view];
     return cell;
 }
 
 - (UITableViewCell *)containerCellWithTitle:(NSString*)title text:(NSString *)text
 {
-    KeywordViewCell *cell = [KeywordViewCell allocCell:title tableView:tableView identifier:title];
+    KeywordViewCell *cell = [KeywordViewCell getCell:title tableView:tableView identifier:title];
 
     UILabel *value;
     value = [[[UILabel alloc] initWithFrame:CGRectMake(110, 6, 190, 32)] autorelease];
@@ -315,7 +315,7 @@
 
 @implementation KeywordViewCell
 
-+ (KeywordViewCell *)allocCell:(NSString *)title tableView:(UITableView*)tableView identifier:(NSString *)identifier
++ (KeywordViewCell *)getCell:(NSString *)title tableView:(UITableView*)tableView identifier:(NSString *)identifier
 {
     KeywordViewCell *cell = (KeywordViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {

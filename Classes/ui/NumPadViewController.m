@@ -150,7 +150,7 @@
     sc.viewController = self;
     sc.selectedShelf = selectedShelf;
 
-    WebApi *api = [webApiFactory createWebApi];
+    WebApi *api = [webApiFactory allocWebApi];
     [sc search:api withCode:textField.text];
     [api release];
 }

@@ -141,7 +141,7 @@
 /**
    Create WebApi instance
 */
-- (WebApi*)createWebApi
+- (WebApi*)allocWebApi
 {
     WebApi *api = nil;
 

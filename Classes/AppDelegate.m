@@ -123,7 +123,7 @@
     sc.viewController = vc;
     sc.selectedShelf = nil;
 
-    WebApi *api = [wf createWebApi];
+    WebApi *api = [wf allocWebApi];
     [sc search:api withCode:code];
     [api release];
 

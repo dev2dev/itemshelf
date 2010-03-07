@@ -269,7 +269,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 {
     WebApiFactory *wf = [WebApiFactory webApiFactory];
     [wf setCodeSearch];
-    WebApi *api = [wf createWebApi];
+    WebApi *api = [wf allocWebApi];
     
     SearchController *sc = [SearchController newController];
     sc.delegate = self;
