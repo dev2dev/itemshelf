@@ -5,7 +5,7 @@
 2009-09-19 : Takuya Murakami
 	* iPhone OS 3.1 専用に修正
 	* UIImagePickerController の overlay を使用
-	* ver 2.2 (Lite 版のみ)
+	* ver 2.2 (Lite 版のみ -> reject)
 	
 2009-08-24 : Takuya Murakami
 	* Lite edition のアイテム数上限を 25 から 100 に引き上げ
@@ -14,7 +14,7 @@
 2009-08-23 : Takuya Murakami
 	* リアルタイムバーコードスキャン対応
 	* AdMob 対応
-	* ver 2.1
+	* ver 2.1 (Lite版はreject)
 	
 2009-08-01 : Takuya Murakami
 	* Yahoo shopping に対応
