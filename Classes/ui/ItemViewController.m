@@ -66,7 +66,7 @@
              action:@selector(moveActionButtonTapped:)]
             autorelease];
 
-#if 0
+#if 1
     self.navigationItem.rightBarButtonItem = [self editButtonItem];
 #endif
 }
@@ -200,7 +200,6 @@
 
 - (int)_calcRowKind:(NSIndexPath *)indexPath item:(Item *)item
 {
-    int n;
     int row = indexPath.row;
 
     if (tableView.editing) {
@@ -218,15 +217,14 @@
         return ROW_SEARCH_AGAIN;
     }
 
-    n = indexPath.row;
     if (!item.registeredWithShelf) {
-        if (indexPath.row == 3) {
+        if (row == 3) {
             return ROW_ADD_TO_SHELF;
         }
-        n--;
+        row--;
     }
 
-    switch (n) {
+    switch (row) {
     case 3:
         return ROW_STAR;
     case 4:
@@ -234,7 +232,7 @@
     case 5:
         return ROW_MEMO;
     }
-    return n - 6;
+    return row - 6;
 }
 
 // セルを返す
@@ -268,55 +266,69 @@
 	
     cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
     cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    BOOL isEditable = NO;
+    BOOL isEditingEditable = NO;
 
     switch (rowKind) {
-    case ROW_TITLE:
-        cell.textLabel.text = item.name;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_TITLE:
+            cell.textLabel.text = item.name;
+            isEditingEditable = YES;
+            break;
 
-    case ROW_SHOW_DETAIL:
-        cell.textLabel.text = NSLocalizedString(@"Show detail", @"");
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_SHOW_DETAIL:
+            cell.textLabel.text = NSLocalizedString(@"Show detail", @"");
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+            isEditable = YES;
+            break;
 
-    case ROW_SEARCH_AGAIN:
-        cell.textLabel.text = NSLocalizedString(@"Search again with title", @"");
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
-        break;
+        case ROW_SEARCH_AGAIN:
+            cell.textLabel.text = NSLocalizedString(@"Search again with title", @"");
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+            isEditable = YES;
+            break;
 
-    case ROW_ADD_TO_SHELF:
-        cell.textLabel.text = NSLocalizedString(@"Add to shelf", @"");
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_ADD_TO_SHELF:
+            cell.textLabel.text = NSLocalizedString(@"Add to shelf", @"");
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+            isEditable = YES;
+            break;
 
-    case ROW_TAGS:
-        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
-                              NSLocalizedString(@"Tags", @""),
-                              item.tags];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_TAGS:
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
+                                   NSLocalizedString(@"Tags", @""),
+                                   item.tags];
+            isEditable = YES;
+            break;
 
-    case ROW_MEMO:
-        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
-                              NSLocalizedString(@"Memo", @""),
-                              item.memo];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_MEMO:
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
+                                   NSLocalizedString(@"Memo", @""),
+                                   item.memo];
+            isEditable = YES;
+            break;
 				
-    default:
-        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
-                                        [item additionalInfoKeyAtIndex:rowKind],
-                                        [item additionalInfoValueAtIndex:rowKind]];
-        if (tableView.editing && [item isAdditionalInfoEditableAtIndex:rowKind]) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        break;
+        default:
+            {
+                NSString *key = [item additionalInfoKeyAtIndex:rowKind];
+                NSString *value = [item additionalInfoValueAtIndex:rowKind];
+                if (value == nil) value = @"";
+                cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", key, value];
+                                  
+                if ([item isAdditionalInfoEditableAtIndex:rowKind]) {
+                    isEditingEditable = YES;
+                }
+            }
+            break;
     }
 
+    if (isEditable) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    if (isEditable || isEditingEditable) {
+        cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+                                   
     return cell;
 }
 
@@ -508,6 +520,7 @@
 
     // tableView に通知
     [tableView setEditing:editing animated:animated];
+    [tableView reloadData];
 }
 
 // Return editing style
