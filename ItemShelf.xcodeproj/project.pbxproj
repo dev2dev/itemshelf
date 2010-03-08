@@ -1231,8 +1231,6 @@
 				INFOPLIST_FILE = "Info-lite.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
-					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1255,8 +1253,6 @@
 				INFOPLIST_FILE = "Info-lite.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
-					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1279,8 +1275,6 @@
 				INFOPLIST_FILE = "Info-lite.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
-					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1304,8 +1298,6 @@
 				INFOPLIST_FILE = "Info-lite.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
-					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";

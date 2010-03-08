@@ -140,7 +140,7 @@ CGPoint lastTouchLocation;
     [tableView release];
 	
     // Initiate filter button title
-    filterButton.title = NSLocalizedString(@"All", @"");
+    filterButton.title = @"All";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -180,9 +180,9 @@ CGPoint lastTouchLocation;
     [self updateTitle];
 
     if (f == nil) {
-        filterButton.title = NSLocalizedString(@"All", @"");
+        filterButton.title = @"All";
     } else {
-        filterButton.title = NSLocalizedString(f, @"");
+        filterButton.title = f;
     }
 
     [tableView reloadData];
@@ -202,6 +202,7 @@ CGPoint lastTouchLocation;
 	
     GenSelectListViewController *vc = [GenSelectListViewController genSelectListViewController:self array:filters title:NSLocalizedString(@"Filter", @"")];
     vc.selectedIndex = filterIndex;
+    vc.isLocalize = NO;
 	
     [self doModalWithNavigationController:vc];
 }

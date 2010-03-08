@@ -65,10 +65,6 @@
              target:self
              action:@selector(moveActionButtonTapped:)]
             autorelease];
-
-#if 1
-    self.navigationItem.rightBarButtonItem = [self editButtonItem];
-#endif
 }
 
 - (void)didReceiveMemoryWarning {
@@ -161,13 +157,9 @@
 {
     Item *item = [itemArray objectAtIndex:section];
 	
-    // (画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + スター + メモ) + 情報数
+    // (タイトル + 画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + スター + メモ) + 情報数
     //    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
-    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + [item numberOfAdditionalInfo];
-
-    if (tv.editing) {
-        n++; // タイトル編集行
-    }
+    int n = 4 + (item.registeredWithShelf ? 0 : 1) + 3 + [item numberOfAdditionalInfo];
 
     return n;
 }
@@ -177,8 +169,7 @@
 {
     Item *item = [itemArray objectAtIndex:indexPath.section];
 	
-    if ((!tableView.editing && indexPath.row == 0) ||
-        (tableView.editing && indexPath.row == 1)) {
+    if (indexPath.row == 1) {
         // 画像セル
         UIImage *image = [item getImage:nil];
         if (image) {
@@ -202,37 +193,33 @@
 {
     int row = indexPath.row;
 
-    if (tableView.editing) {
-        row--;  // タイトル編集行
-    }
-
     switch (row) {
-    case -1:
-        return ROW_TITLE;
     case 0:
-        return ROW_IMAGE;
+        return ROW_TITLE;
     case 1:
-        return ROW_SHOW_DETAIL;
+        return ROW_IMAGE;
     case 2:
+        return ROW_SHOW_DETAIL;
+    case 3:
         return ROW_SEARCH_AGAIN;
     }
 
     if (!item.registeredWithShelf) {
-        if (row == 3) {
+        if (row == 4) {
             return ROW_ADD_TO_SHELF;
         }
         row--;
     }
 
     switch (row) {
-    case 3:
-        return ROW_STAR;
     case 4:
-        return ROW_TAGS;
+        return ROW_STAR;
     case 5:
+        return ROW_TAGS;
+    case 6:
         return ROW_MEMO;
     }
-    return row - 6;
+    return row - 7;
 }
 
 // セルを返す
@@ -268,12 +255,13 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     BOOL isEditable = NO;
-    BOOL isEditingEditable = NO;
 
     switch (rowKind) {
         case ROW_TITLE:
-            cell.textLabel.text = item.name;
-            isEditingEditable = YES;
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
+                                   NSLocalizedString(@"Title", @""),
+                                   item.name];
+            isEditable = YES;
             break;
 
         case ROW_SHOW_DETAIL:
@@ -310,13 +298,13 @@
 				
         default:
             {
-                NSString *key = [item additionalInfoKeyAtIndex:rowKind];
+                NSString *key = NSLocalizedString([item additionalInfoKeyAtIndex:rowKind], @"");
                 NSString *value = [item additionalInfoValueAtIndex:rowKind];
                 if (value == nil) value = @"";
                 cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", key, value];
                                   
                 if ([item isAdditionalInfoEditableAtIndex:rowKind]) {
-                    isEditingEditable = YES;
+                    isEditable = YES;
                 }
             }
             break;
@@ -324,9 +312,6 @@
 
     if (isEditable) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    if (isEditable || isEditingEditable) {
-        cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
                                    
     return cell;
@@ -520,7 +505,7 @@
 
     // tableView に通知
     [tableView setEditing:editing animated:animated];
-    [tableView reloadData];
+    //[tableView reloadData];
 }
 
 // Return editing style
