@@ -641,18 +641,19 @@ static NSMutableArray *agingArray = nil;
 // Additional info
 - (int)numberOfAdditionalInfo
 {
-    return 6;
+    return 7;
 }
 
 - (NSString *)additionalInfoKeyAtIndex:(int)idx
 {
     switch (idx) {
-    case 0: return @"Author";
-    case 1: return @"Manufacturer";
-    case 2: return @"Category";
-    case 3: return @"Price";
-    case 4: return @"Code";
-    case 5: return @"ASIN";
+    case 0: return @"Title";
+    case 1: return @"Author";
+    case 2: return @"Manufacturer";
+    case 3: return @"Category";
+    case 4: return @"Price";
+    case 5: return @"Code";
+    case 6: return @"ASIN";
     }
     return nil;
  }
@@ -660,38 +661,32 @@ static NSMutableArray *agingArray = nil;
 - (NSString *)additionalInfoValueAtIndex:(int)idx
 {
     switch (idx) {
-        case 0: return author;
-        case 1: return manufacturer;
-        case 2: return category; //NSLocalizedString(category, @"");
-        case 3: return price;
-        case 4: return idString;
-        case 5: return asin;
+        case 0: return name;
+        case 1: return author;
+        case 2: return manufacturer;
+        case 3: return category; //NSLocalizedString(category, @"");
+        case 4: return price;
+        case 5: return idString;
+        case 6: return asin;
     }
     return nil;
 }
 
 - (BOOL)isAdditionalInfoEditableAtIndex:(int)idx
 {
-    switch (idx) {
-        case 0: return YES;
-        case 1: return YES;
-        case 2: return YES;
-        case 3: return YES;
-        case 4: return YES;
-        case 5: return YES;
-    }
-    return NO;
+    return YES;
 }    
 
 - (void)setAdditionalInfoValueAtIndex:(int)idx withValue:(NSString *)value
 {
     switch (idx) {
-        case 0: self.author = value; break;
-        case 1: self.manufacturer = value; break;
-        case 2: self.category = value; break;
-        case 3: self.price = value; break;
-        case 4: self.idString = value; break;
-        case 5: self.asin = value; break;
+        case 0: self.name = value; break;
+        case 1: self.author = value; break;
+        case 2: self.manufacturer = value; break;
+        case 3: self.category = value; break;
+        case 4: self.price = value; break;
+        case 5: self.idString = value; break;
+        case 6: self.asin = value; break;
     }
 }
 

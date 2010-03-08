@@ -105,40 +105,6 @@
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// InfoString 処理
-
-#if 0
-- (void)checkAndAppendString:(NSMutableArray*)infoStrings value:(NSString *)value withName:(NSString *)name
-{
-    if (value != nil && value.length > 0) {
-        [infoStrings addObject:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(name, @""), value]];
-    }
-}
-
-- (void)updateInfoStringsDict
-{
-    for (Item *item in itemArray) {
-        item.infoStrings = [[[NSMutableArray alloc] initWithCapacity:5] autorelease];
-
-        [self checkAndAppendString:item.infoStrings value:item.author withName:@"Author"];
-        [self checkAndAppendString:item.infoStrings value:item.manufacturer withName:@"Manufacturer"];
-        [self checkAndAppendString:item.infoStrings value:item.price withName:@"Price"];
-        [self checkAndAppendString:item.infoStrings value:NSLocalizedString(item.category, @"") withName:@"Category"];
-        [self checkAndAppendString:item.infoStrings value:item.idString withName:@"Code"];
-        [self checkAndAppendString:item.infoStrings value:item.asin withName:@"ASIN"];
-		
-        NSLog(@"DEBUG: Category = %@", item.category);
-    }
-}
-
-- (NSMutableArray *)infoStrings:(int)index
-{
-    Item *item = [itemArray objectAtIndex:index];
-    return item.infoStrings;
-}
-#endif
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark TableViewDataSource
 
@@ -157,9 +123,8 @@
 {
     Item *item = [itemArray objectAtIndex:section];
 	
-    // (タイトル + 画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + スター + メモ) + 情報数
-    //    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
-    int n = 4 + (item.registeredWithShelf ? 0 : 1) + 3 + [item numberOfAdditionalInfo];
+    // (画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + スター + メモ) + 情報数
+    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + [item numberOfAdditionalInfo];
 
     return n;
 }
@@ -169,7 +134,7 @@
 {
     Item *item = [itemArray objectAtIndex:indexPath.section];
 	
-    if (indexPath.row == 1) {
+    if (indexPath.row == 0) {
         // 画像セル
         UIImage *image = [item getImage:nil];
         if (image) {
@@ -180,7 +145,7 @@
 }
 
 // セルの種別を返す
-#define ROW_TITLE -1
+//#define ROW_TITLE -1
 #define ROW_IMAGE -2
 #define ROW_SHOW_DETAIL -3
 #define ROW_SEARCH_AGAIN -4
@@ -195,31 +160,29 @@
 
     switch (row) {
     case 0:
-        return ROW_TITLE;
-    case 1:
         return ROW_IMAGE;
-    case 2:
+    case 1:
         return ROW_SHOW_DETAIL;
-    case 3:
+    case 2:
         return ROW_SEARCH_AGAIN;
     }
 
     if (!item.registeredWithShelf) {
-        if (row == 4) {
+        if (row == 3) {
             return ROW_ADD_TO_SHELF;
         }
         row--;
     }
 
     switch (row) {
-    case 4:
+    case 3:
         return ROW_STAR;
-    case 5:
+    case 4:
         return ROW_TAGS;
-    case 6:
+    case 5:
         return ROW_MEMO;
     }
-    return row - 7;
+    return row - 6;
 }
 
 // セルを返す
@@ -257,13 +220,6 @@
     BOOL isEditable = NO;
 
     switch (rowKind) {
-        case ROW_TITLE:
-            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
-                                   NSLocalizedString(@"Title", @""),
-                                   item.name];
-            isEditable = YES;
-            break;
-
         case ROW_SHOW_DETAIL:
             cell.textLabel.text = NSLocalizedString(@"Show detail", @"");
             cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
@@ -430,17 +386,6 @@
         vc.text = item.memo;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (rowKind == ROW_TITLE) {
-        // タイトル編集
-        currentEditingItem = item;
-        currentEditingRow = rowKind;
-        GenEditTextViewController *vc =
-            [GenEditTextViewController genEditTextViewController:self
-                                       title:NSLocalizedString(@"Title", @"")];
-        vc.text = item.name;
-
-        [self.navigationController pushViewController:vc animated:YES];
-    }
     else if (rowKind >= 0 && [item isAdditionalInfoEditableAtIndex:rowKind]) {
         // その他編集
         currentEditingItem = item;
@@ -483,12 +428,7 @@
 // タイトルその他編集
 - (void)genEditTextViewChanged:(GenEditTextViewController *)vc
 {
-    if (currentEditingRow == ROW_TITLE) {
-        currentEditingItem.name = vc.text;
-    } else {
-        [currentEditingItem setAdditionalInfoValueAtIndex:currentEditingRow withValue:vc.text];
-    }
-
+    [currentEditingItem setAdditionalInfoValueAtIndex:currentEditingRow withValue:vc.text];
     [currentEditingItem update]; // update DB
 
     [tableView reloadData];
