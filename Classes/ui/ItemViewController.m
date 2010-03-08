@@ -491,7 +491,9 @@
     } else {
         [currentEditingItem setAdditionalInfoValueAtIndex:currentEditingRow withValue:vc.text];
     }
-    // TBD: DB update
+
+    [currentEditingItem update]; // update DB
+
     [tableView reloadData];
 }
 
