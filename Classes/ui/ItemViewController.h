@@ -73,11 +73,12 @@
 - (void)openSafari;
 
 // private method
-- (void)updateInfoStringsDict;
-- (NSMutableArray *)infoStrings:(int)index;
+//- (void)updateInfoStringsDict;
+//- (NSMutableArray *)infoStrings:(int)index;
+
 - (int)_calcRowKind:(NSIndexPath *)indexPath item:(Item *)item;
 
-- (void)checkAndAppendString:(NSMutableArray*)infoStrings value:(NSString *)value withName:(NSString *)name;
+//- (void)checkAndAppendString:(NSMutableArray*)infoStrings value:(NSString *)value withName:(NSString *)name;
 - (UITableViewCell *)getImageCell:(UITableView *)tv item:(Item*)item;
 
 @end

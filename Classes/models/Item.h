@@ -80,7 +80,7 @@
     id<ItemDelegate> itemDelegate; ///< Delegate of ItemDelegate protocol
 
     // ItemView 用
-    NSMutableArray *infoStrings; ///< Information strings, used with ItemView
+    //NSMutableArray *infoStrings; ///< Information strings, used with ItemView
     BOOL registeredWithShelf;  ///< Is registered in shelf?
 }
 
@@ -102,7 +102,7 @@
 @property(nonatomic,retain) UIImage *imageCache;
 @property(nonatomic,assign) int sorder;
 @property(nonatomic,assign) int star;
-@property(nonatomic,retain) NSMutableArray *infoStrings;
+//@property(nonatomic,retain) NSMutableArray *infoStrings;
 @property(nonatomic,assign) BOOL registeredWithShelf;
 
 - (BOOL)isEqualToItem:(Item*)item;

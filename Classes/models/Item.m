@@ -42,7 +42,8 @@
 @synthesize serviceId, idString, asin;
 @synthesize name, author, manufacturer, category, detailURL, price, tags;
 @synthesize memo, imageURL, sorder, star;
-@synthesize imageCache, infoStrings, registeredWithShelf;
+@synthesize imageCache, registeredWithShelf;
+//@synthesize infoStrings;
 
 - (id)init
 {
@@ -85,7 +86,7 @@
     [memo release];
     [imageURL release];
     [imageCache release];
-    [infoStrings release];
+    //[infoStrings release];
 	
     [super dealloc];
 }
