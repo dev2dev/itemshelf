@@ -637,4 +637,57 @@ static NSMutableArray *agingArray = nil;
 
 //@}
 
+// Additional info
+- (int)numberOfAdditionalInfo
+{
+    retun 6;
+}
+
+- (NSString *)additionalInfoKeyAtIndex:(int)idx
+{
+    switch (idx) {
+    case 0: return @"Author";
+    case 1: return @"Manufacturer";
+    case 2: return @"Category";
+    case 3: return @"Price";
+    case 4: return @"Code";
+    case 5: return @"ASIN";
+    }
+    return nil;
+}
+
+- (NSString *)additionalInfoValueAtIndex:(int)idx
+{
+    switch (idx) {
+    case 0: return item.author;
+    case 1: return item.manufacturer;
+    case 2: return NSLocalizedString(item.category, @"");
+    case 3: return item.price;
+    case 4: return item.code;
+    case 5: return item.asin;
+    }
+    return nil;
+}
+
+- (BOOL)isAdditionalInfoEditableAtIndex:(int)idx
+{
+    switch (idx) {
+    case 0: return YES;
+    case 1: return YES;
+    case 3: return YES;
+    }
+    return NO;
+}    
+
+- (void)setAdditionalInfoValueAtIndex:(int)idx withValue:(NSString *)value
+{
+    switch (idx) {
+    case 0: return item.author = value;
+    case 1: return item.manufacturer = value;
+    case 3: return item.price = value;
+    }
+
+    // ###TBD: update DB!
+}
+
 @end

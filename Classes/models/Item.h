@@ -132,4 +132,10 @@
 - (void)_deleteImageFile;
 + (void)deleteAllImageCache;
 
+- (int)numberOfAdditionalInfo;
+- (NSString *)additionalInfoKeyAtIndex:(int)idx;
+- (NSString *)additionalInfoValueAtIndex:(int)idx;
+- (BOOL)isAdditionalInfoEditableAtIndex:(int)idx;
+- (void)setAdditionalInfoValueAtIndex:(int)idx withValue:(NSString *)value;
+
 @end
