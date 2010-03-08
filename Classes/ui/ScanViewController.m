@@ -177,7 +177,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         break;
     case 4:
         imgView.image = keywordIcon;
-        nameLabel.text = NSLocalizedString(@"Manual Input", @"");
+        nameLabel.text = NSLocalizedString(@"Manual input", @"");
         descLabel.text = NSLocalizedString(@"ManualInputDescription", @"");
         break;
     case 5:

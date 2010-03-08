@@ -31,6 +31,8 @@
 "EnterCodeDescription" = "Enter item code manually (ISBN, ASIN, UPC, EAN, JAN)";
 "Enter title" = "Enter keyword";
 "EnterTitleDescription" = "Enter title or keyword (author, artist etc.) to search items";
+"Manual input" = "Manual input";
+"ManualInputDescription" = "Input all information manually";
 
 "Camera" = "Camera";
 "Photo library" = "Photo library";
