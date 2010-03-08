@@ -618,11 +618,11 @@
 
     // タイトル
     [body appendString:item.name];
-    [body appendString:@"\n\n"];
+    [body appendString:@"<br><br>"];
 	
     // itemshelf リンク
     [body appendFormat:@"<a href='itemshelf://%@'>ItemShelf Link</a>", item.asin];
-    [body appendString:@"\n\n"];
+    [body appendString:@"<br><br>"];
 	
     // 詳細 URL
     NSString *detailURL = [WebApiFactory detailUrl:item isMobile:NO];

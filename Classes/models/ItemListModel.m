@@ -258,6 +258,10 @@ static int compByStar(Item *a, Item *b, void *ctx)
 {
     return a.star - b.star;
 }
+static int compByDate(Item *a, Item *b, void *ctx)
+{
+    return a.date - b.date;
+}
 
 /**
    @brief ソート
@@ -278,6 +282,9 @@ static int compByStar(Item *a, Item *b, void *ctx)
         break;
     case 3:
         [filteredList sortUsingFunction:compByStar context:0];
+        break;
+    case 4:
+        [filteredList sortUsingFunction:compByDate context:0];
         break;
     }
 

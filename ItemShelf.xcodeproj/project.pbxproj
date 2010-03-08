@@ -75,6 +75,7 @@
 		3E427BDE0EDC30B80028E633 /* NumPadSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BDD0EDC30B80028E633 /* NumPadSelected.png */; };
 		3E42FD420EDD6BEF00FD4879 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E42FD410EDD6BEF00FD4879 /* Entitlements.plist */; };
 		3E554C870ED98A4400166874 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E554C860ED98A4400166874 /* Localizable.strings */; };
+		3E61A3B41145166500AFC6E3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB6F10C114505F000C859C7 /* MessageUI.framework */; };
 		3E6A1C57101770E800767CC0 /* Sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E6A1C56101770E800767CC0 /* Sort.png */; };
 		3E6A1C58101770E800767CC0 /* Sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E6A1C56101770E800767CC0 /* Sort.png */; };
 		3E6F53100ECFBE7D00E68A4B /* ItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */; };
@@ -435,6 +436,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E61A3B41145166500AFC6E3 /* MessageUI.framework in Frameworks */,
 				3EC9C7580EE14B8A0026396A /* libZebla.a in Frameworks */,
 				3EB779D311429519001C3F1F /* AVFoundation.framework in Frameworks */,
 				3ECBBB4E0EDC4A8200865EF7 /* AudioToolbox in Frameworks */,
