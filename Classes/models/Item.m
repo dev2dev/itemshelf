@@ -654,7 +654,7 @@ static NSMutableArray *agingArray = nil;
     case 5: return @"ASIN";
     }
     return nil;
-}
+ }
 
 - (NSString *)additionalInfoValueAtIndex:(int)idx
 {
