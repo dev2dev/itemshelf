@@ -98,9 +98,9 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (!isCameraAvailable) {
-        return 4;
+        return 5;
     }
-    return 5;
+    return 6;
 }
 
 // セルを返す
@@ -176,6 +176,11 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         descLabel.text = NSLocalizedString(@"EnterTitleDescription", @"");
         break;
     case 4:
+        imgView.image = keywordIcon;
+        nameLabel.text = NSLocalizedString(@"Manual Input", @"");
+        descLabel.text = NSLocalizedString(@"ManualInputDescription", @"");
+        break;
+    case 5:
         imgView.image = localeIcon;
         nameLabel.text = NSLocalizedString(@"Select locale", @"");
         descLabel.text = NSLocalizedString(@"Select locale of service", @"");
@@ -207,6 +212,9 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         [self enterKeyword:nil];
         break;
     case 4:
+        [self enterManual:nil];
+        break;
+    case 5:
         [self selectService];
         break;
     }
@@ -309,6 +317,29 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     v.selectedShelf = selectedShelf;
 
     [self.navigationController pushViewController:v animated:YES];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// 手動入力
+- (void)enterManual:(id)sender
+{
+    Item *item = [[[Item alloc] init] autorelease];
+    if (selectedShelf == nil) {
+        item.shelfId = 0; // 未分類
+    } else {
+        item.shelfId = selectedShelf.pkey;
+    }
+    DataModel *dm = [DataModel sharedDataModel];
+    [dm addItem:item];
+
+    NSMutableArray *itemArray = [[[NSMutableArray alloc] init] autorelease];
+    [itemArray addObject:item];
+
+    // show item view
+    ItemViewController *vc = [[[ItemViewController alloc] initWithNibName:@"ItemView" bundle:nil] autorelease];
+    vc.itemArray = itemArray;
+
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
