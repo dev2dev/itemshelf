@@ -75,6 +75,7 @@
 		3E427BDE0EDC30B80028E633 /* NumPadSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BDD0EDC30B80028E633 /* NumPadSelected.png */; };
 		3E42FD420EDD6BEF00FD4879 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E42FD410EDD6BEF00FD4879 /* Entitlements.plist */; };
 		3E554C870ED98A4400166874 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E554C860ED98A4400166874 /* Localizable.strings */; };
+		3E61A3B41145166500AFC6E3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB6F10C114505F000C859C7 /* MessageUI.framework */; };
 		3E6A1C57101770E800767CC0 /* Sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E6A1C56101770E800767CC0 /* Sort.png */; };
 		3E6A1C58101770E800767CC0 /* Sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E6A1C56101770E800767CC0 /* Sort.png */; };
 		3E6F53100ECFBE7D00E68A4B /* ItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */; };
@@ -97,6 +98,7 @@
 		3EA62C9E0EE9834900A4694B /* NumPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA62C9D0EE9834900A4694B /* NumPad.png */; };
 		3EA62D260EE98F7600A4694B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA62D250EE98F7600A4694B /* Default.png */; };
 		3EA8F0E30F555BF900FE2779 /* Icon-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EA8F0E20F555BF900FE2779 /* Icon-lite.png */; };
+		3EB6F10D114505F000C859C7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB6F10C114505F000C859C7 /* MessageUI.framework */; };
 		3EB779C911429491001C3F1F /* libGoogleAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB779C811429491001C3F1F /* libGoogleAds.a */; };
 		3EB779CA11429491001C3F1F /* libGoogleAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB779C811429491001C3F1F /* libGoogleAds.a */; };
 		3EB779D311429519001C3F1F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB779D211429519001C3F1F /* AVFoundation.framework */; };
@@ -322,6 +324,7 @@
 		3EA62C9D0EE9834900A4694B /* NumPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NumPad.png; sourceTree = "<group>"; };
 		3EA62D250EE98F7600A4694B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3EA8F0E20F555BF900FE2779 /* Icon-lite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-lite.png"; sourceTree = "<group>"; };
+		3EB6F10C114505F000C859C7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3EB779C61142947E001C3F1F /* GADAdSenseParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSenseParameters.h; sourceTree = "<group>"; };
 		3EB779C711429488001C3F1F /* GADAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdViewController.h; sourceTree = "<group>"; };
 		3EB779C811429491001C3F1F /* libGoogleAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAds.a; sourceTree = "<group>"; };
@@ -433,6 +436,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E61A3B41145166500AFC6E3 /* MessageUI.framework in Frameworks */,
 				3EC9C7580EE14B8A0026396A /* libZebla.a in Frameworks */,
 				3EB779D311429519001C3F1F /* AVFoundation.framework in Frameworks */,
 				3ECBBB4E0EDC4A8200865EF7 /* AudioToolbox in Frameworks */,
@@ -462,6 +466,7 @@
 				3E28EB9810649CD2006F9FF7 /* QuartzCore.framework in Frameworks */,
 				3EB779CA11429491001C3F1F /* libGoogleAds.a in Frameworks */,
 				3EB779EC114295A1001C3F1F /* AVFoundation.framework in Frameworks */,
+				3EB6F10D114505F000C859C7 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				3ECBBB4D0EDC4A8200865EF7 /* AudioToolbox */,
+				3EB6F10C114505F000C859C7 /* MessageUI.framework */,
 				3E28EABA10649A7A006F9FF7 /* libsqlite3.dylib */,
 				3E28EABC10649A87006F9FF7 /* Foundation.framework */,
 				3E28EAC910649B87006F9FF7 /* CoreGraphics.framework */,
@@ -1227,8 +1233,6 @@
 				INFOPLIST_FILE = "Info-lite.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
-					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1251,8 +1255,6 @@
 				INFOPLIST_FILE = "Info-lite.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
-					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1275,8 +1277,6 @@
 				INFOPLIST_FILE = "Info-lite.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
-					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -1300,8 +1300,6 @@
 				INFOPLIST_FILE = "Info-lite.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SYSTEM_LIBRARY_DIR)/Frameworks/AudioToolbox.framework\\\"",
-					"\\\"$(SRCROOT)/build/Debug\\ (tmurakam)-iphonesimulator\\\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";

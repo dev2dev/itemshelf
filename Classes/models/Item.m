@@ -42,7 +42,8 @@
 @synthesize serviceId, idString, asin;
 @synthesize name, author, manufacturer, category, detailURL, price, tags;
 @synthesize memo, imageURL, sorder, star;
-@synthesize imageCache, infoStrings, registeredWithShelf;
+@synthesize imageCache, registeredWithShelf;
+//@synthesize infoStrings;
 
 - (id)init
 {
@@ -85,7 +86,7 @@
     [memo release];
     [imageURL release];
     [imageCache release];
-    [infoStrings release];
+    //[infoStrings release];
 	
     [super dealloc];
 }
@@ -636,5 +637,57 @@ static NSMutableArray *agingArray = nil;
 }
 
 //@}
+
+// Additional info
+- (int)numberOfAdditionalInfo
+{
+    return 7;
+}
+
+- (NSString *)additionalInfoKeyAtIndex:(int)idx
+{
+    switch (idx) {
+    case 0: return @"Title";
+    case 1: return @"Author";
+    case 2: return @"Manufacturer";
+    case 3: return @"Category";
+    case 4: return @"Price";
+    case 5: return @"Code";
+    case 6: return @"ASIN";
+    }
+    return nil;
+ }
+
+- (NSString *)additionalInfoValueAtIndex:(int)idx
+{
+    switch (idx) {
+        case 0: return name;
+        case 1: return author;
+        case 2: return manufacturer;
+        case 3: return category; //NSLocalizedString(category, @"");
+        case 4: return price;
+        case 5: return idString;
+        case 6: return asin;
+    }
+    return nil;
+}
+
+- (BOOL)isAdditionalInfoEditableAtIndex:(int)idx
+{
+    return YES;
+}    
+
+- (void)setAdditionalInfoValueAtIndex:(int)idx withValue:(NSString *)value
+{
+    switch (idx) {
+        case 0: self.name = value; break;
+        case 1: self.author = value; break;
+        case 2: self.manufacturer = value; break;
+        case 3: self.category = value; break;
+        case 4: self.price = value; break;
+        case 5: self.idString = value; break;
+        case 6: self.asin = value; break;
+    }
+}
 
 @end

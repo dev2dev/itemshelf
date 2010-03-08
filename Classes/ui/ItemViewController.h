@@ -33,17 +33,22 @@
 */
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
 #import "Common.h"
 #import "Item.h"
 #import "GenSelectListViewController.h"
 #import "EditTagsViewController.h"
 #import "EditMemoVC.h"
 #import "EditStarViewController.h"
+#import "GenEditTextViewController.h"
 
 @interface ItemViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, 
      EditTagsViewDelegate, EditMemoViewDelegate, EditStarViewDelegate,
-     GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+     GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,
+     GenEditTextViewDelegate, MFMailComposeViewControllerDelegate>
 {
     IBOutlet UITableView *tableView;
     IBOutlet UIBarButtonItem *cameraButton;
@@ -55,6 +60,7 @@
     UIActionSheet *cameraActionSheet;
 
     Item *currentEditingItem;
+    int currentEditingRow;
 }
 
 @property(nonatomic,retain) NSMutableArray *itemArray;
@@ -68,11 +74,12 @@
 - (void)openSafari;
 
 // private method
-- (void)updateInfoStringsDict;
-- (NSMutableArray *)infoStrings:(int)index;
+//- (void)updateInfoStringsDict;
+//- (NSMutableArray *)infoStrings:(int)index;
+
 - (int)_calcRowKind:(NSIndexPath *)indexPath item:(Item *)item;
 
-- (void)checkAndAppendString:(NSMutableArray*)infoStrings value:(NSString *)value withName:(NSString *)name;
+//- (void)checkAndAppendString:(NSMutableArray*)infoStrings value:(NSString *)value withName:(NSString *)name;
 - (UITableViewCell *)getImageCell:(UITableView *)tv item:(Item*)item;
 
 @end

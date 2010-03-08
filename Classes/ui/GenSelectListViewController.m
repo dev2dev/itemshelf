@@ -36,7 +36,7 @@
 
 @implementation GenSelectListViewController
 
-@synthesize delegate, list, identifier, selectedIndex;
+@synthesize delegate, list, identifier, selectedIndex, isLocalize;
 
 /**
    Generate GenSelectListViewController
@@ -64,6 +64,7 @@
         self.list = ary;
         self.title = a_title;
         self.identifier = -1;
+        self.isLocalize = YES;
     }
     return self;
 }    
@@ -139,7 +140,11 @@
     }
 
     NSString *text = [list objectAtIndex:indexPath.row];
-    cell.textLabel.text = NSLocalizedString(text, @"");
+    if (self.isLocalize) {
+        cell.textLabel.text = NSLocalizedString(text, @"");
+    } else {
+        cell.textLabel.text = text;
+    }
 
     return cell;
 }

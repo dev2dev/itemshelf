@@ -62,6 +62,7 @@
 - (void)scanFromLibrary:(id)sender;
 - (void)enterIdentifier:(id)sender;
 - (void)enterKeyword:(id)sender;
+- (void)enterManual:(id)sender;
 
 - (BOOL)execScan:(UIImagePickerControllerSourceType)type;
 - (void)selectService;

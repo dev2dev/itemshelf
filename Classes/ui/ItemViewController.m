@@ -84,16 +84,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updateInfoStringsDict];
 
-	// keyword 検索の場合は、アイテム編集させない
-	Item *item0 = [itemArray objectAtIndex:0];
-	BOOL editable = false;
-	if (itemArray.count == 1 && item0.registeredWithShelf) {
-		editable = true;
-	}
-	cameraButton.enabled = editable;
-	self.navigationItem.rightBarButtonItem.enabled = editable;
+    // keyword 検索の場合は、アイテム編集させない
+    Item *item0 = [itemArray objectAtIndex:0];
+    BOOL editable = false;
+    if (itemArray.count == 1 && item0.registeredWithShelf) {
+        editable = true;
+    }
+    cameraButton.enabled = editable;
+    self.navigationItem.rightBarButtonItem.enabled = editable;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -104,38 +103,6 @@
     for (Item *item in itemArray) {
         [item getImage:self];
     }
-}
-
-- (void)checkAndAppendString:(NSMutableArray*)infoStrings value:(NSString *)value withName:(NSString *)name
-{
-    if (value != nil && value.length > 0) {
-        [infoStrings addObject:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(name, @""), value]];
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// InfoString 処理
-
-- (void)updateInfoStringsDict
-{
-    for (Item *item in itemArray) {
-        item.infoStrings = [[[NSMutableArray alloc] initWithCapacity:5] autorelease];
-
-        [self checkAndAppendString:item.infoStrings value:item.author withName:@"Author"];
-        [self checkAndAppendString:item.infoStrings value:item.manufacturer withName:@"Manufacturer"];
-        [self checkAndAppendString:item.infoStrings value:item.price withName:@"Price"];
-        [self checkAndAppendString:item.infoStrings value:NSLocalizedString(item.category, @"") withName:@"Category"];
-        [self checkAndAppendString:item.infoStrings value:item.idString withName:@"Code"];
-        [self checkAndAppendString:item.infoStrings value:item.asin withName:@"ASIN"];
-		
-        NSLog(@"DEBUG: Category = %@", item.category);
-    }
-}
-
-- (NSMutableArray *)infoStrings:(int)index
-{
-    Item *item = [itemArray objectAtIndex:index];
-    return item.infoStrings;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -152,12 +119,14 @@
     return item.name;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section
 {
     Item *item = [itemArray objectAtIndex:section];
 	
     // (画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + スター + メモ) + 情報数
-    return 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
+    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + [item numberOfAdditionalInfo];
+
+    return n;
 }
 
 // セルの高さを返す
@@ -176,19 +145,20 @@
 }
 
 // セルの種別を返す
-#define ROW_IMAGE -1
-#define ROW_SHOW_DETAIL -2
-#define ROW_SEARCH_AGAIN -3
-#define ROW_ADD_TO_SHELF -4
-#define ROW_TAGS -5
-#define ROW_STAR -6
-#define ROW_MEMO -7
+//#define ROW_TITLE -1
+#define ROW_IMAGE -2
+#define ROW_SHOW_DETAIL -3
+#define ROW_SEARCH_AGAIN -4
+#define ROW_ADD_TO_SHELF -5
+#define ROW_TAGS -6
+#define ROW_STAR -7
+#define ROW_MEMO -8
 
 - (int)_calcRowKind:(NSIndexPath *)indexPath item:(Item *)item
 {
-    int n;
+    int row = indexPath.row;
 
-    switch (indexPath.row) {
+    switch (row) {
     case 0:
         return ROW_IMAGE;
     case 1:
@@ -197,15 +167,14 @@
         return ROW_SEARCH_AGAIN;
     }
 
-    n = indexPath.row;
     if (!item.registeredWithShelf) {
-        if (indexPath.row == 3) {
+        if (row == 3) {
             return ROW_ADD_TO_SHELF;
         }
-        n--;
+        row--;
     }
 
-    switch (n) {
+    switch (row) {
     case 3:
         return ROW_STAR;
     case 4:
@@ -213,14 +182,13 @@
     case 5:
         return ROW_MEMO;
     }
-    return n - 6;
+    return row - 6;
 }
 
 // セルを返す
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Item *item = [itemArray objectAtIndex:indexPath.section];
-    NSMutableArray *infoStrings = [self infoStrings:indexPath.section];
 
     int rowKind = [self _calcRowKind:indexPath item:item];
 
@@ -248,45 +216,60 @@
 	
     cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
     cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    BOOL isEditable = NO;
 
     switch (rowKind) {
-    case ROW_SHOW_DETAIL:
-        cell.textLabel.text = NSLocalizedString(@"Show detail", @"");
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_SHOW_DETAIL:
+            cell.textLabel.text = NSLocalizedString(@"Show detail", @"");
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+            isEditable = YES;
+            break;
 
-    case ROW_SEARCH_AGAIN:
-        cell.textLabel.text = NSLocalizedString(@"Search again with title", @"");
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
-        break;
+        case ROW_SEARCH_AGAIN:
+            cell.textLabel.text = NSLocalizedString(@"Search again with title", @"");
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+            isEditable = YES;
+            break;
 
-    case ROW_ADD_TO_SHELF:
-        cell.textLabel.text = NSLocalizedString(@"Add to shelf", @"");
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_ADD_TO_SHELF:
+            cell.textLabel.text = NSLocalizedString(@"Add to shelf", @"");
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
+            isEditable = YES;
+            break;
 
-    case ROW_TAGS:
-        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
-                              NSLocalizedString(@"Tags", @""),
-                              item.tags];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_TAGS:
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
+                                   NSLocalizedString(@"Tags", @""),
+                                   item.tags];
+            isEditable = YES;
+            break;
 
-    case ROW_MEMO:
-        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
-                              NSLocalizedString(@"Memo", @""),
-                              item.memo];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        break;
+        case ROW_MEMO:
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
+                                   NSLocalizedString(@"Memo", @""),
+                                   item.memo];
+            isEditable = YES;
+            break;
 				
-    default:
-        cell.textLabel.text = [infoStrings objectAtIndex:rowKind];
-        break;
+        default:
+            {
+                NSString *key = NSLocalizedString([item additionalInfoKeyAtIndex:rowKind], @"");
+                NSString *value = [item additionalInfoValueAtIndex:rowKind];
+                if (value == nil) value = @"";
+                cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", key, value];
+                                  
+                if ([item isAdditionalInfoEditableAtIndex:rowKind]) {
+                    isEditable = YES;
+                }
+            }
+            break;
     }
 
+    if (isEditable) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+                                   
     return cell;
 }
 
@@ -349,7 +332,7 @@
 
     Item *item = [itemArray objectAtIndex:indexPath.section];
     int rowKind = [self _calcRowKind:indexPath item:item];
-	
+
     if (rowKind == ROW_IMAGE) {
         [self cameraButtonTapped:nil];
     }
@@ -403,6 +386,22 @@
         vc.text = item.memo;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    else if (rowKind >= 0 && [item isAdditionalInfoEditableAtIndex:rowKind]) {
+        // その他編集
+        currentEditingItem = item;
+        currentEditingRow = rowKind;
+
+        NSString *key, *value;
+        key = [item additionalInfoKeyAtIndex:rowKind];
+        value = [item additionalInfoValueAtIndex:rowKind];
+
+        GenEditTextViewController *vc =
+            [GenEditTextViewController genEditTextViewController:self
+                                       title:NSLocalizedString(key, @"")];
+        vc.text = value;
+
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)editStarViewChanged:(EditStarViewController *)vc
@@ -424,6 +423,41 @@
     currentEditingItem.memo = vc.text;
     [currentEditingItem updateMemo];
     [tableView reloadData];
+}
+
+// タイトルその他編集
+- (void)genEditTextViewChanged:(GenEditTextViewController *)vc
+{
+    [currentEditingItem setAdditionalInfoValueAtIndex:currentEditingRow withValue:vc.text];
+    [currentEditingItem update]; // update DB
+
+    [tableView reloadData];
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Edit handling
+
+// Edit button process
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+
+    // tableView に通知
+    [tableView setEditing:editing animated:animated];
+    //[tableView reloadData];
+}
+
+// Return editing style
+- (UITableViewCellEditingStyle)tableView:(UITableView*)tv
+           editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
+- (BOOL)tableView:(UITableView *)tv canMoveRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    return NO;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -584,16 +618,19 @@
 
     // タイトル
     [body appendString:item.name];
-    [body appendString:@"\n\n"];
+    [body appendString:@"<br><br>"];
 	
     // itemshelf リンク
     [body appendFormat:@"<a href='itemshelf://%@'>ItemShelf Link</a>", item.asin];
-    [body appendString:@"\n\n"];
+    [body appendString:@"<br><br>"];
 	
     // 詳細 URL
     NSString *detailURL = [WebApiFactory detailUrl:item isMobile:NO];
     [body appendFormat:@"<a href='%@'>Detail link of the item</a>", detailURL];
 	
+#if 0
+    // old version...
+
     // ここでいったん body を完全に　URL encode する
     NSString *tmp = [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [body setString:tmp];
@@ -616,6 +653,22 @@
     // メーラをキックする
     NSURL *url = [NSURL URLWithString:mailStr];
     [[UIApplication sharedApplication] openURL:url];
+#else
+    // MFMailComposeViewController を使う
+    MFMailComposeViewController *vc = [[MFMailComposeViewController alloc] init];
+    vc.mailComposeDelegate = self;
+
+    [vc setSubject:[NSString stringWithFormat:@"[ItemShelf] %@", item.name]];
+    [vc setMessageBody:body isHTML:YES];
+    [self.navigationController presentModalViewController:vc animated:YES];
+    [vc release];
+#endif
+}
+
+// MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    [controller dismissModalViewControllerAnimated:YES];
 }
 
 - (void)openSafari

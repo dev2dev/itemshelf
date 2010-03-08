@@ -58,12 +58,14 @@
 	
     NSArray *list;      ///< list of options
     int selectedIndex;  ///< selected index of options list
+    BOOL isLocalize; 
 }
 
 @property(nonatomic,assign) id<GenSelectListViewDelegate> delegate;
 @property(nonatomic,assign) int identifier;
 @property(nonatomic,retain) NSArray *list;
 @property(nonatomic,assign) int selectedIndex;
+@property(nonatomic,assign) BOOL isLocalize;
 
 + (GenSelectListViewController *)genSelectListViewController:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title;
 - (id)init:(id<GenSelectListViewDelegate>)delegate array:(NSArray*)ary title:(NSString*)title;
