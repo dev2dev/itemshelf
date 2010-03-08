@@ -33,6 +33,9 @@
 */
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
 #import "Common.h"
 #import "Item.h"
 #import "GenSelectListViewController.h"
@@ -43,7 +46,8 @@
 @interface ItemViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, 
      EditTagsViewDelegate, EditMemoViewDelegate, EditStarViewDelegate,
-     GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+     GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,
+     MFMailComposeViewControllerDelegate>
 {
     IBOutlet UITableView *tableView;
     IBOutlet UIBarButtonItem *cameraButton;

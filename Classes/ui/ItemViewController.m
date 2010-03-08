@@ -594,6 +594,9 @@
     NSString *detailURL = [WebApiFactory detailUrl:item isMobile:NO];
     [body appendFormat:@"<a href='%@'>Detail link of the item</a>", detailURL];
 	
+#if 0
+    // old version...
+
     // ここでいったん body を完全に　URL encode する
     NSString *tmp = [body stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [body setString:tmp];
@@ -616,6 +619,22 @@
     // メーラをキックする
     NSURL *url = [NSURL URLWithString:mailStr];
     [[UIApplication sharedApplication] openURL:url];
+#else
+    // MFMailComposeViewController を使う
+    MFMailComposeViewController *vc = [[MFMailComposeViewController alloc] init];
+    vc.mailComposeDelegate = self;
+
+    [vc setSubject:[NSString stringWithFormat:@"[ItemShelf] %@", item.name]];
+    [vc setMessageBody:body isHTML:YES];
+    [self.navigationController presentModalViewController:vc animated:YES];
+    [vc release];
+#endif
+}
+
+// MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    [controller dismissModalViewControllerAnimated:YES];
 }
 
 - (void)openSafari
