@@ -65,6 +65,10 @@
              target:self
              action:@selector(moveActionButtonTapped:)]
             autorelease];
+
+#if 0
+    self.navigationItem.rightBarButtonItem = [self editButtonItem];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
@@ -157,7 +161,13 @@
     Item *item = [itemArray objectAtIndex:section];
 	
     // (画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + スター + メモ) + 情報数
-    return 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
+    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
+
+    if (tableView.editing) {
+        n++; // タイトル編集行
+    }
+
+    return n;
 }
 
 // セルの高さを返す
@@ -165,7 +175,8 @@
 {
     Item *item = [itemArray objectAtIndex:indexPath.section];
 	
-    if (indexPath.row == 0) {
+    if ((!tableView.editing && indexPath.row == 0) ||
+        (tableView.editing && indexPath.row == 1)) {
         // 画像セル
         UIImage *image = [item getImage:nil];
         if (image) {
@@ -176,19 +187,27 @@
 }
 
 // セルの種別を返す
-#define ROW_IMAGE -1
-#define ROW_SHOW_DETAIL -2
-#define ROW_SEARCH_AGAIN -3
-#define ROW_ADD_TO_SHELF -4
-#define ROW_TAGS -5
-#define ROW_STAR -6
-#define ROW_MEMO -7
+#define ROW_TITLE -1
+#define ROW_IMAGE -2
+#define ROW_SHOW_DETAIL -3
+#define ROW_SEARCH_AGAIN -4
+#define ROW_ADD_TO_SHELF -5
+#define ROW_TAGS -6
+#define ROW_STAR -7
+#define ROW_MEMO -8
 
 - (int)_calcRowKind:(NSIndexPath *)indexPath item:(Item *)item
 {
     int n;
+    int row = indexPath.row;
 
-    switch (indexPath.row) {
+    if (tableView.editing) {
+        row--;  // タイトル編集行
+    }
+
+    switch (row) {
+    case -1:
+        return ROW_TITLE;
     case 0:
         return ROW_IMAGE;
     case 1:
@@ -250,6 +269,11 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
 
     switch (rowKind) {
+    case ROW_TITLE:
+        cell.textLabel.text = item.title;
+        cell.accessoryType = UITableViewCellAccessoryDiscloseIndicator;
+        break;
+
     case ROW_SHOW_DETAIL:
         cell.textLabel.text = NSLocalizedString(@"Show detail", @"");
         cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
@@ -349,7 +373,7 @@
 
     Item *item = [itemArray objectAtIndex:indexPath.section];
     int rowKind = [self _calcRowKind:indexPath item:item];
-	
+
     if (rowKind == ROW_IMAGE) {
         [self cameraButtonTapped:nil];
     }
@@ -403,6 +427,23 @@
         vc.text = item.memo;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    else {
+        // タイトルその他
+#if 0
+        currentEditingItem = item;
+        currentEditingRow = rowKind;
+
+        GenEditTextViewController *vc =
+            [GenEditTextViewController genEditTextViewController:self
+                                       title:NSLocalizedString(@"TBD", @"")];
+        if (rowKind == ROW_TITLE) {
+            vc.text = item.title;
+        } else {
+            vc.text = [infoStrings objectAtIndex:rowKind];
+        }
+        [self.navigationController pushViewController:vc animated:YES];
+#endif
+    }
 }
 
 - (void)editStarViewChanged:(EditStarViewController *)vc
@@ -424,6 +465,45 @@
     currentEditingItem.memo = vc.text;
     [currentEditingItem updateMemo];
     [tableView reloadData];
+}
+
+#if 0
+// タイトルその他編集
+- (void)genEditTextViewChanged:(GenEditTextViewController *)vc
+{
+    if (currentEditingRowKind == ROW_TITLE) {
+        currentEditingItem.title = vc.text;
+    } else {
+        [infoStrings replaceObjectAtIndex:currentEditingRowKind withObject:vc.text];
+    }
+    [currentEditingItem updateAll];
+    [tableView reloadData];
+}
+#endif
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Edit handling
+
+// Edit button process
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+
+    // tableView に通知
+    [tableView setEditing:editing animated:animated];
+}
+
+// Return editing style
+- (UITableViewCellEditingStyle)tableView:(UITableView*)tv
+           editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
+- (BOOL)tableView:(UITableView *)tv canMoveRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    return NO;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
