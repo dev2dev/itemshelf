@@ -88,16 +88,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updateInfoStringsDict];
 
-	// keyword 検索の場合は、アイテム編集させない
-	Item *item0 = [itemArray objectAtIndex:0];
-	BOOL editable = false;
-	if (itemArray.count == 1 && item0.registeredWithShelf) {
-		editable = true;
-	}
-	cameraButton.enabled = editable;
-	self.navigationItem.rightBarButtonItem.enabled = editable;
+    // keyword 検索の場合は、アイテム編集させない
+    Item *item0 = [itemArray objectAtIndex:0];
+    BOOL editable = false;
+    if (itemArray.count == 1 && item0.registeredWithShelf) {
+        editable = true;
+    }
+    cameraButton.enabled = editable;
+    self.navigationItem.rightBarButtonItem.enabled = editable;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -110,15 +109,16 @@
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// InfoString 処理
+
+#if 0
 - (void)checkAndAppendString:(NSMutableArray*)infoStrings value:(NSString *)value withName:(NSString *)name
 {
     if (value != nil && value.length > 0) {
         [infoStrings addObject:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(name, @""), value]];
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// InfoString 処理
 
 - (void)updateInfoStringsDict
 {
@@ -141,6 +141,7 @@
     Item *item = [itemArray objectAtIndex:index];
     return item.infoStrings;
 }
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark TableViewDataSource
@@ -161,7 +162,8 @@
     Item *item = [itemArray objectAtIndex:section];
 	
     // (画像 + 詳細を見る + 再検索) + 棚に追加 + (タグ + スター + メモ) + 情報数
-    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
+    //    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
+    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + [item numberOfAdditionalInfo];
 
     if (tableView.editing) {
         n++; // タイトル編集行
@@ -239,7 +241,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Item *item = [itemArray objectAtIndex:indexPath.section];
-    NSMutableArray *infoStrings = [self infoStrings:indexPath.section];
 
     int rowKind = [self _calcRowKind:indexPath item:item];
 
@@ -307,7 +308,12 @@
         break;
 				
     default:
-        cell.textLabel.text = [infoStrings objectAtIndex:rowKind];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@",
+                                        [item additionalInfoKeyAtIndex:rowKind],
+                                        [item additionalInfoValueAtIndex:rowKind]];
+        if (tableView.editing && [item isAdditionalInfoEditableAtIndex:rowKind]) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         break;
     }
 
@@ -427,22 +433,32 @@
         vc.text = item.memo;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else {
-        // タイトルその他
-#if 0
+    else if (rowKind == ROW_TITLE) {
+        // タイトル編集
+        currentEditingItem = item;
+        currentEditingRow = rowKind;
+        GenEditTextViewController *vc =
+            [GenEditTextViewController genEditTextViewController:self
+                                       title:NSLocalizedString(@"Title", @"")];
+        vc.value = item.title;
+
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if (rowKind >= 0 && [item isAdditionalInfoEditableAtIndex:rowKind]) {
+        // その他編集
         currentEditingItem = item;
         currentEditingRow = rowKind;
 
+        NSString *key, *value;
+        key = [item additionalInfoKeyAtIndex:rowKind];
+        value = [item additionalInfoValueAtIndex:rowKind];
+
         GenEditTextViewController *vc =
             [GenEditTextViewController genEditTextViewController:self
-                                       title:NSLocalizedString(@"TBD", @"")];
-        if (rowKind == ROW_TITLE) {
-            vc.text = item.title;
-        } else {
-            vc.text = [infoStrings objectAtIndex:rowKind];
-        }
+                                       title:NSLocalizedString(key, @"")];
+        vc.value = value;
+
         [self.navigationController pushViewController:vc animated:YES];
-#endif
     }
 }
 
@@ -467,19 +483,17 @@
     [tableView reloadData];
 }
 
-#if 0
 // タイトルその他編集
 - (void)genEditTextViewChanged:(GenEditTextViewController *)vc
 {
     if (currentEditingRowKind == ROW_TITLE) {
         currentEditingItem.title = vc.text;
     } else {
-        [infoStrings replaceObjectAtIndex:currentEditingRowKind withObject:vc.text];
+        [currentEditingItem setAdditionalInfoValueAtIndex:currentEditingRow withValue:vc.text];
     }
-    [currentEditingItem updateAll];
+    // TBD: DB update
     [tableView reloadData];
 }
-#endif
 
 
 //////////////////////////////////////////////////////////////////////////////////////////

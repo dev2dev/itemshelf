@@ -59,6 +59,7 @@
     UIActionSheet *cameraActionSheet;
 
     Item *currentEditingItem;
+    int currentEditingRow;
 }
 
 @property(nonatomic,retain) NSMutableArray *itemArray;
