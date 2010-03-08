@@ -157,7 +157,7 @@
     return item.name;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section
 {
     Item *item = [itemArray objectAtIndex:section];
 	
@@ -165,7 +165,7 @@
     //    int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + item.infoStrings.count;
     int n = 3 + (item.registeredWithShelf ? 0 : 1) + 3 + [item numberOfAdditionalInfo];
 
-    if (tableView.editing) {
+    if (tv.editing) {
         n++; // タイトル編集行
     }
 
@@ -271,8 +271,8 @@
 
     switch (rowKind) {
     case ROW_TITLE:
-        cell.textLabel.text = item.title;
-        cell.accessoryType = UITableViewCellAccessoryDiscloseIndicator;
+        cell.textLabel.text = item.name;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         break;
 
     case ROW_SHOW_DETAIL:
@@ -440,7 +440,7 @@
         GenEditTextViewController *vc =
             [GenEditTextViewController genEditTextViewController:self
                                        title:NSLocalizedString(@"Title", @"")];
-        vc.value = item.title;
+        vc.text = item.name;
 
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -456,7 +456,7 @@
         GenEditTextViewController *vc =
             [GenEditTextViewController genEditTextViewController:self
                                        title:NSLocalizedString(key, @"")];
-        vc.value = value;
+        vc.text = value;
 
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -486,8 +486,8 @@
 // タイトルその他編集
 - (void)genEditTextViewChanged:(GenEditTextViewController *)vc
 {
-    if (currentEditingRowKind == ROW_TITLE) {
-        currentEditingItem.title = vc.text;
+    if (currentEditingRow == ROW_TITLE) {
+        currentEditingItem.name = vc.text;
     } else {
         [currentEditingItem setAdditionalInfoValueAtIndex:currentEditingRow withValue:vc.text];
     }

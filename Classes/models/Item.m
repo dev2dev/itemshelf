@@ -641,7 +641,7 @@ static NSMutableArray *agingArray = nil;
 // Additional info
 - (int)numberOfAdditionalInfo
 {
-    retun 6;
+    return 6;
 }
 
 - (NSString *)additionalInfoKeyAtIndex:(int)idx
@@ -660,12 +660,12 @@ static NSMutableArray *agingArray = nil;
 - (NSString *)additionalInfoValueAtIndex:(int)idx
 {
     switch (idx) {
-    case 0: return item.author;
-    case 1: return item.manufacturer;
-    case 2: return NSLocalizedString(item.category, @"");
-    case 3: return item.price;
-    case 4: return item.code;
-    case 5: return item.asin;
+    case 0: return author;
+    case 1: return manufacturer;
+    case 2: return NSLocalizedString(category, @"");
+    case 3: return price;
+    case 4: return idString;
+    case 5: return asin;
     }
     return nil;
 }
@@ -683,12 +683,10 @@ static NSMutableArray *agingArray = nil;
 - (void)setAdditionalInfoValueAtIndex:(int)idx withValue:(NSString *)value
 {
     switch (idx) {
-    case 0: return item.author = value;
-    case 1: return item.manufacturer = value;
-    case 3: return item.price = value;
+    case 0: self.author = value;
+    case 1: self.manufacturer = value;
+    case 3: self.price = value;
     }
-
-    // ###TBD: update DB!
 }
 
 @end

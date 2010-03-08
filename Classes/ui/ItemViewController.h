@@ -42,12 +42,13 @@
 #import "EditTagsViewController.h"
 #import "EditMemoVC.h"
 #import "EditStarViewController.h"
+#import "GenEditTextViewController.h"
 
 @interface ItemViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, ItemDelegate, 
      EditTagsViewDelegate, EditMemoViewDelegate, EditStarViewDelegate,
      GenSelectListViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-     MFMailComposeViewControllerDelegate>
+     GenEditTextViewDelegate, MFMailComposeViewControllerDelegate>
 {
     IBOutlet UITableView *tableView;
     IBOutlet UIBarButtonItem *cameraButton;
