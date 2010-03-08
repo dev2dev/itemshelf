@@ -260,7 +260,20 @@ static int compByStar(Item *a, Item *b, void *ctx)
 }
 static int compByDate(Item *a, Item *b, void *ctx)
 {
-    return a.date - b.date;
+    int ret;
+    switch ([a.date compare:b.date]) {
+        case NSOrderedSame:
+            ret = 0;
+            break;
+        case NSOrderedAscending:
+            ret = -1;
+            break;
+        default:
+            ret = 1;
+            break;
+    }
+            
+    return ret;
 }
 
 /**
