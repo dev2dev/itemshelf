@@ -305,10 +305,18 @@ static DateFormatter2 *dateFormatter = nil;
 */
 - (NSString*)dbPath
 {
-    NSString *dbPath = [AppDelegate pathOfDataFile:@"iWantThis.db"];
+    NSString *dbPath = [AppDelegate pathOfDataFile:@"itemshelf.db"];
     NSLog(@"dbPath = %@", dbPath);
 
     return dbPath;
+}
+
+- (NSString*)_oldDbPath
+{
+    NSString *oldDbPath = [AppDelegate pathOfDataFile:@"iWantThis.db"];
+    NSLog(@"oldDbPath = %@", oldDbPath);
+
+    return oldDbPath;
 }
 
 /**
@@ -318,11 +326,24 @@ static DateFormatter2 *dateFormatter = nil;
 */
 - (BOOL)open
 {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    // Check old DB
+    NSString *oldDbPath = [self _oldDbPath];
+    BOOL isExistOldDb = [fileManager fileExistsAtPath:oldDbPath];
+
     // Load from DB
     NSString *dbPath = [self dbPath];
-	
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isExistedDb = [fileManager fileExistsAtPath:dbPath];
+
+    if (isExistOldDb) {
+        if (isExistedDb) {
+            [fileManager removeItemAtPath:oldDbPath error:NULL];
+        } else {
+            [fileManager moveItemAtPath:oldDbPath toPath:dbPath error:NULL];
+            isExistedDb = YES;
+        }
+    }
 	
     if (sqlite3_open([dbPath UTF8String], &handle) != 0) {
         // ouch!

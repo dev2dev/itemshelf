@@ -34,6 +34,8 @@
 
 #import <arpa/inet.h>
 #import <fcntl.h>
+#import <sys/types.h>
+#import <sys/stat.h>
 
 #import "TmiWebServer.h"
 #import "BackupServer.h"
@@ -198,17 +200,23 @@
     // okay, save data between start and end.
     int f = -1;
 
+    NSString *filename;
     if (isZip) {
         // save to zip file
-        f = open([[self _zipFileName] UTF8String], O_WRONLY);
+        filename = [self _zipFileName];
+
     } else {
         // save to DB directly
-        f = open([[[Database instance] dbPath] UTF8String], O_WRONLY);
+        filename = [[Database instance] dbPath];
     }
+    NSLog(@"restore file:%@", filename);
+    f = open([filename UTF8String], O_CREAT|O_WRONLY);
     if (f < 0) {
         // TBD;
+        NSLog(@"open failed:%s", strerror(errno));
         return;
     }
+    chmod([filename UTF8String], S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
     char *p = data;
     char *end = data + datalen;
@@ -222,7 +230,9 @@
     [Item deleteAllImageCache];
     
     if (isZip) {
-        if (![self _unzipArchive]) {
+        BOOL result = [self _unzipArchive];
+        [[NSFileManager defaultManager] removeItemAtPath:filename error:NULL];
+        if (!result) {
             [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
             [self sendString:@"Restoration failed. Try again..."];
             return;
