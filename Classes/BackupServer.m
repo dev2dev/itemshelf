@@ -38,6 +38,8 @@
 #import "TmiWebServer.h"
 #import "BackupServer.h"
 #import "Item.h"
+#import "AppDelegate.h"
+#import "ZipArchive.h"
 
 @implementation BackupServer
 @synthesize filePath, dataName;
@@ -113,7 +115,18 @@
 */
 - (void)sendBackup
 {
+#if 0
+    // DB only...
     int f = open([filePath UTF8String], O_RDONLY);
+#else
+    // ZIP
+    if (![self _zipArchive]) {
+        // TBD
+        return;
+    }
+    int f = open([[self _zipFileName] UTF8String], O_RDONLY);
+#endif
+
     if (f < 0) {
         // file open error...
         // TBD
@@ -169,15 +182,30 @@
 */
 - (void)restore:(char *)data datalen:(int)datalen
 {
+    const char zipheader[4] = {0x50, 0x4b, 0x03, 0x04};
+    BOOL isZip = NO;
+
     // Check data format
-    if (strncmp(data, "SQLite format 3", 15) != 0) {
+    if (memcmp(data, zipheader, 4) == 0) {
+        // okey its zip file
+        isZip = YES;
+    }
+    else if (strncmp(data, "SQLite format 3", 15) != 0) {
         [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
         [self sendString:@"This is not itemshelf database file. Try again."];
         return;
     }
 
     // okay, save data between start and end.
-    int f = open([filePath UTF8String], O_WRONLY);
+    int f = -1;
+
+    if (isZip) {
+        // save to zip file
+        f = open([[self _zipFileName] UTF8String], O_WRONLY);
+    } else {
+        // save to DB directly
+        f = open([filePath UTF8String], O_WRONLY);
+    }
     if (f < 0) {
         // TBD;
         return;
@@ -194,6 +222,14 @@
     // Clear all image data
     [Item deleteAllImageCache];
     
+    if (isZip) {
+        if (![self _unzipArchive]) {
+            [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
+            [self sendString:@"Restoration failed. Try again..."];
+            return;
+        }
+    }
+
     // send reply
     [self sendString:@"HTTP/1.0 200 OK\r\nContent-Type:text/html\r\n\r\n"];
     [self sendString:@"Restore completed. Please restart the application."];
@@ -201,6 +237,49 @@
     // terminate application ...
     //[[UIApplication sharedApplication] terminate];
     exit(0);
+}
+
+- (NSString *)_zipFileName
+{
+    return [AppDelegate pathOfDataFile:@"Backup.zip"];
+}
+
+- (BOOL)_zipArchive
+{
+    NSString *dir = [AppDelegate pathOfDataFile:nil];
+
+    // ファイル一覧取得
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *files = [fileManager subpathsAtPath:dir];
+    
+    ZipArchive *zip = [[[ZipArchive alloc] init] autorelease];
+    [zip CreateZipFile2:[self _zipFileName]];
+
+    for (NSString *file in files) {
+        if ([file hasSuffix:@"db"] || [file hasPrefix:@"img-"]) {
+            NSString *fullpath = [dir stringByAppendingPathComponent:file];
+            [zip addFileToZip:fullpath newname:file];
+        }
+    }
+
+    BOOL result = [zip CloseZipFile2];
+    return result;
+}
+
+- (BOOL)_unzipArchive
+{
+    NSString *dir = [AppDelegate pathOfDataFile:nil];
+
+    ZipArchive *zip = [[[ZipArchive alloc] init] autorelease];
+    if (![zip UnzipOpenFile:[self _zipFileName]]) {
+        // no file
+        return NO;
+    }
+
+    [zip UnzipFileTo:dir overWrite:YES];
+    [zip UnzipCloseFile];
+    
+    return YES;
 }
 
 @end
