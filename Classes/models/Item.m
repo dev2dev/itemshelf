@@ -468,6 +468,8 @@ static NSMutableArray *agingArray = nil;
     }
 
     // Check cache file on the file system.
+    [self _fixImagePath];
+
     NSString *imagePath = [self _imagePath];
     if (imagePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
 #if 1
@@ -585,24 +587,39 @@ static NSMutableArray *agingArray = nil;
 }
 
 /**
-   Get image (cache) file name (private)
-*/
-- (NSString*)_imageFileName
-{
-    if (pkey < 0) return nil;
-
-    NSString *filename = [NSString stringWithFormat:@"img-%d", self.pkey];
-    return filename;
-}
-
-/**
   Get image (cache) file name (full path) (private)
 */
 - (NSString *)_imagePath
 {
     if (pkey < 0) return nil;
-	
-    return [AppDelegate pathOfDataFile:[self _imageFileName]];
+
+    NSString *filename = [NSString stringWithFormat:@"img-%d.jpg", self.pkey];
+    return [AppDelegate pathOfDataFile:filename];
+}
+
+/**
+  Fix image extension (for backward compat.)
+*/
+- (void)_fixImagePath
+{
+    if (pkey < 0) return;
+
+    NSFileManager *fm = [NSFileManager defaultManager];
+
+    NSString *oldfilename = [NSString stringWithFormat:@"img-%d", self.pkey];
+    NSString *oldpath = [AppDelegate pathOfDataFile:oldfilename];
+
+    if (![fm fileExistsAtPath:oldpath]) return;
+
+    NSString *newfilename = [NSString stringWithFormat:@"img-%d.jpg", self.pkey];
+    NSString *newpath = [AppDelegate pathOfDataFile:newfilename];
+
+    if ([fm fileExistsAtPath:newpath]) {
+        [fm removeItemAtPath:oldpath error:NULL];
+    } else {
+        [fm moveItemAtPath:oldpath toPath:newpath error:NULL];
+        NSLog(@"image renamed : %@ -> %@", oldpath, newpath);
+    }
 }
 
 /**

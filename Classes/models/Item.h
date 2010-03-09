@@ -127,8 +127,8 @@
 - (UIImage*)_getNoImage;
 - (void)_refreshImageCache;
 - (void)_putImageCache;
-- (NSString*)_imageFileName;
 - (NSString *)_imagePath; // private
+- (void)_fixImagePath;
 - (void)_deleteImageFile;
 + (void)deleteAllImageCache;
 

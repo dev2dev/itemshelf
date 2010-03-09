@@ -42,13 +42,13 @@
 #import "ZipArchive.h"
 
 @implementation BackupServer
-@synthesize filePath, dataName;
+//@synthesize filePath;
+@synthesize dataName;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        filePath = nil;
         dataName = nil;
     }
     return self;
@@ -57,7 +57,6 @@
 - (void)dealloc
 {
     [dataName release];
-    [filePath release];
     [super dealloc];
 }
 
@@ -204,7 +203,7 @@
         f = open([[self _zipFileName] UTF8String], O_WRONLY);
     } else {
         // save to DB directly
-        f = open([filePath UTF8String], O_WRONLY);
+        f = open([[[Database instance] dbPath] UTF8String], O_WRONLY);
     }
     if (f < 0) {
         // TBD;
@@ -256,7 +255,7 @@
     [zip CreateZipFile2:[self _zipFileName]];
 
     for (NSString *file in files) {
-        if ([file hasSuffix:@"db"] || [file hasPrefix:@"img-"]) {
+        if ([file hasSuffix:@"db"] || [file hasSuffix:@"jpg"]) {
             NSString *fullpath = [dir stringByAppendingPathComponent:file];
             [zip addFileToZip:fullpath newname:file];
         }

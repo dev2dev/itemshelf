@@ -39,11 +39,11 @@
 */
 @interface BackupServer : TmiWebServer
 {
-    NSString *filePath;
+    //NSString *filePath;
     NSString *dataName;
 }
 
-@property(nonatomic,retain) NSString *filePath;
+//@property(nonatomic,retain) NSString *filePath;
 @property(nonatomic,retain) NSString *dataName;
 
 - (void)sendIndexHtml;
