@@ -203,4 +203,45 @@
     exit(0);
 }
 
+- (NSString *)_zipFileName
+{
+    return [AppDelegate pathOfDataFile:@"Backup.zip"];
+}
+
+- (BOOL)_zipArchive
+{
+    NSString *dir = [AppDelegate pathOfDataFile:nil];
+
+    // ファイル一覧取得
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *files = [fileManager subpathsAtPath:dir];
+    
+    ZipArchive *zip = [[[ZipArchive alloc] init] autorelease];
+    [archiver CreateZipFile2:[self _zipFileName]];
+
+    for (NSString *file in files) {
+        if (![file hasSuffix:@"zip"]) {
+            NSString *fullpath = [dir stringByAppendingPathComponent:file];
+            [zip addFileToZip:fullpath newname:file];
+        }
+    }
+
+    BOOL result = [zip CloseZipFile2];
+    return result;
+}
+
+- (BOOL)_unzipArchive
+{
+    NSString *dir = [AppDelegate pathOfDataFile:nil];
+
+    ZipArchive *zip = [[[ZipArchive alloc] init] autorelease];
+    if (![zip UnzipOpenFile:[self _zipFileName]) {
+        // no file
+        return NO;
+    }
+
+    [zip UnzipFileTo:dir overWrite:YES];
+    [zip UnzipCloseFile];
+}
+
 @end
