@@ -38,6 +38,8 @@
 #import "TmiWebServer.h"
 #import "BackupServer.h"
 #import "Item.h"
+#import "AppDelegate.h"
+#import "ZipArchive.h"
 
 @implementation BackupServer
 @synthesize filePath, dataName;
@@ -251,7 +253,7 @@
     NSArray *files = [fileManager subpathsAtPath:dir];
     
     ZipArchive *zip = [[[ZipArchive alloc] init] autorelease];
-    [archiver CreateZipFile2:[self _zipFileName]];
+    [zip CreateZipFile2:[self _zipFileName]];
 
     for (NSString *file in files) {
         if (![file hasSuffix:@"zip"]) {
@@ -269,7 +271,7 @@
     NSString *dir = [AppDelegate pathOfDataFile:nil];
 
     ZipArchive *zip = [[[ZipArchive alloc] init] autorelease];
-    if (![zip UnzipOpenFile:[self _zipFileName]) {
+    if (![zip UnzipOpenFile:[self _zipFileName]]) {
         // no file
         return NO;
     }
