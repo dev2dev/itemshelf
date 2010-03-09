@@ -115,7 +115,7 @@
 */
 - (void)sendBackup
 {
-#if 1
+#if 0
     // DB only...
     int f = open([filePath UTF8String], O_RDONLY);
 #else
@@ -256,7 +256,7 @@
     [zip CreateZipFile2:[self _zipFileName]];
 
     for (NSString *file in files) {
-        if (![file hasSuffix:@"zip"]) {
+        if ([file hasSuffix:@"db"] || [file hasPrefix:@"img-"]) {
             NSString *fullpath = [dir stringByAppendingPathComponent:file];
             [zip addFileToZip:fullpath newname:file];
         }
@@ -278,6 +278,8 @@
 
     [zip UnzipFileTo:dir overWrite:YES];
     [zip UnzipCloseFile];
+    
+    return YES;
 }
 
 @end
