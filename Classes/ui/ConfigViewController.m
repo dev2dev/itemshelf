@@ -188,7 +188,7 @@
     
     backupServer = [[BackupServer alloc] init];
     backupServer.filePath = [[Database instance] dbPath];
-    backupServer.dataName = @"itemshelf.db";
+    backupServer.dataName = @"itemshelf-backup.zip";
 
     NSString *url = [backupServer serverUrl];
     if (url != nil) {
