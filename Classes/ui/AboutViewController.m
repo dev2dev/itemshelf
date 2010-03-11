@@ -35,7 +35,7 @@
 #import "AboutViewController.h"
 #import "Edition.h"
 
-#define COPYRIGHT @"Copyright © 2008-2009, ItemShelf development team. All rights reserved."
+#define COPYRIGHT @"Copyright © 2008-2010, ItemShelf development team. All rights reserved."
 #define COPYRIGHT_ZEBRA @"Zebra barcode library, Copyright 2007-2008 (c) Jeff Brown <spadix@users.sourceforge.net>"
 
 @implementation AboutViewController
