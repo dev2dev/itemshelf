@@ -1295,6 +1295,7 @@
 					DEBUG,
 				);
 				INFOPLIST_FILE = "Info-lite.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAds\"",
@@ -1317,6 +1318,7 @@
 				GCC_PREFIX_HEADER = ItemShelf_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LITE_EDITION;
 				INFOPLIST_FILE = "Info-lite.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAds\"",
@@ -1339,6 +1341,7 @@
 				GCC_PREFIX_HEADER = ItemShelf_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LITE_EDITION;
 				INFOPLIST_FILE = "Info-lite.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAds\"",
@@ -1362,6 +1365,7 @@
 				GCC_PREFIX_HEADER = ItemShelf_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LITE_EDITION;
 				INFOPLIST_FILE = "Info-lite.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAds\"",
