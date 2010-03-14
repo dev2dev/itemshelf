@@ -1,5 +1,9 @@
+2010-03-14 : Takuya Murakami
+	* AFMA channel ID を修正
+	* ver 2.2.1 (Lite 版のみ, Appstore 上は 2.2)
+
 2010-03-11 : Takuya Murakami
-	* ver 2.2
+	* ver 2.2 (AppStore 上, Lite 版は 2.1)
 
 2010-03-09 : Takuya Murakami
 	* バックアップを ZIP 化、画像もすべて含む
