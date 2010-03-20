@@ -266,7 +266,7 @@
 	
     // 「新規追加」行の追加／削除処理
     int newRow = [[DataModel sharedDataModel] shelvesCount];
-    if ([Edition isLiteEdition]) newRow++;
+    //if ([Edition isLiteEdition]) newRow++;
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRow inSection:0];
     if (editing) {
@@ -277,7 +277,7 @@
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                    withRowAnimation:UITableViewRowAnimationTop];
     }
-    [tableView reloadData];
+    //[tableView reloadData];
 
 #if 0
     if (editing) {
@@ -344,6 +344,18 @@
         return NO;	// All 棚は移動させない
     }
     return YES;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tv targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)fromIndexPath 
+       toProposedIndexPath:(NSIndexPath *)proposedIndexPath
+{
+    int addNewShelfRow = [[DataModel sharedDataModel] shelvesCount];
+    
+    // All 列と、Add new shelf... の列には移動を禁止する
+    if (proposedIndexPath.row == 0 || proposedIndexPath.row == addNewShelfRow) {
+        return fromIndexPath;
+    }
+    return proposedIndexPath;
 }
 
 - (void)tableView:(UITableView *)tv moveRowAtIndexPath:(NSIndexPath*)from toIndexPath:(NSIndexPath*)to
