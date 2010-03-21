@@ -113,15 +113,16 @@
         [comp removeQuery:@"SubscriptionId"];
         [comp removeQuery:@"tag"];
 	
+        NSString *u = [[comp absoluteString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         url = [NSString
-                stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonredirect.cgi/%@",
-                [comp absoluteString]];
+               stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonredirect.cgi/%@", u];
+
     } else {
         url = [NSString
                 stringWithFormat:@"http://itemshelf.com/cgi-bin/amazonmobile.cgi?host=%@&asin=%@",
                 comp.host, item.asin];
     }
-
+    //NSLog(@"%@", url);
     return url;
 }
 

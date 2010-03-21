@@ -96,6 +96,7 @@
     [Item clearAllImageCache];
 
     // ページロード処理
+    //NSLog(@"Open URL: %@", urlString);
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *req = [[[NSURLRequest alloc] initWithURL:url] autorelease];
     [webView loadRequest:req];
