@@ -128,7 +128,13 @@ CGPoint lastTouchLocation;
     }
 	
     // Generate table view with touch event handlers
-    tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:CGRectMake(0, 0, 320, 372)];
+    CGRect rect = [self.view frame];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        // iPad
+        tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:CGRectMake(0, 0, 768, 1024-108)];
+    } else {
+        tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:CGRectMake(0, 0, 320, 480-108)];
+    }
     tableView.rowHeight = ITEM_CELL_HEIGHT;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.dataSource = self;
