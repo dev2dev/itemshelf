@@ -239,11 +239,11 @@ CGPoint lastTouchLocation;
     }
 
     if (itemsPerLine == 1) {
-        itemsPerLine = 4;
-        if (centerRow > 0) centerRow /= 4;
+        itemsPerLine = [ItemCell4 numItemsPerCell];
+        if (centerRow > 0) centerRow /= [ItemCell4 numItemsPerCell];
     } else {
         itemsPerLine = 1;
-        if (centerRow > 0) centerRow *= 4;
+        if (centerRow > 0) centerRow *= [ItemCell4 numItemsPerCell];
     }
 
     if (self.navigationItem.rightBarButtonItem) {
@@ -322,8 +322,9 @@ CGPoint lastTouchLocation;
         return cell;
     } else {
         ItemCell4 *cell = [ItemCell4 getCell:tv];
-        for (int i = 0;  i < 4; i++) {
-            int idx = row * 4 + i;
+        int n = [ItemCell4 numItemsPerCell];
+        for (int i = 0;  i < n; i++) {
+            int idx = row * n + i;
 
             Item *item;
             if (idx < model.count) {
@@ -359,12 +360,11 @@ CGPoint lastTouchLocation;
 
     // クリックされたアイテムの index を計算
     int idx = indexPath.row;
-    if (itemsPerLine == 1) {
-        //
-    } else {
-        int x = lastTouchLocation.x * 4 / 320;
-        idx = idx * 4 + x;
+    if (itemsPerLine > 1) {
+        int x = lastTouchLocation.x / ITEM_IMAGE_WIDTH;
+        idx = idx * itemsPerLine + x;
     }
+
     if (idx >= [model count]) {
         return;
     }

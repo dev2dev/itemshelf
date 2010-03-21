@@ -66,7 +66,11 @@
     if (self) {
         webApiFactory = [[WebApiFactory alloc] init];
 
-        textField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 190, 28)];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            textField = [[UITextField alloc] initWithFrame:CGRectMake(160, 10, 500, 28)];
+        } else {
+            textField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 190, 28)];
+        }
         //textField.backgroundColor = [UIColor grayColor];
         textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         textField.font = [UIFont systemFontOfSize: 14.0];
@@ -294,7 +298,11 @@
     KeywordViewCell *cell = [KeywordViewCell getCell:title tableView:tableView identifier:title];
 
     UILabel *value;
-    value = [[[UILabel alloc] initWithFrame:CGRectMake(110, 6, 190, 32)] autorelease];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        value = [[[UILabel alloc] initWithFrame:CGRectMake(160, 6, 500, 32)] autorelease];
+    } else {
+        value = [[[UILabel alloc] initWithFrame:CGRectMake(110, 6, 190, 32)] autorelease];
+    }
     value.text = NSLocalizedString(text, @"");
     value.font = [UIFont systemFontOfSize: 14.0];
     value.textColor = [UIColor blackColor];

@@ -47,4 +47,6 @@
 + (ItemCell4 *)getCell:(UITableView *)tableView;
 - (void)setItem:(Item *)item atIndex:(int)index;
 
++ (int)numItemsPerCell;
+
 @end

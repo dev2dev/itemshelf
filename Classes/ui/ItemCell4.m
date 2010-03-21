@@ -66,7 +66,8 @@
 	
     // 画像
     UIImageView *imgView;
-    for (int i = 0; i < 4; i++) {
+    int n = [ItemCell4 numItemsPerCell];
+    for (int i = 0; i < n; i++) {
         imgView = [[[UIImageView alloc]
                        initWithFrame:CGRectMake(ITEM_IMAGE_WIDTH * i,
                                                 ITEM_CELL_HEIGHT - ITEM_IMAGE_HEIGHT - 8,
@@ -98,6 +99,14 @@
     } else {
         imgView.image = nil;
     }
+}
+
++ (int)numItemsPerCell
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return 9;
+    }
+    return 4;
 }
 
 @end
