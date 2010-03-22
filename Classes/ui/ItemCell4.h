@@ -42,11 +42,13 @@
 
 @interface ItemCell4 : UITableViewCell
 {
+    int numItemsPerCell;
+    NSMutableArray *imageViews;
 }
 
-+ (ItemCell4 *)getCell:(UITableView *)tableView;
-- (void)setItem:(Item *)item atIndex:(int)index;
++ (ItemCell4 *)getCell:(UITableView *)tableView numItemsPerCell:(int)n;
 
-+ (int)numItemsPerCell;
+- (void)setNumItemsPerCell:(int)n;
+- (void)setItem:(Item *)item atIndex:(int)index;
 
 @end

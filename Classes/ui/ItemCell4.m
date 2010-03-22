@@ -38,12 +38,15 @@
 
 #define REUSE_CELL_ID @"ItemCell4Id"
 
-+ (ItemCell4 *)getCell:(UITableView *)tableView
++ (ItemCell4 *)getCell:(UITableView *)tableView numItemsPerCell:(int)n
 {
     ItemCell4 *cell = (ItemCell4*)[tableView dequeueReusableCellWithIdentifier:REUSE_CELL_ID];
     if (cell == nil) {
         cell = [[[ItemCell4 alloc] init] autorelease];
     }
+    
+    [cell setNumItemsPerCell:n];
+    
     return cell;
 }
 
@@ -63,30 +66,54 @@
     backImage.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     backImage.image = backgroundImage;
     [self.contentView addSubview:backImage];
-	
+
+	numItemsPerCell = 0;
+    imageViews = nil;
+    
+    return self;
+}
+
+- (void)setNumItemsPerCell:(int)n
+{
+    UIImageView *iv;
+    
+    // 以前と同じ画像数なら、なにもしない
+    if (numItemsPerCell == n) {
+        return;
+    }
+    
+    if (imageViews == nil) {
+        // 初期化時
+        imageViews = [[NSMutableArray alloc] init];
+    } else {
+        // 画像数変更 (画面回転)
+        for (iv in imageViews) {
+            [iv removeFromSuperview];
+        }
+        [imageViews removeAllObjects];
+    }
+    
     // 画像
-    UIImageView *imgView;
-    int n = [ItemCell4 numItemsPerCell];
     for (int i = 0; i < n; i++) {
-        imgView = [[[UIImageView alloc]
+        iv = [[[UIImageView alloc]
                        initWithFrame:CGRectMake(ITEM_IMAGE_WIDTH * i,
                                                 ITEM_CELL_HEIGHT - ITEM_IMAGE_HEIGHT - 8,
                                                 ITEM_IMAGE_WIDTH, ITEM_IMAGE_HEIGHT)]
                       autorelease];
-        imgView.tag = i + 1;
-        imgView.autoresizingMask = 0;
-        imgView.contentMode = UIViewContentModeScaleAspectFit; // 画像のアスペクト比を変えないようにする。
+        iv.tag = i + 1;
+        iv.autoresizingMask = 0;
+        iv.contentMode = UIViewContentModeScaleAspectFit; // 画像のアスペクト比を変えないようにする。
         //imgView.contentMode = UIViewContentModeBottom;
-        imgView.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:imgView];
+        iv.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:iv];
+        
+        [imageViews addObject:iv];
     }
-
-    return self;
 }
 
 - (void)setItem:(Item *)item atIndex:(int)index
 {
-    UIImageView *imgView = (UIImageView *)[self.contentView viewWithTag:index + 1];
+    UIImageView *imgView = (UIImageView *)[imageViews objectAtIndex:index];
 
     if (item != nil) {
         UIImage *image = [item getImage:nil];
@@ -99,14 +126,6 @@
     } else {
         imgView.image = nil;
     }
-}
-
-+ (int)numItemsPerCell
-{
-    if (IS_IPAD) {
-        return 9;
-    }
-    return 4;
 }
 
 @end

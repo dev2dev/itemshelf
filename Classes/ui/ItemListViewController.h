@@ -76,4 +76,6 @@
 - (IBAction)filterButtonTapped:(id)sender;
 - (IBAction)sortButtonTapped:(id)sender;
 
+- (int)_calcNumMultiItemsPerLine;
+
 @end
