@@ -103,7 +103,7 @@
 
 + (int)numItemsPerCell
 {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    if (IS_IPAD) {
         return 9;
     }
     return 4;

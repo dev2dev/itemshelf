@@ -46,6 +46,8 @@ void AssertFailed(const char *filename, int line);
 
 #import "StringArray.h"
 
+#define IS_IPAD   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+
 /**
    Common utility class
  */

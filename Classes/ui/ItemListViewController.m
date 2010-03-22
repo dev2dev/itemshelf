@@ -129,7 +129,7 @@ CGPoint lastTouchLocation;
 	
     // Generate table view with touch event handlers
     CGRect rect = [self.view frame];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    if (IS_IPAD) {
         // iPad
         tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:CGRectMake(0, 0, 768, 1024-108)];
     } else {
@@ -609,5 +609,9 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [vc release];
 }
 //@}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
+}
 
 @end

@@ -339,7 +339,7 @@
     else if (rowKind == ROW_SHOW_DETAIL) {
         // 詳細を表示
         NSString *detailURL;
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if (IS_IPAD) {
             detailURL = [WebApiFactory detailUrl:item isMobile:NO];
         } else {
             detailURL = [WebApiFactory detailUrl:item isMobile:YES];
@@ -683,6 +683,10 @@
     NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
     NSURL *url = [NSURL URLWithString:[detailURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
 }
 
 
