@@ -93,6 +93,8 @@
 		3E817E840EE6C1C60015A97E /* NoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E817E830EE6C1C60015A97E /* NoImage.png */; };
 		3E89CB490EF559C400286564 /* ShelfNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E89CB470EF559C400286564 /* ShelfNormal.png */; };
 		3E89CB4A0EF559C400286564 /* ShelfSmart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E89CB480EF559C400286564 /* ShelfSmart.png */; };
+		3E97899311571C97009C158B /* NumPadView-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E97899211571C97009C158B /* NumPadView-iPad.xib */; };
+		3E97899411571C97009C158B /* NumPadView-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E97899211571C97009C158B /* NumPadView-iPad.xib */; };
 		3E9935A011465B54005386D0 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E99359811465B54005386D0 /* ioapi.c */; };
 		3E9935A111465B54005386D0 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E99359A11465B54005386D0 /* mztools.c */; };
 		3E9935A211465B54005386D0 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E99359C11465B54005386D0 /* unzip.c */; };
@@ -333,6 +335,7 @@
 		3E817E830EE6C1C60015A97E /* NoImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NoImage.png; sourceTree = "<group>"; };
 		3E89CB470EF559C400286564 /* ShelfNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShelfNormal.png; sourceTree = "<group>"; };
 		3E89CB480EF559C400286564 /* ShelfSmart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShelfSmart.png; sourceTree = "<group>"; };
+		3E97899211571C97009C158B /* NumPadView-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "NumPadView-iPad.xib"; sourceTree = "<group>"; };
 		3E99359711465B54005386D0 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		3E99359811465B54005386D0 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
 		3E99359911465B54005386D0 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
@@ -832,6 +835,7 @@
 				3E9E4DC00ED0339C00A7DCF2 /* GenEditTextView.xib */,
 				3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */,
 				3E427BC00EDC2A320028E633 /* NumPadView.xib */,
+				3E97899211571C97009C158B /* NumPadView-iPad.xib */,
 				3ED069690F545CBA006D932B /* KeywordView2.xib */,
 				3E0C0CC3101ABC1F00F18D86 /* EditMemoView.xib */,
 			);
@@ -1008,6 +1012,7 @@
 				3E0C0D7E101AD45800F18D86 /* Star5.png in Resources */,
 				3E71A6AA10406A04006266C7 /* BarcodeReader.png in Resources */,
 				3EE8374E11564EFD00F64764 /* MainWindow-iPad.xib in Resources */,
+				3E97899311571C97009C158B /* NumPadView-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1064,7 @@
 				3E0C0D85101AD45800F18D86 /* Star5.png in Resources */,
 				3E71A6A910406A04006266C7 /* BarcodeReader.png in Resources */,
 				3EE8374F11564EFD00F64764 /* MainWindow-iPad.xib in Resources */,
+				3E97899411571C97009C158B /* NumPadView-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

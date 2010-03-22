@@ -44,8 +44,14 @@
 
 + (NumPadViewController *)numPadViewController:(NSString*)title
 {
+    NSString *nibName;
+    if (IS_IPAD) {
+        nibName = @"NumPadView-iPad";
+    } else {
+        nibName = @"NumPadView";
+    }
     NumPadViewController *vc = [[[NumPadViewController alloc]
-                                    initWithNibName:@"NumPadView"
+                                    initWithNibName:nibName
                                     bundle:nil] autorelease];
     vc.title = title;
     return vc;
