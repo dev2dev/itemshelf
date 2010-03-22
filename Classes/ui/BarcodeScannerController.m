@@ -67,19 +67,16 @@
     NSLog(@"BarcodeScannerController: viewDidAppear");
     [super viewDidAppear:animated];
     
-    UIImage *overlay = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BarcodeReader" ofType:@"png"]];
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    imgView.image = overlay;
+    if (self.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        // バーコード用ビューをオーバーレイする
+        UIImage *overlay = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"BarcodeReader" ofType:@"png"]];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        imgView.image = overlay;
 
-#if 0
-    [self.view addSubview:imgView];
-    [self.view bringSubviewToFront:imgView];
-    [imgView release];
-#else
-    // iPhone OS 3.1
-    self.cameraOverlayView = imgView;
-    [imgView release];
-#endif
+        // iPhone OS 3.1
+        self.cameraOverlayView = imgView;
+        [imgView release];
+    }
 
     timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerHandler:) userInfo:nil repeats:YES];
     [timer retain];
