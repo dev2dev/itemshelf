@@ -614,8 +614,17 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 }
 //@}
 
+// 画面回転
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if (itemsPerLine > 1) {
+        itemsPerLine = [self _calcNumMultiItemsPerLine];
+        [tableView reloadData];
+    }
 }
 
 @end
