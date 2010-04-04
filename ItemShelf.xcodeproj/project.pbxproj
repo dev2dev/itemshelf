@@ -237,6 +237,7 @@
 		3ED6BE110ED588CB00F4C7EE /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED6BE100ED588CB00F4C7EE /* whiteButton.png */; };
 		3EDA86A90EFA7DE300C4D226 /* PlusItem.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA86A70EFA7DE300C4D226 /* PlusItem.png */; };
 		3EDA86AA0EFA7DE300C4D226 /* PlusShelf.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */; };
+		3EDCFFFC11684765009D99C2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDCFFFB11684765009D99C2 /* SystemConfiguration.framework */; };
 		3EE8374E11564EFD00F64764 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8374D11564EFD00F64764 /* MainWindow-iPad.xib */; };
 		3EE8374F11564EFD00F64764 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8374D11564EFD00F64764 /* MainWindow-iPad.xib */; };
 /* End PBXBuildFile section */
@@ -457,6 +458,7 @@
 		3ED6BE100ED588CB00F4C7EE /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteButton.png; sourceTree = "<group>"; };
 		3EDA86A70EFA7DE300C4D226 /* PlusItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusItem.png; sourceTree = "<group>"; };
 		3EDA86A80EFA7DE300C4D226 /* PlusShelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusShelf.png; sourceTree = "<group>"; };
+		3EDCFFFB11684765009D99C2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3EE8374D11564EFD00F64764 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -499,6 +501,7 @@
 				3EB779EC114295A1001C3F1F /* AVFoundation.framework in Frameworks */,
 				3EB6F10D114505F000C859C7 /* MessageUI.framework in Frameworks */,
 				3E9935B911465BD1005386D0 /* libz.dylib in Frameworks */,
+				3EDCFFFC11684765009D99C2 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +589,7 @@
 				3E7F60171084CABA0040A615 /* CoreLocation.framework */,
 				3EB779D211429519001C3F1F /* AVFoundation.framework */,
 				3E9935B811465BD1005386D0 /* libz.dylib */,
+				3EDCFFFB11684765009D99C2 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
