@@ -64,6 +64,12 @@ extern NSString* const kGADAdSenseAdTextColor;  // UIColor
 // The default color of the ad url is 33FF33.
 extern NSString* const kGADAdSenseAdURLColor;  // UIColor
 
+// The direction that expandable ads should grow.  If you don't want to support
+// expandable ads, do not set this attribute.  Allowed values "b" or "t" which
+// indicate that the growth should be towards the bottom or top of the screen,
+// respectively.
+extern NSString* const kGADExpandDirection;  // NSString
+
 // When there are no relevant Google ads to show, Google displays public service
 // ads. You can override this behavior by setting kGADAdsenseAlternateAdColor
 // to a color that is used to fill in the ad slot, or kGADAdSenseAlternateAdURL

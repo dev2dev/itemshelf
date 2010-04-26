@@ -36,19 +36,21 @@ typedef enum {
 @property(nonatomic, assign) id<GADAdViewControllerDelegate> delegate;
 
 // Specify the time (in seconds) for automatic refreshing of the ad.  Set to 0
-// to disable.  Otherwise, set to 180 or larger (non-zero values less than 180
-// will be increased to 180). The default is 0 (no auto refresh).
-@property(nonatomic, assign) NSUInteger autoRefreshSeconds;
+// or any negative value to disable.  Otherwise, set to 180 or larger (non-zero
+// values less than 180 will be increased to 180). The default is 0 (no auto
+// refresh).
+@property(nonatomic, assign) NSInteger autoRefreshSeconds;
 
 // Initialize with the application delegate
 - (id)initWithDelegate:(id<GADAdViewControllerDelegate>)delegate;
 
 // Loads the ad from the Google Ad Server.
-// Normally, the ad will display immediately. Audio ads are not displayed until
-// a call to |showLoadedGoogleAd|.
+// Normally, the ad will display immediately. AdSense for audio ads are not
+// displayed until a call to |showLoadedGoogleAd|.
 - (void)loadGoogleAd:(NSDictionary *)attributes;
 
-// Shows a loaded ad. Needed only for audio ads. Has no effect otherwise.
+// Shows a loaded ad. Needed only for AdSense for audio ads. Has no effect
+// otherwise.
 - (void)showLoadedGoogleAd;
 
 // Dismiss the website view
@@ -69,37 +71,45 @@ typedef enum {
 
 @optional
 
+// Invoked when |loadGoogleAd| succeeds. For AdSense for audio ads, |results|
+// will contain a |kGADAdSenseAdDuration| key containing the duration of the ad
+// in milliseconds.
+- (void)loadSucceeded:(GADAdViewController *)adController
+          withResults:(NSDictionary *) results;
+
 // Invoked when |loadGoogleAd| fails.  If loadGoogleAd: is invoked or the
 // auto-refresh timer fires when the application is inactive, this method will
 // be called with an NSError in the kGADErrorDomain domain.
 - (void)loadFailed:(GADAdViewController *)adController
          withError:(NSError *) error;
 
-// Invoked when |loadGoogleAd| succeeds. For audio ads, |results| will contain
-// a |kGADAdSenseAdDuration| key containing the duration of the
-// ad in milliseconds.
-- (void)loadSucceeded:(GADAdViewController *)adController
-         withResults:(NSDictionary *) results;
-
-// Invoked when |showLoadedGoogleAd| fails.
-- (void)showFailed:(GADAdViewController *)adController
-       withError:(NSError *) error;
-
-// Invoked when |showLoadedGoogleAd| is complete.
-- (void)showSucceeded:(GADAdViewController *)adController
-         withResults:(NSDictionary *) results;
-
 // |adControllerActionModelForAdClick:| will be called when a user taps on an
 // ad. The delegate can override the default behavior (opening in Safari).
 - (GADAdClickAction)adControllerActionModelForAdClick:
     (GADAdViewController *)adController;
 
-// Invoked when the ad load completes.
-// This callback is deprecated for audio ads, use |loadSucceeded:withResults|
-// instead.
-- (void)adControllerDidFinishLoading:(GADAdViewController *)adController;
-
 // Invoked when the website view has been closed.
 - (void)adControllerDidCloseWebsiteView:(GADAdViewController *)adController;
+
+// For AdSense for audio ads:
+// Invoked when |showLoadedGoogleAd| fails.
+- (void)showFailed:(GADAdViewController *)adController
+         withError:(NSError *) error;
+
+// For AdSense for audio ads:
+// Invoked when |showLoadedGoogleAd| is complete.
+- (void)showSucceeded:(GADAdViewController *)adController
+          withResults:(NSDictionary *) results;
+
+// DEPRECATED: Use |loadSucceeded:withResults:| instead to be notified when the
+// ad load completes.
+- (void)adControllerDidFinishLoading:(GADAdViewController *)adController;
+
+// Expandable ad support:
+// Invoked just after an expandable ad has expanded.
+- (void)adControllerDidExpandAd:(GADAdViewController *)controller;
+
+// Invoked just after an expandable ad has collapsed.
+- (void)adControllerDidCollapseAd:(GADAdViewController *)controller;
 
 @end

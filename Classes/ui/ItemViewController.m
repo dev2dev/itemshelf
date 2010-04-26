@@ -338,7 +338,13 @@
     }
     else if (rowKind == ROW_SHOW_DETAIL) {
         // 詳細を表示
-        NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
+        NSString *detailURL;
+        if (IS_IPAD) {
+            detailURL = [WebApiFactory detailUrl:item isMobile:NO];
+        } else {
+            detailURL = [WebApiFactory detailUrl:item isMobile:YES];
+        }
+        NSLog(@"Open URL : %@", detailURL);
         WebViewController *vc = [[[WebViewController alloc] initWithNibName:@"WebView" bundle:nil] autorelease];
         vc.urlString = detailURL;
 
@@ -677,6 +683,10 @@
     NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
     NSURL *url = [NSURL URLWithString:[detailURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
 }
 
 

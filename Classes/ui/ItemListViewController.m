@@ -118,7 +118,9 @@ CGPoint lastTouchLocation;
     }
 	
     // Generate table view with touch event handlers
-    tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:CGRectMake(0, 0, 320, 372)];
+    tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:CGRectMake(0, 0, 320, 392)];
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
     tableView.rowHeight = ITEM_CELL_HEIGHT;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.dataSource = self;
@@ -240,12 +242,14 @@ CGPoint lastTouchLocation;
         centerRow = [[ary objectAtIndex:ary.count / 2] row];
     }
 
+    int numMultiItemPerLine = [self _calcNumMultiItemsPerLine];
+    
     if (itemsPerLine == 1) {
-        itemsPerLine = 4;
-        if (centerRow > 0) centerRow /= 4;
+        itemsPerLine = numMultiItemPerLine;
+        if (centerRow > 0) centerRow /= itemsPerLine;
     } else {
+        if (centerRow > 0) centerRow *= itemsPerLine;
         itemsPerLine = 1;
-        if (centerRow > 0) centerRow *= 4;
     }
 
     if (self.navigationItem.rightBarButtonItem) {
@@ -260,6 +264,13 @@ CGPoint lastTouchLocation;
         NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:centerRow inSection:1];
         [tableView scrollToRowAtIndexPath:newIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     }
+}
+
+// 一列に入る画像数を計算
+- (int)_calcNumMultiItemsPerLine
+{
+    int width = self.view.frame.size.width;
+    return width / ITEM_IMAGE_WIDTH;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -323,9 +334,9 @@ CGPoint lastTouchLocation;
         [cell setItem:item];
         return cell;
     } else {
-        ItemCell4 *cell = [ItemCell4 getCell:tv];
-        for (int i = 0;  i < 4; i++) {
-            int idx = row * 4 + i;
+        ItemCell4 *cell = [ItemCell4 getCell:tv numItemsPerCell:itemsPerLine];
+        for (int i = 0;  i < itemsPerLine; i++) {
+            int idx = row * itemsPerLine + i;
 
             Item *item;
             if (idx < model.count) {
@@ -361,12 +372,11 @@ CGPoint lastTouchLocation;
 
     // クリックされたアイテムの index を計算
     int idx = indexPath.row;
-    if (itemsPerLine == 1) {
-        //
-    } else {
-        int x = lastTouchLocation.x * 4 / 320;
-        idx = idx * 4 + x;
+    if (itemsPerLine > 1) {
+        int x = lastTouchLocation.x / ITEM_IMAGE_WIDTH;
+        idx = idx * itemsPerLine + x;
     }
+
     if (idx >= [model count]) {
         return;
     }
@@ -616,5 +626,18 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [vc release];
 }
 //@}
+
+// 画面回転
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if (itemsPerLine > 1) {
+        itemsPerLine = [self _calcNumMultiItemsPerLine];
+        [tableView reloadData];
+    }
+}
 
 @end

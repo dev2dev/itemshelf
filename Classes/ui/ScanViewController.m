@@ -97,6 +97,9 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (IS_IPAD) {
+        return 4; // no camera, no photo library
+    }
     if (!isCameraAvailable) {
         return 5;
     }
@@ -152,7 +155,11 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     }		
 
     int row = indexPath.row;
-    if (!isCameraAvailable) row++;
+    if (IS_IPAD) {
+        row+=2;
+    } else if (!isCameraAvailable) {
+        row++;
+    }
     
     switch (row) {
     case 0:
@@ -196,7 +203,11 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     [tv deselectRowAtIndexPath:indexPath animated:NO];
 	
     int row = indexPath.row;
-    if (!isCameraAvailable) row++;
+    if (IS_IPAD) {
+        row += 2;
+    } else if (!isCameraAvailable) {
+        row++;
+    }
     
     switch (row) {
     case 0:
@@ -367,6 +378,10 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     WebApiFactory *wf = [WebApiFactory webApiFactory];
     wf.serviceId = serviceId;
     [wf saveDefaults];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
 }
 
 @end
