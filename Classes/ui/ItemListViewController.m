@@ -508,6 +508,9 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 //////////////////////////////////////////////////////////////////////////////////////////
 // SearchBar processing
 
+#pragma mark -
+#pragma mark Search bar processing
+
 /**
    @name SearchBar processing
 */
@@ -626,6 +629,27 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [vc release];
 }
 //@}
+
+
+#pragma mark -
+#pragma mark Split View Delegate
+
+- (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController
+          withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc
+{
+    barButtonItem.title = NSLocalizedString(@"Shelves", @"");
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+}
+
+- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aVi
+ewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    self.navigationItem.leftBarButtonItem = nil;
+}
+
+#pragma mark -
+#pragma mark Rotation support
 
 // 画面回転
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
