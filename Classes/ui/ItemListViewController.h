@@ -60,6 +60,8 @@
 {
     UITableViewWithTouchEvent *tableView;
     UISearchBar *searchBar;
+
+    IBOutlet UIToolbar *toolbar;
     IBOutlet UIBarButtonItem *scanButton;
     IBOutlet UIBarButtonItem *filterButton;
 

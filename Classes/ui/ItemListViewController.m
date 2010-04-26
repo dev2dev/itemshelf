@@ -95,6 +95,7 @@ CGPoint lastTouchLocation;
         searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         searchBar.delegate = self;
     }
+    
     return self;
 }
 
@@ -118,7 +119,10 @@ CGPoint lastTouchLocation;
     }
 	
     // Generate table view with touch event handlers
-    tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:CGRectMake(0, 0, 320, 392)];
+    CGRect frame = self.view.frame;
+    frame.origin.y = 0;
+    frame.size.height = frame.size.height - toolbar.frame.size.height;
+    tableView = [[UITableViewWithTouchEvent alloc] initWithFrame:frame];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     tableView.rowHeight = ITEM_CELL_HEIGHT;
@@ -130,7 +134,7 @@ CGPoint lastTouchLocation;
     
     [self.view addSubview:tableView];
     [tableView release];
-	
+    
     // Initiate filter button title
     filterButton.title = @"All";
 }
@@ -641,8 +645,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     self.navigationItem.leftBarButtonItem = barButtonItem;
 }
 
-- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aVi
-ewController
+- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     self.navigationItem.leftBarButtonItem = nil;

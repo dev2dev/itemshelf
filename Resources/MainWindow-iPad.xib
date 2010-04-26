@@ -2,16 +2,16 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">800</int>
-		<string key="IBDocument.SystemVersion">10C540</string>
-		<string key="IBDocument.InterfaceBuilderVersion">762</string>
-		<string key="IBDocument.AppKitVersion">1038.25</string>
-		<string key="IBDocument.HIToolboxVersion">458.00</string>
+		<string key="IBDocument.SystemVersion">10D573</string>
+		<string key="IBDocument.InterfaceBuilderVersion">785</string>
+		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.HIToolboxVersion">460.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">87</string>
+			<string key="NS.object.0">110</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="180"/>
+			<integer value="181"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -33,7 +33,7 @@
 				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">1316</int>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
-				<string key="NSFrameSize">{768, 1004}</string>
+				<string key="NSFrameSize">{768, 1024}</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -47,37 +47,84 @@
 				<bool key="IBUIVisibleAtLaunch">YES</bool>
 				<bool key="IBUIResizesToFullScreen">YES</bool>
 			</object>
-			<object class="IBUINavigationController" id="721027782">
-				<reference key="IBUISimulatedStatusBarMetrics" ref="693489949"/>
+			<object class="IBUISplitViewController" id="64482988">
+				<array key="IBUIToolbarItems" id="0"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
-					<int key="interfaceOrientation">1</int>
+					<int key="interfaceOrientation">3</int>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationBar" key="IBUINavigationBar" id="1063855771">
-					<nil key="NSNextResponder"/>
-					<int key="NSvFlags">256</int>
-					<string key="NSFrameSize">{0, 0}</string>
-					<bool key="IBUIOpaque">NO</bool>
-					<bool key="IBUIClipsSubviews">YES</bool>
-					<bool key="IBUIMultipleTouchEnabled">YES</bool>
-					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-				</object>
-				<array class="NSMutableArray" key="IBUIViewControllers">
-					<object class="IBUIViewController" id="420710082">
-						<object class="IBUINavigationItem" key="IBUINavigationItem" id="613256415">
-							<reference key="IBUINavigationBar"/>
-							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						</object>
-						<reference key="IBUIParentViewController" ref="721027782"/>
-						<string key="IBUINibName">ShelfListView</string>
-						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
-							<int key="interfaceOrientation">1</int>
-						</object>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<bool key="IBUIHorizontal">NO</bool>
+				<bool key="IBUIHorizontal">YES</bool>
+				<object class="IBUINavigationController" key="IBUIMasterViewController" id="721027782">
+					<reference key="IBUIParentViewController" ref="64482988"/>
+					<reference key="IBUISimulatedStatusBarMetrics" ref="693489949"/>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="interfaceOrientation">1</int>
 					</object>
-				</array>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="1063855771">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<array class="NSMutableArray" key="IBUIViewControllers">
+						<object class="IBUIViewController" id="420710082">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="613256415">
+								<reference key="IBUINavigationBar"/>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="721027782"/>
+							<string key="IBUINibName">ShelfListView</string>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+						</object>
+					</array>
+				</object>
+				<object class="IBUINavigationController" key="IBUIDetailViewController" id="114870106">
+					<reference key="IBUIParentViewController" ref="64482988"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+						<int key="IBUIStatusBarStyle">2</int>
+					</object>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="212033304">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<array key="IBUIViewControllers">
+						<object class="IBUIViewController" id="945295279">
+							<reference key="IBUIToolbarItems" ref="0"/>
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="370905007">
+								<reference key="IBUINavigationBar"/>
+								<string key="IBUITitle">Item</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="114870106"/>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+						</object>
+					</array>
+				</object>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -106,12 +153,60 @@
 					</object>
 					<int key="connectionID">185</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">shelfListViewController</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="420710082"/>
+					</object>
+					<int key="connectionID">202</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">splitViewController</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="64482988"/>
+					</object>
+					<int key="connectionID">203</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">splitShelfListViewController</string>
+						<reference key="source" ref="945295279"/>
+						<reference key="destination" ref="420710082"/>
+					</object>
+					<int key="connectionID">204</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">splitItemListViewController</string>
+						<reference key="source" ref="420710082"/>
+						<reference key="destination" ref="945295279"/>
+					</object>
+					<int key="connectionID">205</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="64482988"/>
+						<reference key="destination" ref="945295279"/>
+					</object>
+					<int key="connectionID">207</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">itemListViewController</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="945295279"/>
+					</object>
+					<int key="connectionID">208</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<array key="object" id="0"/>
+						<reference key="object" ref="0"/>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>
@@ -138,13 +233,27 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">186</int>
+						<reference key="object" ref="64482988"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="721027782"/>
+							<reference ref="114870106"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">180</int>
 						<reference key="object" ref="721027782"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="420710082"/>
 							<reference ref="1063855771"/>
+							<reference ref="420710082"/>
 						</array>
-						<reference key="parent" ref="0"/>
+						<reference key="parent" ref="64482988"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">182</int>
+						<reference key="object" ref="1063855771"/>
+						<reference key="parent" ref="721027782"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">181</int>
@@ -155,14 +264,36 @@
 						<reference key="parent" ref="721027782"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">182</int>
-						<reference key="object" ref="1063855771"/>
-						<reference key="parent" ref="721027782"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">183</int>
 						<reference key="object" ref="613256415"/>
 						<reference key="parent" ref="420710082"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">197</int>
+						<reference key="object" ref="114870106"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="212033304"/>
+							<reference ref="945295279"/>
+						</array>
+						<reference key="parent" ref="64482988"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">199</int>
+						<reference key="object" ref="212033304"/>
+						<reference key="parent" ref="114870106"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">196</int>
+						<reference key="object" ref="945295279"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="370905007"/>
+						</array>
+						<reference key="parent" ref="114870106"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">201</int>
+						<reference key="object" ref="370905007"/>
+						<reference key="parent" ref="945295279"/>
 					</object>
 				</array>
 			</object>
@@ -179,6 +310,12 @@
 				<string key="181.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="182.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="183.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="186.IBEditorWindowLastContentRect">{{0, 377}, {1024, 768}}</string>
+				<string key="186.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="196.CustomClassName">ItemListViewController</string>
+				<string key="196.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="197.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="199.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<dictionary class="NSMutableDictionary" key="2.IBAttributePlaceholdersKey"/>
 				<string key="2.IBEditorWindowLastContentRect">{{229, 373}, {320, 480}}</string>
 				<object class="NSMutableDictionary" key="2.IBLastUsedUIStatusBarStylesToTargetRuntimesMap">
@@ -193,7 +330,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">185</int>
+			<int key="maxID">208</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -201,8 +338,33 @@
 					<string key="className">AppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="itemListViewController">ItemListViewController</string>
 						<string key="navigationController">UINavigationController</string>
+						<string key="shelfListViewController">ShelfListViewController</string>
+						<string key="splitViewController">UISplitViewController</string>
 						<string key="window">UIWindow</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="itemListViewController">
+							<string key="name">itemListViewController</string>
+							<string key="candidateClassName">ItemListViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="navigationController">
+							<string key="name">navigationController</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shelfListViewController">
+							<string key="name">shelfListViewController</string>
+							<string key="candidateClassName">ShelfListViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitViewController">
+							<string key="name">splitViewController</string>
+							<string key="candidateClassName">UISplitViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -218,6 +380,62 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">ItemListViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="filterButtonTapped:">id</string>
+						<string key="scanButtonTapped:">id</string>
+						<string key="sortButtonTapped:">id</string>
+						<string key="toggleCellView:">id</string>
+						<string key="toggleSearchBar:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="filterButtonTapped:">
+							<string key="name">filterButtonTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="scanButtonTapped:">
+							<string key="name">scanButtonTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="sortButtonTapped:">
+							<string key="name">sortButtonTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleCellView:">
+							<string key="name">toggleCellView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleSearchBar:">
+							<string key="name">toggleSearchBar:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="filterButton">UIBarButtonItem</string>
+						<string key="scanButton">UIBarButtonItem</string>
+						<string key="splitShelfListViewController">ShelfListViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="filterButton">
+							<string key="name">filterButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scanButton">
+							<string key="name">scanButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitShelfListViewController">
+							<string key="name">splitShelfListViewController</string>
+							<string key="candidateClassName">ShelfListViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/ui/ItemListViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">ShelfListViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -225,10 +443,34 @@
 						<string key="addShelfButtonTapped:">id</string>
 						<string key="scanButtonTapped:">id</string>
 					</dictionary>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">tableView</string>
-						<string key="NS.object.0">UITableView</string>
-					</object>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="actionButtonTapped:">
+							<string key="name">actionButtonTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="addShelfButtonTapped:">
+							<string key="name">addShelfButtonTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="scanButtonTapped:">
+							<string key="name">scanButtonTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="splitItemListViewController">ItemListViewController</string>
+						<string key="tableView">UITableView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="splitItemListViewController">
+							<string key="name">splitItemListViewController</string>
+							<string key="candidateClassName">ItemListViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/ui/ShelfListViewController.h</string>
@@ -458,6 +700,14 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">UISplitViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="490844259">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UISplitViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">UITableView</string>
 					<string key="superclassName">UIScrollView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -483,6 +733,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">UIViewController</string>
 					<reference key="sourceIdentifier" ref="797028635"/>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIPopoverController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIViewController</string>
+					<reference key="sourceIdentifier" ref="490844259"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIViewController</string>
@@ -522,6 +783,6 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<string key="IBDocument.LastKnownRelativeProjectPath">../ItemShelf.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">87</string>
+		<string key="IBCocoaTouchPluginVersion">110</string>
 	</data>
 </archive>
