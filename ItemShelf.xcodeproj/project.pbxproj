@@ -25,6 +25,7 @@
 		3E0C0D85101AD45800F18D86 /* Star5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0C0D77101AD45800F18D86 /* Star5.png */; };
 		3E15190F0EDAB7C100F510E9 /* ItemCellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15190E0EDAB7C100F510E9 /* ItemCellBack.png */; };
 		3E15194D0EDAC11900F510E9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15194C0EDAC11900F510E9 /* Icon.png */; };
+		3E1C73E41168647E00CCCC22 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDCFFFB11684765009D99C2 /* SystemConfiguration.framework */; };
 		3E23100B0F4D9ED0006E24AF /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		3E23100C0F4D9ED0006E24AF /* ItemListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282CCBFD0DB6C98000C4EA27 /* ItemListView.xib */; };
 		3E23100D0F4D9ED0006E24AF /* ScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7FFEBB0ECC487B000164D4 /* ScanView.xib */; };
@@ -468,6 +469,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E1C73E41168647E00CCCC22 /* SystemConfiguration.framework in Frameworks */,
 				3E9935BA11465BDD005386D0 /* libz.dylib in Frameworks */,
 				3E61A3B41145166500AFC6E3 /* MessageUI.framework in Frameworks */,
 				3EC9C7580EE14B8A0026396A /* libZebla.a in Frameworks */,
