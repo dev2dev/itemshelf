@@ -186,13 +186,17 @@
         // 棚表示
         Shelf *shelf = [dm shelfAtIndex:row];
 
-        // ItemListView を表示する
-        ItemListViewController *vc = [[[ItemListViewController alloc]
-                                          initWithNibName:@"ItemListView"
-                                          bundle:nil] autorelease];
-        [vc setShelf:shelf];
-
-        [self.navigationController pushViewController:vc animated:YES];
+        if (IS_IPAD) {
+            [splitItemListViewController setShelf:shelf];
+            [splitItemListViewController viewWillAppear:NO];
+        } else {
+            // ItemListView を表示する
+            ItemListViewController *vc = [[[ItemListViewController alloc]
+                                              initWithNibName:@"ItemListView"
+                                              bundle:nil] autorelease];
+            [vc setShelf:shelf];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

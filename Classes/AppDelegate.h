@@ -37,6 +37,8 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import "SearchController.h"
+#import "ShelfListViewController.h"
+#import "ItemListViewController.h"
 
 /**
    Application delegate
@@ -45,6 +47,11 @@
 {
     IBOutlet UIWindow *window;
     IBOutlet UINavigationController *navigationController;
+
+    // iPad
+    IBOutlet UISplitViewController *splitViewController;
+    IBOutlet ShelfListViewController *shelfListViewController;
+    IBOutlet ItemListViewController *itemListViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -53,5 +60,12 @@
 + (NSString*)pathOfDataFile:(NSString*)filename;
 
 - (void)reportAppOpenToAdMob;
+
+// Utility
+#ifndef UI_USER_INTERFACE_IDIOM
+#define IS_IPAD NO
+#else
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#endif
 
 @end

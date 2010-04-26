@@ -36,6 +36,8 @@
 #import "DataModel.h"
 #import "EditShelfViewController.h"
 
+@class ItemListViewController;
+
 @interface ShelfListViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 {
@@ -45,6 +47,9 @@
     UIImage *smartShelfImage;
     
     BOOL needRefreshAd;
+
+    // iPad
+    IBOutlet ItemListViewController *splitItemListViewController;
 }
 
 @property(nonatomic,retain) UITableView *tableView;

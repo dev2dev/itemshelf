@@ -111,16 +111,6 @@ CGPoint lastTouchLocation;
 	
     [super viewDidLoad];
 	
-    NSString *title = model.shelf.name;
-    self.navigationItem.title = title;
-
-    // Disable scan button for smart shelf
-    if (model.shelf.shelfType == ShelfTypeNormal) {
-        scanButton.enabled = YES;
-    } else {
-        scanButton.enabled = NO;
-    }
-
     // Add Edit button
     self.navigationItem.rightBarButtonItem = [self editButtonItem];
     if (itemsPerLine != 1) {
@@ -156,10 +146,28 @@ CGPoint lastTouchLocation;
 
 - (void)viewWillAppear:(BOOL)animated {
     ASSERT(model != nil);
+
+    // set title
+    NSString *title = model.shelf.name;
+    self.navigationItem.title = title;
+
+    // Disable scan button for smart shelf
+    if (model.shelf.shelfType == ShelfTypeNormal) {
+        scanButton.enabled = YES;
+    } else {
+        scanButton.enabled = NO;
+    }
+
     [model updateFilter];
     [self updateTitle];
 
     [tableView reloadData];
+
+    // ShelfListView 側の件数を更新する
+    if (IS_IPAD) {
+        [splitShelfListViewController viewWillAppear:NO];
+    }
+
     [super viewWillAppear:animated];
 }
 
@@ -410,6 +418,11 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 
         [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView reloadData];
+
+        // ShelfListView 側の件数を更新する
+        if (IS_IPAD) {
+            [splitShelfListViewController viewWillAppear:NO];
+        }
     }
 }
 

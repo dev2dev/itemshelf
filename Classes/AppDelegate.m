@@ -51,7 +51,11 @@
     DataModel *dm = [DataModel sharedDataModel];
     [dm loadDB];
 	
-    [window addSubview:navigationController.view];
+    if (IS_IPAD) {
+        [window addSubview:splitViewController.view];
+    } else {
+        [window addSubview:navigationController.view];
+    }
     [window makeKeyAndVisible];
 
     // AdMob
@@ -62,7 +66,12 @@
     [[DataModel sharedDataModel] release];
     [Database shutdown];
 
-    [navigationController release];
+    if (IS_IPAD) {
+        [splitViewController release];
+    } else {
+        [navigationController release];
+    }
+
     [window release];
     [super dealloc];
 }

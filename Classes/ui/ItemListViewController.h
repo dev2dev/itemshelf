@@ -43,6 +43,8 @@
 #import "StringArray.h"
 #import "GenSelectListViewController.h"
 
+@class ShelfListViewController;
+
 /**
    Extended UITableView class with touch event handlers.
    
@@ -62,6 +64,9 @@
     IBOutlet UIBarButtonItem *filterButton;
 
     ItemListModel *model;
+
+    // iPad
+    IBOutlet ShelfListViewController *splitShelfListViewController;
 }
 
 - (void)setShelf:(Shelf*)shelf;
