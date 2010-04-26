@@ -61,11 +61,4 @@
 
 - (void)reportAppOpenToAdMob;
 
-// Utility
-#ifndef UI_USER_INTERFACE_IDIOM
-#define IS_IPAD NO
-#else
-#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-#endif
-
 @end

@@ -46,10 +46,11 @@ void AssertFailed(const char *filename, int line);
 
 #import "StringArray.h"
 
-#ifndef __IPHONE_3_2
-#define IS_IPAD   NO // TBD
+// Utility
+#ifndef UI_USER_INTERFACE_IDIOM
+#define IS_IPAD NO
 #else
-#define IS_IPAD   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #endif
 
 /**
