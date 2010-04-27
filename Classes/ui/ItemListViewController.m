@@ -112,10 +112,21 @@ CGPoint lastTouchLocation;
 	
     [super viewDidLoad];
 	
-    // Add Edit button
-    self.navigationItem.rightBarButtonItem = [self editButtonItem];
+    // Add buttons
+    UIBarButtonitem *bb;
+    if (!IS_IPAD) {
+        bb = self.navigationItem.rightBarButtonItem = [self editButtonItem];
+    } else {
+        // iPad
+        bb = self.navigationItem.leftBarButtonitem = [self editButtonItem];
+    }
     if (itemsPerLine != 1) {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+        bb.enabled = NO;
+    }
+
+    if (IS_IPAD) {
+        bb = [[[UIBarButtonItem alloc] initWithCustomView:searchBar] autorelease];
+        self.navigationItem.rightBarButtonItem = bb;
     }
 	
     // Generate table view with touch event handlers
@@ -262,9 +273,15 @@ CGPoint lastTouchLocation;
         itemsPerLine = 1;
     }
 
-    if (self.navigationItem.rightBarButtonItem) {
-        self.navigationItem.rightBarButtonItem.enabled = 
-            (itemsPerLine == 1) ? YES : NO;
+    UIBarButtonItem *bb;
+    if (IS_IPAD) {
+        bb = self.navigationItem.leftBarButtonItem;
+    } else {
+        bb = self.navigationItem.rightBarButtonItem;
+    }
+
+    if (bb) {
+        bb.enabled = (itemsPerLine == 1) ? YES : NO;
     }
 
     [tableView reloadData];
