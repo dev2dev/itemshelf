@@ -118,9 +118,24 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     UILabel *nameLabel, *descLabel;
 	
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:SCAN_CELL_ID];
+#if 1
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:SCAN_CELL_ID] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+
+    // アイコン
+    imgView = cell.imageView;
+    imgView.contentMode = UIViewContentModeScaleAspectFit; // 画像のアスペクト比を変えないようにする。
+
+    nameLabel = cell.textLabel;
+    descLabel = cell.detailTextLabel;
+
+#else
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SCAN_CELL_ID] autorelease];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone; // TBD
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         // アイコン
@@ -135,6 +150,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         nameLabel.tag = TAG_NAME;
         nameLabel.font = [UIFont boldSystemFontOfSize:14.0];
         nameLabel.textColor = [UIColor blackColor];
+        nameLabel.backgroundColor = [UIColor clearColor];
         nameLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [cell.contentView addSubview:nameLabel];
 
@@ -143,6 +159,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         descLabel.tag = TAG_DESC;
         descLabel.font = [UIFont systemFontOfSize:12.0];
         descLabel.textColor = [UIColor grayColor];
+        descLabel.backgroundColor = [UIColor clearColor];
         descLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         descLabel.lineBreakMode = UILineBreakModeWordWrap;
         descLabel.numberOfLines = 0;
@@ -153,6 +170,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
         nameLabel = (UILabel *)[cell.contentView viewWithTag:TAG_NAME];
         descLabel = (UILabel *)[cell.contentView viewWithTag:TAG_DESC];
     }		
+#endif
 
     int row = indexPath.row;
     if (IS_IPAD) {
