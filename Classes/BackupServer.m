@@ -210,7 +210,7 @@
         filename = [[Database instance] dbPath];
     }
     NSLog(@"restore file:%@", filename);
-    f = open([filename UTF8String], O_CREAT|O_WRONLY);
+    f = open([filename UTF8String], O_CREAT|O_WRONLY, 0644);
     if (f < 0) {
         // TBD;
         NSLog(@"open failed:%s", strerror(errno));

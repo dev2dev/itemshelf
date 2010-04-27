@@ -47,6 +47,7 @@
     UIImage *normalShelfImage;
     UIImage *smartShelfImage;
     
+    BOOL isEditing;
     BOOL needRefreshAd;
 
     // iPad

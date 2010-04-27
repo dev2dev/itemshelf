@@ -48,6 +48,8 @@
 {
     [super viewDidLoad];
 	
+    isEditing = NO;
+    
     // title 設定
     self.title = NSLocalizedString(@"Shelves", @"");
 	
@@ -116,8 +118,10 @@
 
 - (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section {
     int count = [[DataModel sharedDataModel] shelvesCount];
-    if (tv.editing) count++; // new cell
-//    if ([Edition isLiteEdition]) count++; // ad
+
+    // Note: tv.editing を見てはいけない。フリックで行を消す場合、
+    // isEditing は NO だが、tv.editing は YES となっている。
+    if (isEditing) count++; // new cell
     return count;
 }
 
@@ -275,6 +279,8 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    
+    isEditing = editing;
 
     // 編集モードの変更
     [tableView setEditing:editing animated:animated];
@@ -284,6 +290,7 @@
     //if ([Edition isLiteEdition]) newRow++;
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRow inSection:0];
+    [tableView beginUpdates];
     if (editing) {
         // 行追加
         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
@@ -292,6 +299,7 @@
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                    withRowAnimation:UITableViewRowAnimationTop];
     }
+    [tableView endUpdates];
     //[tableView reloadData];
 
 #if 0
@@ -338,9 +346,11 @@
         // 削除
         Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:row];
         [[DataModel sharedDataModel] removeShelf:shelf];
-	
-        [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [tableView reloadData];
+        
+        [tv beginUpdates];
+        [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade]; //TBD
+        [tv endUpdates];
+        [tv reloadData];
     }
 }
 

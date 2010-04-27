@@ -481,7 +481,9 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
         Item *item = [model itemAtIndex:row];
         [model removeObject:item];
 
+        [tv beginUpdates];
         [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tv endUpdates];
         [tableView reloadData];
 
         // ShelfListView 側の件数を更新する
