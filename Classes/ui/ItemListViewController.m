@@ -88,19 +88,11 @@ CGPoint lastTouchLocation;
 
 @implementation ItemListViewController
 
+@synthesize popoverController;
+
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
     self = [super initWithNibName:nibName bundle:bundle];
-    if (self) {
-        searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-        searchBar.hidden = YES;
-        searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-        searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        searchBar.showsCancelButton = NO;
-        searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        searchBar.delegate = self;
-    }
-    
     return self;
 }
 
@@ -109,21 +101,39 @@ CGPoint lastTouchLocation;
     ASSERT(model);
 	
     [super viewDidLoad];
-	
-    // Add buttons
-    UIBarButtonitem *bb;
+
+    // 検索バー作成
     if (!IS_IPAD) {
-        bb = self.navigationItem.rightBarButtonItem = [self editButtonItem];
+        searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     } else {
-        // iPad
-        bb = self.navigationItem.leftBarButtonitem = [self editButtonItem];
+        searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     }
+    searchBar.hidden = YES;
+    searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    searchBar.showsCancelButton = NO;
+    searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    searchBar.delegate = self;
+
+    // Add buttons
+    UIBarButtonitem *editb = [self editButtonItem];
     if (itemsPerLine != 1) {
-        bb.enabled = NO;
+        editb.enabled = NO;
     }
 
-    if (IS_IPAD) {
-        bb = [[[UIBarButtonItem alloc] initWithCustomView:searchBar] autorelease];
+    if (!IS_IPAD) {
+        // iPhone
+        // 右側に編集ボタンを置く
+        self.navigationItem.rightBarButtonItem = editb;
+    } else {
+        // iPad
+        // 右側に検索バー、編集ボタンの２つを置く
+        // (左側は縦置き時に棚一覧ボタンが出現するので使えない)
+        int width = searchBar.frame.size.width + editb.frame.size.width;
+        UIToolbar *tb = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, width, 44)] autorelease];
+        tb.items = [NSArray arrayWithObjects:searchBar, editb, nil];
+
+        UIBarButtonItem *bb = [[[UIBarButtonItem alloc] initWithCustomView:tb] autorelease];
         self.navigationItem.rightBarButtonItem = bb;
     }
 	
@@ -156,6 +166,7 @@ CGPoint lastTouchLocation;
 - (void)dealloc {
     [model release];
     [searchBar release];
+    [popoverController release];
     [super dealloc];
 }
 
@@ -191,6 +202,10 @@ CGPoint lastTouchLocation;
         if (IS_IPAD) {
             [splitShelfListViewController reload];
         }
+    }
+
+    if (popoverController != nil) {
+        [popoverController dismissPopoverAnimated:YES];
     }
 }
 
@@ -278,16 +293,8 @@ CGPoint lastTouchLocation;
         itemsPerLine = 1;
     }
 
-    UIBarButtonItem *bb;
-    if (IS_IPAD) {
-        bb = self.navigationItem.leftBarButtonItem;
-    } else {
-        bb = self.navigationItem.rightBarButtonItem;
-    }
-
-    if (bb) {
-        bb.enabled = (itemsPerLine == 1) ? YES : NO;
-    }
+    UIBarButtonItem *editb = [self editButtonItem];
+    editb.enabled = (itemsPerLine == 1) ? YES : NO;
 
     [tableView reloadData];
 
@@ -616,11 +623,11 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)sb
 {
-    // Enable cancel button when editing text
-    sb.showsCancelButton = YES; 
-	
-    // Disable Edit, Filter buttons.
     if (!IS_IPAD) {
+        // Enable cancel button when editing text
+        sb.showsCancelButton = YES; 
+	
+        // Disable Edit, Filter buttons.
         self.navigationItem.leftBarButtonItem.enabled = NO;
         self.navigationItem.rightBarButtonItem.enabled = NO;
     }
@@ -628,10 +635,10 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)sb
 {
-    sb.showsCancelButton = NO;
-	
-    // Back to enabeld for Edit, Filter buttons.
     if (!IS_IPAD) {
+        sb.showsCancelButton = NO;
+
+        // Back to enabeld for Edit, Filter buttons.
         self.navigationItem.leftBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem.enabled = YES;
     }
@@ -692,12 +699,14 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 {
     barButtonItem.title = NSLocalizedString(@"Shelves", @"");
     self.navigationItem.leftBarButtonItem = barButtonItem;
+    self.popoverController = pc;
 }
 
 - (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     self.navigationItem.leftBarButtonItem = nil;
+    self.popoverController = nil;
 }
 
 #pragma mark -

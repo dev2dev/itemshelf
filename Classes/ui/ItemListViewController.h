@@ -56,7 +56,8 @@
 
 @interface ItemListViewController : UIViewController
 <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, 
-     ItemDelegate, GenSelectListViewDelegate, UIActionSheetDelegate>
+     ItemDelegate, GenSelectListViewDelegate, UIActionSheetDelegate,
+     UISplitViewControllerDelegate>
 {
     UITableViewWithTouchEvent *tableView;
     UISearchBar *searchBar;
@@ -69,7 +70,10 @@
 
     // iPad
     IBOutlet ShelfListViewController *splitShelfListViewController;
+    UIPopoverController *popoverController;
 }
+
+@property(nonatomic,retain) UIPopoverController *popoverController;
 
 - (void)reload;
 - (void)setShelf:(Shelf*)shelf;
