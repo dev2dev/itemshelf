@@ -555,7 +555,7 @@
     if (!IS_IPAD) {
         [self doModalWithNavigationController:vc];
     } else {
-        [self doModalWithPopoverController:vc fromBarButtonitem:self.navigationItem.rightBarButtonItem];
+        [self doModalWithPopoverController:vc fromBarButtonItem:self.navigationItem.rightBarButtonItem];
     }
 }
 

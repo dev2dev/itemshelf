@@ -106,7 +106,7 @@ CGPoint lastTouchLocation;
     if (!IS_IPAD) {
         searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     } else {
-        searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+        searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 180, 44)];
     }
     searchBar.hidden = YES;
     searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -129,9 +129,12 @@ CGPoint lastTouchLocation;
         // iPad
         // 右側に検索バー、編集ボタンの２つを置く
         // (左側は縦置き時に棚一覧ボタンが出現するので使えない)
-        int width = searchBar.frame.size.width + 32/*TBD*/;
+        searchBar.hidden = NO;
+        int width = searchBar.frame.size.width + 70/*TBD*/;
         UIToolbar *tb = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, width, 44)] autorelease];
-        tb.items = [NSArray arrayWithObjects:searchBar, editb, nil];
+        
+        UIBarButtonItem *sbb = [[[UIBarButtonItem alloc] initWithCustomView:searchBar] autorelease];
+        tb.items = [NSArray arrayWithObjects:sbb, editb, nil];
 
         UIBarButtonItem *bb = [[[UIBarButtonItem alloc] initWithCustomView:tb] autorelease];
         self.navigationItem.rightBarButtonItem = bb;
