@@ -47,6 +47,8 @@ static int itemsPerLine = 1;
 //////////////////////////////////////////////////////////////////////////////////////////
 // UITableView with touch event handlers
 
+#pragma mark UITableViewWithTouchEvent
+
 @implementation UITableViewWithTouchEvent
 
 CGPoint lastTouchLocation;
@@ -81,6 +83,9 @@ CGPoint lastTouchLocation;
 //////////////////////////////////////////////////////////////////////////////////////////
 // ItemListViewController implementation
 
+#pragma mark -
+#pragma mark ItemListViewController
+
 @implementation ItemListViewController
 
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
@@ -97,13 +102,6 @@ CGPoint lastTouchLocation;
     }
     
     return self;
-}
-
-- (void)setShelf:(Shelf *)shelf
-{
-    // Generate ItemListModel
-    [model release];
-    model = [[ItemListModel alloc] initWithShelf:shelf];
 }
 
 - (void)viewDidLoad
@@ -159,6 +157,13 @@ CGPoint lastTouchLocation;
     [model release];
     [searchBar release];
     [super dealloc];
+}
+
+- (void)setShelf:(Shelf *)shelf
+{
+    // Generate ItemListModel
+    [model release];
+    model = [[ItemListModel alloc] initWithShelf:shelf];
 }
 
 - (void)reload
@@ -306,6 +311,7 @@ CGPoint lastTouchLocation;
 */
 //@{
 
+#pragma mark -
 #pragma mark TableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -420,6 +426,9 @@ CGPoint lastTouchLocation;
 //////////////////////////////////////////////////////////////////////////////////////////
 // Edit handling
 
+#pragma mark -
+#pragma mark Edit handling
+
 /**
    @name Edit handling
 */
@@ -497,6 +506,10 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Sort
+
+#pragma mark -
+#pragma mark Sorting
+
 /**
  @name Sort
  */
@@ -548,6 +561,8 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 */
 - (IBAction)toggleSearchBar:(id)sender
 {
+    if (IS_IPAD) return;
+
     searchBar.hidden = !searchBar.hidden;
 	
     if (!searchBar.hidden) {
@@ -564,6 +579,8 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 */
 - (void)showSearchBar
 {
+    if (IS_IPAD) return;
+
     self.navigationItem.rightBarButtonItem = nil;
     self.navigationItem.titleView = searchBar;
     self.navigationItem.hidesBackButton = YES;
@@ -583,6 +600,8 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 */
 - (void)hideSearchBar
 {
+    if (IS_IPAD) return;
+
     self.navigationItem.rightBarButtonItem = [self editButtonItem];
     self.navigationItem.titleView = nil;
     self.navigationItem.hidesBackButton = NO;
@@ -601,8 +620,10 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     sb.showsCancelButton = YES; 
 	
     // Disable Edit, Filter buttons.
-    self.navigationItem.leftBarButtonItem.enabled = NO;
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    if (!IS_IPAD) {
+        self.navigationItem.leftBarButtonItem.enabled = NO;
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)sb
@@ -610,8 +631,10 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     sb.showsCancelButton = NO;
 	
     // Back to enabeld for Edit, Filter buttons.
-    self.navigationItem.leftBarButtonItem.enabled = YES;
-    self.navigationItem.rightBarButtonItem.enabled = YES;
+    if (!IS_IPAD) {
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    }
 }
 
 - (void)searchBar:(UISearchBar *)sb textDidChange:(NSString *)text
@@ -641,6 +664,9 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Scan processing
+
+#pragma mark -
+#pragma mark Scan handling
 
 /**
    @name Scan button processing
