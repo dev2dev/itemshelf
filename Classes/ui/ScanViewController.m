@@ -32,6 +32,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#import "AppDelegate.h"
 #import "ScanViewController.h"
 #import "ItemViewController.h"
 #import "BarcodeReader.h"
@@ -75,6 +76,7 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 - (void)doneAction:(id)sender
 {
     [self.navigationController dismissModalViewControllerAnimated:YES];
+    [AppDelegate reload];
 }
 
 - (void)didReceiveMemoryWarning {

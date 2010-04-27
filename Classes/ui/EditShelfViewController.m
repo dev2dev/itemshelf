@@ -32,6 +32,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#import "AppDelegate.h"
 #import "EditShelfViewController.h"
 #import "DataModel.h"
 
@@ -130,6 +131,7 @@
     //[tagsField resignFirstResponder];
 
     [self.navigationController dismissModalViewControllerAnimated:YES];
+    [AppDelegate reload];
 }
 
 - (UITextField*)allocTextInputField:(NSString*)value placeholder:(NSString*)placeholder

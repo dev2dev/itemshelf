@@ -32,6 +32,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#import "AppDelegate.h"
 #import "GenSelectListViewController.h"
 
 @implementation GenSelectListViewController
@@ -96,6 +97,7 @@
 {
     if (self.navigationController.viewControllers.count == 1) {
         [self.navigationController dismissModalViewControllerAnimated:YES];
+        [AppDelegate reload];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }

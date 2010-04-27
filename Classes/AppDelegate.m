@@ -43,6 +43,15 @@
 @synthesize window;
 @synthesize navigationController;
 
+static AppDelegate *sharedAppDelegate;
+
+- (id)init
+{
+    self = [super init];
+    sharedAppDelegate = self;
+    return self;
+}
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
     srand(time(nil));
@@ -74,6 +83,19 @@
 
     [window release];
     [super dealloc];
+}
+
++ (void)reload
+{
+    [sharedAppDelegate _reload];
+}
+
+- (void)_reload
+{
+    if (IS_IPAD) {
+        [shelfListViewController reload];
+        [itemListViewController reload];
+    }
 }
 
 /**

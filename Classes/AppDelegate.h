@@ -59,6 +59,8 @@
 
 + (NSString*)pathOfDataFile:(NSString*)filename;
 
++ (void)reload;
+- (void)_reload;
 - (void)reportAppOpenToAdMob;
 
 @end

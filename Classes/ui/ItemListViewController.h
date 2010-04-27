@@ -37,13 +37,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
+#import "ShelfListViewController.h"
 #import "Shelf.h"
 #import "Item.h"
 #import "ItemListModel.h"
 #import "StringArray.h"
 #import "GenSelectListViewController.h"
-
-@class ShelfListViewController;
 
 /**
    Extended UITableView class with touch event handlers.
