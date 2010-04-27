@@ -416,8 +416,9 @@ CGPoint lastTouchLocation;
     [tv deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) return; // ad
 
+    NSString *nib = (IS_IPAD) ? @"ItemView-ipad" : @"ItemView";
     ItemViewController *vc = [[[ItemViewController alloc]
-                                  initWithNibName:@"ItemView"
+                                  initWithNibName:nib
                                   bundle:[NSBundle mainBundle]]
                                  autorelease];
 

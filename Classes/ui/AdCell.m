@@ -7,6 +7,7 @@
 //   AdSense : size = 320x50
 
 #import "AdCell.h"
+#import "Common.h"
 
 /////////////////////////////////////////////////////////////////////
 // AdCell
@@ -43,23 +44,31 @@
          AFMA_KEYWORDS, kGADAdSenseKeywords,
          [NSArray arrayWithObjects:AFMA_CHANNEL_IDS, nil], kGADAdSenseChannelIDs,
          [NSNumber numberWithInt:AFMA_IS_TEST], kGADAdSenseIsTestAdRequest,
-
-         //[UIColor brownColor], kGADAdSenseAdBackgroundColor,
-         //[UIColor colorWithRed:235/255.0 green:205/255.0 blue:180/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
-         //[UIColor colorWithRed:185/255.0 green:145/255.0 blue:113/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
-         [UIColor colorWithRed:175/255.0 green:140/255.0 blue:105/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
-
-         //[UIColor darkGrayColor], kGADAdSenseAdBackgroundColor,
-
-         //[UIColor lightGrayColor], kGADAdSenseAdBorderColor,
-         
-         //[UIColor blackColor], kGADAdSenseAdTextColor,
-         //[UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0], kGADAdSenseAdTextColor,
-          
-         //[UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0], kGADAdSenseAdLinkColor,
-         //[UIColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:0], kGADAdSenseAdURLColor,
          nil];
-    return attributes;
+
+    NSMutableDictionary *md = [[[NSMutableDictionary alloc] init] autorelease];
+    [md setDictionary:attributes];
+    
+    if (!IS_IPAD) {
+        [md setObject:[UIColor colorWithRed:175/255.0 green:140/255.0 blue:105/256.0 alpha:0.0] forKey:kGADAdSenseAdBackgroundColor];
+    } else {
+        [md setObject:[UIColor whiteColor] forKey:kGADAdSenseAdBackgroundColor];         
+    }
+        //[UIColor brownColor], kGADAdSenseAdBackgroundColor,
+        //[UIColor colorWithRed:235/255.0 green:205/255.0 blue:180/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
+        //[UIColor colorWithRed:185/255.0 green:145/255.0 blue:113/256.0 alpha:0], kGADAdSenseAdBackgroundColor,
+
+        //[UIColor darkGrayColor], kGADAdSenseAdBackgroundColor,
+
+        //[UIColor lightGrayColor], kGADAdSenseAdBorderColor,
+         
+        //[UIColor blackColor], kGADAdSenseAdTextColor,
+        //[UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0], kGADAdSenseAdTextColor,
+          
+        //[UIColor colorWithRed:0.0 green:0.0 blue:0.5 alpha:0], kGADAdSenseAdLinkColor,
+        //[UIColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:0], kGADAdSenseAdURLColor,
+
+    return md;
 }
 
 - (UITableViewCell *)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)identifier

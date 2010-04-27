@@ -79,6 +79,10 @@
 		3E61A3B41145166500AFC6E3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB6F10C114505F000C859C7 /* MessageUI.framework */; };
 		3E6A1C57101770E800767CC0 /* Sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E6A1C56101770E800767CC0 /* Sort.png */; };
 		3E6A1C58101770E800767CC0 /* Sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E6A1C56101770E800767CC0 /* Sort.png */; };
+		3E6CE73111872E1900221C66 /* ItemListView-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6CE73011872E1900221C66 /* ItemListView-ipad.xib */; };
+		3E6CE73211872E1900221C66 /* ItemListView-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6CE73011872E1900221C66 /* ItemListView-ipad.xib */; };
+		3E6CE7511187303400221C66 /* ItemView-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6CE7501187303400221C66 /* ItemView-ipad.xib */; };
+		3E6CE7521187303400221C66 /* ItemView-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6CE7501187303400221C66 /* ItemView-ipad.xib */; };
 		3E6F53100ECFBE7D00E68A4B /* ItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */; };
 		3E71A6A910406A04006266C7 /* BarcodeReader.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E71A6A810406A04006266C7 /* BarcodeReader.png */; };
 		3E71A6AA10406A04006266C7 /* BarcodeReader.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E71A6A810406A04006266C7 /* BarcodeReader.png */; };
@@ -328,6 +332,8 @@
 		3E554C840ED98A0900166874 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E554C880ED98A4E00166874 /* Japanese */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 10; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E6A1C56101770E800767CC0 /* Sort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sort.png; sourceTree = "<group>"; };
+		3E6CE73011872E1900221C66 /* ItemListView-ipad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "ItemListView-ipad.xib"; sourceTree = "<group>"; };
+		3E6CE7501187303400221C66 /* ItemView-ipad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "ItemView-ipad.xib"; sourceTree = "<group>"; };
 		3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemView.xib; sourceTree = "<group>"; };
 		3E71A6A810406A04006266C7 /* BarcodeReader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarcodeReader.png; sourceTree = "<group>"; };
 		3E7EB2DB0EE422D900D5CE27 /* ShelfListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShelfListView.xib; sourceTree = "<group>"; };
@@ -834,7 +840,9 @@
 				3EB7A9EF0EF66601009B038F /* EditShelfView.xib */,
 				3E7FFEBB0ECC487B000164D4 /* ScanView.xib */,
 				282CCBFD0DB6C98000C4EA27 /* ItemListView.xib */,
+				3E6CE73011872E1900221C66 /* ItemListView-ipad.xib */,
 				3E6F530F0ECFBE7D00E68A4B /* ItemView.xib */,
+				3E6CE7501187303400221C66 /* ItemView-ipad.xib */,
 				3EC639D00EE544C30057FAC2 /* WebView.xib */,
 				3E3EA1500ED9A072006892E9 /* ConfigView.xib */,
 				3E3AA5AC0EE02EF200339BAB /* AboutView.xib */,
@@ -1019,6 +1027,8 @@
 				3E71A6AA10406A04006266C7 /* BarcodeReader.png in Resources */,
 				3EE8374E11564EFD00F64764 /* MainWindow-iPad.xib in Resources */,
 				3E97899311571C97009C158B /* NumPadView-iPad.xib in Resources */,
+				3E6CE73211872E1900221C66 /* ItemListView-ipad.xib in Resources */,
+				3E6CE7511187303400221C66 /* ItemView-ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1071,6 +1081,8 @@
 				3E71A6A910406A04006266C7 /* BarcodeReader.png in Resources */,
 				3EE8374F11564EFD00F64764 /* MainWindow-iPad.xib in Resources */,
 				3E97899411571C97009C158B /* NumPadView-iPad.xib in Resources */,
+				3E6CE73111872E1900221C66 /* ItemListView-ipad.xib in Resources */,
+				3E6CE7521187303400221C66 /* ItemView-ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,6 +1426,7 @@
 					zebra/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = iphoneos3.2;
@@ -1459,6 +1472,7 @@
 					zebra/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = iphoneos3.2;
@@ -1545,7 +1559,7 @@
 					zebra/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = iphoneos3.2;
@@ -1566,6 +1580,7 @@
 					zebra/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "";
 				SDKROOT = iphoneos3.2;

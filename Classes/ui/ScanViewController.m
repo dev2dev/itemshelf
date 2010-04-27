@@ -365,7 +365,8 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
     [itemArray addObject:item];
 
     // show item view
-    ItemViewController *vc = [[[ItemViewController alloc] initWithNibName:@"ItemView" bundle:nil] autorelease];
+    NSString *nib = (IS_IPAD) ? @"ItemView-ipad" : @"ItemView";
+    ItemViewController *vc = [[[ItemViewController alloc] initWithNibName:nib bundle:nil] autorelease];
     vc.itemArray = itemArray;
 
     [self.navigationController pushViewController:vc animated:YES];

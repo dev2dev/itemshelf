@@ -152,7 +152,8 @@
     }
 	
     // show item view
-    ItemViewController *vc = [[[ItemViewController alloc] initWithNibName:@"ItemView" bundle:nil] autorelease];
+    NSString *nib = (IS_IPAD) ? @"ItemView-ipad" : @"ItemView";
+    ItemViewController *vc = [[[ItemViewController alloc] initWithNibName:nib bundle:nil] autorelease];
     vc.itemArray = itemArray;
 
     [api release];
