@@ -310,7 +310,7 @@ CGPoint lastTouchLocation;
     [tableView reloadData];
 
     // 表示位置を調整する
-    if (centerRow >= 0) {
+    if (centerRow >= 0 && [model count] > 0) {
         NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:centerRow inSection:1];
         [tableView scrollToRowAtIndexPath:newIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     }

@@ -131,6 +131,8 @@ static UIImage *cameraIcon = nil, *libraryIcon = nil, *numpadIcon = nil, *keywor
 
     nameLabel = cell.textLabel;
     descLabel = cell.detailTextLabel;
+    descLabel.font = [UIFont systemFontOfSize:10.0];
+    descLabel.lineBreakMode = UILineBreakModeWordWrap;
 
 #else
     if (cell == nil) {

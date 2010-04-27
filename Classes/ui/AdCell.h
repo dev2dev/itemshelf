@@ -10,6 +10,7 @@
 
 #define AFMA_CLIENT_ID  @"ca-mb-app-pub-4621925249922081"
 #define AFMA_CHANNEL_IDS @"3548046115"
+#define AFMA_CHANNEL_IDS_IPAD @"6436993045"
 #define AFMA_KEYWORDS  @"本,書籍,コミック,CD,DVD,book,comics" // shopping
 #define AFMA_IS_TEST 1
 
