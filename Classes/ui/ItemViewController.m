@@ -688,7 +688,7 @@
 - (void)openSafari
 {
     Item *item = [itemArray objectAtIndex:0];
-    NSString *detailURL = [WebApiFactory detailUrl:item isMobile:YES];
+    NSString *detailURL = [WebApiFactory detailUrl:item isMobile:(IS_IPAD) ? NO : YES];
     NSURL *url = [NSURL URLWithString:[detailURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:url];
 }
