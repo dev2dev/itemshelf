@@ -74,6 +74,12 @@
     }
     
     needRefreshAd = NO;
+
+    if (IS_IPAD) {
+        Shelf *shelf = [dm shelfAtIndex:0]; // all
+        splitItemListViewController.shelf = shelf;
+        [splitItemListViewController reload];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,8 +94,13 @@
     [super dealloc];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)reload
+{
     [tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self reload];
     [super viewWillAppear:animated];
 }
 
@@ -187,8 +198,8 @@
         Shelf *shelf = [dm shelfAtIndex:row];
 
         if (IS_IPAD) {
-            [splitItemListViewController setShelf:shelf];
-            [splitItemListViewController viewWillAppear:NO];
+            splitItemListViewController.shelf = shelf;
+            [splitItemListViewController reload];
         } else {
             // ItemListView を表示する
             ItemListViewController *vc = [[[ItemListViewController alloc]

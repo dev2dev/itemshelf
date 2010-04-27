@@ -58,6 +58,7 @@
 - (IBAction)scanButtonTapped:(id)sender;
 - (IBAction)actionButtonTapped:(id)sender;
 
+- (void)reload;
 - (void)addShelf;
 - (int)getRow:(NSIndexPath *)indexPath;
 

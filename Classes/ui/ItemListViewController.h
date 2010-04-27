@@ -71,6 +71,7 @@
     IBOutlet ShelfListViewController *splitShelfListViewController;
 }
 
+- (void)reload;
 - (void)setShelf:(Shelf*)shelf;
 - (void)updateTitle;
 - (void)setFilter:(NSString *)filter;
