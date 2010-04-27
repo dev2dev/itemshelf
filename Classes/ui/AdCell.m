@@ -76,9 +76,10 @@
     UIView *v = adViewController.view;
     
     CGRect frame = v.frame;
-    frame.origin.x = 0;
+    frame.origin.x = (self.frame.size.width - frame.size.width) / 2;
     frame.origin.y = 0;
     v.frame = frame;
+    v.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [self.contentView addSubview:v];
     
     return self;
