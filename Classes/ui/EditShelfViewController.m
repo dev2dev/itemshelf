@@ -140,6 +140,7 @@
     t.text = value;
     t.placeholder = NSLocalizedString(placeholder, @"");
     t.font = [UIFont systemFontOfSize:14];
+    t.backgroundColor = [UIColor clearColor];
     t.keyboardType = UIKeyboardTypeDefault;
     t.returnKeyType = UIReturnKeyDone;
     t.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -156,6 +157,7 @@
                       initWithFrame:CGRectMake(110, 2, 170, 32)];
     lb.text = value;
     lb.font = [UIFont systemFontOfSize:14];
+    lb.backgroundColor = [UIColor clearColor];
     return lb;
 }
 

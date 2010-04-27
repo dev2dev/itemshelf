@@ -167,21 +167,21 @@
     case 1:
         switch (indexPath.row) {
         case 0:
-            clabel = [[[UILabel alloc] initWithFrame:CGRectMake(20, 5, 270, 50)] autorelease];
+            clabel = cell.textLabel; //[[[UILabel alloc] initWithFrame:CGRectMake(20, 5, 270, 50)] autorelease];
             clabel.lineBreakMode = UILineBreakModeWordWrap;
             clabel.numberOfLines = 0;
             clabel.font = [UIFont boldSystemFontOfSize:14.0];
             clabel.text = COPYRIGHT;
-            [cell addSubview:clabel];
+            //[cell addSubview:clabel];
             break;
 					
         case 1:
-            clabel = [[[UILabel alloc] initWithFrame:CGRectMake(20, 5, 270, 40)] autorelease];
+            clabel = cell.textLabel; //[[[UILabel alloc] initWithFrame:CGRectMake(20, 5, 270, 40)] autorelease];
             clabel.lineBreakMode = UILineBreakModeWordWrap;
-            clabel.numberOfLines = 0;
+            clabel.numberOfLines = 2;
             clabel.font = [UIFont boldSystemFontOfSize:11.0];
             clabel.text = COPYRIGHT_ZEBRA;
-            [cell addSubview:clabel];
+            //[cell addSubview:clabel];
             break;
         }
         break;
