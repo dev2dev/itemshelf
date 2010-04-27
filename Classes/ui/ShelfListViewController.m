@@ -225,7 +225,7 @@
     EditShelfViewController *vc = [EditShelfViewController
                                       editShelfViewController:shelf
                                       isNew:NO];
-    [self doModalWithNavigationController:vc];
+    [self doModalWithNavigationController:vc]; // TBD : pushView に変更
 }
 
 // 追加

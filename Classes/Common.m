@@ -158,6 +158,10 @@ void AssertFailed(const char *filename, int line)
 {
     UINavigationController *newnv = [[UINavigationController alloc]
                                         initWithRootViewController:vc];
+
+    if (IS_IPAD) {
+        newnv.modalPresentationStyle = UIModalPresentationStylePageSheet;
+    }
     [self.navigationController presentModalViewController:newnv animated:YES];
     [newnv release];
 }
