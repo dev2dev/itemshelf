@@ -75,6 +75,7 @@
         textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         textField.font = [UIFont systemFontOfSize: 14.0];
         textField.textColor = [UIColor blackColor];
+        textField.backgroundColor = [UIColor clearColor];
         textField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	
         textField.placeholder = self.title;
@@ -306,6 +307,7 @@
     value.text = NSLocalizedString(text, @"");
     value.font = [UIFont systemFontOfSize: 14.0];
     value.textColor = [UIColor blackColor];
+    value.backgroundColor = [UIColor clearColor];
     value.autoresizingMask = 0;//UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [cell attachView:value];    
     return cell;
@@ -334,8 +336,8 @@
     UILabel *tlabel = [[[UILabel alloc] initWithFrame:CGRectMake(10, 6, 90, 32)] autorelease];
     tlabel.text = NSLocalizedString(title, @"");
     tlabel.font = [UIFont systemFontOfSize: 14.0];
-    //tlabel.backgroundColor = [UIColor grayColor];
     tlabel.textColor = [UIColor blueColor];
+    tlabel.backgroundColor = [UIColor clearColor];
     tlabel.textAlignment = UITextAlignmentLeft;
     tlabel.autoresizingMask = 0;//UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [cell.contentView addSubview:tlabel];
