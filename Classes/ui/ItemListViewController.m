@@ -254,8 +254,12 @@ CGPoint lastTouchLocation;
     GenSelectListViewController *vc = [GenSelectListViewController genSelectListViewController:self array:filters title:NSLocalizedString(@"Filter", @"")];
     vc.selectedIndex = filterIndex;
     vc.isLocalize = NO;
-	
-    [self doModalWithNavigationController:vc];
+
+    if (!IS_IPAD) {
+        [self doModalWithNavigationController:vc];
+    } else {
+        [self doModalWithPopoverController:vc fromBarButtonItem:filterButton];
+    }
 }
 
 /**
@@ -268,6 +272,10 @@ CGPoint lastTouchLocation;
         [self setFilter:nil];
     } else {
         [self setFilter:[vc selectedString]];
+    }
+
+    if (IS_IPAD) {
+        [self dismissModalPopover];
     }
 }
 

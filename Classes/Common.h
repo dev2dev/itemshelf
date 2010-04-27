@@ -70,6 +70,8 @@ void AssertFailed(const char *filename, int line);
 */
 @interface UIViewController (MyExt)
 - (void)doModalWithNavigationController:(UIViewController *)vc;
+- (void)doModalWithPopoverController:(UIViewController *)vc fromBarButtonItem:(UIBarButtonItem *)barButton;
+- (void)dismissModalPopover;
 @end
 
 /**

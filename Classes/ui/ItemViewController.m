@@ -551,8 +551,12 @@
          ];
     vc.selectedIndex = selectedIndex;
     [shelfNames release];
-	
-    [self doModalWithNavigationController:vc];
+
+    if (!IS_IPAD) {
+        [self doModalWithNavigationController:vc];
+    } else {
+        [self doModalWithPopoverController:vc fromBarButtonitem:self.navigationItem.rightBarButtonItem];
+    }
 }
 
 - (void)genSelectListViewChanged:(GenSelectListViewController*)vc
@@ -563,6 +567,10 @@
     Shelf *shelf = [[dm normalShelves] objectAtIndex:selectedIndex];
     for (Item *item in itemArray) {
         [dm changeShelf:item withShelf:shelf.pkey];	
+    }
+
+    if (IS_IPAD) {
+        [self dismissModalPopover];
     }
 }
 

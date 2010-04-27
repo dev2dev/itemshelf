@@ -162,6 +162,27 @@ void AssertFailed(const char *filename, int line)
     [newnv release];
 }
 
+static _commonPopover = nil;
+
+- (void)doModalWithPopoverController:(UIViewController *)vc fromBarButtonItem:(UIBarButtonItem *)barButton
+{
+    if (_commonPopover) {
+        [self dismissModalPopover];
+    }
+
+    _commonPopover = [[UIPopoverController alloc] initWithContentViewController:vc];
+    [_commonPopover presentPopoverFromBarButtonItem:barButton permittedArrowDirections:UIPopoverArrowDirectionAny];
+}
+
+- (void)dismissModalPopover
+{
+    if (_commonPopover != nil) {
+        [_commonPopover dismissPopoverAnimated:YES];
+        [_commonPopover release];
+        _commonPopover = nil;
+    }
+}
+
 @end
 
 /**
