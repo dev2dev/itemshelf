@@ -76,8 +76,8 @@
     needRefreshAd = NO;
 
     if (IS_IPAD) {
-        Shelf *shelf = [dm shelfAtIndex:0]; // all
-        splitItemListViewController.shelf = shelf;
+        Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:0]; // all
+        [splitItemListViewController setShelf:shelf];
         [splitItemListViewController reload];
     }
 }
@@ -198,7 +198,7 @@
         Shelf *shelf = [dm shelfAtIndex:row];
 
         if (IS_IPAD) {
-            splitItemListViewController.shelf = shelf;
+            [splitItemListViewController setShelf:shelf];
             [splitItemListViewController reload];
         } else {
             // ItemListView を表示する

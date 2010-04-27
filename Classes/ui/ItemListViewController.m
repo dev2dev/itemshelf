@@ -116,7 +116,7 @@ CGPoint lastTouchLocation;
     searchBar.delegate = self;
 
     // Add buttons
-    UIBarButtonitem *editb = [self editButtonItem];
+    UIBarButtonItem *editb = [self editButtonItem];
     if (itemsPerLine != 1) {
         editb.enabled = NO;
     }
@@ -129,7 +129,7 @@ CGPoint lastTouchLocation;
         // iPad
         // 右側に検索バー、編集ボタンの２つを置く
         // (左側は縦置き時に棚一覧ボタンが出現するので使えない)
-        int width = searchBar.frame.size.width + editb.frame.size.width;
+        int width = searchBar.frame.size.width + 32/*TBD*/;
         UIToolbar *tb = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, width, 44)] autorelease];
         tb.items = [NSArray arrayWithObjects:searchBar, editb, nil];
 

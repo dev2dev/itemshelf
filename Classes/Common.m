@@ -160,13 +160,13 @@ void AssertFailed(const char *filename, int line)
                                         initWithRootViewController:vc];
 
     if (IS_IPAD) {
-        newnv.modalPresentationStyle = UIModalPresentationStylePageSheet;
+        newnv.modalPresentationStyle = UIModalPresentationPageSheet;
     }
     [self.navigationController presentModalViewController:newnv animated:YES];
     [newnv release];
 }
 
-static _commonPopover = nil;
+static UIPopoverController *_commonPopover = nil;
 
 - (void)doModalWithPopoverController:(UIViewController *)vc fromBarButtonItem:(UIBarButtonItem *)barButton
 {
@@ -175,7 +175,7 @@ static _commonPopover = nil;
     }
 
     _commonPopover = [[UIPopoverController alloc] initWithContentViewController:vc];
-    [_commonPopover presentPopoverFromBarButtonItem:barButton permittedArrowDirections:UIPopoverArrowDirectionAny];
+    [_commonPopover presentPopoverFromBarButtonItem:barButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)dismissModalPopover
