@@ -173,11 +173,24 @@ CGPoint lastTouchLocation;
     [super dealloc];
 }
 
+- (Shelf *)shelf
+{
+    if (model == nil) {
+        return nil;
+    }
+    return model.shelf;
+}
+
 - (void)setShelf:(Shelf *)shelf
 {
     // Generate ItemListModel
     [model release];
-    model = [[ItemListModel alloc] initWithShelf:shelf];
+    if (shelf == nil) {
+        model = nil;
+    } else {
+        model = [[ItemListModel alloc] initWithShelf:shelf];
+    }
+    [self reload];
 }
 
 - (void)reload

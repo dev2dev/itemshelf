@@ -79,8 +79,7 @@
 
     if (IS_IPAD) {
         Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:0]; // all
-        [splitItemListViewController setShelf:shelf];
-        [splitItemListViewController reload];
+        splitItemListViewController.shelf = shelf;
     }
 }
 
@@ -202,14 +201,13 @@
         Shelf *shelf = [dm shelfAtIndex:row];
 
         if (IS_IPAD) {
-            [splitItemListViewController setShelf:shelf];
-            [splitItemListViewController reload];
+            splitItemListViewController.shelf = shelf;
         } else {
             // ItemListView を表示する
             ItemListViewController *vc = [[[ItemListViewController alloc]
                                               initWithNibName:@"ItemListView"
                                               bundle:nil] autorelease];
-            [vc setShelf:shelf];
+            vc.shelf = shelf;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
@@ -346,6 +344,10 @@
         // 削除
         Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:row];
         [[DataModel sharedDataModel] removeShelf:shelf];
+        
+        if (splitItemListViewController.shelf == shelf) {
+            splitItemListViewController.shelf = nil;
+        }
         
         [tv beginUpdates];
         [tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade]; //TBD
