@@ -72,6 +72,7 @@
     UIPopoverController *popoverController;
 }
 
+@property(nonatomic,assign) Shelf *shelf;
 @property(nonatomic,retain) UIPopoverController *popoverController;
 
 - (void)reload;
