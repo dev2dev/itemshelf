@@ -172,7 +172,7 @@ extern CGImageRef UIGetScreenImage(); // undocumented
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+    return [Common isSupportedOrientation:interfaceOrientation];
 }
 
 @end

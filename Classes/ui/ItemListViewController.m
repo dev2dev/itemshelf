@@ -38,6 +38,8 @@
 #import "ItemCell4.h"
 #import "ItemViewController.h"
 #import "ScanViewController.h"
+#import "ConfigViewController.h"
+
 #import "DataModel.h"
 #import "Edition.h"
 #import "AdCell.h"
@@ -197,6 +199,7 @@ CGPoint lastTouchLocation;
 {
     if (model == nil) {
         self.navigationItem.title = @"";
+        [tableView reloadData];
     } else {
         // set title
         NSString *title = model.shelf.name;
@@ -717,6 +720,12 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 }
 //@}
 
+- (IBAction)configButtonTapped:(id)sender
+{
+    ConfigViewController *vc = [[ConfigViewController alloc] initWithNibName:@"ConfigView" bundle:nil];
+    [self doModalWithNavigationController:vc];
+    [vc release];
+}
 
 #pragma mark -
 #pragma mark Split View Delegate
@@ -741,7 +750,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 
 // 画面回転
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+    return [Common isSupportedOrientation:interfaceOrientation];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation

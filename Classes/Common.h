@@ -63,6 +63,7 @@ void AssertFailed(const char *filename, int line);
 + (UIImage *)resizeImageWithin:(UIImage *)image width:(double)maxWidth height:(double)maxHeight;
 + (UIImage *)resizeImage:(UIImage *)image width:(double)width height:(double)height;
 + (NSString *)currencyString:(double)value withLocaleString:(NSString *)locale;
++ (BOOL)isSupportedOrientation:(UIInterfaceOrientation)orientation;
 @end
 
 /**

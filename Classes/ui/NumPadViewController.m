@@ -192,6 +192,8 @@
     [serviceIdButton setTitleForAllState:[webApiFactory serviceIdString]];
 }
 
-
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return [Common isSupportedOrientation:interfaceOrientation];
+}
 
 @end

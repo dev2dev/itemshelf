@@ -80,6 +80,11 @@
     if (IS_IPAD) {
         Shelf *shelf = [[DataModel sharedDataModel] shelfAtIndex:0]; // all
         splitItemListViewController.shelf = shelf;
+        
+        // Popover のサイズを変更
+        CGSize s = self.contentSizeForViewInPopover;
+        s.height = 800;
+        self.contentSizeForViewInPopover = s;
     }
 }
 
@@ -432,8 +437,9 @@
 #endif
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return [Common isSupportedOrientation:toInterfaceOrientation];
 }
 
 @end
