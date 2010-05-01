@@ -64,7 +64,7 @@
 		3E28EABD10649A87006F9FF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EABC10649A87006F9FF7 /* Foundation.framework */; };
 		3E28EACA10649B87006F9FF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EAC910649B87006F9FF7 /* CoreGraphics.framework */; };
 		3E28EAE210649BAC006F9FF7 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EAE110649BAC006F9FF7 /* AddressBook.framework */; };
-		3E28EB9510649C6C006F9FF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9410649C6C006F9FF7 /* UIKit.framework */; };
+		3E28EB9510649C6C006F9FF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9410649C6C006F9FF7 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3E28EB9810649CD2006F9FF7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9710649CD2006F9FF7 /* QuartzCore.framework */; };
 		3E2C0C550ED9ADDB00867F11 /* GenSelectListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */; };
 		3E368D3411428ED4001B2805 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7F60171084CABA0040A615 /* CoreLocation.framework */; };
@@ -98,7 +98,7 @@
 		3E7F605E1084CD210040A615 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EABC10649A87006F9FF7 /* Foundation.framework */; };
 		3E7F60AC1084CD2E0040A615 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EAC910649B87006F9FF7 /* CoreGraphics.framework */; };
 		3E7F60CC1084CD440040A615 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EAE110649BAC006F9FF7 /* AddressBook.framework */; };
-		3E7F610B1084CD4A0040A615 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9410649C6C006F9FF7 /* UIKit.framework */; };
+		3E7F610B1084CD4A0040A615 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9410649C6C006F9FF7 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3E7F611F1084CD4F0040A615 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E28EB9710649CD2006F9FF7 /* QuartzCore.framework */; };
 		3E7FFEBC0ECC487B000164D4 /* ScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E7FFEBB0ECC487B000164D4 /* ScanView.xib */; };
 		3E817E840EE6C1C60015A97E /* NoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E817E830EE6C1C60015A97E /* NoImage.png */; };
@@ -1278,7 +1278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1304,7 +1304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -1328,7 +1328,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1358,7 +1358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -1383,7 +1383,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
@@ -1408,7 +1408,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Takuya Murakami";
@@ -1456,7 +1456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Takuya Murakami";
@@ -1502,7 +1502,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
