@@ -199,6 +199,7 @@ CGPoint lastTouchLocation;
 {
     if (model == nil) {
         self.navigationItem.title = @"";
+        [tableView reloadData];
     } else {
         // set title
         NSString *title = model.shelf.name;
