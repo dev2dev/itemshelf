@@ -64,7 +64,8 @@
     IBOutlet UIToolbar *toolbar;
     IBOutlet UIBarButtonItem *scanButton;
     IBOutlet UIBarButtonItem *filterButton;
-
+    IBOutlet UIBarButtonItem *configButton; // iPad
+    
     ItemListModel *model;
 
     // iPad
@@ -87,6 +88,7 @@
 - (IBAction)scanButtonTapped:(id)sender;
 - (IBAction)filterButtonTapped:(id)sender;
 - (IBAction)sortButtonTapped:(id)sender;
+- (IBAction)configButtonTapped:(id)sender; // ipad
 
 - (int)_calcNumMultiItemsPerLine;
 

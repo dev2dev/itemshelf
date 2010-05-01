@@ -145,6 +145,13 @@ void AssertFailed(const char *filename, int line)
     return ret;
 }
 
++ (BOOL)isSupportedOrientation:(UIInterfaceOrientation)orientation
+{
+    if (IS_IPAD) return YES;
+    return (orientation == UIInterfaceOrientationPortrait);
+}
+
+
 @end
 
 @implementation UIViewController (MyExt)

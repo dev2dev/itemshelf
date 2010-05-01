@@ -69,6 +69,8 @@
 		3E2C0C550ED9ADDB00867F11 /* GenSelectListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */; };
 		3E368D3411428ED4001B2805 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7F60171084CABA0040A615 /* CoreLocation.framework */; };
 		3E36E1AE0F309A9500AB3C64 /* config.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E36E1AD0F309A9500AB3C64 /* config.png */; };
+		3E3A0A5E118BD6CB007F56DD /* ShelfListView-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3A0A5D118BD6CB007F56DD /* ShelfListView-ipad.xib */; };
+		3E3A0A5F118BD6CB007F56DD /* ShelfListView-ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3A0A5D118BD6CB007F56DD /* ShelfListView-ipad.xib */; };
 		3E3AA5AD0EE02EF200339BAB /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3AA5AC0EE02EF200339BAB /* AboutView.xib */; };
 		3E3EA1510ED9A072006892E9 /* ConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E3EA1500ED9A072006892E9 /* ConfigView.xib */; };
 		3E427BC10EDC2A320028E633 /* NumPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E427BC00EDC2A320028E633 /* NumPadView.xib */; };
@@ -324,6 +326,7 @@
 		3E2C0C540ED9ADDB00867F11 /* GenSelectListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenSelectListView.xib; sourceTree = "<group>"; };
 		3E36D9AF0F4DA4530007B625 /* Info-lite.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-lite.plist"; sourceTree = SOURCE_ROOT; };
 		3E36E1AD0F309A9500AB3C64 /* config.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = config.png; sourceTree = "<group>"; };
+		3E3A0A5D118BD6CB007F56DD /* ShelfListView-ipad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "ShelfListView-ipad.xib"; sourceTree = "<group>"; };
 		3E3AA5AC0EE02EF200339BAB /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		3E3EA1500ED9A072006892E9 /* ConfigView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfigView.xib; sourceTree = "<group>"; };
 		3E427BC00EDC2A320028E633 /* NumPadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumPadView.xib; sourceTree = "<group>"; };
@@ -845,6 +848,7 @@
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				3EE8374D11564EFD00F64764 /* MainWindow-iPad.xib */,
 				3E7EB2DB0EE422D900D5CE27 /* ShelfListView.xib */,
+				3E3A0A5D118BD6CB007F56DD /* ShelfListView-ipad.xib */,
 				3EB7A9EF0EF66601009B038F /* EditShelfView.xib */,
 				3E7FFEBB0ECC487B000164D4 /* ScanView.xib */,
 				282CCBFD0DB6C98000C4EA27 /* ItemListView.xib */,
@@ -1039,6 +1043,7 @@
 				3E6CE7511187303400221C66 /* ItemView-ipad.xib in Resources */,
 				3E6665DD118B1E52006EBD0B /* Default-Landscape.png in Resources */,
 				3E6665DE118B1E58006EBD0B /* Default-Portrait.png in Resources */,
+				3E3A0A5F118BD6CB007F56DD /* ShelfListView-ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1095,6 +1100,7 @@
 				3E6CE7521187303400221C66 /* ItemView-ipad.xib in Resources */,
 				3E6665DB118B1E49006EBD0B /* Default-Landscape.png in Resources */,
 				3E6665DC118B1E49006EBD0B /* Default-Portrait.png in Resources */,
+				3E3A0A5E118BD6CB007F56DD /* ShelfListView-ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
