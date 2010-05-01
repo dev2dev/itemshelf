@@ -50,7 +50,8 @@
     
     if (!IS_IPAD) {
         [md setObject:[NSArray arrayWithObjects:AFMA_CHANNEL_IDS, nil] forKey:kGADAdSenseChannelIDs];
-        [md setObject:[UIColor colorWithRed:175/255.0 green:140/255.0 blue:105/256.0 alpha:0.0] forKey:kGADAdSenseAdBackgroundColor];
+        //[md setObject:[UIColor colorWithRed:175/255.0 green:140/255.0 blue:105/256.0 alpha:0.0] forKey:kGADAdSenseAdBackgroundColor];
+        [md setObject:[UIColor whiteColor] forKey:kGADAdSenseAdBackgroundColor];         
     } else {
         [md setObject:[NSArray arrayWithObjects:AFMA_CHANNEL_IDS_IPAD, nil] forKey:kGADAdSenseChannelIDs];
         [md setObject:[UIColor whiteColor] forKey:kGADAdSenseAdBackgroundColor];         

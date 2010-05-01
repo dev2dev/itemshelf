@@ -34,7 +34,7 @@
 
 // Web API
 
-#define ENABLE_KAKAKUCOM   1
+#define ENABLE_KAKAKUCOM   0
 #define ENABLE_RAKUTEN     1
 
 #import <UIKit/UIKit.h>
