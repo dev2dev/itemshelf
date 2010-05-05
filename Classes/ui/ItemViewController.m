@@ -323,6 +323,9 @@
     [tableView reloadData];
 }
 
+#pragma mark -
+#pragma mark UITableViewDelegate
+
 //
 // セルをクリックしたときの処理
 //
@@ -469,20 +472,31 @@
 ////////////////////////////////////////////////////////////////////////////////////////////
 // 写真撮影/選択処理
 
+#pragma mark Image Picker
+
 - (void)cameraButtonTapped:(id)sender
 {
 	Item *item = [itemArray objectAtIndex:0];
 	if (!item.registeredWithShelf) return; // do nothing
 	
 	currentEditingItem = item;
-	
+
+	// カメラがない場合は直接フォトライブラリを開く
+    BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    if (!hasCamera) {
+        [self execImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
+        return;
+    }
+    
+    // カメラ・フォトライブラリを選択
     cameraActionSheet = [[UIActionSheet alloc]
-                            initWithTitle:NSLocalizedString(@"Set image for this item.", @"")
-                            delegate:self
-                            cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
-                            destructiveButtonTitle:nil
-                            otherButtonTitles:NSLocalizedString(@"Camera", @""),
-                              NSLocalizedString(@"Photo library", @""), nil];
+                         initWithTitle:NSLocalizedString(@"Set image for this item.", @"")
+                         delegate:self
+                         cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+                         destructiveButtonTitle:nil
+                         otherButtonTitles:NSLocalizedString(@"Camera", @""),
+                         NSLocalizedString(@"Photo library", @""), nil];
+
     cameraActionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [cameraActionSheet showInView:self.view];
     [cameraActionSheet release];
@@ -495,7 +509,17 @@
         picker.sourceType = sourceType;
         picker.delegate = self;
         picker.allowsEditing = YES;
-        [self presentModalViewController:picker animated:YES];
+        if (!IS_IPAD) {
+            [self presentModalViewController:picker animated:YES];
+        } else {
+            if (popoverController) {
+                [popoverController dismissPopoverAnimated:YES];
+                [popoverController release];
+            }
+            popoverController = [[UIPopoverController alloc] initWithContentViewController:picker];
+            NSIndexPath *idx = [NSIndexPath indexPathForRow:0 inSection:0];
+            [popoverController presentPopoverFromRect:[tableView cellForRowAtIndexPath:idx].frame inView:tableView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
         [picker release];
     }
 }
@@ -524,6 +548,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Shelf 変更処理
+
+#pragma mark Move Shelf Action
 
 - (IBAction)moveActionButtonTapped:(id)sender
 {
@@ -576,6 +602,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Action Sheet 処理
+
+#pragma mark Action Sheet
 
 - (IBAction)openActionButtonTapped:(id)sender
 {

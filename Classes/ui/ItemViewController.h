@@ -61,6 +61,9 @@
 
     Item *currentEditingItem;
     int currentEditingRow;
+    
+    // iPad
+    UIPopoverController *popoverController;
 }
 
 @property(nonatomic,retain) NSMutableArray *itemArray;
@@ -68,6 +71,7 @@
 
 
 - (IBAction)cameraButtonTapped:(id)sender;
+- (void)execImagePicker:(UIImagePickerControllerSourceType)sourceType;
 //- (IBAction)moveActionButtonTapped:(id)sender;
 - (IBAction)openActionButtonTapped:(id)sender;
 - (void)sendMail;
