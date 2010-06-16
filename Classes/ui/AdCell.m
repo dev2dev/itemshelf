@@ -41,6 +41,7 @@
          AFMA_CLIENT_ID, kGADAdSenseClientID,
          @"Takuya Murakami", kGADAdSenseCompanyName,
          @"ItemShelf Lite", kGADAdSenseAppName,
+         AFMA_APPID, kGADAdSenseApplicationAppleID,
          AFMA_KEYWORDS, kGADAdSenseKeywords,
          [NSNumber numberWithInt:AFMA_IS_TEST], kGADAdSenseIsTestAdRequest,
          nil];
