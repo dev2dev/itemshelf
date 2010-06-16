@@ -33,6 +33,10 @@ typedef enum {
 @interface GADAdViewController : UIViewController
 
 @property(nonatomic, assign) GADAdSize adSize;  // default: kGADAdSize320x50
+
+// NOTE: It's important to set the delegate to nil before releasing either your
+// delegate or the GADAdViewController.  Otherwise, it's possible for an async
+// network response to attempt to message a deallocated object and crash.
 @property(nonatomic, assign) id<GADAdViewControllerDelegate> delegate;
 
 // Specify the time (in seconds) for automatic refreshing of the ad.  Set to 0
@@ -100,10 +104,6 @@ typedef enum {
 // Invoked when |showLoadedGoogleAd| is complete.
 - (void)showSucceeded:(GADAdViewController *)adController
           withResults:(NSDictionary *) results;
-
-// DEPRECATED: Use |loadSucceeded:withResults:| instead to be notified when the
-// ad load completes.
-- (void)adControllerDidFinishLoading:(GADAdViewController *)adController;
 
 // Expandable ad support:
 // Invoked just after an expandable ad has expanded.
