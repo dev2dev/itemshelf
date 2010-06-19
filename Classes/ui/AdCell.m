@@ -44,6 +44,8 @@
          AFMA_APPID, kGADAdSenseApplicationAppleID,
          AFMA_KEYWORDS, kGADAdSenseKeywords,
          [NSNumber numberWithInt:AFMA_IS_TEST], kGADAdSenseIsTestAdRequest,
+         //[UIColor brownColor], kGADAdSenseAdBackgroundColor,
+         //[UIColor brownColor], kGADAdSenseAdTopBackgroundColor,
          nil];
 
     NSMutableDictionary *md = [[[NSMutableDictionary alloc] init] autorelease];
