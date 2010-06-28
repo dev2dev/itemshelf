@@ -9,7 +9,7 @@
 #import "GADAdSenseParameters.h"
 
 #define AFMA_CLIENT_ID  @"ca-mb-app-pub-4621925249922081"
-#define AFMA_APPID @"GUJYY5S9D5" // ItemShelf Lite
+#define AFMA_APPID @"306480147" // ItemShelf Lite
 
 #define AFMA_CHANNEL_IDS @"3548046115"
 #define AFMA_CHANNEL_IDS_IPAD @"6436993045"
