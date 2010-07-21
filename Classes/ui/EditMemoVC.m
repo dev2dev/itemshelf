@@ -61,6 +61,15 @@
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                   target:self
                                                   action:@selector(doneAction)] autorelease];
+
+    // keyboard notification
+    keyboardShown = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onKeyboardShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onKeyboardHidden:)
+                                                 name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,6 +99,40 @@
     [delegate editMemoViewChanged:self identifier:identifier];
 
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark keyboardEvent
+
+- (void)onKeyboardShown:(NSNotification *)notification
+{
+    [self _keyboardShownHidden:notification isShown:YES];
+}
+
+- (void)onKeyboardHidden:(NSNotification *)notification
+{
+    [self _keyboardShownHidden:notification isShown:NO];
+}
+
+- (void)_keyboardShownHidden:(NSNotification *)notification isShown:(BOOL)isShown
+{
+    if (keyboardShown == isShown) return;
+    keyboardShown = isShown;
+    
+    NSDictionary *info = [notification userInfo];
+    
+    // キーボードサイズ取得
+    NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardEndFrame = [value CGRectValue];
+    CGRect keyboardFrame = [self.view convertRect:keyboardEndFrame toView:nil];
+    
+    // textView サイズ変更
+    CGRect frame = textView.frame;
+    if (isShown) {
+        frame.size.height -= keyboardFrame.size.height;
+    } else {
+        frame.size.height += keyboardFrame.size.height;
+    }
+    textView.frame = frame;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

@@ -47,6 +47,8 @@
     id<EditMemoViewDelegate> delegate;
     NSString *text;
     int identifier;
+    
+    BOOL keyboardShown;
 }
 
 @property(nonatomic,assign) id<EditMemoViewDelegate> delegate;
@@ -55,5 +57,9 @@
 
 + (EditMemoViewController *)editMemoViewController:(id<EditMemoViewDelegate>)delegate title:(NSString*)title identifier:(int)id;
 - (void)doneAction;
+
+- (void)onKeyboardShown:(NSNotification *)notification;
+- (void)onKeyboardHidden:(NSNotification *)notification;
+- (void)_keyboardShownHidden:(NSNotification *)notification isShown:(BOOL)isShown;
 
 @end
